@@ -1,0 +1,125 @@
+<div class="site_nav">
+	<div class="site_nav_bd">
+		<div class="fleft">你好1，欢迎来到管家车易站！请<a href="" class="coloryel">【登录】</a>,免费<a href="" class="coloryel">【注册】</a></div>
+		<div class="fright">
+			<ul class="site_nav_menu">
+				<li><a href=""><img src="__STATIC__/img/shouye.png" alt="" />首页</a></li>
+				<li class="sec_li"><a href=""><img src="__STATIC__/img/maic.png" alt="" />我要买车</a></li>
+				<li><a href=""><img src="__STATIC__/img/maic.png" alt="" />我要卖车</a></li>
+				<li><a href=""><img src="__STATIC__/img/xiazai.png" alt="" />APP下载</a></li>
+				<li><a href=""><img src="__STATIC__/img/wangahn.png" alt="" />网站导航</a></li>
+			</ul>					
+		</div>
+	</div>
+</div>
+<div class="fn_show gj_clear header_show">
+	<!--<div class="wrap gj_clear marginbt _left">-->
+		<!--<div class="logo">-->
+	 		  <!--<h1> <a href="http://www.gj2car.com">二手车交易市场</a></h1>-->
+		<!--</div>-->
+		<!--<div class="city_current">-->
+			<!--<div class="address"><span>郑州</span><b class="icon1"></b></div>-->
+			<!--<div class="white-line"></div>-->
+			<!--<div class="city"  style="display: none;" >-->
+				<!--<ol>-->
+				<!--</ol>-->
+			<!--</div>-->
+		<!--</div>-->
+		<!--<div class="search gj_clear">-->
+	        <!--<div class="search_tab">-->
+	            <!--<a href="javascript:;" class="s_old active" id="">二手车</a>-->
+	            <!--<a href="javascript:;" class="s_new">新车</a>-->
+	            <!--<a href="javascript:;" class="s_zero">零首付</a>-->
+	        <!--</div>-->
+	        <!--<div class="ipt_cont">-->
+	        	  <!--<div class="search_ipts">-->
+		        	 <!--<input type="text"  name="txtNewcar" autocomplete="off" placeholder="请输入喜欢的品牌或车型" />-->
+		        	 <!--<a class="search_btn">搜索</a>-->
+		        <!--</div>-->
+	        <!--</div>-->
+	       <!--&lt;!&ndash; 搜索历史记录 &ndash;&gt;-->
+	        <!--<div id="history_list" class="search_list" style="display:none;"></div>-->
+	    <!--</div>-->
+	<!--</div>-->
+	<!--<div class="nav gj_clear">-->
+		<!--<ul class="wrap">-->
+			<!--<li class="active"><a href="index.html">首页</a></li>-->
+			<!--<li ><a href="newCar.html" class="sec_li">新车</a></li>-->
+			<!--<li><a href="carList.html">二手车</a></li>-->
+		    <!--&lt;!&ndash;<li><a href="zeroCar.html">零首付</a></li>&ndash;&gt;-->
+			<!--<li><a href="sell.html">卖车</a></li>-->
+			<!--<li><a href="change.html">置换</a></li>-->
+			<!--<li><a href="News.html">新闻资讯</a></li>-->
+			<!--<li><a href="appDownLoad.html">APP下载</a></li>-->
+			<!--<li><a href="login.html">登录/注册</a></li>-->
+		<!--</ul>-->
+	<!--</div>-->
+</div>
+<div class="fn_hide gj_clear header_hide borbt">
+	<div class="wrap" >
+		<div class="logo" >
+		   <h1 style=""> 
+		   <a href="http://www.gj2car.com">二手车交易市场</a>
+		   </h1>
+		</div>
+		<div class="city_current">
+			<div class="address"><span>郑州</span><b class="icon1"></b></div>
+			<div class="white-line"></div>
+			<div class="city"  style="display: none;" >
+				<ol>
+				</ol>
+			</div>
+		</div>
+		<div class="header_tel">
+			<img src="__STATIC__/img/phone1.png" alt="" height="17"/>
+			0371-53375515
+		</div>
+		<div class="nav">
+			<ul>
+				<li class="active"><a href="index.html">首页</a></li>
+				<li><a href="carList.html">二手车</a></li>
+				<li><a href="newCar.html">新车</a></li>
+				<!--<li><a href="zeroCar.html">零首付</a></li>-->
+				<li><a href="sell.html">卖车</a></li>
+				<li><a href="change.html">置换</a></li>
+				<li><a href="News.html">新闻资讯</a></li>
+				<li><a href="appDownLoad.html">APP下载</a></li>
+				<li><a href="login.html">登录/注册</a></li>
+			</ul>
+		</div>
+	</div>
+	</div>
+<script>
+	
+	function tab(a,b,c){
+	    $(a).on("click",c,function(){
+	        $(this).addClass('active').siblings().removeClass('active');
+	        $(b).eq($(this).index()).show().siblings().hide();
+	    })
+	}
+//	$('.wrap li').click(function(){
+//		
+//		$(this).addClass('active').siblings().removeClass('active')
+//	})
+tab(".search_tab",".ipt_cont .search_ipts","a");
+$(window).on('scroll',function(){
+	var bH=$("body").outerHeight();
+	var wH=$(window).innerHeight();
+	
+	var wsH=$(window).scrollTop();  
+	var sH=$(".header .fn_show").height();
+//	console.log(bH+'页面高度---页面可用高度'+wH+'-----滚动高度'+wsH+'-----页面头部高度'+sH)
+//	console.log(bH-wH)
+	if(wsH+50>sH){
+		$(".header .header_hide").css('display','block');
+		$(".header .header_show").css('display','none');
+		$(".header").addClass('fixedTop')
+	}else{
+		$(".header .header_hide").css('display','none');
+		$(".header .header_show").css('display','block');
+		$(".header").removeClass('fixedTop')
+	}
+	
+})
+
+</script>

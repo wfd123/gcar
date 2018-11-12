@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="__STATIC__/css/style.css" />
+	<link rel="stylesheet" href="__STATIC__/css/other.css" />
+	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+	<script src="__STATIC__/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<style>
+
+	</style>
+	
+	<body>
+	<div class="header">{include file="public/header"}</div>
+        <div class="full_wid">
+			<div class="header"></div>			
+			<div class="news_bg"></div>
+			<div class="wrap oh">
+				<div class="breadnav">您的位置：<a href="#">郑州二手交易市场</a>>><a href="#">二手车新闻资讯 </a></div>
+				<ul class="news_tab_nav">
+					<li class="active"><a href="javascript:;" onclick="set('bd0',1,5)" id="bd01">公司新闻</a></li>
+					<li><a href="javascript:;" onclick="set('bd0',2,5)" id="bd02">行业新闻</a></li>
+					<li><a href="javascript:;" onclick="set('bd0',3,5)" id="bd03">媒体报道</a></li>
+					<li><a href="javascript:;" onclick="set('bd0',4,5)" id="bd04">特色活动</a></li>
+					<li><a href="javascript:;" onclick="set('bd0',5,5)" id="bd05">新车资讯</a></li>
+				</ul>
+				<div class="news_conlist">
+					<ul id="conbd01">
+						{volist name="new1" id="val"}
+						<li><a href="{$domain}/{$Think.session.cityurl}/newsdetails/{$val.id}">
+							<span class="news_listImg"><img src="__STATIC__/img/gds1.png" alt="" title="" height="167"/></span>
+							<div class="news_text_desc ">
+								<h2 class="hid">{$val.title}</h2>
+								<p>(管家车易站 选车导购){$val.miaoshu} </p>
+								<p class="time">{$val.time}</p>
+							</div>
+						</a></li>
+						{/volist}
+					</ul>
+					<ul id="conbd02" style="display: none;">
+						{volist name="new2" id="val"}
+						<li><a href="{$domain}/{$Think.session.cityurl}/newsdetails/{$val.id}">
+							<span class="news_listImg"><img src="__STATIC__/img/gds1.png" alt="" title="" height="167"/></span>
+							<div class="news_text_desc ">
+								<h2 class="hid">{$val.title}</h2>
+								<p>(管家车易站 选车导购){$val.miaoshu} </p>
+								<p class="time">{$val.time}</p>
+							</div>
+						</a></li>
+						{/volist}
+					</ul>
+					<ul id="conbd03" style="display: none;">
+						{volist name="new3" id="val"}
+						<li><a href="{$domain}/{$Think.session.cityurl}/newsdetails/{$val.id}">
+							<span class="news_listImg"><img src="__STATIC__/img/gds1.png" alt="" title="" height="167"/></span>
+							<div class="news_text_desc ">
+								<h2 class="hid">{$val.title}</h2>
+								<p>(管家车易站 选车导购){$val.miaoshu} </p>
+								<p class="time">{$val.time}</p>
+							</div>
+						</a></li>
+						{/volist}
+					</ul>
+					<ul id="conbd04" style="display: none;">
+						{volist name="new4" id="val"}
+						<li><a href="{$domain}/{$Think.session.cityurl}/newsdetails/{$val.id}">
+							<span class="news_listImg"><img src="__STATIC__/img/gds1.png" alt="" title="" height="167"/></span>
+							<div class="news_text_desc ">
+								<h2 class="hid">{$val.title}</h2>
+								<p>(管家车易站 选车导购){$val.miaoshu} </p>
+								<p class="time">{$val.time}</p>
+							</div>
+						</a></li>
+						{/volist}
+					</ul>
+					<ul id="conbd05" style="display: none;">
+						{volist name="new5" id="val"}
+						<li><a href="{$domain}/{$Think.session.cityurl}/newsdetails/{$val.id}">
+							<span class="news_listImg"><img src="__STATIC__/img/gds1.png" alt="" title="" height="167"/></span>
+							<div class="news_text_desc ">
+								<h2 class="hid">{$val.title}</h2>
+								<p>(管家车易站 选车导购){$val.miaoshu} </p>
+								<p class="time">{$val.time}</p>
+							</div>
+						</a></li>
+						{/volist}
+					</ul>
+				</div>
+				
+			</div>
+			<div class="wrap news_car_recom">
+				<div class="tit_er">
+			        <div class="line_tit"></div>			        
+			        <h2 class="color tit_con">热门二手车</h2>	       
+			    </div>
+			    <div class="car_list marbtp10 ">
+				    <ul class="list">
+						{volist name="er_car" id="val" offset="1" length="10"}
+						<li class="items5">
+							<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_img flex_center"><img src="{$val.img_url}" alt="" /></a>
+							<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_desc">
+								<h3>{$val.name}</h3>
+								<p>
+									<!--<span class="car_price"><b>{$val.new_car_price}</b>万</span>-->
+									<span class="car_sui">新车含税{$val.price}万</span></p>
+								<p><span>{$val.car_cardtime}上牌</span> <span class="padlt20">{$val.car_mileage}万公里</span> </p>
+								<div class="che_ordered">立即预约</div>
+							</a>
+						</li>
+						{/volist}
+
+					</ul>
+			    </div>
+			    <div class="tit_er">
+			        <div class="line_tit"></div>			        
+			        <h2 class="color tit_con">热门新车</h2>	       
+			    </div>
+			    <div class="car_list marbtp10 ">
+				   <ul class="list">
+					   {volist name="new_car" id="val" offset="1" length="10"}
+						<li class="items5">
+							<a href="{$domain}/{$Think.session.cityurl}/detail/{$val.id}" class="flex_around" target="_blank">
+							<a href="{$domain}/{$Think.session.cityurl}/detail/{$val.id}" class="car_img flex_center"><img src="{$val.img_url}" alt="" /></a>
+							<a href="{$domain}/{$Think.session.cityurl}/detail/{$val.id}" class="car_desc">
+								<h3>{$val.name}</h3>
+								<p class="valign ptp15">
+									<span class="pay_first plt10">首付<b class="">{$val.pay10_s2}</b>万</span>
+									<span class="pay_month">月供{$val.pay10_y2}元</span>
+									<span class="pay_month">月供{$val.pay10_n2}元</span>
+								</p>
+								<div class="che_ordered">立即预约</div>
+							</a>
+
+							</a>
+						</li>
+					   {/volist}
+						
+					</ul>
+			    </div>
+			</div>
+		</div>
+		<div class="footer mtp40">	
+			
+		</div>
+		<div class="fixedRight">
+			<ul class="right_sider">
+				<li><div class="gj_side_contnet iocn_s1"><p>pk</p></div>
+					<div class="gj_sidecon_desc "></div>
+				</li>
+				<li><div class="gj_side_contnet iocn_s2"><p>收藏</p></div>
+					<div class="gj_sidecon_desc"></div>
+				</li>
+				<li><div class="gj_side_contnet iocn_s3"><p>浏览</p></div>
+					<div class="gj_sidecon_desc"></div>
+				</li>
+				<li><div class="gj_side_contnet iocn_s4"><p>个人</p></div>
+					<div class="gj_sidecon_desc"></div>
+				</li>
+				<li><div class="gj_side_contnet iocn_s5"><p>公众号</p></div>
+					<div class="gj_sidecon_desc"></div>
+				</li>
+				<li><div class="gj_side_contnet iocn_s6"><p>APP下载</p></div>
+					<div class="gj_sidecon_desc"></div>
+				</li>
+				<li><div class="gj_side_contnet iocn_s7"><p>客服</p></div>
+				<div class="gj_sidecon_desc"></div></li>
+				<li><div class="gj_side_contnet iocn_s8"><p>反馈</p></div>
+				<div class="gj_sidecon_desc"></div></li>
+				<li><div class="gj_side_contnet iocn_s9"><p>顶部</p></div>
+					<div class="gj_sidecon_desc"></div>
+				</li>
+				
+			</ul>
+		</div>
+		<div class="footer">
+			{include file="public/footer"}
+		</div>
+	</body>
+	<script>		 
+		$(function(){
+            $($(".wrap li")[5]).addClass("active").siblings().removeClass("active");
+			// $(".header").load("templates/header.html");
+		    // $(".footer").load("templates/footer.html");
+		    $(".news_tab_nav li").click(function(){
+		   	   $(this).addClass('active').siblings('li').removeClass('active')
+		    })
+		})
+</script>
+</html>

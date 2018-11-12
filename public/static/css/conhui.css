@@ -1,0 +1,583 @@
+*{word-wrap:break-word}
+html,body,h1,h2,h3,h4,h5,h6,hr,p,iframe,dl,dt,dd,ul,ol,li,pre,form,button,input,textarea,th,td,fieldset{margin:0;padding:0}
+ul,ol,dl{list-style-type:none}
+html,body{*position:static}
+html{font-family: sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
+address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}
+input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit}
+input,button{overflow: visible;vertical-align:middle;outline:none}
+input[type="submit"],input[type="reset"],input[type="button"],input[type="text"],input[type="password"]{-webkit-appearance:none;outline:none}
+body,th,td,button,input,select,textarea{font-family:"Microsoft Yahei","Hiragino Sans GB","Helvetica Neue",Helvetica,tahoma,arial,"WenQuanYi Micro Hei",Verdana,sans-serif,"\5B8B\4F53";font-size:12px;color: #333;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing:grayscale}
+body{line-height:1.6}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+a,area{outline:none;blr:expression(this.onFocus=this.blur())}
+a{text-decoration:none;cursor: pointer}
+a:hover{text-decoration:underline;outline:none}
+a.ie6:hover{zoom:1}
+a:focus{outline:none}
+a:hover,a:active{outline:none}:focus{outline:none}
+sub,sup{vertical-align:baseline}
+button,input[type="button"], input[type="submit"] {line-height:normal !important}
+/*img*/
+img{border:0;vertical-align:middle}
+a img,img{-ms-interpolation-mode:bicubic}
+@media (max-width:767px){
+	.img-responsive{max-width:100%!important;height: auto!important}
+}
+.pt-5{padding-top:5px}.pt-10{padding-top:10px}.pt-20{padding-top:20px}
+.pb-5{padding-bottom:5px}.pb-10{padding-bottom:10px}.pb-20{padding-bottom:20px}
+.pl-5{padding-left:5px}.pl-10{padding-left:10px}.pl-20{padding-left:20px}
+.pr-5{padding-right:5px}.pr-10{padding-right:10px}.pr-20{padding-right:20px}
+.pd-5{padding:5px}.pd-10{padding:10px}.pd-15{padding:15px}.pd-20{padding:20px}.pd-30{padding:30px}.pd-40{padding:40px}
+.bk-gray{border:solid 1px #eee}
+.radius{border-radius:4px; overflow:hidden;}
+.size-MINI.radius{ border-radius:3px}
+.size-L.radius{ border-radius:5px}
+.size-XL.radius{ border-radius:6px}
+.round{border-radius:1000px; overflow:hidden;}
+.circle{ border-radius:50%; overflow:hidden;}
+label,.placeholder{font-size:14px}
+.form legend{font-size:20px}/*表单名称*/
+.form .row{margin-top:15px}/*表单行*/
+		.form-label{display:block; color:#555}/*表单标题*/
+		.formControls{position:relative}/*表单控制区*/
+		.formControls > *{vertical-align:middle}
+			.placeholder{position:absolute; left:4px; top:4px;color:#c6c6c6; cursor:text}/*表单默认值*/	
+.form-horizontal .row{display:table;width:100%}
+.form-horizontal .form-label{margin-top:3px;cursor:text;text-align:right;padding-right:10px}
+.form-horizontal .formControls{ padding-right:10px}
+.form-horizontal .Validform_checktip{ margin-top:5px}
+/*设置placeholder颜色*/
+::-webkit-input-placeholder {color:#b3b3b3}/* WebKit browsers */
+:-moz-placeholder {color:#b3b3b3}/* Mozilla Firefox 4 to 18 */
+::-moz-placeholder {color:#b3b3b3}/* Mozilla Firefox 19+ */
+:-ms-input-placeholder {color:#b3b3b3}/* Internet Explorer 10+ */
+.placeholder{color:#adb0be; position:absolute; z-index:9}/*不兼容placeholder属性的浏览器，可使用<span class="placeholder">表单默认值</span>*/
+@media (max-width: 767px) {
+	.responsive .form-label{ text-align:left;padding-right:0; font-size:16px; float:none}
+	.responsive .formControls{ padding-right:0; float:none; margin-top:10px}
+}
+.btn-primary{color:#fff;background-color:#5a98de; border-color:#5a98de}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active{color:#fff;background-color:#0a6999;border-color:#0a6999}
+.input-text,.btn,.input-text.size-M,.btn.size-M{ font-size:14px; height:31px;line-height:1.42857;padding:4px}/*默认为M，可以不写，可以理解为：均码*/
+a.btn,a.btn.size-M,span.btn,span.btn.size-M{ line-height:21px}
+.btn,.btn.size-M{ padding:4px 12px}
+
+.input-text.size-MINI,.btn.size-MINI{font-size:12px; height:23px;padding:1px 2px;line-height:1.42857}/*迷你*/
+a.btn.size-MINI,span.btn.size-MINI{ line-height:21px}
+.btn.size-MINI{ padding:1px 4px}
+
+.input-text.size-S,.btn.size-S{font-size:12px; height:27px;padding:3px;line-height:1.42857}/*小*/
+a.btn.size-S,span.btn.size-S{ line-height:19px}
+.btn.size-S{ padding:3px 8px}
+
+.input-text.size-L,.btn.size-L{font-size:16px; height:41px; padding:8px}/*大*/
+a.btn.size-L,span.btn.size-L{ line-height:23px}
+.btn.size-L{ padding:8px 16px}
+
+.input-text.size-XL,.btn.size-XL{font-size:18px; height:48px; padding:10px}/*特大*/
+a.btn.size-XL,span.btn.size-XL{ line-height:26px}
+.btn.size-XL{ padding:10px 24px}
+
+@media (max-width: 767px) {
+	.responsive .input-text.size-MINI,.responsive .btn.size-MINI{height:24px}
+	.responsive .input-text.size-S,.responsive .btn.size-S{ font-size:14px; height:30px}
+	.responsive .input-text,.btn,.responsive .input-text.size-M,.responsive .btn.size-M{ font-size:16px; height:36px}
+	.responsive .input-text.size-L,.responsive .btn.size-L{ font-size:18px; height:42px}
+	.responsive .input-text.size-XL,.responsive .btn.size-XL{ font-size:20px; height:48px}
+}
+.row.cl{}
+.row{ box-sizing:border-box}
+[class^="col-"],[class*=" col-"]{box-sizing:border-box; float:left;min-height: 1px;position: relative}
+.col-1{width:8.33333%}
+.col-1.5{width:10%}
+.col-2{width:16.66667%}
+.col-3{width:25%}
+.col-4{width:33.33333%}
+.col-5{width:41.66667%}
+.col-6{width:50%}
+.col-7{width:58.33333%}
+.col-8{width:66.66667%}
+.col-9{width:75%}
+.col-10{width:83.33333%}
+.col-11{width:91.66667%}
+.col-12{width:100%}
+.select-box{border:solid 1px #ddd;box-sizing:border-box;vertical-align:middle; width:100%; display:inline-block}
+	.select{border:solid 1px #ddd;box-sizing:border-box;cursor: pointer;line-height:normal;font-weight: normal;width:100%}
+.select-box .select{ border:none}
+.select-box.inline,.select-box.inline .select{ width:auto}
+
+.select-box,
+.select-box.size-M{height:31px;padding:4px 5px}
+	.select,.size-M .select{font-size: 14px}
+
+.select-box.size-MINI{height:23px;padding:0px 5px}
+	.size-MINI .select{font-size: 12px}
+		
+.select-box.size-S{height:27px;padding:3px 5px}
+	.size-S .select{font-size: 12px}
+	
+.select-box.size-L{height:41px;padding:8px 5px}
+	.size-L .select{font-size: 16px}
+
+.select-box.size-XL{height:48px;padding:10px 5px}
+	.size-XL .select{font-size: 18px}
+
+@media (max-width: 767px) {
+	.responsive .select-box{ border:none}
+	.responsive .select-box .select,.responsive .select{border:solid 1px #ddd; padding:10px;font-size:16px}
+	.responsive .select-box,.responsive .select-box.size-M,.responsive .select-box.size-MINI,.responsive .select-box.size-S,.responsive .select-box.size-L,.responsive .select-box.size-XL{ height:auto; padding:0}
+}
+.input-text,.btn,.input-text.size-M,.btn.size-M{ font-size:14px; height:31px;line-height:1.42857;padding:4px}/*默认为M，可以不写，可以理解为：均码*/
+a.btn,a.btn.size-M,span.btn,span.btn.size-M{ line-height:21px}
+.btn,.btn.size-M{ padding:4px 12px}
+
+.input-text.size-MINI,.btn.size-MINI{font-size:12px; height:23px;padding:1px 2px;line-height:1.42857}/*迷你*/
+a.btn.size-MINI,span.btn.size-MINI{ line-height:21px}
+.btn.size-MINI{ padding:1px 4px}
+
+.input-text.size-S,.btn.size-S{font-size:12px; height:27px;padding:3px;line-height:1.42857}/*小*/
+a.btn.size-S,span.btn.size-S{ line-height:19px}
+.btn.size-S{ padding:3px 8px}
+
+.input-text.size-L,.btn.size-L{font-size:16px; height:41px; padding:8px}/*大*/
+a.btn.size-L,span.btn.size-L{ line-height:23px}
+.btn.size-L{ padding:8px 16px}
+
+.input-text.size-XL,.btn.size-XL{font-size:18px; height:48px; padding:10px}/*特大*/
+a.btn.size-XL,span.btn.size-XL{ line-height:26px}
+.btn.size-XL{ padding:10px 24px}
+
+@media (max-width: 767px) {
+	.responsive .input-text.size-MINI,.responsive .btn.size-MINI{height:24px}
+	.responsive .input-text.size-S,.responsive .btn.size-S{ font-size:14px; height:30px}
+	.responsive .input-text,.btn,.responsive .input-text.size-M,.responsive .btn.size-M{ font-size:16px; height:36px}
+	.responsive .input-text.size-L,.responsive .btn.size-L{ font-size:18px; height:42px}
+	.responsive .input-text.size-XL,.responsive .btn.size-XL{ font-size:20px; height:48px}
+}
+.row.cl{}
+.row{ box-sizing:border-box}
+[class^="col-"],[class*=" col-"]{box-sizing:border-box; float:left;min-height: 1px;position: relative}
+.col-1{width:8.33333%}
+.col-2{width:16.66667%}
+.col-3{width:25%}
+.col-4{width:33.33333%}
+.col-5{width:41.66667%}
+.col-6{width:50%}
+.col-7{width:58.33333%}
+.col-8{width:66.66667%}
+.col-9{width:75%}
+.col-10{width:83.33333%}
+.col-11{width:91.66667%}
+.col-12{width:100%}
+
+.col-offset-0{margin-left:0}
+.col-offset-1{margin-left:8.33333%}
+.col-offset-2{margin-left:16.66667%}
+.col-offset-3{margin-left:25%}
+.col-offset-4{margin-left:33.33333%}
+.col-offset-5{margin-left:41.66667%}
+.col-offset-6{margin-left:50%}
+.col-offset-7{margin-left:58.33333%}
+.col-offset-8{margin-left:66.66667%}
+.col-offset-9{margin-left:75%}
+.col-offset-10{margin-left:83.33333%}
+.col-offset-11{margin-left:91.66667%}
+
+.col-push-0{position:relative;left:0;right:auto}
+.col-pull-0{right:0;left:auto}
+.col-push-1{left:8.33333%;right:auto}
+.col-pull-1{right:8.33333%;left:auto}
+.col-push-2{left:16.66667%;right:auto}
+.col-pull-2{right:16.66667%;left:auto}
+.col-push-3{left:25%;right:auto}
+.col-pull-3{right:25%;left:auto}
+.col-push-4{left:33.33333%;right:auto}
+.col-pull-4{right:33.33333%;left:auto}
+.col-push-5{left:41.66667%;right:auto}
+.col-pull-5{right:41.66667%;left:auto}
+.col-push-6{left:50%;right:auto}
+.col-pull-6{right:50%;left:auto}
+.col-push-7{left:58.33333%;right:auto}
+.col-pull-7{right:58.33333%;left:auto}
+.col-push-8{left:66.66667%;right:auto}
+.col-pull-8{right:66.66667%;left:auto}
+.col-push-9{left:75%;right:auto}
+.col-pull-9{right:75%;left:auto}
+.col-push-10{left:83.33333%;right:auto}
+.col-pull-10{right:83.33333%;left:auto}
+.col-push-11{left:91.66667%;right:auto}
+.col-pull-11{right:91.66667%;left:auto}
+.input-text,.textarea{box-sizing:border-box;border:solid 1px #ddd;width:100%;
+    -webkit-transition:all 0.2s linear 0s;
+       -moz-transition:all 0.2s linear 0s;
+         -o-transition:all 0.2s linear 0s;
+            transition:all 0.2s linear 0s}
+.textarea{ height:100px; resize:none; font-size:14px; padding:4px}
+	.textarea-numberbar{ position:absolute; right:20px; bottom:5px; z-index:1; margin-bottom:0}
+	.textarea-length{ font-style:normal}
+.input-text:hover,.textarea:hover{border: solid 1px #3bb4f2}
+/*得到焦点后*/
+.input-text.focus,textarea.focus{border:solid 1px #0f9ae0 \9;border-color:rgba(82,168,236,0.8);box-shadow:0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6)}
+/*不可点击*/
+.input-text.disabled,.textarea.disabled,.input-text.disabled.focus,.textarea.disabled.focus{background-color:#ededed; cursor:default;border-color: #ddd;
+	-webkit-box-shadow:inset 0 2px 2px #e8e7e7;
+       -moz-box-shadow:inset 0 2px 2px #e8e7e7;
+            box-shadow:inset 0 2px 2px #e8e7e7}
+/*只读状态*/
+.input-text.disabled,.textarea.disabled{background-color:#e6e6e6; cursor:default}
+/*阴影*/
+.input-text.box-shadow,.textarea.box-shadow{-ms-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);box-shadow:inset 0 1px 1px rgba(0,0,0,0.075)}
+/*行内元素*/
+.input-text.inline{ display:inline-block; width:auto}
+.radius{border-radius:4px; overflow:hidden;}
+.close{font-size:20px;color: #000;text-shadow: 0 1px 0 #fff;opacity: 0.2;filter: alpha(opacity=20)}
+.close:hover,.close:focus{color: #000;text-decoration: none;cursor: pointer;opacity: 0.4;filter: alpha(opacity=40)}
+
+button.close{padding:0;cursor:pointer;background:transparent;border: 0;-webkit-appearance: none}
+/*按钮*/
+.btn{display:inline-block;box-sizing:border-box;cursor:pointer;text-align:center;font-weight:400;white-space:nowrap;vertical-align: middle;-moz-padding-start:npx; -moz-padding-end:npx;border:solid 1px #ddd; background-color:#fff; width:auto;*zoom:1;*overflow:visible;
+	-webkit-transition:background-color .1s linear;
+		-moz-transition:background-color .1s linear;
+		-o-transition:background-color .1s linear;
+			transition:background-color .1s linear}
+a.btn:hover,a.btn:focus,a.btn:active,a.btn.active,a.btn.disabled,a.btn[disabled]{text-decoration:none}
+.btn:active,.btn.active{background-color:#ccc}
+.btn:first-child{*margin-left:0}
+.btn.active,.btn:active{-moz-box-shadow:0 1px 8px rgba(0, 0, 0, 0.125) inset;-webkit-box-shadow:0 1px 8px rgba(0, 0, 0, 0.125) inset; box-shadow:0 1px 8px rgba(0, 0, 0, 0.125) inset}
+
+/*默认——灰色	通常用于取消*/
+.btn-default{background-color:#e6e6e6;border-color:#e6e6e6}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active{color:#333;background-color:#c7c7c7;border-color:#c7c7c7}
+
+/*主要——主色	通常用于确定、提交、购买、支付等*/
+.btn-primary{color:#fff;background-color:#5a98de; border-color:#5a98de}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active{color:#fff;background-color:#0a6999;border-color:#0a6999}
+
+/*次要按钮*/
+.btn-secondary{color:#fff;background-color:#3bb4f2; border-color:#3bb4f2}
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active,
+.btn-secondary.active{color:#fff;background-color:#0f9ae0;border-color:#0f9ae0}
+
+/*成功*/
+.btn-success{color:#fff;background-color:#5eb95e; border-color:#5eb95e}
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active{color:#fff;background-color:#429842;border-color:#429842}
+
+/*警告*/
+.btn-warning{color:#fff;background-color:#f37b1d; border-color:#f37b1d}
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active,
+.btn-warning.active{color:#fff;background-color:#c85e0b;border-color:#c85e0b}
+
+/*危险*/
+.btn-danger{color:#fff;background-color:#dd514c; border-color:#dd514c}
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-danger.active{color:#fff;background-color:#c62b26;border-color:#c62b26}
+
+/*链接*/
+.btn-link{color:#0e90d2;cursor:pointer;border-color:transparent;background-color:transparent}
+.btn-link:hover,
+.btn-link:focus,
+.btn-link:active,
+.btn-link.active{color:#095f8a;text-decoration:underline;background-color:transparent}
+
+/*禁用状态*/
+.btn.disabled{cursor:not-allowed;background-image:none;opacity:.65;filter:alpha(opacity=65);box-shadow:none; pointer-events:none}
+
+/*块级按钮*/
+.btn-block {-moz-box-sizing: border-box;display: block;padding-left: 0;padding-right: 0;width: 100%}
+
+/*表单组*/
+.form-group{ display:inline-block;vertical-align:middle}
+.form-group .input-text{ position:relative; vertical-align:top}
+.form-group.radius .input-text{border-radius:4px 0 0 4px}
+.form-group.round .input-text{border-radius:1000px 0 0 1000px}
+.form-group .btn{position:relative;margin-left:-1px}
+.form-group.radius .btn{ border-radius:0 4px 4px 0}
+.form-group.round .btn{ border-radius:0 1000px 1000px 0}
+/*3.3 表格
+	Name:			style_table
+	Example:		<table class="table table-bordered table-striped table-condensed"><thead><tr><th>…</th></tr></thead><tbody><tr><td>…</td></tr></tbody></table>
+	Explain:		表格，None无样式，仅仅有列和行|.table行与行之间以水平线相隔|.table-bordered表格外围均有外边框|.table-striped奇数行背景设为浅灰色|.table-condensed竖直方向padding缩减一半，从8px变为4px，所有的 td 和 th 元素都受影响
+*/
+/*默认table*/
+table{width:100%;empty-cells:show;background-color:transparent;border-collapse:collapse;border-spacing:0}
+table th{text-align:left; font-weight:400}
+/*带水平线*/
+.table th{font-weight:bold}
+.table th,.table td{padding:8px;line-height:20px}
+.table td{text-align:left}
+.table tbody tr.success > td{background-color:#dff0d8}
+.table tbody tr.error > td{background-color:#f2dede}
+.table tbody tr.warning > td{background-color:#fcf8e3}
+.table tbody tr.info > td{background-color:#d9edf7}
+.table tbody + tbody{border-top:2px solid #ddd}
+.table .table{background-color:#fff}
+
+/*带横向分割线*/
+.table-border{border-top:1px solid #ddd}
+.table-border th,.table-border td{border-bottom:1px solid #ddd}
+
+/*th带背景*/
+.table-bg thead th{background-color:#F5FAFE}
+/*带外边框*/
+.table-bordered{border:1px solid #ddd;border-collapse:separate;*border-collapse:collapse;border-left:0}
+.table-bordered th,.table-bordered td{border-left:1px solid #ddd}
+.table-border.table-bordered{border-bottom:0}
+
+/*奇数行背景设为浅灰色*/
+.table-striped tbody > tr:nth-child(odd) > td,.table-striped tbody > tr:nth-child(odd) > th{background-color:#f9f9f9}
+/*竖直方向padding缩减一半*/
+.table-condensed th,.table-condensed td{padding:4px 5px}
+/*鼠标悬停样式*/
+.table-hover tbody tr:hover td,.table-hover tbody tr:hover th{background-color: #f5f5f5}
+/*鼠标选择整行样式*/
+.table tbody tr.selected td{background-color:#F3F3F3}
+/*定义颜色*/
+/*悬停在行*/
+.table tbody tr.active,.table tbody tr.active>td,.table tbody tr.active>th,.table tbody tr .active{background-color:#F5F5F5!important}
+/*成功或积极*/
+.table tbody tr.success,.table tbody tr.success>td,.table tbody tr.success>th,.table tbody tr .success{background-color:#DFF0D8!important}
+
+/*警告或出错*/
+.table tbody tr.warning,.table tbody tr.warning>td,.table tbody tr.warning>th,.table tbody tr .warning{background-color:#FCF8E3!important}
+/*危险*/
+.table tbody tr.danger,.table tbody tr.danger>td,.table tbody tr.danger>th,.table tbody tr .danger{background-color:#F2DEDE!important}
+
+/*表格文字对齐方式，默认是居左对齐*/
+.table .text-c th,.table .text-c td{text-align:center}/*整行居中*/
+.table .text-r th,.table .text-r td{text-align:right}/*整行居右*/
+.table th.text-l,.table td.text-l{text-align:left!important}/*单独列居左*/
+.table th.text-c,.table td.text-c{text-align:center!important}/*单独列居中*/
+.table th.text-r,.table td.text-r{text-align:right!important}/*单独列居右*/
+
+/*datatable*/
+table.dataTable {border-collapse: separate;border-spacing: 0;clear: both}
+table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting {cursor: pointer; background-repeat:no-repeat;background-position:right center}
+table.dataTable thead .sorting{background-image:url(../images/sort_both.png)}
+table.dataTable thead .sorting_asc {background-image:url(../images/sort_asc.png)}
+table.dataTable thead .sorting_desc {background-image:url(../images/sort_desc.png)}
+.dataTable td.sorting_1 {background-color: #f5fafe}
+.dataTables_wrapper .dataTables_length {float: left;padding-bottom:10px}
+.dataTables_wrapper .dataTables_length .select{ width:100px}
+.dataTables_wrapper .dataTables_filter {float: right;text-align: right}
+.dataTables_wrapper .dataTables_filter .input-text { width:auto;font-size:25px;}
+.dataTables_wrapper .dataTables_info {clear: both;float: left;padding-top:10px;font-size:15px; color:#666}
+.dataTables_wrapper .dataTables_paginate {float: right;padding-top:10px;text-align: right}
+.dataTables_wrapper .dataTables_paginate .paginate_button {border: 1px solid #ccc;cursor: pointer;display: inline-block;margin-left: 2px;text-align: center;text-decoration: none;color: #666;height: 26px;line-height: 26px;text-decoration: none;margin: 0 0px 6px 6px;padding: 0 10px;font-size:14px}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover,.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {background:#5a98de;color:#fff}
+/*表格尺寸*/
+.table.size-MINI{}/*迷你*/
+.table.size-S{}/*小*/
+.table.size-M{}/*中*/
+.table.size-L{}/*默认为L，可以不写，可以理解为：均码*/
+.table.size-XL{}/*大*/
+.table.size-XXL{}/*加大*/
+.table.size-XXXL{}/*超大*/
+
+/*让表格支持响应式*/
+/*
+<div class="table-responsive">
+  <table class="table">
+    ...
+  </table>
+</div>
+*/
+@media (max-width: 767px) {
+  table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    border: 1px solid #dddddd;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -webkit-overflow-scrolling: touch}
+  table-responsive > .table {
+    margin-bottom: 0}
+  table-responsive > .table > thead > tr > th,
+  table-responsive > .table > tbody > tr > th,
+  table-responsive > .table > tfoot > tr > th,
+  table-responsive > .table > thead > tr > td,
+  table-responsive > .table > tbody > tr > td,
+  table-responsive > .table > tfoot > tr > td {
+    white-space: nowrap}
+  table-responsive > .table-bordered {
+    border: 0}
+  table-responsive > .table-bordered > thead > tr > th:first-child,
+  table-responsive > .table-bordered > tbody > tr > th:first-child,
+  table-responsive > .table-bordered > tfoot > tr > th:first-child,
+  table-responsive > .table-bordered > thead > tr > td:first-child,
+  table-responsive > .table-bordered > tbody > tr > td:first-child,
+  table-responsive > .table-bordered > tfoot > tr > td:first-child {
+    border-left: 0}
+  table-responsive > .table-bordered > thead > tr > th:last-child,
+  table-responsive > .table-bordered > tbody > tr > th:last-child,
+  table-responsive > .table-bordered > tfoot > tr > th:last-child,
+  table-responsive > .table-bordered > thead > tr > td:last-child,
+  table-responsive > .table-bordered > tbody > tr > td:last-child,
+  table-responsive > .table-bordered > tfoot > tr > td:last-child {
+    border-right: 0}
+  table-responsive > .table-bordered > tbody > tr:last-child > th,
+  table-responsive > .table-bordered > tfoot > tr:last-child > th,
+  table-responsive > .table-bordered > tbody > tr:last-child > td,
+  table-responsive > .table-bordered > tfoot > tr:last-child > td {
+    border-bottom: 0}
+}
+.iconpic{display:inline-block; vertical-align:sub;*vertical-align:middle;_vertical-align:middle; width:16px; height:16px; background-position:center; background-repeat:no-repeat}
+/*3.8 效果
+	Name:			style_animation
+	Example:		<input class="btn hui-animation" val="淡入" type="button" data-tra="hui-fadein" />
+*/
+/* duang 加特效 */
+.hui-bounce,.hui-flip,.hui-flash,.hui-shake,.hui-swing,.hui-wobble,.hui-ring{-webkit-animation:1s ease;-moz-animation:1s ease;-ms-animation:1s ease;animation:1s ease}
+.hui-fadein,.hui-fadeinT,.hui-fadeinR,.hui-fadeinB,.hui-fadeinL,.hui-bouncein,.hui-bounceinT,.hui-bounceinR,.hui-bounceinB,.hui-bounceinL,.hui-rotatein,.hui-rotateinLT,.hui-rotateinLB,.hui-rotateinRT,.hui-rotateinRB,.hui-flipin,.hui-flipinX,.hui-flipinY{-webkit-animation:1s ease-out backwards;-moz-animation:1s ease-out backwards;-ms-animation:1s ease-out backwards;animation:1s ease-out backwards}
+.hui-fadeout,.hui-fadeoutT,.hui-fadeoutR,.hui-fadeoutB,.hui-fadeoutL,.hui-bounceout,.hui-bounceoutT,.hui-bounceoutR,.hui-bounceoutB,.hui-bounceoutL,.hui-rotateout,.hui-rotateoutLT,.hui-rotateoutLB,.hui-rotateoutRT,.hui-rotateoutRB,.hui-flipout,.hui-flipoutX,.hui-flipoutY{-webkit-animation:1s ease-in forwards;-moz-animation:1s ease-in forwards;-ms-animation:1s ease-in forwards;animation:1s ease-in forwards}
+
+/* 淡入 */
+.hui-fadein{-webkit-animation-name:fadein;-moz-animation-name:fadein;-ms-animation-name:fadein;animation-name:fadein}
+/* 淡入-从上 */
+.hui-fadeinT{-webkit-animation-name:fadeinT;-moz-animation-name:fadeinT;-ms-animation-name:fadeinT;animation-name:fadeinT}
+/* 淡入-从右 */
+.hui-fadeinR{-webkit-animation-name:fadeinR;-moz-animation-name:fadeinR;-ms-animation-name:fadeinR;animation-name:fadeinR}
+/* 淡入-从下 */
+.hui-fadeinB{-webkit-animation-name:fadeinB;-moz-animation-name:fadeinB;-ms-animation-name:fadeinB;animation-name:fadeinB}
+/* 淡入-从左 */
+.hui-fadeinL{-webkit-animation-name:fadeinL;-moz-animation-name:fadeinL;-ms-animation-name:fadeinL;animation-name:fadeinL}
+/* 淡出 */
+.hui-fadeout{-webkit-animation-name:fadeout;-moz-animation-name:fadeout;-ms-animation-name:fadeout;animation-name:fadeout}
+
+/* 淡出-向上 */
+.hui-fadeoutT{-webkit-animation-name:fadeoutT;-moz-animation-name:fadeoutT;-ms-animation-name:fadeoutT;animation-name:fadeoutT}
+/* 淡出-向右 */
+.hui-fadeoutR{-webkit-animation-name:fadeoutR;-moz-animation-name:fadeoutR;-ms-animation-name:fadeoutR;animation-name:fadeoutR}
+/* 淡出-向下 */
+.hui-fadeoutB{-webkit-animation-name:fadeoutB;-moz-animation-name:fadeoutB;-ms-animation-name:fadeoutB;animation-name:fadeoutB}
+/* 淡出-向左 */
+.hui-fadeoutL{-webkit-animation-name:fadeoutL;-moz-animation-name:fadeoutL;-ms-animation-name:fadeoutL;animation-name:fadeoutL}
+
+/* 弹跳 */
+.hui-bounce{-webkit-animation-name:bounce;-moz-animation-name:bounce;-ms-animation-name:bounce;animation-name:bounce}
+
+/* 弹入 */
+.hui-bouncein{-webkit-animation-name:bouncein;-moz-animation-name:bouncein;-ms-animation-name:bouncein;animation-name:bouncein}
+/* 弹入-从上 */
+.hui-bounceinT{-webkit-animation-name:bounceinT;-moz-animation-name:bounceinT;-ms-animation-name:bounceinT;animation-name:bounceinT}
+/* 弹入-从右 */
+.hui-bounceinR{-webkit-animation-name:bounceinR;-moz-animation-name:bounceinR;-ms-animation-name:bounceinR;animation-name:bounceinR}
+/* 弹入-从下 */
+.hui-bounceinB{-webkit-animation-name:bounceinB;-moz-animation-name:bounceinB;-ms-animation-name:bounceinB;animation-name:bounceinB}
+/* 弹入-从左 */
+.hui-bounceinL{-webkit-animation-name:bounceinL;-moz-animation-name:bounceinL;-ms-animation-name:bounceinL;animation-name:bounceinL}
+
+/* 弹出 */
+.hui-bounceout{-webkit-animation-name:bounceout;-moz-animation-name:bounceout;-ms-animation-name:bounceout;animation-name:bounceout}
+/* 弹出-向上 */
+.hui-bounceoutT{-webkit-animation-name:bounceoutT;-moz-animation-name:bounceoutT;-ms-animation-name:bounceoutT;animation-name:bounceoutT}
+/* 弹出-向右 */
+.hui-bounceoutR{-webkit-animation-name:bounceoutR;-moz-animation-name:bounceoutR;-ms-animation-name:bounceoutR;animation-name:bounceoutR}
+/* 弹出-向下 */
+.hui-bounceoutB{-webkit-animation-name:bounceoutB;-moz-animation-name:bounceoutB;-ms-animation-name:bounceoutB;animation-name:bounceoutB}
+/* 弹出-向左 */
+.hui-bounceoutL{-webkit-animation-name:bounceoutL;-moz-animation-name:bounceoutL;-ms-animation-name:bounceoutL;animation-name:bounceoutL}
+
+/* 转入 */
+.hui-rotatein{-webkit-animation-name:rotatein;-moz-animation-name:rotatein;-ms-animation-name:rotatein;animation-name:rotatein}
+/* 转入-从左上 */
+.hui-rotateinLT{-webkit-animation-name:rotateinLT;-moz-animation-name:rotateinLT;-ms-animation-name:rotateinLT;animation-name:rotateinLT}
+/* 转入-从左下 */
+.hui-rotateinLB{-webkit-animation-name:rotateinLB;-moz-animation-name:rotateinLB;-ms-animation-name:rotateinLB;animation-name:rotateinLB}
+/* 转入-从右上 */
+.hui-rotateinRT{-webkit-animation-name:rotateinRT;-moz-animation-name:rotateinRT;-ms-animation-name:rotateinRT;animation-name:rotateinRT}
+/* 转入-从右下*/
+.hui-rotateinRB{-webkit-animation-name:rotateinRB;-moz-animation-name:rotateinRB;-ms-animation-name:rotateinRB;animation-name:rotateinRB}
+
+/* 转出 */
+.hui-rotateout{-webkit-animation-name:rotateout;-moz-animation-name:rotateout;-ms-animation-name:rotateout;animation-name:rotateout}
+/* 转出-向左上 */
+.hui-rotateoutLT{-webkit-animation-name:rotateoutLT;-moz-animation-name:rotateoutLT;-ms-animation-name:rotateoutLT;animation-name:rotateoutLT}
+/* 转出-向左下 */
+.hui-rotateoutLB{-webkit-animation-name:rotateoutLB;-moz-animation-name:rotateoutLB;-ms-animation-name:rotateoutLB;animation-name:rotateoutLB}
+/* 转出-向右上 */
+.hui-rotateoutRT{-webkit-animation-name:rotateoutRT;-moz-animation-name:rotateoutRT;-ms-animation-name:rotateoutRT;animation-name:rotateoutRT}
+/* 转出-向右下 */
+.hui-rotateoutRB{-webkit-animation-name:rotateoutRB;-moz-animation-name:rotateoutRB;-ms-animation-name:rotateoutRB;animation-name:rotateoutRB}
+
+/* 翻转 */
+.hui-flip{-webkit-animation-name:flip;-moz-animation-name:flip;-ms-animation-name:flip;animation-name:flip}
+/* 翻入-X轴 */
+.hui-flipinX{-webkit-animation-name:flipinX;-moz-animation-name:flipinX;-ms-animation-name:flipinX;animation-name:flipinX}
+/* 翻入-Y轴 */
+.hui-flipin,.hui-flipinY{-webkit-animation-name:flipinY;-moz-animation-name:flipinY;-ms-animation-name:flipinY;animation-name:flipinY}
+/* 翻出-X轴 */
+.hui-flipoutX{-webkit-animation-name:flipoutX;-moz-animation-name:flipoutX;-ms-animation-name:flipoutX;animation-name:flipoutX}
+/* 翻出-Y轴 */
+.hui-flipout,.hui-flipoutY{-webkit-animation-name:flipoutY;-moz-animation-name:flipoutY;-ms-animation-name:flipoutY;animation-name:flipoutY}
+
+/* 闪烁 */
+.hui-flash{-webkit-animation-name:flash;-moz-animation-name:flash;-ms-animation-name:flash;animation-name:flash}
+/* 震颤 */
+.hui-shake{-webkit-animation-name:shake;-moz-animation-name:shake;-ms-animation-name:shake;animation-name:shake}
+/* 摇摆 */
+.hui-swing{-webkit-animation-name:swing;-moz-animation-name:swing;-ms-animation-name:swing;animation-name:swing}
+/* 摇晃 */
+.hui-wobble{-webkit-animation-name:wobble;-moz-animation-name:wobble;-ms-animation-name:wobble;animation-name:wobble}
+/* 震铃 */
+.hui-ring{-webkit-animation-name:ring;-moz-animation-name:ring;-ms-animation-name:ring;animation-name:ring}
+/* define */
+/* 淡入 */
+.mt-5{margin-top:5px}.mt-10{margin-top:10px}.mt-15{margin-top:15px}.mt-20{margin-top:20px}.mt-25{margin-top:25px}.mt-30{margin-top:30px}.mt-35{margin-top:35px}.mt-40{margin-top:40px}.mt-50{margin-top:50px}
+.mb-5{margin-bottom:5px}.mb-10{margin-bottom:10px}.mb-15{margin-bottom:15px}.mb-20{margin-bottom:20px}.mb-30{margin-bottom:30px}.mb-40{margin-bottom:40px}.mb-50{margin-bottom:50px}
+.ml-5{margin-left:5px}.ml-10{margin-left:10px}.ml-15{margin-left:15px}.ml-20{margin-left:20px}.ml-30{margin-left:30px}.ml-40{margin-left:40px}.ml-50{margin-left:50px}
+.mr-5{margin-right:5px}.mr-10{margin-right:10px}.mr-15{margin-right:15px}.mr-20{margin-right:20px}.mr-30{margin-right:30px}.mr-40{margin-right:40px}.mr-50{margin-right:50px}
+.Huialert{position:relative;padding:8px 35px 8px 14px;margin-bottom: 20px;text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);background-color: #fcf8e3;border: 1px solid #fbeed5}
+.Huialert, .Huialert h4{color: #c09853}
+.Huialert h4{margin: 0}
+.Huialert .Hui-iconfont{position:absolute;top:9px;right:10px;line-height: 20px;cursor:pointer; color:#000; opacity:0.2;_color:#666}
+.Huialert .Hui-iconfont.hover{color:#000;opacity:0.8}
+.Huialert-success{color: #468847;background-color: #dff0d8;border-color: #d6e9c6}
+.Huialert-success h4{color: #468847}
+.Huialert-danger{color: #b94a48;background-color: #f2dede;border-color: #eed3d7}
+.Huialert-danger h4{color: #b94a48}
+.Huialert-error{color: #fff;background-color: #f37b1d;border-color: #e56c0c}
+.Huialert-error h4{color: #fff}
+.Huialert-info{color: #31708f;background-color: #d9edf7;border-color: #bce8f1}
+.Huialert-info h4{color:#31708f}
+.Huialert-block{padding-top: 14px;padding-bottom: 14px}
+.Huialert-block > p, .Huialert-block > ul{margin-bottom: 0}
+.Huialert-block p + p{margin-top: 5px}
+    h1,h2,h3,h4,h5,h6{font-weight:500;line-height:1.1;color:inherit}
+    h1 small,h2 small,h3 small,h4 small,h5 small,h6 small,h1 .small,h2 .small,h3 .small,h4 .small,h5 .small,h6 .small{font-weight:normal;line-height:1;color:#999}
+    h1,h2,h3{margin-top:20px;margin-bottom:10px}
+    h1 small,h2 small,h3 small,h1 .small,h2 .small,h3 .small{font-size:65%}
+    h4,h5,h6{margin-top:10px;margin-bottom:10px}
+    h4 small,h5 small,h6 small,h4 .small,h5 .small,h6 .small{font-size:75%}
+    h1{font-size:36px}
+    h2{font-size:30px}
+    h3{font-size:24px}
+    h4{font-size:18px}
+    h5{font-size:14px}
+    h6{font-size:12px}
+.main
+{
+	width:900px;
+	margin:50px auto auto auto;
+	padding:5px;
+	border:1px solid #336699;
+}

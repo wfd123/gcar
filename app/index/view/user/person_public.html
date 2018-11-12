@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title></title>
+		<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+	</head>
+	<link rel="stylesheet" href="__STATIC__/css/style.css" />
+	<link rel="stylesheet" href="__STATIC__/css/other.css" />
+	<link rel="stylesheet" href="__STATIC__/css/iconfont.css" />
+	<link rel="stylesheet" href="__STATIC__/js/theme/default/laydate.css" />	
+	<style>
+	
+	</style>
+	<body>
+	<div class="header">
+		{include file="public/header"}
+	</div>
+
+		<div class="full_wid">			
+			<div class="wrap ">	
+				<div class="person_center">
+					<div class="person_left">
+						<div class="person_info">
+							<div class="user_avatar"><img src="__STATIC__/img/yhtx.png" alt="" /></div>
+							<p class="uphone">{$Think.session.phone}</p>
+							<p>向阳二手车一号店</p>							
+						</div>
+						<div class="tab_choose">
+							<ul>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_man"><b class="icon_xb1"> </b>管理店铺<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_rele"><b class="icon_xb2"></b>发布车辆信息<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_pub.html"><b class="icon_xb3"></b>发布过的<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_buse.html"><b class="icon_xb4"></b>商家入驻<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_oppo.html"><b class="icon_xb5"></b>商机<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_info.html"><b class="icon_xb6"></b>个人资料<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_coll.html"><b class="icon_xb7"></b>我的收藏<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class="active"><a href="{$domain}/{$Think.session.cityurl}/per_his"><b class="icon_xb8"></b>浏览记录<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_feed.html"><b class="icon_xb9"></b>意见反馈<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_ord.html"><b class="icon_xb10"></b>我的预约<i class="icon iconfont icon-jiantou"></i></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="person_right">
+						<h1 class="borbt"><span class="release">发布过的</span>
+							<ul class="fright sel_status">
+								<li class="active" data-status='0'><b></b><span>全部</span></li>
+								<li data-status='1'><b></b><span>审核中</span></li>
+								<li data-status='2'><b></b><span>发布成功</span></li>
+								<li data-status='3'><b></b><span>发布失败</span></li>
+								<li data-status='4'><b></b><span>已下架</span></li>
+							</ul>
+						</h1>
+						<ul id="che_fb0" class="p_list">
+							{notempty name="all_car"}
+							{volist name="all_car" id="val"}
+							<li class="item">
+								<div class="car_img"><img src="{$val.img_url}" alt="" /></div>
+								<div class="car_desc"><h3>{$val.name}</h3>
+									<p>{$val.car_mileage}万公里 | {$val.create_time}| 郑州</p>
+									<div><span class="cprice"><b>{$val.price}</b>万</span>
+										<!--<span class="nprice">13.22万</span>-->
+									</div>
+								</div>
+								<div class="car_status">
+									<!--<img src="__STATIC__/img/shenhez .png" alt="" />-->
+								</div>
+
+							</li>
+							{/volist}
+							{/notempty}
+
+						</ul>
+						<ul id="che_fb1" class="p_list" style="display: none;">
+							{notempty name="dai_audit"}
+							{volist name="dai_audit" id="val"}
+							<li class="item">
+								<div class="car_img"><img src="{$val.img_url}" alt="" /></div>
+								<div class="car_desc"><h3>{$val.name}</h3>
+									<p>{$val.car_mileage}万公里 | {$val.create_time} | {$val.name}郑州</p>
+									<div><span class="cprice"><b>{$val.price}</b>万</span>
+										<!--<span class="nprice">{$val.price}万</span>-->
+									</div>
+								</div>
+								<div class="car_status"><img src="__STATIC__/img/shenhez .png" alt="" /></div>
+
+							</li>
+							{/volist}
+							{/notempty}
+
+						</ul>
+						<ul id="che_fb2" class="p_list" style="display: none;">
+							{notempty name="fabu_car"}
+							{volist name="fabu_car" id="val"}
+							<li class="item">
+								<div class="car_img"><img src="{$val.img_url}" alt="" /></div>
+								<div class="car_desc"><h3>789{$val.name}</h3>
+									<p>{$val.car_mileage}万公里 | {$val.create_time}  | 郑州</p>
+									<div><span class="cprice"><b>{$val.price}</b>万</span>
+										<!--<span class="nprice">13.22万</span></div>-->
+								</div>
+								<div class="car_status"><img src="__STATIC__/img/fabuchengg.png" alt="" /></div>
+								<div class="car_res">
+									<p class="bgorg martp20">下架</p>
+									<p class="bgbor">商家推荐</p>
+
+								</div>
+							</li>
+							{/volist}
+							{/notempty}
+						</ul>
+						<ul id="che_fb3" class="p_list" style="display: none;">
+							{notempty name="no_audit"}
+							{volist name="no_audit" id="val"}
+							<li class="item">
+								<div class="car_img"><img src="{$val.img_url}" alt="" /></div>
+								<div class="car_desc"><h3>456{$val.name}</h3>
+									<p>{$val.car_mileage}万公里 | {$val.create_time}  | 郑州</p>
+									<div><span class="cprice"><b>{$val.price}</b>万</span>
+										<!--<span class="nprice">13.22万</span></div>-->
+								</div>
+								<div class="car_status"><img src="__STATIC__/img/fabushibai.png" alt="" /></div>
+								<div class="car_res">
+									<p class="bgorg">查看原因</p>
+									<p class="bgorg">编辑</p>
+									<p class="bgred">删除</p>
+								</div>
+							</li>
+							{/volist}
+							{/notempty}
+						</ul>
+						<ul id="che_fb4" class="p_list" style="display: none;">
+							{notempty name="del_audit"}
+							{volist name="del_audit" id="val"}
+							<li class="item">
+								<div class="car_img"><img src="{$val.img_url}" alt="" /></div>
+								<div class="car_desc"><h3>123{$val.name}</h3>
+									<p>{$val.car_mileage}万公里 | {$val.create_time} | 郑州</p>
+									<div><span class="cprice"><b>{$val.price}</b>万</span>
+										<!--<span class="nprice">13.22万</span></div>-->
+								</div>
+								<div class="car_status"><img src="__STATIC__/img/fabushibai.png" alt="" /></div>
+								<div class="car_res">
+									<p class="bgorg">查看原因</p>
+									<p class="bgorg">编辑</p>
+									<p class="bgred">删除</p>
+								</div>
+							</li>
+							{/volist}
+							{/notempty}
+
+						</ul>
+						<ul id="che_fb5" class="p_list" style="display: none;">
+							<li class="item">
+								<div class="car_img"><img src="__STATIC__/img/s.png" alt="" /></div>
+								<div class="car_desc"><h3>123123卡罗拉 2011款 1.8L CVT GL-i</h3>
+									<p>8.1万公里 | 2012-03 | 郑州</p>
+									<div><span class="cprice"><b>78</b>万</span><span class="nprice">13.22万</span></div>
+								</div>
+								<div class="car_status"><img src="__STATIC__/img/xiajia.png" alt="" /></div>
+								<div class="car_res">
+									<p class="bgorg">编辑</p>
+									<p class="bgorg">上架</p>
+									<p class="bgred">删除</p>
+								</div>
+							</li>
+
+							<li class="item">
+								<div class="car_img"><img src="__STATIC__/img/s.png" alt="" /></div>
+								<div class="car_desc"><h3>卡罗拉 2011款 1.8L CVT GL-i</h3>
+									<p>8.1万公里 | 2012-03 | 郑州</p>
+									<div><span class="cprice"><b>78</b>万</span><span class="nprice">13.22万</span></div>
+								</div>
+								<div class="car_status"><img src="__STATIC__/img/xiajia.png" alt="" /></div>
+								<div class="car_res">
+									<p class="bgorg">编辑</p>
+									<p class="bgorg">上架</p>
+									<p class="bgred">删除</p>
+								</div>
+							</li>
+						</ul>
+					</div>	
+				</div>
+			</div>
+		</div>
+	<div class="footer">
+		{include file="public/footer"}
+	</div>
+		
+	</body>
+	<script src="__STATIC__/js/laydate.js"></script>
+	<script src="__STATIC__/js/imgUp.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__STATIC__/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script>		
+		$(function(){		
+			$(".sel_status li").each(function(){
+				var that=$(this);
+				that.click(function(){
+					if(!$(this).hasClass("active")){
+                        $(this).addClass("active").siblings().removeClass("active");
+                        var index = $(this).attr("data-status");
+                        for (var i = 0; i< 6; i++){
+                            $("#che_fb" + i).css("display", 'none')
+						}
+						$("#che_fb" + index).css("display", 'block')
+					}
+				
+			})
+			})
+			
+			//加载公用头部和底部
+		    //$(".header").load("templates/header.html");
+//		    $(".footer").load("templates/footer.html");
+
+			
+	})
+</script>
+</html>

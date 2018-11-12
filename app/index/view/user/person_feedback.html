@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title></title>
+	</head>
+	<link rel="icon" type="image/x-icon" href="favicon.png">
+	<link rel="stylesheet" href="__STATIC__/css/style.css" />
+	<link rel="stylesheet" href="__STATIC__/css/other.css" />
+	<style>
+	
+	</style>
+	<body>
+	<div class="header">
+		{include file="public/header"}
+	</div>
+
+		<div class="full_wid">			
+			<div class="wrap ">	
+				<div class="person_center">
+					<div class="person_left">
+						<div class="person_info">
+							<div class="user_avatar"><img src="__STATIC__/img/yhtx.png" alt="" /></div>
+							<p class="uphone">{$Think.session.phone}</p>
+							<p>向阳二手车一号店</p>							
+						</div>
+						<div class="tab_choose">
+							<ul>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_man"><b class="icon_xb1"> </b>管理店铺<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_rele"><b class="icon_xb2"></b>发布车辆信息<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_pub.html"><b class="icon_xb3"></b>发布过的<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_buse.html"><b class="icon_xb4"></b>商家入驻<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_oppo.html"><b class="icon_xb5"></b>商机<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_info.html"><b class="icon_xb6"></b>个人资料<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_coll.html"><b class="icon_xb7"></b>我的收藏<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class="active"><a href="{$domain}/{$Think.session.cityurl}/per_his"><b class="icon_xb8"></b>浏览记录<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_feed.html"><b class="icon_xb9"></b>意见反馈<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_ord.html"><b class="icon_xb10"></b>我的预约<i class="icon iconfont icon-jiantou"></i></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="person_right">
+						<h1 class="borbt"><span class="release">意见反馈</span></h1>
+						<h2 class="step"></h2>
+						<div class="upLoad_form">
+
+							<form action="{:url('user/person_feedback')}" method="post">
+								<ul class="motify_ipt">
+									<li><span class="my_form_tit">姓名：</span><div class="fleft myform_ipt"><input type="name" name="name" placeholder="请输入您的姓名"/></div></li>
+									<li><span class="my_form_tit">手机号：</span>
+										<div class="fleft myform_ipt"><input type="phone" name="phone" placeholder="请输入您的手机号" /></div>
+									</li>
+									<li><span class="my_form_tit">详细描述：</span>
+										<div class="fleft "><textarea name="con" rows="" cols="" class="store_desc" placeholder="请用10-400字以内描述您所遇到的问题"></textarea></div>
+									</li>
+									<p class="sub_btn pwd_submit"><input type="submit" value="提交" /></p>
+									</ul>
+							</form>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	<div class="footer">
+		{include file="public/footer"}
+	</div>
+		
+		<div class="mask1"></div>
+	</body>
+	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+	<script>		
+		$(function(){			
+
+//			手机号隐藏中间4位
+			$(".uphone").text($(".uphone").text().substring(0, 3) + "****" + $(".uphone").text().substring(7, 11));
+			//加载公用头部和底部
+		    $(".header").load("templates/header.html");
+//		    $(".footer").load("templates/footer.html");
+
+			
+	})
+
+</script>
+</html>

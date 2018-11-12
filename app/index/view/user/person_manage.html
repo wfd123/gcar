@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+	<head>
+		<meta charset="utf-8"/>
+		<title></title>
+		<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+		<script src="__STATIC__/js/jquery.form.js"></script>
+		<script src="__STATIC__/js/jquery.validate.min.js"></script>
+		<script src="__STATIC__/layer/layer.js"></script>
+	</head>
+	<link rel="icon" type="image/x-icon" href="favicon.png">
+	<link rel="stylesheet" href="__STATIC__/css/style.css" />
+	<link rel="stylesheet" href="__STATIC__/css/other.css" />
+	<link rel="stylesheet" href="__STATIC__/css/iconfont.css" />
+	<!--<link rel="stylesheet" type="text/css" href="__STATIC__/css/conhui.css"/>-->
+	<style type="text/css">
+		.mblack
+		{
+			float: left;
+			padding-top: 10px;
+			padding-left: 8px;
+			vertical-align: top;
+			white-space: nowrap;
+		}
+		.validate-result{
+			height: 40px; text-align: center;color: red;font-size: 18px;margin-top: 15px;
+		}
+		.error {
+			background:url("__STATIC__/img/false.png") no-repeat 0px 4px;
+			font-weight: bold;
+			padding-left:20px;
+			color: #EA5200;
+		}
+		.checked {
+			background:url("__STATIC__/img/true.png") no-repeat center center;
+		}
+	</style>
+	<body>
+	<div class="header">
+		{include file="public/header"}
+	</div>
+		<div class="full_wid">			
+			<div class="wrap ">	
+				<div class="person_center">
+					<div class="person_left">
+						<div class="person_info">
+							<div class="user_avatar"><img src="__STATIC__/img/yhtx.png" alt="" /></div>
+							<p class="uphone">{$Think.session.phone}</p>
+							<p>{$shop_info.shop_name}</p>
+						</div>
+						<div class="tab_choose">
+							<ul>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_man"><b class="icon_xb1"> </b>管理店铺<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_rele"><b class="icon_xb2"></b>发布车辆信息<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_pub.html"><b class="icon_xb3"></b>发布过的<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_buse.html"><b class="icon_xb4"></b>商家入驻<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_oppo.html"><b class="icon_xb5"></b>商机<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_info.html"><b class="icon_xb6"></b>个人资料<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_coll.html"><b class="icon_xb7"></b>我的收藏<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class="active"><a href="{$domain}/{$Think.session.cityurl}/per_his"><b class="icon_xb8"></b>浏览记录<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_feed.html"><b class="icon_xb9"></b>意见反馈<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_ord.html"><b class="icon_xb10"></b>我的预约<i class="icon iconfont icon-jiantou"></i></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="person_right">
+						<h1 class="borbt"><span class="release">店铺装修</span></h1>
+						<!--<h2 class="step">店铺装修</h2>-->
+						<div class="upLoad_form">
+							<form id="shop_form" action="{:url('user/change_shopinfo')}" enctype="multipart/form-data" method="post">
+							<ul class="storeInfo_ipt motify_ipt">
+								<li><span class="my_form_tit">店铺名称：</span>
+									<div class="fleft myform_ipt"><input type="text" name="shop_name" value="{$shop_info.shop_name}" placeholder="请填写您的店铺名称"/></div>
+									<div class="mblack"> </div>
+								</li>
+								<li><span class="my_form_tit">联系电话：</span>
+									<div class="fleft myform_ipt"><input type="text" name="shop_phone" value="{$shop_info.shop_phone}" placeholder="请填写您的联系电话" /></div>
+									<div class="mblack"> </div>
+								</li>
+								<li><span class="my_form_tit">店铺地址：</span>
+									<div class="fleft myform_ipt"><input type="text" name="shop_address" value="{$shop_info.shop_address}" placeholder="请填写您店铺的详细地址"/></div>
+									<div class="mblack"> </div>
+								</li>
+								<li><span class="my_form_tit">营业时间：</span>
+									<div class="fleft"><input type="text" placeholder="9:00" name="startTiem" value="{$shop_info.startTiem}"  class="startTiem"/>-<input type="text" name="endTiem" value="{$shop_info.endTiem}" placeholder="18:00" class="endTiem"/></div>
+									<div class="mblack"> </div>
+								</li>
+								<li><span class="my_form_tit">店铺描述：</span>
+									<div class="fleft">
+										<textarea name="shop_desc" rows="" cols="" class="store_desc" placeholder="请填写您店铺的描述">{$shop_info.shop_desc}</textarea>
+									</div>
+									<div class="mblack"> </div>
+								</li>
+								<li><span class="my_form_tit">上传门头：</span>
+									<div class="picture">
+										<div class='upload'>
+									      <!--  <div class="upLoadImg">
+										          <span class="center_img"><img class="imgg" id="" src="/assets/computer/images/img_406.png"></span>
+										       <b class="delete"><img src="/assets/computer/images/fancy_close.png" alt=""></b>
+										       </div>  -->
+										</div>
+										<div id="uploadForm">
+								            <input id="file_inp" type="file" name="door_photo" />
+								            <div class="upLoad_pic">
+												<img class="img_up" id="" src="__STATIC__/img/addimg.png"/>
+									            <span>点击上传图片</span>
+									        </div>
+										</div>
+								    </div>
+
+								</li>
+							</ul>
+							<div class="validate-result" id="result"></div>
+							<p style="text-align: center;"><input style="margin: 15px auto;" class="sub_btn pwd_submit" type="submit" value="提交"></p>
+
+							</form>
+						</div>
+
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	<div class="footer">
+		{include file="public/footer"}
+	</div>
+		<div class="mask1"></div>
+	</body>
+
+	<script>
+		$(function(){
+            $("#shop_form").validate({
+                rules: {
+                    shop_name:"required",
+                    shop_phone:"required",
+                    shop_address:"required",
+					shop_desc:"required",
+                    startTiem:"required",
+                    endTiem:"required",
+                },
+                messages: {
+                    shop_name:"店铺名称不能为空",
+                    shop_phone: "店铺联系电话不能为空",
+                    shop_address:"地址不能为空",
+					shop_desc:"描述不能为空",
+                    startTiem:"开始营业时间不能为空",
+                    endTiem:"结束营业时间不能为空",
+                },
+                success:function(label){
+                    label.html("&nbsp;").addClass("checked");
+                },
+                // the errorPlacement has to take the table layout into account
+                errorPlacement: function(error, element) {
+
+                    if (element.is(":radio"))
+                        error.appendTo(element.parent().next());
+                    else if (element.is(":checkbox"))
+                        error.appendTo(element.next());
+                    else {
+                        error.appendTo(element.parent().next());
+					}
+                },
+                // specifying a submitHandler prevents the default submit, good for the demo
+                submitHandler: function() {
+                    $("#shop_form").ajaxSubmit({
+                        clearForm:true,
+						success: function (data) {
+						    var ret = JSON.parse(data);
+						    if (ret.code == 200) {
+                                layer.msg('店铺信息修改成功!', {icon: 1, time: 2000});
+
+                            } else {
+                                $("#result").text(ret.msg);
+							}
+                        }
+					});
+                    return false;
+                },
+                highlight: function(element, errorClass) {
+                    $(element).parent().next().find("." + errorClass).removeClass("checked");
+                }
+            });
+			
+	})
+</script>
+</html>

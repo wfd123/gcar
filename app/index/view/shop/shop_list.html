@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<link rel="icon" type="image/x-icon" href="favicon.png">
+	<link rel="stylesheet" href="__STATIC__/css/style.css" />
+	<link rel="stylesheet" href="__STATIC__/css/other.css" />
+	<link rel="stylesheet" href="__STATIC__/css/iconfont.css">
+	<link rel="stylesheet" href="__STATIC__/css/swiper.min.css" />
+	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+	<!--<script src="js/gjsilde.min.js" type="text/javascript" charset="utf-8"></script>-->
+	<style>
+
+	</style>
+	<body style="background:#f8f8f8">
+	<div class="header">{include file="public/header"}</div>
+	<div class="breadnav">您的位置：<a href="#">郑州二手交易市场</a>>><a href="#">向阳二手车 >></a><a href=""> 店铺首页</a></div>
+	<div class="storeH">
+		<div class="wrap">
+			<h1 class="textCenter"><span>郑州管家二手车<b>优选商家</b></span></h1>
+			<p class="fright phone">
+				  <i class="icon iconfont icon-msnui-telephone"></i>  15638886114
+			</p>
+			<div class="gj_clear"></div>
+			<ul class="shop_nav gj_clear">
+				<li class="active"><a href="{$domain}/{$Think.session.cityurl}/shop">店铺首页</a></li>
+				<li><a href="{$domain}/{$Think.session.cityurl}/shop_list">在售车源</a></li>
+				<li><a href="{$domain}/{$Think.session.cityurl}/shop_info">公司信息</a></li>
+			</ul>
+		</div>
+		
+	</div>
+	<div class="bgfa">
+		<div class="wrap">
+			<div class="oh">
+				<div class="brandLeft">
+					<ul>
+						<li class="">
+							<h3>品牌<b>全部</b></h3>
+							<div class="classify">
+								<a href="" class="active" >不限</a>
+								{volist name="brand" id="val"}
+								<a href="{:url('index/lots_cars')}?brand_id={$val.id}&page=1&sort=1">{$val.name}</a>
+								{/volist}
+							</div>
+						</li>
+						<li class="">
+							<h3>价格<b>全部</b></h3>
+							<div class="classify">
+								<a href="" class="active" >不限</a>
+								{volist name="price" id="val"}
+								<a href="{:url('index/lots_cars')}?price_range={$val.id}&page=1&sort=1">{$val.name}</a>
+								{/volist}
+							</div>
+						</li>
+						<li class="">
+							<h3>级别<b>全部</b></h3>
+							<div class="classify">
+								<a href="" class="active" >不限</a>
+								{volist name="subface" id="val"}<a href="{:url('index/lots_cars')}?car_age={$val.id}&page=1&sort=1">{$val.name}</a>{/volist}
+							</div>
+						</li>
+						<li>
+							<h3>车龄 <b>全部</b></h3>
+							<div class="classify">
+								<a href="" class="active" >不限</a>
+								{volist name="age" id="val"}<a href="{:url('index/lots_cars')}?age={$val.id}&page=1&sort=1">{$val.cheling}</a>{/volist}
+							</div>
+						</li>
+					</ul>
+
+
+
+				</div>
+				<!--右侧车源以及筛选-->			
+				<div class="listImg">
+					<div class="gj_clear">
+						<ul  class="sort_s">
+							<li class=""><a href="">默认排序</a></li>
+							<li class=""><a href="">价格<b class="actives"></b><i></i></a></li>
+							<li class=""><a href="">车龄<b></b><i class="actives"></i></a></li>
+							<li class=""><a href="">级别<b></b><i></i></a></li>
+							<li class=""><a href="">里程<b></b><i></i></a></li>
+						</ul>
+						<div class="search_box">
+							<input type="text" value=""/>
+							<a href="">搜索</a>
+						</div>
+					</div>
+					<div class="gj_clear" >
+						<ul class="store_list gj_clear">
+                            {volist name="er_car" id="val" offset="1" length="10" }
+							<li class="items"><a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_img flex_center"><img src="{$val.img_url}" alt="" /><a href="" class="car_desc"><h3>{$val.name}</h3><div class="fleft"><p>里程：{$val.car_mileage}公里</p><p>年份：{$val.car_cardtime}</p></div><div class="fright car_money">¥<b>{$val.price}</b>万</div>	</a></a></li>
+                            {/volist}
+						</ul>
+						<div class="page">
+							<a href="">首页</a><a href="">1</a><a href="" class="active">2</a><a href="">...</a><a href="">9</a><a href="">尾页</a>
+						</div>
+					</div>
+				</div>
+			</div>
+					
+		</div>	
+	</div>
+	<div class="adv_img">
+		<h2>想开什么车 ？管家车易站应有尽有.</h2>
+		<div class="buy_ipt">
+			<input type="text" placeholder="请输入手机号"/>
+			<div class="btn_buy">我要买车</div>
+		</div>
+	</div>
+	<div class="footer">{include file="public/footer"}</div>
+	
+	</body>
+	<script>
+		$(function(){
+			$(".brandLeft li.p_r").hover(function(){
+				$(this).find('.sale_all_list').show();
+				$(this).css("border","1px solid #ff802c")
+			},function(){
+				$(this).find('.sale_all_list').hide();
+				$(this).css("border","none")
+			})
+		})
+	   // $(".header").load("templates/header.html");
+	   // $(".footer").load("templates/footer.html");
+	
+	</script>
+	
+</html>
+ 

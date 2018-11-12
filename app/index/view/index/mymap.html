@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+<title>浏览器定位</title>
+<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+ 	<script type='text/javascript' src='//api.map.baidu.com/api?v=2.0&ak=dqY1z7TetG6ILgOgug1Ztegq'></script>
+<style>
+html, body {
+margin: 0;
+height: 100%;
+width: 100%;
+position: absolute;
+}
+
+#container {
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+width: 100%;
+height: 100%;
+}
+
+.button-group {
+position: absolute;
+bottom: 20px;
+right: 20px;
+font-size: 12px;
+padding: 10px;
+}
+
+.button-group .button {
+height: 28px;
+line-height: 28px;
+background-color: #0D9BF2;
+color: #FFF;
+border: 0;
+outline: none;
+padding-left: 5px;
+padding-right: 5px;
+border-radius: 3px;
+margin-bottom: 4px;
+cursor: pointer;
+}
+.button-group .inputtext {
+height: 26px;
+line-height: 26px;
+border: 1px;
+outline: none;
+padding-left: 5px;
+padding-right: 5px;
+border-radius: 3px;
+margin-bottom: 4px;
+cursor: pointer;
+}
+/*
+.tip {
+position: absolute;
+bottom: 30px;
+right: 10px;
+background-color: #FFF;
+text-align: center;
+border: 1px solid #ccc;
+line-height: 30px;
+border-radius: 3px;
+padding: 0 5px;
+font-size: 12px;
+}
+*/
+#tip {
+background-color: #fff;
+padding-left: 10px;
+padding-right: 10px;
+position: absolute;
+font-size: 12px;
+right: 10px;
+top: 20px;
+border-radius: 3px;
+border: 1px solid #ccc;
+line-height: 30px;
+}
+
+/*
+#tip input[type='button'] {
+margin-top: 10px;
+margin-bottom: 10px;
+background-color: #0D9BF2;
+height: 30px;
+text-align: center;
+line-height: 30px;
+color: #fff;
+font-size: 12px;
+border-radius: 3px;
+outline: none;
+border: 0;
+}
+*/
+.amap-info-content {
+font-size: 12px;
+}
+
+#myPageTop {
+position: absolute;
+top: 5px;
+right: 10px;
+background: #fff none repeat scroll 0 0;
+border: 1px solid #ccc;
+margin: 10px auto;
+padding:6px;
+font-family: "Microsoft Yahei", "微软雅黑", "Pinghei";
+font-size: 14px;
+}
+#myPageTop label {
+margin: 0 20px 0 0;
+color: #666666;
+font-weight: normal;
+}
+#myPageTop input {
+width: 170px;
+}
+#myPageTop .column2{
+padding-left: 25px;
+}
+
+/*PC端显示地图长宽
+#container {width:500px; height: 300px; };
+</style>
+<body>
+<!--<div id='container'></div>-->
+<!--<div id="tip"></div>-->
+<script type="text/javascript">
+/**
+* Created with WebStorm && Sublime Text 3
+* Date: 2015/10/29 14:04
+*/
+window.onload = function() {
+map.plugin(["AMap.ToolBar"], function() {
+map.addControl(new AMap.ToolBar());
+});
+if(location.href.indexOf('&guide=1')!==-1){
+map.setStatus({scrollWheel:false})
+}
+}
+/***************************************
+由于Chrome、IOS10等已不再支持非安全域的浏览器定位请求，为保证定位成功率和精度，请尽快升级您的站点到HTTPS。
+***************************************/
+mapObj = new AMap.Map('iCenter');
+mapObj.plugin('AMap.Geolocation', function () {
+    geolocation = new AMap.Geolocation({
+        enableHighAccuracy: true,//是否使用高精度定位，默认:true
+        timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+        maximumAge: 0,           //定位结果缓存0毫秒，默认：0
+        convert: false,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+        showButton: true,        //显示定位按钮，默认：true
+        buttonPosition: 'LB',    //定位按钮停靠位置，默认：'LB'，左下角
+        buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+        showMarker: true,        //定位成功后在定位到的位置显示点标记，默认：true
+        showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+        panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true
+        zoomToAccuracy:true      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+    });
+    mapObj.addControl(geolocation);
+    geolocation.getCurrentPosition();
+    AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+    AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+});
+//解析定位结果
+function onComplete(data) {
+//传入后台存数据
+// $.ajax({
+// url: "{:U('Aa/data')}",
+// data: {b : data.position.getLat(), d : data.position.getLng(), e: data.formattedAddress},
+// type:"post",
+// success:function(data){
+// console.log(data);
+//
+// }
+// });
+
+console.log(data);
+var str=['定位成功'];
+str.push('经度：' + data.position.getLng());
+str.push('纬度：' + data.position.getLat());
+if(data.accuracy){
+str.push('精度：' + data.accuracy + ' 米');
+}//如为IP精确定位结果则没有精度信息
+str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
+document.getElementById('tip').innerHTML = str.join('<br>');
+}
+
+//解析定位错误信息
+function onError(data) {
+	
+document.getElementById('tip').innerHTML = '定位失败';
+}
+</script>
+</body>
+</html>

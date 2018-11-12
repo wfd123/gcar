@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	<div class="control-group" style="margin-top:12px;">
+	<label class="controls-label">品牌名称：</label>
+	<form:select id="operTypeSelect" path="bannerId" class="input-medium" onchange="getBranchByBrandName()">
+		<form:option selected="selected" value="">请选择</form:option>
+		<c:forEach items="${tCdCarBrandList}" var="item" varStatus="status">
+			<form:option value="${item.id }">${item.brandName }</form:option>
+		</c:forEach>
+	</form:select>
+	<label class="controls-label">车系名称：</label>
+	<select id="operSelect" name="branchId" class="input-medium" onClick="getModelByBranchName()">
+		<option selected="selected" value="">请选择</option>
+		<c:forEach items="${tCdCarBranchList}" var="item" varStatus="status">
+		</c:forEach>
+	</select> 
+	<label class="controls-label">车型名称：</label>
+		<select id="modelsId" name="modelId" class="input-medium" style="width:400px;">
+		<option selected="selected" value="">请选择</option>
+		<c:forEach items="${tCdCarModelList}" var="item" varStatus="status">
+		</c:forEach>
+	</select>
+</div>
+	</body>
+</html>

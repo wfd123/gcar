@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="__STATIC__/css/style.css" />
+	<link rel="stylesheet" href="__STATIC__/css/other.css" />
+	<link rel="stylesheet" href="__STATIC__/css/swiper.min.css" />
+	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+	<script src="__STATIC__/js/jqueryPhoto.js"></script>	
+	<script src="__STATIC__/js/gjsilde.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__STATIC__/js/jquery.lazyload.min.js" type="text/javascript" charset="utf-8"></script>
+
+	<style>
+		
+	</style>
+	<body>
+		<div class="border">				
+			<div class="header">{include file="public/header"}</div>
+		</div>
+		<div class="breadnav">你的位置:<a href="">首页</a>>><a href="">二手车</a></div>
+		<div class="full_wid">
+			
+			<div class="wrap">
+				<div class="oh">
+					<div class="detail_pic">
+						<span id="prev" class="btn prev"></span>
+						<span id="next" class="btn next"></span>
+						<span id="prevTop" class="btn prev"></span>
+						<span id="nextTop" class="btn next"></span>
+						<div id="picBox" class="picBox">
+							<ul class="cf">
+
+								{volist name="carinfo.img_url" id="vol"}
+								<li> <a href="javascript:;"><img src="{$vol}" alt=""></a></li>
+								{/volist}
+							</ul>
+						</div>
+						<div id="listBox" class="listBox">
+							<ul class="cf">
+								{volist name="carinfo.img_url" id="vol"}
+								<li class="on"><i class="arr2"></i><img src="{$vol}" alt=""></li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="clear"></div>
+					</div>	
+		        	<div class="detail_desc">
+		        		<div class="detail_info">
+		        			<h1>{$carinfo.car_name}</h1>
+		        			<div class="desc_price"><span class="price">￥{$carinfo.price}万</span><span class="price_save">比新车省24.33元 </span><span class="price_note">含过户费</span></div>
+		        			<div class="signal">管家车易站，专业的二手车买卖平台</div>
+		        		</div>
+		        		<img src="__STATIC__/img/dianpu.png" alt="" class="sure_shop"/>
+		        		<div class="stages"><span>分期购<b>20%</b></span><span>首付<b>{$carinfo.pay20_s2}万</b></span><span>月供 <b>{$carinfo.pay20_s2}元</b></span><span>期数 <b>{$carinfo.pay20_n2}期</b></span><a href="" class="stages_go">分期购车＞</a></div>
+		        		<ul class="detail_assort flex_around">
+		        			<li>
+		        				<p>{$carinfo.car_cardtime}</p>
+		        				<span>上牌时间</span>
+		        			</li>
+		        			<li>
+		        				<p>{$carinfo.car_mileage}万公里 </p>
+		        				<span>表显里程</span>
+		        			</li>
+		        			<li>
+		        				<p>{$carinfo.blowdown}</p>
+		        				<span>排放标准</span>
+		        			</li>
+		        			<li>
+		        				<p>{$carinfo.output} </p>
+		        				<span>排量</span>
+		        			</li>
+		        			<li>
+		        				<p>{$carinfo.gearbox}</p>
+		        				<span>变速箱</span>
+		        			</li>
+		        		</ul>
+		        		<div class="car_results">
+		        			<p class="lowerPrice">询问底价</p>
+		        			<ul class="btn_box">
+			        			<a href="{:url('user/collect_car')}?brand_id={$carinfo.brand_id}&sys_id={$carinfo.sys_id}&type=2&cartype_id={$carinfo.cartype_id}&cheid={$carinfo.pu_id}&name={$carinfo.car_name}&img_url={$carinfo['img_512']['0']}&shoufu={$carinfo.pay20_s2}&ygong={$carinfo.pay20_y2}&price={$carinfo.price}"><li><img src="__STATIC__/img/collect.png" alt="" /><p>收藏</p></li></a>
+								<li><img src="__STATIC__/img/PK.png" alt="" /><p>加入PK</p></li>
+			        			<li><img src="__STATIC__/img/share.png" alt="" /><p>分享</p></li>
+			        		</ul>
+	        		</div>
+	        	</div>
+				</div>
+	        	<div class="flex_center marbt30"><h2 class="tit_erjie">基本配置</h2></div>
+	        	<ul class="detail_information">
+	        		<li>
+	        			<h3>基本配置</h3>
+	        			<div>
+							{notempty name="carparam"}
+	        				<p>{$carparam.info['0']['name']}</p><span>{$carparam.info['0']['content']}</span>
+	        				<p>{$carparam.info['3']['name']}</p><span>{$carparam.info['3']['content']}</span>
+	        				<p>{$carparam.info['4']['name']}</p><span>{$carparam.info['4']['content']}</span>
+							{/notempty}
+
+	        			</div>
+	        		</li>
+	        		<li><h3>外观参数</h3>
+	        			<div>
+							{notempty name="carparam"}
+							<p>{$carparam.car_body['0']['name']}</p><span>{$carparam.car_body['0']['content']}</span>
+							<p>{$carparam.car_body['1']['name']}</p><span>{$carparam.car_body['1']['content']}</span>
+							<p>{$carparam.car_body['2']['name']}</p><span>{$carparam.car_body['2']['content']}</span>
+							{/notempty}
+	        			</div>
+	        		</li>
+	        		<li><h3>发动机参数</h3>
+	        			<div>
+							{notempty name="carparam"}
+							<p>{$carparam.base['0']['name']}</p><span>{$carparam.base['0']['content']}</span>
+							<p>{$carparam.base['1']['name']}</p><span>{$carparam.base['1']['content']}</span>
+							<p>{$carparam.base['2']['name']}</p><span>{$carparam.base['2']['content']}</span>
+							{/notempty}
+						</div>
+	        		</li>
+	        	</ul>
+	        	<p class="more_config">查看更多配置</p>
+	        	<div class="flex_center marbt30"><h2 class="tit_erjie">车主自述</h2></div>
+	        	<p class="user_say">{$carinfo.car_desc}</p>
+				<div class="flex_center marbt30"><h2 class="tit_erjie">车源图片<b>(以实地看车为准)</b></h2></div>
+				<div class="piclist">
+					<ul>
+						{volist name="carinfo.img_512" id="vol"}
+
+						<li><img src="{$vol}" alt="" height="390"/></li>
+
+						{/volist}
+					</ul>
+				</div>
+				<div class="flex_center marbt30"><h2 class="tit_erjie">店铺信息</h2></div>
+				<ul class="detail_shop_info">
+					<li><div class="fleft flex_center "><img src="__STATIC__/img/shop_img.png" alt=""  height="83"/></div>
+						<div class="fleft ">
+							<h3>{$shopinfo.shop_name}</h3>
+							<p><img src="__STATIC__/img/dianh.png" alt="" height="20">电话：{$shopinfo.shop_phone}</p>
+							<p><img src="__STATIC__/img/dingw.png" alt="" height="20" />地址：{$shopinfo.shop_address}</p>
+						</div>
+					</li>
+					<li >
+						<div class="fleft marlt32">
+							<p class="score"><b>{$shopinfo.all_score}分</b></p>
+							<p>店铺环境：5.0分</p>
+							<p>服务态度：5.0分</p>
+							<p>车源真实：5.0分</p>
+						</div>
+						<div class="fleft">
+							<p><a href="" class="btn_piblic">发表评论</a></p>
+						</div>	
+					</li>
+					<li>
+						<div class="fleft marlt48">
+							<p><img src="__STATIC__/img/rez.png" alt="" height="30"/>管家车易站认证店铺</p>
+							<p><img src="__STATIC__/img/che.png" alt="" height="30" />在售车源：1808台</p>
+						
+						</div>
+						<div class="fleft">
+							<p><a href="" class="btn_piblic">进店逛逛</a></p>
+						</div>
+					</li>
+				</ul>
+				<div class="tit_er">
+			        <div class="line_tit"></div>			        
+			        <h2 class="color tit_con">同系推荐</h2>
+			    </div>
+				<div class="car_list">
+					<ul class="list">
+						<a href="">
+						{volist name="sys_cars" id="val" offset="1" legth="8"}
+						<li class="items5">
+							<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_img flex_center"><img src="{$val.img_url}" alt="" /></a>
+							<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_desc">
+								<h3>{$val.name}</h3>
+								<p><span class="car_price"><b>{$val.price}</b>万</span><span class="car_sui">新车含税{$val.news_price}万</span></p>
+								<p><span>{$val.car_cardtime}上牌</span> <span class="padlt20">{$val.car_mileage}万公里</span> </p>
+								<div class="che_ordered">立即预约</div>
+							</a>
+						</li>
+					    {/volist}
+						</a>
+					</ul>
+				</div>
+			</div>
+		
+    </div>
+  <!--公共底部样式-->
+    <!--<div class="footer"></div>-->
+  <!--底部123固定悬浮-->
+    <div class="wrap_bt">
+    	<div class="wrap oh flex_center">
+    		<div class="car_descInfo">
+    			<h4 class="hid">{$carinfo.car_name} </h4>
+    			<p>{$carinfo.car_cardtime} <b>|</b>{$carinfo.car_mileage}万公里<b>|</b>{$carinfo.blowdown} <b>|</b>郑州</p>
+    		</div>
+    		<div class="car_descPri">
+    			<b>￥{$carinfo.price}万 </b>比新车省：万
+    		</div>
+    		<div class="car_descOrder flex_center">
+    			<input type="text" placeholder="请输入手机号"/>
+    			<p class="lowerPrice">询问底价</span>
+    		</div>
+    	</div>	     
+    </div>
+  <!--点击轮播显示大图以及预订-->    
+  <div class="photoList">
+  		<div class="pc_slide">
+			<div class="view">
+				<div class="swiper-container">
+					<a class="arrow-left" href="#"></a>
+					<a class="arrow-right" href="#"></a>
+					<div class="swiper-wrapper">
+						{volist name="carinfo.img_url" id="vol"}
+						<div class="swiper-slide">
+
+							<a target="_blank"><img src="{$vol}" alt=""></a>
+
+						</div>
+						{/volist}
+					</div>
+				</div>
+			</div>
+			<div class="preview">
+				<a class="arrow-left" href="#"></a>
+				<a class="arrow-right" href="#"></a>
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						{volist name="carinfo.img_url" id="vol"}
+						<div class="swiper-slide active-nav">
+							<div class="silde_img"><img src="{$vol}" alt=""></div>
+						</div>
+						{/volist}
+					</div>
+				</div>
+			</div>
+		</div>
+  		<div class="silde_info">
+  			<h2>{$carinfo.car_name}</h2>
+  			<p class="info_car">{$carinfo.car_cardtime} | {$carinfo.car_mileage}万公里 | {$carinfo.blowdown} | 郑州</p>
+  			<div class="tag flex_center"><span>准新车</span><span>店铺认证</span></div>
+  			<div class="info_price"><b>￥{$carinfo.price}万&nbsp;</b>比新车省：75.29万</div>
+  			<div class="car_form">
+  				<div class="ipt ipt_phone"><input type="text" placeholder="请输入手机号"/><span class="getcode">获取验证码</span></div>
+  				<div class="ipt"><input type="text" placeholder="请输入短信验证码"/></div>
+  				<div><p class="lowerPrice">询问底价</p></div>
+  				
+  			</div>
+  			<div class="link_btn">
+				<a href="javascript:;">联系商家</a>
+				<a href="">分期购车</a>
+			</div>
+			<ul class="btn_box oh">
+    			<li><img src="__STATIC__/img/collect.png" alt="" /><p>收藏</p></li>
+    			<li><img src="__STATIC__/img/PK.png" alt="" /><p>加入</p></li>
+    			<li><img src="__STATIC__/img/share.png" alt="" /><p>分享</p></li>
+    		</ul>
+    		<div class="del"><img src="__STATIC__/img/del1.png" alt="" height="16"/></div>
+  		</div>
+  </div>
+  
+  <!--更多车辆信息配置-->
+  	<div class="carConfig">
+  		<h2>汽车配置<div class="del"><img src="__STATIC__/img/del1.png" alt="" height="16"/></div></h2>
+  		<h3>{$carinfo.car_name}</h3>
+  		<div class="configBox">
+  			<ul class="config_tit1">
+  				<li class="con1 active"><b></b><span>基本配置</span></li>
+  				<li class="con2"><b></b><span>操控配置</span></li>
+  				<li class="con3"><b></b><span>外部配置</span></li>
+  				<li class="con4"><b></b><span>变速箱/底盘/车轮配置</span></li>
+  				<li class="con5"><b></b><span>高科技配置</span></li>
+  				<li class="con6"><b></b><span>灯光配置</span></li>
+  				<li class="con7"><b></b><span>发动机配置</span></li>
+  				<li class="con8"><b></b><span>多媒体配置</span></li>
+  				<li class="con9"><b></b><span>安全配资</span></li>
+  				<li class="con10"><b></b><span>车身配置</span></li>
+  			</ul>
+  			<div class="configCont">
+				{notempty name="carparam"}
+  				<div class="config_f con1">
+  					<div class="config_tit2"><b></b><span>基本配置</span></div>
+  					<ul class="">
+
+						{volist name="carparam['info']" id="vol"}
+  						<li>
+  							<p>{$vol.name}</p>
+  							<span>{$vol.content}</span>
+  						</li>
+  						{/volist}
+
+  					</ul>
+  				</div>
+  				<div class="config_f con2">
+  					<div class="config_tit2"><b></b><span>操控配置</span></div>
+  					<ul class="">
+						{notempty name="carparam"}
+						{volist name="carparam['nbbase']" id="vol"}
+  						<li>
+							<p>{$vol.name}</p>
+							<span>{$vol.content}</span>
+  						</li>
+						{/volist}
+						{/notempty}
+  					</ul>
+  				</div>
+  				<div class="config_f con3">
+  					<div class="config_tit2"><b></b><span>外部配置</span></div>
+  					<ul class="">
+						{notempty name="carparam"}
+						{volist name="carparam['wbfdpzhi']" id="vol"}
+  						<li>
+							<p>{$vol.name}</p>
+							<span>{$vol.content}</span>
+  						</li>
+						{/volist}
+						{/notempty}
+  					</ul>
+  				</div>
+  				<div class="config_f con4">
+  					<div class="config_tit2"><b></b><span>变速箱/底盘/车轮配置</span></div>
+  					<ul class="">
+
+						{volist name="carparam['gearbox']" id="vol"}
+						<li>
+							<p>{$vol.name}</p>
+							<span>{$vol.content}</span>
+						</li>
+						{/volist}
+
+  					</ul>
+  				</div>
+  				<div class="config_f con5">
+  					<div class="config_tit2"><b></b><span>高科技配置</span></div>
+  					<ul class="">
+						{volist name="carparam['fzcz']" id="vol"}
+						<li>
+							<p>{$vol.name}</p>
+							<span>{$vol.content}</span>
+						</li>
+						{/volist}
+  					</ul>
+  				</div>
+  				<div class="config_f con6">
+  					<div class="config_tit2"><b></b><span>灯光配置</span></div>
+  					<ul class="">
+						{volist name="carparam['lightbase']" id="vol"}
+						<li>
+							<p>{$vol.name}</p>
+							<span>{$vol.content}</span>
+						</li>
+						{/volist}
+  					</ul>
+  				</div>
+  				<div class="config_f con7">
+  					<div class="config_tit2"><b></b><span>发动机配置</span></div>
+  					<ul class="">
+						{volist name="carparam['base']" id="vol"}
+						<li>
+							<p>{$vol.name}</p>
+							<span>{$vol.content}</span>
+						</li>
+						{/volist}
+
+  					</ul>
+  				</div>
+  				<div class="config_f con8">
+  					<div class="config_tit2"><b></b><span>多媒体配置</span></div>
+  					<ul class="">
+						{volist name="carparam['dmtbase']" id="vol"}
+						<li>
+							<p>{$vol.name}</p>
+							<span>{$vol.content}</span>
+						</li>
+						{/volist}
+
+					</ul>
+  				</div>
+  				<div class="config_f con9">
+  					<div class="config_tit2"><b></b><span>安全配置</span></div>
+  					<ul class="">
+						{volist name="carparam['safe_base']" id="vol"}
+						<li>
+							<p>{$vol.name}</p>
+							<span>{$vol.content}</span>
+						</li>
+						{/volist}
+  					</ul>
+  				</div>
+  				<div class="config_f con10">
+  					<div class="config_tit2"><b></b><span>车身配置</span></div>
+  					<ul class="">
+						{volist name="carparam['clzhid']" id="vol"}
+						<li>
+							<p>{$vol.name}</p>
+							<span>{$vol.content}</span>
+						</li>
+						{/volist}
+  					</ul>
+  				</div>
+				{/notempty}
+  			</div>
+  		</div>
+  	</div>
+		<div class="footer">
+			{include file="public/footer"}
+		</div>
+ <!--蒙版--> 	
+  	<div class="mask"></div>
+	</body>
+	<script>		
+		$(function(){
+//			加载公共头部和底部
+		    $(".header").load("templates/header.html");
+//		    $(".footer").load("templates/footer.html");
+//			点击更多配置查看详细配置
+		    $(".more_config").click(function(){
+		    	$(".mask").show();
+		    	$(".carConfig").show();
+		    	$("html,body").css("overflow-y","hidden");
+//		    	楼层效果
+		    	$(".configCont").scroll(function() {
+	                var cTop=$(".configCont").offset().top;                
+	               $(".configCont .config_f").each(function(){
+	               		var fTop= $(this).offset().top;              	
+	               		var fTops = $(this).height() + fTop;
+	               		if(fTop<=cTop&&fTops>=cTop){
+	               			var n=$(this).index()+1;
+	               			$(".config_tit1 .con"+n).addClass("active").siblings().removeClass("active");
+	               			
+	               		}
+	               })
+            	})
+	            $(".config_tit1 li").click(function(){
+	            	var className = this.className;
+					$(this).addClass("active").siblings().removeClass("active");
+					var top = 0;
+					$.each($('.configCont .' + className).prevAll(), function(i, n) {
+						top += $(n).height();
+						console.log(n)
+					});
+					$(".configCont").stop().animate({
+						scrollTop: top
+					}, 200);
+	            })
+		    })
+		    $(".carConfig .del,.mask").click(function(){
+		    	$(".mask").hide();
+		    	$(".carConfig").hide();
+		    	$("html,body").css("overflow-y","auto");
+		    })
+//		          点击图片查看大图信息以及预定
+		    $("#picBox,.piclist").click(function(){
+		    	$(".photoList").show();
+		    	$(".mask").show();
+		        $("html,body").css("overflow-y","hidden");
+		    })
+		    $(".photoList .del,.mask").click(function(){
+		    	$(".photoList").hide();
+		    	$(".mask").hide();
+		    	$("html,body").css("overflow-y","auto");
+		    })
+            
+		})
+		</script>
+		<script>
+		$(function(){
+	//			相册轮播大图对应小图 swiper
+			var viewSwiper = new Swiper('.view .swiper-container', {
+				onSlideChangeStart: function() {
+					updateNavPosition();
+				}
+			})
+			$('.view .arrow-left,.preview .arrow-left').on('click', function(e) {
+				e.preventDefault();
+				if(viewSwiper.activeIndex == 0) {
+					viewSwiper.swipeTo(viewSwiper.slides.length - 1, 1000);
+					return;
+				}
+				viewSwiper.swipePrev();
+			})
+			$('.view .arrow-right,.preview .arrow-right').on('click', function(e) {
+				e.preventDefault();
+				if(viewSwiper.activeIndex == viewSwiper.slides.length - 1) {
+					viewSwiper.swipeTo(0, 1000);
+					return
+				}
+				viewSwiper.swipeNext();
+			})
+			var previewSwiper = new Swiper('.preview .swiper-container', {
+				visibilityFullFit: true,
+				slidesPerView: 'auto',
+				onlyExternal: true,
+				onSlideClick: function() {
+					viewSwiper.swipeTo(previewSwiper.clickedSlideIndex);
+				}
+			})
+			function updateNavPosition() {
+				$('.preview .active-nav').removeClass('active-nav');
+				var activeNav = $('.preview .swiper-slide').eq(viewSwiper.activeIndex).addClass('active-nav');
+				if(!activeNav.hasClass('swiper-slide-visible')) {
+					if(activeNav.index() > previewSwiper.activeIndex) {
+						var thumbsPerNav = Math.floor(previewSwiper.width / activeNav.width()) - 1;
+						previewSwiper.swipeTo(activeNav.index() - thumbsPerNav);
+					} else {
+						previewSwiper.swipeTo(activeNav.index());
+					}
+				}
+			}
+		})
+		</script>
+</html>

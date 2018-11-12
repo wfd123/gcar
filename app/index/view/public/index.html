@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/other.css" />
+	<link rel="stylesheet" href="css/fakeLoader.css" />
+	<link rel="stylesheet" href="css/swiper.min.css" />
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/fakeLoader.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.lazyload.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/gjsilde.min.js" type="text/javascript" charset="utf-8"></script>		
+	<style>
+		.site_nav{background-color: #f5f5f5;border-bottom: 1px solid #eee;width: 100%;}
+		.site_nav_bd{width: 1200px;margin: 0 auto;height: 35px;line-height: 35px;background: #f5f5f5;}
+		.site_nav_menu li{float: left;margin-right: 15px;}
+		.site_nav_menu li a{display: flex;align-items: center;justify-content: center;color: #999;}
+		.site_nav_menu li a img{height: 13px;margin-right: 3px;}
+	</style>
+	<body>
+		<div class="fakeLoader"></div>
+		<div class="site_nav">
+			<div class="site_nav_bd">
+				<div class="fleft">你好，欢迎来到管家车易站！请<a href="" class="coloryel">【登录】</a>,免费<a href="" class="coloryel">【注册】</a></div>
+				<div class="fright">
+					<ul class="site_nav_menu">
+						<li><a href=""><img src="img/home1.png" alt="" />首页</a></li>
+						<li><a href=""><img src="img/sell2.png" alt="" />我要买车</a></li>
+						<li><a href=""><img src="img/sell1.png" alt="" />我要买车</a></li>
+						<li><a href=""><img src="" alt="" />网站导航</a></li>
+					</ul>					
+				</div>
+			</div>
+		</div>
+		<div class="border"><div class="header"></div></div>
+		<div class="full_wid">
+			<div class="home_banner">
+			    <a class="arrow-left" href="#"></a> 
+			    <a class="arrow-right" href="#"></a>
+			    <div class="swiper-container">
+			      <div class="swiper-wrapper">
+			        <!--<div class="swiper-slide"> <img src="img/bgimg1.png"> </div>-->
+			        <!--<div class="swiper-slide"> <img src="img/bgimg1.png"> </div>-->
+			      </div>
+			    </div>
+			    <div class="pagination"></div>
+			</div>
+			<div class="wrap home_sel">
+				<ul class="home_sel_tit">
+					<li class="active"> 新车</li>
+					<li>二手车</li>
+				</ul>
+				<div class="home_sel_con">
+					<ul class="sel_newcar_brand oh ">
+						<li><a href=""><img src="img/bd341e66b92e33195101c974f95e6baf.png" alt=""><p>宝马</p></a></li>
+						<li><a href=""><img src="img/55f22179f5031ef142482e69d92ac594.png" alt=""><p>凯迪拉克</p></a></li>
+						<li><a href=""><img src="img/55f22179f5031ef142482e69d92ac594.png" alt=""><p>凯迪拉克</p></a></li>
+						<li><a href=""><img src="img/55f22179f5031ef142482e69d92ac594.png" alt=""><p>凯迪拉克</p></a></li>
+						<li><a href=""><img src="img/55f22179f5031ef142482e69d92ac594.png" alt=""><p>凯迪拉克</p></a></li>
+						<li><a href=""><img src="img/55f22179f5031ef142482e69d92ac594.png" alt=""><p>凯迪拉克</p></a></li>
+						<li><a href=""><img src="img/55f22179f5031ef142482e69d92ac594.png" alt=""><p>凯迪拉克</p></a></li>
+						<li><a href=""><img src="img/bd341e66b92e33195101c974f95e6baf.png" alt=""><p>宝马</p></a></li>
+						<li><a href=""><img src="img/55f22179f5031ef142482e69d92ac594.png" alt=""><p>凯迪拉克</p></a></li>
+						<li><a href=""><img src="img/55f22179f5031ef142482e69d92ac594.png" alt=""><p>凯迪拉克</p></a></li>
+					</ul>
+					<ul class="sel_newcar_type oh mtp40">
+						<li class="active"><a href=""> 分期购</a></li>
+						<li class="active"><a href=""> 1成购新</a></li>
+						<li class=""><a href=""> 5万以下</a></li>
+						<li class=""><a href=""> 10-15万</a></li>
+						<li class=""><a href=""> 10-15万</a></li>
+					</ul>
+					<ul class="sel_newcar_type oh mtp40">
+						<li class="active"><a href=""> 准新车</a></li>
+						<li class="active"><a href=""> 练手车</a></li>
+						<li class=""><a href=""> SUV</a></li>
+						<li class=""><a href=""> 紧凑型车</a></li>
+						<li class=""><a href=""> 紧凑型车</a></li>
+						<li class="active fright"><a href="" class="moretype"><img src="img/quanbu.png" alt="" width="23">更多车型</a></li>
+					</ul>
+				</div>
+				<div class="sel_bot">
+					<div class="home_search">
+						<p class="search_tit"><b>管家车易站</b> 新车 二手车 直卖网</p>
+						<div class="search_ipt"><input type="text" placeholder="请输入感兴趣的新车、二手车品牌车系"><a href="">立即搜索</a></div>
+						<div class="sel_opt"><a href="">奥迪</a><a href=""></a><a href="">别克</a><a href="">奥迪</a><a href=""></a><a href="">别克</a><a href="">大宗 </a></div>
+					</div>
+					<div class="home_order fleft">
+						<p class="search_tit"><b>1至3成首付 </b> 新车 二手车 开回家</p>
+						<div class="search_ipt"><input type="text" placeholder="请输入手机号"><a href="">特惠购车</a></div>
+						<div class="sel_opt">预约后将会有专业的客户人员为你推荐好车</div>
+					</div>
+				</div>
+			</div>
+			<div class="wrap">
+				<div class="home_recom_car">
+					<div class="recom_new_tit oh marbt23">
+						<h2>推荐新车</h2>
+						<ul class="fleft">
+							<li class="active">分期购</li>
+							<li>一成购新</li>
+							<li>低月供</li>
+							<li>5万以下</li>
+						</ul>
+					</div>
+					<div class="recom_new_con">
+						<ul class="recom_tit_img ">
+							<li class="car_left"><a href=""><img class='lazy-load'  data-original="img/group1.png" alt="" titlt=''/></a></li>							
+							
+							<li>
+								<a href="" class="flex_around"  target="_blank"> 
+								<span class="car_img"><img class='lazy-load' data-original="img/car11.png" alt="" titlt='' src='img/220150.gif'/>
+								</span>
+								<h3 class="text_overflow">奔驰A4L 2017款 plus 40 TFSI 进取型奔驰A4L 2017款 plus 40 TFSI 进取型</h3>
+								<p class="valign ptp15">
+									<span class="pay_first plt10">首付<b class="">44</b>万</span>
+									<span class="pay_month">月供5555元</span>
+								</p>									
+								</a>
+							</li>										
+							
+						</ul>
+					</div>
+				</div>
+				<div class="home_recom_car">
+					<div class="recom_new_tit oh marbt23">
+						<h2>推荐二手车</h2>
+						<ul class="fleft">
+							<li class="active">最近发布</li>
+							<li>价格最低</li>
+							<li>车龄最短</li>
+							<li>里程最短</li>
+						</ul>
+					</div>
+					<div class="recom_new_con">
+						<ul class="recom_tit_img">
+							<li class="car_left"><a href=""><img class='lazy-load' data-original="img/group1.png" alt="" titlt=''/></a></li>							
+							<li>
+								<a href="" class="flex_around">
+								<span class="car_img"><img class='lazy-load' data-original="img/car11.png" alt="" titlt='' src='img/220150.gif'/>
+								</span>
+								<h3 class="text_overflow">奔驰A4L 2017款 plus 40 TFSI 进取型奔驰A4L 2017款 plus 40 TFSI 进取型</h3>
+								<p class="mile">2016年  |  2.0万公里</p>
+								<p class="valign">
+									<span class="pay_first plt10"><b class="">44</b>万 <i>19.9万</i></span>
+									<span class="sure"><img src="img/pinpairz.png" alt=""/></span>
+								</p>									
+								</a>
+							</li>
+							
+						</ul>
+					</div>
+				</div>
+				<div class="home_user_made ">
+					<div class="recom_new_tit oh marbt23">
+						<h2>私人订制</h2>
+					</div>
+					<div class="boxshaow recom_new_con">
+						<div class="recom_tit_img">
+							<div class="car_left fleft"><a href=""><img class='lazy-load' data-original="img/group1.png" alt="" /></a></div>	
+							<div class="home_user_ipt">
+								<p class="font_weight">填写需求</p>
+								<div class="border">
+									<textarea name="" rows="" cols="" id="textCon" placeholder="填写您的需求 比如需要什么样的车 什么价位的车什么样的车型..."></textarea>
+									<span class="fright color6 ft14 count_num">限制字数为0-500字</span>
+								</div>
+							</div>
+							<div class="home_user_ipt">
+								<p class="font_weight">姓名：</p>
+								<div class="made_ipt">
+									<input type="text" placeholder="请输入姓名"/>
+								</div>
+								<p class="font_weight">手机号：</p>
+								<div class="made_ipt">
+									<input type="text" placeholder="请输入手机号"/><span class="getcode">获取验证码</span>
+								</div>
+								<p class="font_weight">验证码：</p>
+								<div class="made_ipt">
+									<input type="text" placeholder="请输入验证码"/>
+								</div>
+								<div class="made_ipt submit_ipt">
+									开启私人订制
+								</div>
+							</div>
+						</div>
+					</div>														
+				</div>
+				<div class="home_user_sell ">
+					<div class="recom_new_tit oh marbt23">
+						<h2>我要卖车</h2>
+					</div>
+					<div class="boxshaow recom_new_con">
+						<div class="recom_tit_img">
+							<div class="car_left fleft"><a href=""><img class='lazy-load' data-original="img/group1.png" alt="" /></a></div>	
+							<div class="car_sell_selipt mlt50 fleft">
+								<div class="borbt"><img src="img/liucheng.png"/></div>					
+							    <p class="sellcar marbt15 oh"><span class="font_weight ft20 ">我要卖车 ></span><span class="color9 ft14">已经有 <b class="coloryel">888</b> 人提交申请</span></p>
+							    <div class="ipt_info fleft">
+							    	<p class="sell_ipt">姓名：<input type="text" placeholder="请输入姓名"/></p>
+							    	<p class="sell_ipt marbt15">手机号：<input type="text"  placeholder="请输入手机号"/></p>
+							    	<p class="sell_ipt">验证码：<input type="text"  placeholder="请输入验证码" class="verfity"/><span class="getcode">获取验证码</span></p>
+							    </div>
+							    <div class="ipt_info fleft marlr15">
+							    	<p>车&nbsp;&nbsp;&nbsp; 型：							    		
+							    		<select name=""  class="info-select">
+							    		   <option value="">品牌</option>
+							    		   <option value="">2</option>
+							    		   <option value="">3</option>
+							    		   <option value="">13</option>
+							    	   </select>							    		
+							    	</p>
+							    	<p>上牌时间: 							    	
+							    		<select name=""  class="info-select">
+							    		   <option value="">年份</option>
+							    		   <option value="">2</option>
+							    		   <option value="">3</option>
+							    		   <option value="">13</option>
+							    	   </select>							    	
+							    	</p>
+							    	<p>行驶里程:						    		
+								    	<select name=""  class="info-select">
+							    		   <option value="">1</option>
+							    		   <option value="">2</option>
+							    		   <option value="">3</option>
+							    		   <option value="">13</option>
+							    	    </select>
+							    		
+							    	</p>
+							    </div>
+							    <div class="ipt_info fleft marlr15">
+							    	<p>车系：
+							    	    <select name=""  class="info-select">
+							    		   <option value="">1</option>
+							    		   <option value="">2</option>
+							    		   <option value="">3</option>
+							    		   <option value="">13</option>
+							    	    </select>
+							    	</p>
+							    	<p>月份：
+							    	    <select name=""  class="info-select">
+							    		  <option value="">1</option>
+							    		   <option value="">2</option>
+							    		   <option value="">3</option>
+							    		   <option value="">13</option>
+							    	    </select>
+							    	</p>
+							    	<p class="next_step">下一步</p>
+							    </div>
+							</div>
+						    
+						</div>
+					</div>														
+				</div>
+			</div>	
+		</div>
+		<div class="wrap">
+			<ul class="news_nav">
+				<li class="active"><h2>公司新闻</h2></li>
+				<li><h2 class="mar180">行业新闻</h2></li>
+				<li><h2 class="mar180">媒体报道</h2></li>
+				<li><h2 class="mar180">特色活动</h2></li>
+				<li><h2 class="mar180">新车资讯</h2></li>
+			</ul>
+			<div class="news_m">
+				
+		        <div class="news_desc" >
+		            <div class="fleft news_tuwen" >
+		                <div class="news_img"><img class='lazy-load' data-original="img/sfds.png" alt="" src='img/220150.gif'/></div>
+		                <div class="img_desc ">
+		                    <a href=""><h3>州二手日产奇郑骏管家车易站</h3></a>
+		                    <p class="tit_desc">郑州二手日产奇骏管家车易站    郑州二手奥迪A3在管家车易站有着良好的口碑和认证的二手私家好车  郑州二手奥迪A3在管家车易站有着良好的口碑和认证的二手私家好车</p>
+		                    <a href="" class="news_details">【详情】</a>
+		                    <p class="fright time"> 刚刚</p>
+		                </div>
+		                <p class="div_fen"></p>
+		                <div class="news_list">		               
+		                    <a href=""><p class="tit_small">
+		                        <span class="fleft"><img src="img/zhixina.png" alt="" /></span>
+		                        <span class="fleft hid_tit">车易站    郑州二手奥迪A3在管家车易站有着良好的口碑和认证的二手私家</span>
+		                        <span class="fright color9">15-15</span>
+		                    </p></a>
+		     	        </div>
+		            </div>
+		            <div class="fleft news_tuwen marlt64">
+		                <div class="news_img"><img class='lazy-load' data-original="img/sfds.png" alt="" src='img/220150.gif'/></div>
+		                <div class="img_desc ">
+		                    <a href=""><h3>州二手日产奇郑骏管家车易站</h3></a>
+		                    <p class="tit_desc">郑州二手日产奇骏管家车易站    郑州二手奥迪A3在管家车易站有着良好的口碑和认证的二手私家好车  郑州二手奥迪A3在管家车易站有着良好的口碑和认证的二手私家好车</p>
+		                    <a href="" class="news_details">【详情】</a>
+		                    <p class="fright time"> 刚刚</p>
+		                </div>
+		                <p class="div_fen"></p>
+		                <div class="news_list" >
+		                <volist name="type11" id="type" offset="5" length='10'>
+		                    <a href="__APP__/zz/news/d{$type.id}"><p class="tit_small">
+		                        <span class="fleft"><img src="img/zhixina.png" alt="" /></span>
+		                        <span class="fleft hid_tit">车易站    郑州二手奥迪A3在管家车易站有着良好的口碑和认证的二手私家</span>
+		                        <span class="fright color9">15-15</span>
+		                    </p></a>
+		                </volist>    
+		                </div>
+		            </div>
+		        </div>
+			</div>
+		</div>		
+		<div class="footer mtp40"></div>
+		<div class="fixedRight">
+			<ul class="right_sider">
+				<li><div class="gj_side_contnet iocn_s1"><p>pk</p></div>
+					<!--<div class="gj_sidecon_desc pk_bar tool_tip">
+						<h2>车型对比</h2>
+						<ul class="list">
+							<li class="items5">
+								<a href="" class="car_img flex_center"><img src="" alt="" /></a>
+								<a href="" class="car_desc">
+									<h3>奔驰A4L 2017款 plus 40 TFSI 进取型</h3>
+									<p><span class="car_price"><b>2066</b>万</span><span class="car_sui">新车含税13.86万</span></p>
+									<p><span>2015年8月10日上牌</span> <span class="padlt20">4万公里</span> </p>
+									<div class="che_ordered">立即预约</div>
+								</a>
+							</li>
+							<li class="items5">
+								<a href="" class="car_img flex_center"><img src="" alt="" /></a>
+								<a href="" class="car_desc">
+									<h3>奔驰A4L 2017款 plus 40 TFSI 进取型</h3>
+									<p><span class="car_price"><b>2066</b>万</span><span class="car_sui">新车含税13.86万</span></p>
+									<p><span>2015年8月10日上牌</span> <span class="padlt20">4万公里</span> </p>
+									<div class="che_ordered">立即预约</div>
+								</a>
+							</li>
+							
+						</ul>
+					</div>-->
+				</li>
+				<li><div class="gj_side_contnet iocn_s2"><p>收藏</p></div>
+					<!--<div class="gj_sidecon_desc car_item tool_tip"><h2>我的收藏</h2>
+						<ul class="list">
+							<li class="items5">
+								<a href="" class="car_img flex_center"><img src="" alt="" /></a>
+								<a href="" class="car_desc">
+									<h3>奔驰A4L 2017款 plus 40 TFSI 进取型</h3>
+									<p><span class="car_price"><b>2066</b>万</span><span class="car_sui">新车含税13.86万</span></p>
+									<p><span>2015年8月10日上牌</span> <span class="padlt20">4万公里</span> </p>
+									<div class="che_ordered">立即预约</div>
+								</a>
+							</li>
+							<li class="items5">
+								<a href="" class="car_img flex_center"><img src="" alt="" /></a>
+								<a href="" class="car_desc">
+									<h3>奔驰A4L 2017款 plus 40 TFSI 进取型</h3>
+									<p><span class="car_price"><b>2066</b>万</span><span class="car_sui">新车含税13.86万</span></p>
+									<p><span>2015年8月10日上牌</span> <span class="padlt20">4万公里</span> </p>
+									<div class="che_ordered">立即预约</div>
+								</a>
+							</li>
+							
+						</ul>
+					</div>-->
+				</li>
+				<li><div class="gj_side_contnet iocn_s3"><p>浏览</p></div>
+					<div class="gj_sidecon_desc tool_tip"></div>
+				</li>
+				<li><div class="gj_side_contnet iocn_s4"><p>个人</p></div>
+					<div class="gj_sidecon_desc tool_tip"></div>
+				</li>
+				<li><div class="gj_side_contnet iocn_s5"><p>公众号</p></div>
+					<!--<div class="gj_sidecon_desc tool_tip"><img src="img/gzh.png" alt="" /></div>-->
+				</li>
+				<li><div class="gj_side_contnet iocn_s6"><p>APP下载</p></div>
+					<!--<div class="gj_sidecon_desc tool_tip"><img src="img/appdn.png" alt="" /></div>-->
+				</li>
+				<li><div class="gj_side_contnet iocn_s7"><p>客服</p></div>
+					<!--<div class=" tool_tip"><img src="img/dianhua.png" alt="" /></div>-->
+				</li>
+				
+				<li><div class="gj_side_contnet iocn_s8"><p>反馈</p></div>
+				<div class="gj_sidecon_desc tool_tip"></div></li>
+				<li><div class="gj_side_contnet iocn_s7"><p>法律顾问</p></div>
+					<!--<div class=" tool_tip"><img src="img/dianhua.png" alt="" /></div>-->
+				</li>
+				<li><div class="gj_side_contnet iocn_s9"><p>顶部</p></div>
+					<div class="gj_sidecon_desc "></div>
+				</li>
+				
+			</ul>
+		</div>
+	</body>
+	<script>		
+		$(function(){
+			var len1=$(".car_item .items5").length;
+			var len2=$(".pk_bar .items5").length;
+			
+			
+			if(len1<0){				
+			}else if(len1>=1){
+				$(".pk_bar").css("width",'500px')
+			}
+			if(len2<0){				
+			}else if(len2>=1){
+				$(".car_item").css("width",'500px')
+			}
+			 // 获取首页banner接口数据
+			     var url='http://www.gj2car.com/';
+			     
+		    $.ajax({
+		        type:'POST',
+		        url: url+'Newpc/Index/banner',
+		        dataType : "json",
+		        success: function(data){		
+		            $(data.body).each(function(i,o){
+		                $(o.banner).each(function(index,obj){
+		                    $(".home_banner .swiper-wrapper").append(" <div class='swiper-slide'><a href=''> <img  src="+obj.img_url+" alt=''  class='swiper-lazy'/> </a></div>");
+		                var mySwiper = new Swiper('.swiper-container',{
+//						    pagination: '.pagination',
+						    loop:true,
+						    grabCursor: true,
+						    paginationClickable: true
+						  })
+						  $('.arrow-left').on('click', function(e){
+						    e.preventDefault()
+						    mySwiper.swipePrev()
+						  })
+						  $('.arrow-right').on('click', function(e){
+						    e.preventDefault()
+						    mySwiper.swipeNext()
+						  })
+		                })
+		            })		            		            
+		        },		        
+		        error:function(){
+		            console.log("没有获取到数据");
+		        }
+//		
+		    });
+//		    输入内容不超过限制字数
+			$("#textCon").on("input propertychange",function(){
+				var that=$(this);
+				$val=that.val();
+				count="";
+				if($val.length>500){
+					that.val($val.substring(0,500));					
+				}
+				count=500-that.val().length;
+				$(".count_num").text('请注意，还可以输入'+count+'字');
+				if(count<=0){
+					$(".count_num").text('没有多余的空间可以输入了');
+				}
+			})
+//			图片懒加载
+
+			 $("img").lazyload({
+//               placeholder:"img/loading.gif",
+                 effect : "fadeIn", //渐现，show(直接显示),fadeIn(淡入),slideDown(下拉)
+                 failure_limit:2 //加载2张可见区域外的图片,lazyload默认在找到第一张不在可见区域里的图片时则不再继续加载,但当HTML容器混乱的时候可能出现可见区域内图片并没加载出来的情况
+             });
+             
+//           首页预载功能
+
+			$(".fakeLoader").fakeLoader({
+				timeToHide:1000, //加载效果的持续时间
+				zIndex:"999",//
+				spinner:"spinner7",//可选值 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 对应有7种效果
+				bgColor:"", //加载时的背景颜色
+				imagePath:"img/loading.gif" //自定义的加载图片，见demo8.html
+			});
+//			车型介绍里面车品牌名称两行省略
+
+
+			$('.recom_tit_img li h3').each(function(){
+			 //设置显示获取字符串的字数  这个根绝要求 看需要大概显示几行
+			    var maxwidth=35;   
+			    if($(this).text().length>maxwidth){
+			         //截取字符串
+			        $(this).text($(this).text().substring(0,maxwidth));
+			        //多余的用省略号显示
+			        $(this).html($(this).html()+'...');
+			    }
+			});
+			
+			
+//			新闻内容省略
+			var content_arr=[];//定义一个空数组
+            $('.news_desc .tit_desc').each(function(){//遍历box内容
+                var content=$.trim($(this).text());//去掉前后文空格
+                content_arr.push(content);//内容放进数组
+            })
+            for(var i=0;i<content_arr.length;i++){//遍历循环数组
+                if(content_arr[i].length>=40){//如果数组长度（也就是文本长度）大于等于50（数字可自己定义）
+                    content=content_arr[i].substr(0,40)+'...';//添加省略号并放进box文字内容后面
+                    $('.news_desc .tit_desc').eq(i).text(content);
+                }else{
+                    content=content_arr[i];
+                   $('.news_desc .tit_desc').eq(i).text(content);
+                }
+            }
+			$(".news_nav li").click(function(){
+				var i=$(this).index();
+				$(this).addClass('active').siblings('li').removeClass('active');
+				$(".news_desc").eq(i).show().siblings('.news_desc').hide()
+			})
+			
+		    $(".header").load("templates/header.html");
+		    $(".footer").load("templates/footer.html")
+		   
+		})
+</script>
+</html>

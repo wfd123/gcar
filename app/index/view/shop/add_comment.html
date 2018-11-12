@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title></title>
+	</head>
+	 <link rel="icon" type="image/x-icon" href="favicon.png">
+	<link rel="stylesheet" href="__STATIC__/css/style.css" />
+	<link rel="stylesheet" href="__STATIC__/css/other.css" />
+
+	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+	<script src="__STATIC__/js/jquery.lazyload.min.js" type="text/javascript" charset="utf-8"></script>	
+	<script src="__STATIC__/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<style>	
+		.tagScore{display: none;}
+
+	</style>
+
+<body>
+
+<div class="header">{include file="public/header"}</div>
+
+
+<div class="full_wid">
+	<div class="wrap">
+		<div class="breadnav">您的位置：<a href="#">郑州二手交易市场</a>>><a href="#">郑州二手车 >></a><a href=""> 发表店铺评论 </a></div>
+
+		<form action="{:url('shop/remark')}" enctype="multipart/form-data"  method="post">
+
+			<input type="hidden" name="shop_id" value="<?php echo $_GET['shop_id']; ?>" />
+		<div class="add_com">
+			<div class="fright store_score">
+				<h2>向阳二手车金水区店</h2>
+				<div class="score_res oh">
+					<b class="f_score">5.0</b>
+					<div class="score_value fleft"><span class=""><em data_value="2"></em></span></div><!--分数-->			
+				</div>
+				<p>店铺环境：5分</p>
+				<p>服务态度：5分</p>
+				<p>商家专业：5分</p>
+				
+			</div>
+			<h1>店铺评分</h1>
+			<h2>向阳二手车金水区店</h2>
+			<div class="score_cont gj_clear">
+				<!--打分-->
+				<div class="comment_score"><span>总体服务:</span>
+					<div class="mark_score star_img">
+						<div class="empty_star">
+							<span class="star" data-value='20' score_vlaue='1'></span>
+							<span class="star" data-value='40' score_vlaue='2'></span>
+							<span class="star" data-value='60' score_vlaue='3'></span>
+							<span class="star" data-value='80' score_vlaue='4'></span>
+							<span class="star" data-value='100' score_vlaue='5'></span>
+						</div>
+						<div class="full_star"></div>
+						<input class="totalTag tagScore" type="hidden" value="1"></input>
+					</div>
+					
+				</div>
+				<div class="comment_score"><span>车源真实:</span>
+					<div class="mark_score smile_img">
+						<div class="empty_star">
+							<span class="star" data-value='20' score_vlaue='1'></span>
+							<span class="star" data-value='40' score_vlaue='2'></span>
+							<span class="star" data-value='60' score_vlaue='3'></span>
+							<span class="star" data-value='80' score_vlaue='4'></span>
+							<span class="star" data-value='100' score_vlaue='5'></span>
+						</div>
+						<div class="full_star"></div>	
+						<input class="carTag tagScore" type="hidden"></input>
+					</div>
+				</div>
+				<div class="comment_score"><span>服务态度:</span>
+					<div class="mark_score smile_img">
+						<div class="empty_star">
+							<span class="star" data-value='20' score_vlaue='1'></span>
+							<span class="star" data-value='40' score_vlaue='2'></span>
+							<span class="star" data-value='60' score_vlaue='3'></span>
+							<span class="star" data-value='80' score_vlaue='4'></span>
+							<span class="star" data-value='100' score_vlaue='5'></span>
+						</div>
+						<div class="full_star"></div>
+						<input class="serviceTag tagScore" type="hidden"></input>
+					</div>
+				</div>
+				<div class="comment_score"><span>商家专业:</span>
+					<div class="mark_score smile_img">
+						<div class="empty_star">
+							<span class="star" data-value='20' score_vlaue='1'></span>
+							<span class="star" data-value='40' score_vlaue='2'></span>
+							<span class="star" data-value='60' score_vlaue='3'></span>
+							<span class="star" data-value='80' score_vlaue='4'></span>
+							<span class="star" data-value='100' score_vlaue='5'></span>
+						</div>
+						<div class="full_star"></div>	
+						<input class="dealerTag tagScore" type="hidden"></input>
+					</div>
+				</div>
+				<!--多选-->
+				<div class="tag_list">
+					<!--<span class="active" tag_check='1' tag_value="1"> 服务热情</span>-->
+					{volist name="lables" id="val"}
+
+					<input type="text" name="lable" >
+					<span tag_check='0'  tag_value="{$val.id}">{$val.lable}</span>
+					<!--<input type="text" name="lable[]" value="">-->
+					{/volist}
+
+				</div>
+			</div>
+	      
+	     	<h2>评价</h2>
+	        <div class="textareabox p_r">
+	        	<textarea class="form_textarea" data-length="500" id="information" name="content"  data-toggle="textarea"
+	        		placeholder="服务是否专业、价格是否合理，写下您的意见吧~"></textarea>
+	        		<span class="limit_num">
+	        			至少10字
+	        		</span>
+	        </div>
+	        <h2>购车阶段</h2>
+	        <ul class="buy_step oh">
+	        	<li><input type="checkbox" class="checked" name="have_ls"/><b></b><span>未联系</span></li>
+	        	<li><input type="checkbox" /><b></b><span>未购车</span></li>
+	        	<li><input type="checkbox" /><b></b><span>未到店</span></li>
+	        </ul>
+			<div class="add_btn"><input type="submit" value="发表评论"/></div>
+			<p>
+				欢迎您为商家进行点评和打分，与万千买家分享您的购车体验！<br />
+				您的点评和打分将成为其他买家的参考依据，并影响该商家评价。<br />
+				请您根据真实的购车体验，客观地发布本人的评价。如您发布的点评并非本人的真实体验，则将被视为违规。
+			</p>
+		</div>
+		</form>
+
+	</div>
+</div>
+
+
+<div class="footer">{include file="public/footer"}</div>
+
+</body>
+<script>
+	$(function(){
+     // $(".header").load("templates/header.html");
+     // $(".footer").load("templates/footer.html");
+//	显示分
+	var score=$(".score_value em").attr("data_value");
+	var f_score=score*20;
+	$(".score_value em").css('width',f_score+'%');
+  //打分
+    $(".empty_star .star").click(function(){
+    	var l_score=$(this).attr('data-value');
+    	var score_res=$(this).attr('score_vlaue');
+    	$(this).parents(".mark_score ").find(".tagScore").val(score_res);
+    	console.log(score_res)
+    	$(this).parents(".mark_score ").find(".full_star").css("width",l_score+'%')
+    })
+//  多选
+    $(".tag_list span").click(function () {	
+	    if ($(this).hasClass("active")) {
+	            $(this).removeClass("active");
+	            $(this).attr("tag_check", 0);
+	       }else{
+	       	    $(this).addClass("active");
+	            $(this).attr("tag_check", 1);
+	       }
+	});
+//	评价
+$("#information").keyup(function () {
+    ChangeInfo(this);
+});
+
+var lengthLimit = 10;//点评内容字数最少限制
+function ChangeInfo(obj) {
+    var len = $(obj).val().length;
+    if (len >= 500) {
+        $(obj).val($(obj).val().substring(0, 500));       
+    }
+    if (len < lengthLimit) {
+        $(".limit_num").html("您还差<em>" + (lengthLimit - len) + "</em>字");
+    }
+    else {
+        if (len > 10) {
+            $(".limit_num").html("<em>" + len + "</em>/500");
+        }
+    }
+   } 
+   
+   
+   
+   
+   
+	})
+	
+
+</script>
+</html>
+
+

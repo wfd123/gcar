@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+	<head>
+		<meta charset="utf-8"/>
+		<title></title>
+	</head>
+	<link rel="icon" type="image/x-icon" href="favicon.png">
+	<link rel="stylesheet" href="__STATIC__/css/style.css" />
+	<link rel="stylesheet" href="__STATIC__/css/other.css" />
+	<link rel="stylesheet" href="__STATIC__/css/webuploader.css" />
+	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+	<style>
+
+	</style>
+	<body>
+	<div class="header">
+		{include file="public/header"}
+	</div>
+
+		<div class="full_wid">			
+			<div class="wrap ">	
+				<div class="person_center">
+					<div class="person_left">
+						<div class="person_info">
+							<div class="user_avatar"><img src="__STATIC__/img/yhtx.png" alt="" /></div>
+							<p class="uphone">{$Think.session.phone}</p>
+							<p>向阳二手车一号店</p>							
+						</div>
+						<div class="tab_choose">
+							<ul>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_man"><b class="icon_xb1"> </b>管理店铺<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_rele"><b class="icon_xb2"></b>发布车辆信息<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_pub.html"><b class="icon_xb3"></b>发布过的<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_buse.html"><b class="icon_xb4"></b>商家入驻<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_oppo.html"><b class="icon_xb5"></b>商机<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_info.html"><b class="icon_xb6"></b>个人资料<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_coll.html"><b class="icon_xb7"></b>我的收藏<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class="active"><a href="{$domain}/{$Think.session.cityurl}/per_his"><b class="icon_xb8"></b>浏览记录<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_feed.html"><b class="icon_xb9"></b>意见反馈<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_ord.html"><b class="icon_xb10"></b>我的预约<i class="icon iconfont icon-jiantou"></i></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="person_right">
+						<h1 class="borbt"><span class="release">商家入驻</span></h1>
+						<h2 class="step"></h2>
+						<form  action="{:url('user/business_entry')}" method='post' enctype='multipart/form-data'>
+						<div class="business_enter">
+							<div>
+								<h3>选择类型 <span>请选择您的入驻类型</span></h3>
+								<div class="sel_type gj_clear">
+									<!--<input type="text" readonly placeholder="新车商户" class="businesType"/>-->
+									<select name="type" class="sel_type gj_clear businesType">
+										<option value="1">新车商户</option>
+										<option value="2">二手车商户</option>
+										<option value="3">零首付商户</option>
+										<option value="4">新能源商户</option>
+									</select>
+									<!--<div class="position_r">-->
+										<!--<select name="type" class="sel_type gj_clear">-->
+											<!--<option value="1">新车商户</option>-->
+											<!--<option value="2">二手车商户</option>-->
+											<!--<option value="3">零首付商户</option>-->
+											<!--<option value="4">新能源商户</option>-->
+										<!--</select>-->
+
+									<!--</div>-->
+								</div>								
+							</div>
+							<div>
+								<h3>上传资料  </h3>
+								<div class="bform_ipt">
+									<div class="sel_type"><span>法人姓名</span><input type="text" name = "name" placeholder="请输入公司法人姓名" /></div>
+									<div class="sel_type"><span>法人手机号</span><input type="text" name="phone" placeholder="请输入公司法人手机号"/></div>
+									<div class="sel_type"><span>验证码</span><input type="text" placeholder="请输入验证码" class="verfity"/><span class="getcode">获取验证码</span></div>
+									<div class="sel_type"><span>店铺名称</span><input type="text" name="shop_name" placeholder="请输入公司店铺名称"/></div>
+									<div class="sel_type"><span>经营范围</span><input type="text" name="business_range" placeholder="请输入公司经营范围" class="slt_type" readonly/></div>
+									<div class="sel_type"><span>公司地址</span><input type="text" name="address" placeholder="请输入公司经营地址"/></div>
+								
+								</div>
+							</div>
+							<div class="img_l gj_clear">
+								<div class="fleft">
+									<h3>上传营业执照  </h3>
+									<div class="imgCont">
+
+										<div id="up_progress_a" class="up-progress" style="display: none;">100%</div>
+										<div id="prev_img_a" style="display: none;"><img style="width:274px;height:195px;" src="__STATIC__/img/967.jpg"></img></div>
+										<div id="uploadForm">
+											<div id="file_inp"></div>
+								            <div class="upLoad_pic">
+									            <img class="img_up"  src="__STATIC__/img/addlo.png" >
+									        </div>
+										</div>
+									</div>
+								</div>
+								<div class="fleft">
+									<h3>店铺logo  </h3>
+									<div class="imgCont">
+
+										<div id="up_progress_b" class="up-progress" style="display: none;">100%</div>
+										<div id="prev_img_b" style="display: none;"><img style="width:274px;height:195px;" src="__STATIC__/img/967.jpg"></img></div>
+										<div id="uploadForm1">
+											<div id="file_inp1"></div>
+											<div class="upLoad_pic">
+												<img class="img_up"  src="__STATIC__/img/addlo.png" >
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="submit sub_btn"><input type="submit" value="提交" /></div>
+						</div>
+						</form>
+					</div>
+
+				</div>
+				
+			</div>
+		</div>	
+		<div class="footer"></div>
+		
+		<div class="mask1"></div>
+
+	</body>
+
+	<script src="__STATIC__/js/webuploader.min.js"></script>
+	<script>
+		$(function(){
+			$(".businesType").click(function(){
+				$(this).parents('.sel_type').addClass('active');				
+			})
+			$(".selList li").click(function(){
+					var result=$(this).text();
+					$(".businesType").val(result);
+					$(this).parents('.sel_type').removeClass('active');
+				})
+   			// $(".header").load("templates/header.html");
+
+            var
+                // 优化retina, 在retina下这个值是2
+                ratio = window.devicePixelRatio || 1,
+
+                // 缩略图大小
+                thumbnailWidth = 100 * ratio,
+                thumbnailHeight = 100 * ratio,
+
+                // Web Uploader实例
+                uploader,
+				uploader1;
+
+            // 初始化Web Uploader
+            uploader = WebUploader.create({
+                formData: {
+                    img_type: 'door_photo'
+                },
+                // 自动上传。
+                auto: true,
+
+                // swf文件路径
+                swf: '__STATIC__/js/Uploader.swf',
+
+                // 文件接收服务端。
+                server: 'upload_image',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#file_inp',
+
+                // 只允许选择文件，可选。
+                accept: {
+                    title: 'Images',
+                    extensions: 'jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/jpg,image/jpeg,image/png'
+                }
+            });
+
+            // 当有文件添加进来的时候
+            uploader.on('fileQueued', function( file ) {
+                $("#up_progress_a").css("display", 'block');
+                $("#prev_img_a").css("display", 'none');
+                $("#uploadForm").css("display", 'none');
+
+                $img = $("#prev_img_a").find('img');
+
+                // 创建缩略图
+                uploader.makeThumb( file, function( error, src ) {
+                    if ( error ) {
+                        $img.replaceWith('<span>不能预览</span>');
+                        return;
+                    }
+                    $img.attr( 'src', src );
+                }, thumbnailWidth, thumbnailHeight );
+
+            });
+
+            // 文件上传过程中创建进度条实时显示。
+            uploader.on( 'uploadProgress', function( file, percentage ) {
+                $("#up_progress_a").text(percentage * 100 + '%');
+                if (percentage * 100 == 100){
+
+                }
+            });
+
+            // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+            uploader.on( 'uploadSuccess', function( file ) {
+                $img = $("#prev_img_a").find('img');
+                // 创建缩略图
+                uploader.makeThumb( file, function( error, src ) {
+                    if ( error ) {
+                        $img.replaceWith('<span>不能预览</span>');
+                        return;
+                    }
+                    $("#up_progress_a").css("display", 'none');
+                    $("#prev_img_a").css("display", 'block');
+                    $("#uploadForm").css("display", 'none');
+                    $img.attr( 'src', src );
+                }, thumbnailWidth, thumbnailHeight );
+            });
+
+            // 文件上传失败，现实上传出错。
+            uploader.on( 'uploadError', function( file ) {
+                $("#up_progress_a").text("上传失败");
+            });
+
+
+            uploader1 = WebUploader.create({
+
+                // 自动上传。
+                auto: true,
+
+                // swf文件路径
+                swf: '__STATIC__/js/Uploader.swf',
+
+                // 文件接收服务端。
+                server: 'upload_image',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#file_inp1',
+
+                // 只允许选择文件，可选。
+                accept: {
+                    title: 'Images',
+                    extensions: 'jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/jpg,image/jpeg,image/png'
+                }
+            });
+
+            // 当有文件添加进来的时候
+            uploader1.on('fileQueued', function( file ) {
+                $("#up_progress_b").css("display", 'block');
+                $("#prev_img_b").css("display", 'none');
+                $("#uploadForm1").css("display", 'none');
+
+                $img = $("#prev_img_b").find('img');
+
+                // 创建缩略图
+                uploader.makeThumb( file, function( error, src ) {
+                    if ( error ) {
+                        $img.replaceWith('<span>不能预览</span>');
+                        return;
+                    }
+                    $img.attr( 'src', src );
+                }, thumbnailWidth, thumbnailHeight );
+
+            });
+
+            // 文件上传过程中创建进度条实时显示。
+            uploader1.on( 'uploadProgress', function( file, percentage ) {
+                $("#up_progress_b").text(percentage * 100 + '%');
+            });
+
+            // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+            uploader1.on( 'uploadSuccess', function( file ) {
+                $img = $("#prev_img_a").find('img');
+                // 创建缩略图
+                uploader.makeThumb( file, function( error, src ) {
+                    if ( error ) {
+                        $img.replaceWith('<span>不能预览</span>');
+                        return;
+                    }
+                    $("#up_progress_b").css("display", 'none');
+                    $("#prev_img_b").css("display", 'block');
+                    $("#uploadForm1").css("display", 'none');
+                    $img.attr( 'src', src );
+                }, thumbnailWidth, thumbnailHeight );
+            });
+
+            // 文件上传失败，现实上传出错。
+            uploader1.on( 'uploadError', function( file ) {
+                $("#up_progress_b").text("上传失败");
+            });
+	})
+</script>
+</html>

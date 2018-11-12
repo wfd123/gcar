@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<link rel="icon" type="image/x-icon" href="favicon.png">
+	<link rel="stylesheet" href="__STATIC__/css/style.css" />
+	<link rel="stylesheet" href="__STATIC__/css/other.css" />
+	<link rel="stylesheet" href="__STATIC__/css/iconfont.css">
+	<link rel="stylesheet" href="__STATIC__/css/swiper.min.css" />
+	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+	<script src="__STATIC__/js/gjsilde.min.js" type="text/javascript" charset="utf-8"></script>
+	<style>
+	
+	</style>
+	<body style="background:#f8f8f8">		
+	<div class="header">{include file="public/header"}</div>
+	<div class="breadnav">您的位置：<a href="#">郑州二手交易市场</a>>><a href="#">向阳二手车 >></a><a href=""> 店铺首页</a></div>
+	<div class="storeH">
+		<div class="wrap">
+			<h1 class="textCenter"><span>郑州管家二手车<b>优选商家</b></span></h1>
+			<p class="fright phone">
+				  <i class="icon iconfont icon-msnui-telephone"></i>  15638886114
+			</p>
+			<div class="gj_clear"></div>
+			<ul class="shop_nav gj_clear">
+				<li class="active"><a href="{$domain}/{$Think.session.cityurl}/shop">店铺首页</a></li>
+				<li><a href="{$domain}/{$Think.session.cityurl}/shop_list">在售车源</a></li>
+				<li><a href="{$domain}/{$Think.session.cityurl}/shop_info">公司信息</a></li>
+			</ul>
+		</div>
+		
+	</div>
+	<div class="bgfa">
+		<div class="wrap">
+			<div class="oh">
+				<div class="brandLeft">
+					
+					<ul>
+						<li class="">
+							<h3>品牌<b>全部</b></h3>
+							<div class="classify">
+								<a href="" class="active" >不限</a>
+								{volist name="brand" id="val"}
+								<a href="{:url('index/lots_cars')}?brand_id={$val.id}&page=1&sort=1">{$val.name}</a>
+								{/volist}
+							</div>
+						</li>
+						<li class="">
+							<h3>价格<b>全部</b></h3>
+						<div class="classify">
+							<a href="" class="active" >不限</a>
+							{volist name="price" id="val"}
+							<a href="{:url('index/lots_cars')}?price_range={$val.id}&page=1&sort=1">{$val.name}</a>
+							{/volist}
+						</div>
+						</li>
+						<li class="">				
+							<h3>级别<b>全部</b></h3>
+							<div class="classify">
+							<a href="" class="active" >不限</a>
+								{volist name="subface" id="val"}<a href="{:url('index/lots_cars')}?car_age={$val.id}&page=1&sort=1">{$val.name}</a>{/volist}
+							</div>
+						</li>
+						<li>
+							<h3>车龄 <b>全部</b></h3>
+							<div class="classify">
+								<a href="" class="active" >不限</a>
+								{volist name="age" id="val"}<a href="{:url('index/lots_cars')}?age={$val.id}&page=1&sort=1">{$val.cheling}</a>{/volist}
+							</div>
+						</li>
+					</ul>
+					
+					
+					
+				</div>
+				<div class="shopImg">
+					<img src="__STATIC__/img/baner112.png" alt="">
+				</div>
+			</div>
+			<div class="shop_recom"><h2>最新车源</h2><b></b></div>	
+			<div class="gj_clear">
+		    	<ul class="list ptp15 new_list">
+					{volist name="new_car" id="val" offset="1" length="10"}
+
+					<li class="items5">
+
+						<a href="{$domain}/{$Think.session.cityurl}/detail/{$val.id}" class="car_img flex_center"><img src="{$val.img_url}" alt="" /></a>
+						<a href="{$domain}/{$Think.session.cityurl}/detail/{$val.id}" class="car_desc">
+							<h3>{$val.name}</h3>
+							<p><span class="pay_first">首付<b>{$val.pay10_s2}</b>万</span> <span class="padlt20">月供{$val.pay10_y2}元</span> </p>
+					
+						</a>
+						<img src="__STATIC__/img/newgoods.png" alt="" class="hot" />
+					</li>
+
+					{/volist}
+				</ul>
+				<a href="" class="more_l">查看更多车型</a>
+		   </div>				
+		</div>	
+	</div>
+<!--店铺评论-->
+	<div class="shop_comment">
+		<div class="wrap martp20">
+			<h2 class="ft18 gj_clear"><b></b>用户评分</h2>
+			<div class="gj_clear score_info">
+				<div class="fleft synthesize ">
+					<p>综合评分</p>
+					<b>5.0</b>
+				</div>
+				<div class="fleft score_div p_r">
+					<div class="score_value value1"><b>车源真实： </b><span class=""><em data_value="2"></em></span></div><!--分数-->	
+					<div class="score_value value2"><b>服务态度：</b><span class=""><em data_value="3"></em></span></div><!--分数-->	
+					<div class="score_value value3"><b>商家专业： </b><span class=""><em data_value="4"></em></span></div><!--分数-->	
+				</div>
+				<div class="fleft commment_list">
+					<span>服务热情&nbsp;999</span>
+					<span>服务热情&nbsp;999</span>
+					<span>服务热情&nbsp;999</span>
+					<span>服务热情&nbsp;999</span>
+					<span>服务热情&nbsp;999</span>
+					<span>服务热情&nbsp;999</span>
+					<span>服务热情&nbsp;999</span>
+					<span>服务热情&nbsp;999</span>
+				</div>
+			</div>
+			<div class="all_recom">
+				<h2 class="ft18 gj_clear"><b></b>全部点评</h2>
+				<ul class="">
+					<li>
+					<div class="gj_clear">
+						<div class="avatar"><img src="__STATIC__/img/userss.png" alt="" /></div>
+						<div class="user_recom fleft">
+							<p class="user_name ft16">支付的接口为部分</p>
+							<div class="user_markscore"><em data_value='5'></em></div>
+							<p>店里的车很好 只要车没有任何事故  可随时提车  分期能落山东的牌照吗？</p>
+						</div>
+					</div>
+					<span class="fright">2018-04-15</span>
+					</li>
+					
+				</ul>
+				<div class="link_other">
+					<a href="{:url('shop/add_comment')}?shop_id=19" class="">发表点评</a><a href="">查看全部点评</a>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="adv_img">
+		<h2>想开什么车 ？管家车易站应有尽有.</h2>
+		<div class="buy_ipt">
+			<input type="text" placeholder="请输入手机号"/>
+			<div class="btn_buy">我要买车</div>
+		</div>
+	</div>		
+	<div class="footer">{include file="public/footer"}</div>
+	
+	</body>
+	<script>
+	   // $(".header").load("templates/header.html");
+	   // $(".footer").load("templates/footer.html");
+	   //	显示分
+	   function showStar(elem){
+	   	var score=$(elem).find("em").attr("data_value");
+		var f_score=score*20;
+		$(elem).find("em").css('width',f_score+'%');
+	   }
+	   showStar(".value1");showStar(".value2");showStar(".value3");
+	showStar(".user_markscore");
+	</script>
+	
+</html>
+ 

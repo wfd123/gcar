@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="__STATIC__/css/style.css" />
+	<link rel="stylesheet" href="__STATIC__/css/other.css" />
+	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+	
+	<script src="__STATIC__/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<style>
+.free_regist{background: #F28F1B;color: #fff;cursor: pointer;}
+.login_phone .agree{margin: 20px 0;text-align: left;color: #666;}
+.login_phone .agree a{color: #333;font-size: 18px;}
+.login_phone>div>img.showPwd{width: 27px;height:19px;}
+#inputId{width: 300px;}
+	</style>
+	<script>
+        var itime = 59; //定义一个变量，倒计时初始化，从59秒开始
+        function getTime() {
+            if (itime >= 0) {
+                if (itime == 0) {
+                    //倒计时变成0时，
+                    //要清除计时器
+                    clearTimeout(act);
+                    //设置按钮为初始状态
+                    $("#getCodeBtn").val('免费获取手机验证码').attr('disabled', false);
+                    itime = 59;
+                } else {
+                    //延迟一秒中执行该函数。
+                    var act = setTimeout('getTime()', 1000);
+                    //把倒计时的秒显示到按钮中
+                    $("#getCodeBtn").val('还剩' + itime + '秒');
+                    itime = itime - 1;
+                }
+            }
+        }
+        $(function() {
+            //定义一个函数,用于完成倒计时效果
+            $("#getCodeBtn").click(function() {
+                //获取输入的手机号码
+                var telphone = $("#telphone").val();
+
+                if(telphone) {
+                    //ajax请求文件，调用短信发送的接口
+                    $.ajax({
+                        type: 'get',
+                        url: '{:url("code/get_code")}',
+                        data:{
+
+                            user_phone:telphone,
+                            is_exist:0
+
+                        },
+                        success: function(msg) {
+                            //判断调用短信发送接口是否成功，
+                            if (msg == 1) {
+                                //调用接口已经成功
+                                alert('发送失败');
+                                $("#getCodeBtn").attr('disabled', true); //要禁用该按钮
+                                //调用一个函数，完成倒计时效果。
+                                getTime();
+                            } else{
+                                alert('短信验证码已经发送成功');
+                                $("#getCodeBtn").attr('disabled', true);
+                                getTime();
+                            }
+                        }
+                    });
+                } else{
+                    alert('请输入手机号');
+                }
+
+            });
+        });
+	</script>
+	<body>	
+		<div class="full_wid">
+			<div class="header">
+				{include file="public/header"}
+			</div>
+			<div class="login_bg">
+				<div class="login_tab">
+					<form class="login_phone"  action="{:url('user/find_pwd')}" method="post">
+					<div class="login_sure">
+						<ul class="login_type">
+							<li class="active">找回密码</li>
+							<b>|</b>
+							<li>已注册可直接<a href="{:url('user/car_login')}" class="coloryel ft16">登录</a></li>
+						</ul>
+						<div class="login_phone">
+							<div class="border"><img src="__STATIC__/img/phone.png" alt="" height="35"/><input type="text" id="telphone"  name="user_phone" placeholder="请输入个人或商家手机号"/></div>
+							<div class="border login_ver"><img src="__STATIC__/img/yzm.png" alt="" height="35"/><input type="text" name="code" placeholder="请输入验证码" /><span class="getcode"><input type="button" value="免费获取手机验证码" id="getCodeBtn" style="width: 120px;height: 40px;font-size:12px; padding-left:1px;color:#333; " /></span></div>
+							<div class="border"><img src="__STATIC__/img/mm.png" alt="" height="35" /><input type="password" name="user_pwd" placeholder="请输入密码" id="inputId"/><img src="__STATIC__/img/buxians.png" width="27" height="19" class="showPwd"/></div>
+							<p class="ptp15 agree"><input type="checkbox" name="" id="" value="" />我已经阅读并同意<a href="">《管家车易站条款》</a></p>
+						
+							<!--<p class="regist_btn free_regist">找回密码</p>-->
+							<input class="regist_btn free_regist" type="submit" value="提交" />
+						</div>
+						
+					</div>
+					</form>
+					
+					<div class="login_other">
+						<img src="__STATIC__/img/ewm.png" alt="" class="app_down" width="225"/>
+						<p class="textCenter">扫描下载</p>
+						<div><img src="__STATIC__/img/qq.png" alt="" />QQ登录</div>
+						<div><img src="__STATIC__/img/wx.png" alt="" />微信登录</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			{include file="public/footer"}
+		</div>
+		
+	</body>
+	<script>		
+		$(function(){	
+			var input=document.getElementById("inputId");
+			$(".showPwd").click(function(){
+				 if($(".showPwd").attr("src")=='__STATIC__/img/buxians.png'){ 
+				 	$(".showPwd").attr("src",'__STATIC__/img/xians.png');	 	
+			       	input.type='text';
+			     }else{
+			     	$(".showPwd").attr("src",'__STATIC__/img/buxians.png');
+			      input.type='password';
+			     }
+			})
+		     
+			 
+		      $(".header").load("templates/header.html");
+		      $(".footer").load("templates/footer.html")
+		})
+</script>
+</html>

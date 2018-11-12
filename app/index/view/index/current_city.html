@@ -1,0 +1,80 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=bfUXDs4Q9hypXBR1yN0A4fGPbxMrhriF"></script>
+	<title>浏览器定位城市</title>
+</head>
+<body>
+		<div class="map" style="display: block">
+            <a style="height: 0px; line-height: 0px; width: 0px; overflow: hidden;" name="map"></a>
+            <div style="border: 0pt none; overflow: hidden; position: relative; top: 0pt; left: 0pt; width: 1200px; height: 580px; z-index: 0; background-color: rgb(235, 234, 232); cursor: default; margin: 0 auto" id="allmap">
+            </div>
+        </div>
+
+	<div id="city"></div>
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(113.689018,34.824333);
+	map.centerAndZoom(point,15);
+map.enableScrollWheelZoom(true);//可拖拽
+		var marker = new BMap.Marker(point);//标记
+		map.addOverlay(marker);        
+		marker.setLabel(new BMap.Label('向阳二手车', { offset: new BMap.Size(-20, -20) }));
+		var mapType = new BMap.MapTypeControl()
+		map.addControl(mapType);
+		var overViewOpen = new BMap.OverviewMapControl({isOpen:true, anchor: BMAP_ANCHOR_BOTTOM_RIGHT});
+		map.addControl(overViewOpen);
+		map.addControl(new BMap.NavigationControl());
+//var geolocation = new BMap.Geolocation();
+//  geolocation.getCurrentPosition(function(r){
+////  	console.log(r.point)
+//      if(this.getStatus() == BMAP_STATUS_SUCCESS){
+//          var mk = new BMap.Marker(r.point);
+//          map.addOverlay(mk);//标出所在地
+//          map.panTo(r.point);//地图中心移动
+////            alert('您的位置：'+r.point.lng+','+r.point.lat);
+//          var point = new BMap.Point(r.point.lng,r.point.lat);//用所定位的经纬度查找所在地省市街道等信息
+//          
+//          var gc = new BMap.Geocoder();
+//          gc.getLocation(point, function(rs){
+//             var addComp = rs.addressComponents; 
+//             console.log(rs)//河南省郑州市二七区大学路54号院附1号
+//            var city=rs.addressComponents.city;//地址信息
+//           document.getElementById('city').innerHTML=city
+//          });
+//      }else {
+//          alert('failed'+this.getStatus());
+//      }        
+//  },{enableHighAccuracy: true})
+
+</script>
+<!--<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    var point = new BMap.Point(113.689018,34.824333);
+    map.centerAndZoom(point,15);
+    map.enableScrollWheelZoom(true);
+    var geoc = new BMap.Geocoder();    
+
+    map.addEventListener("click", function(e){   
+        //通过点击百度地图，可以获取到对应的point, 由point的lng、lat属性就可以获取对应的经度纬度     
+        var pt = e.point;
+        geoc.getLocation(pt, function(rs){
+            //addressComponents对象可以获取到详细的地址信息
+            var addComp = rs.addressComponents;
+            var site = addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
+            //将对应的HTML元素设置值
+            $("#site").val(site);
+            $("#longitude").val(pt.lng);
+            $("#latitude").val(pt.lat);
+            console.log(pt.lng+'-----'+pt.lat)
+        });        
+    });
+</script>-->

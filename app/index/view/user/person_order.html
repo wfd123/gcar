@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title></title>
+	</head>
+	<link rel="icon" type="image/x-icon" href="favicon.png">
+	<link rel="stylesheet" href="__STATIC__/css/style.css" />
+	<link rel="stylesheet" href="__STATIC__/css/other.css" />
+
+	<style>
+	
+	</style>
+	<body>
+	<div class="header">
+		{include file="public/header"}
+	</div>
+
+		<div class="full_wid">			
+			<div class="wrap ">	
+				<div class="person_center">
+					<div class="person_left">
+						<div class="person_info">
+							<div class="user_avatar"><img src="__STATIC__/img/yhtx.png" alt="" /></div>
+							<p class="uphone">{$Think.session.phone}</p>
+							<p>向阳二手车一号店</p>							
+						</div>
+						<div class="tab_choose">
+							<ul>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_man"><b class="icon_xb1"> </b>管理店铺<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_rele"><b class="icon_xb2"></b>发布车辆信息<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_pub.html"><b class="icon_xb3"></b>发布过的<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_buse.html"><b class="icon_xb4"></b>商家入驻<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_oppo.html"><b class="icon_xb5"></b>商机<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_info.html"><b class="icon_xb6"></b>个人资料<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_coll.html"><b class="icon_xb7"></b>我的收藏<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class="active"><a href="{$domain}/{$Think.session.cityurl}/per_his"><b class="icon_xb8"></b>浏览记录<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_feed.html"><b class="icon_xb9"></b>意见反馈<i class="icon iconfont icon-jiantou"></i></a></li>
+								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_ord.html"><b class="icon_xb10"></b>我的预约<i class="icon iconfont icon-jiantou"></i></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="person_right">
+						<h1 class="borbt"><span class="release">我的预约 </span>
+							<ul class="fright sel_status">
+								<li class="active" data-status='1'><b></b><span>全部</span></li>
+								<li data-status='0'><b></b><span>新车</span></li>
+								<li data-status='0'><b></b><span>二手车</span></li>
+								<li data-status='0'><b></b><span>零首付</span></li>
+							</ul>
+						</h1>
+						<ul class="p_list">
+							{volist name="list" id="val"}
+							<li class="item">
+								<a href="{:url('index/details')}?cheid={$val.pu_id}&price={$val.price}&mileage={$val.car_mileage}&name={$val.name}&img={$val.img_url}&time={$val.car_cardtime}">
+								<div class="car_img"><img src="{$val.img_url}" alt="" /></div>
+								<div class="car_desc"><h3>{$val.name}</h3>
+									<p>{$val.car_mileage}万公里 | {$val.car_cardtime} | {$val.shop_name}</p>
+									<div><span class="cprice"><b>78</b>万</span><span class="nprice">{$val.price}万</span></div>
+								</div>
+								<div class="order_res">
+									<p>预约时间：2018-07-27  15:00</p>
+									<span class="order_des">详 情</span>
+								</div>
+								</a>
+							</li>
+							{/volist}
+						</ul>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			{include file="public/footer"}
+		</div>
+		
+	</body>
+	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+	<script src="__STATIC__/js/laydate.js"></script>
+	<script src="__STATIC__/js/imgUp.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__STATIC__/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script>		
+		$(function(){		
+			$(".sel_status li").each(function(){
+				var that=$(this);
+				$(that).click(function(){
+				var status=$(this).attr("data-status");
+					if(status==1){
+						$(this).attr("data-status",0);
+						$(this).removeClass("active")
+					}else{
+						$(this).attr("data-status",1);
+						$(this).addClass("active").siblings().removeClass("active")
+					}
+				
+			})
+			})
+			
+			//加载公用头部和底部
+		   // $(".header").load("templates/header.html");
+//		    $(".footer").load("templates/footer.html");
+
+			
+	})
+</script>
+</html>
