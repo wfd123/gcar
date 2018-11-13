@@ -90,7 +90,7 @@ class Twocar extends Common
         //dump($er_car);die;
 
 
-        $cat = Db::table('rele_car')->where("status=1 and up_under=1 and city_id=$city_id")->order('pu_id desc')->paginate(8);
+        $cat = Db::table('rele_car')->where("status=1 and up_under=1 and city_id=$city_id")->order('pu_id asc')->paginate(8);
         $items = $cat->items();
         foreach ($cat as $k => $v){
             $items[$k]['news_price'] = Db::table('new_car')->where(['id' => $v['news_price']])->find();
