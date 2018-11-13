@@ -1,251 +1,291 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8"/>
-		<title></title>
-	</head>
-		<link rel="icon" type="image/x-icon" href="favicon.png">
-	<link rel="stylesheet" href="__STATIC__/css/style.css" />
-	<link rel="stylesheet" href="__STATIC__/css/other.css" />
-	<link rel="stylesheet" href="__STATIC__/css/iconfont.css" />
-	<link rel="stylesheet" href="__STATIC__/js/theme/default/laydate.css" />
-	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+<head>
+	<meta charset="utf-8"/>
+	<title></title>
+</head>
+<link rel="icon" type="image/x-icon" href="favicon.png">
+<link rel="stylesheet" href="__STATIC__/css/style.css" />
+<link rel="stylesheet" href="__STATIC__/css/other.css" />
+<link rel="stylesheet" href="__STATIC__/css/iconfont.css" />
+<link rel="stylesheet" href="__STATIC__/js/theme/default/laydate.css" />
+<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
 
-	<script src="__STATIC__/js/common.js" type="text/javascript" charset="utf-8"></script>
-	<style>
-		.tab_info li{float: left;margin-left: 60px;font-size: 20px;margin-top: 40px;cursor: pointer;}
-		.tab_info .active{color: #FF802C;}
-		.editCont{margin-top: 44px;margin-left: 50px;}
-		.info_base .ipt{width:400px;height: 50px;line-height: 50px ;}
-		.info_base .ipt input{background: #fcfcfc;width: 275px;height: 35px;line-height: 35px;border: 1px solid #ababab;}
-		.info_base .ipt input[type='radio']{width: 18px;height:18px;margin-right:5px;}
-		.info_base span{display: block;float: left;width:125px;text-align: right;padding-right: 20px;font-size: 18px;}
-		.avatar span{margin-top: 50px;}
-		.editCont .sub_btn{margin-left:120px;width: 275px;}
-	</style>
-	<script>
-        var itime = 59; //定义一个变量，倒计时初始化，从59秒开始
-        function getTime() {
-            if (itime >= 0) {
-                if (itime == 0) {
-                    //倒计时变成0时，
-                    //要清除计时器
-                    clearTimeout(act);
-                    //设置按钮为初始状态
-                    $("#getCodeBtn").val('免费获取手机验证码').attr('disabled', false);
-                    itime = 59;
-                } else {
-                    //延迟一秒中执行该函数。
-                    var act = setTimeout('getTime()', 1000);
-                    //把倒计时的秒显示到按钮中
-                    $("#getCodeBtn").val('还剩' + itime + '秒');
-                    itime = itime - 1;
-                }
+<script src="__STATIC__/js/common.js" type="text/javascript" charset="utf-8"></script>
+<style>
+	.tab_info li{float: left;margin-left: 60px;font-size: 20px;margin-top: 40px;cursor: pointer;}
+	.tab_info .active{color: #FF802C;}
+	.editCont{margin-top: 44px;margin-left: 50px;}
+	.info_base .ipt{width:400px;height: 50px;line-height: 50px ;}
+	.info_base .ipt input{background: #fcfcfc;width: 275px;height: 35px;line-height: 35px;border: 1px solid #ababab;}
+	.info_base .ipt input[type='radio']{width: 18px;height:18px;margin-right:5px;}
+	.info_base span{display: block;float: left;width:125px;text-align: right;padding-right: 20px;font-size: 18px;}
+	.avatar span{margin-top: 50px;}
+	.editCont .sub_btn{margin-left:120px;width: 275px;}
+
+	.file {
+		position: relative;
+		display: inline-block;
+		background: #D0EEFF;
+		border: 1px solid #99D3F5;
+		border-radius: 4px;
+		padding: 7px 25px;
+		overflow: hidden;
+		color: #1E88C7;
+		text-decoration: none;
+		text-indent: 0;
+		line-height: 25px;
+	}
+	.file input {
+		position: absolute;
+		font-size: 100px;
+		right: 0;
+		top: 0;
+		opacity: 0;
+	}
+	.file:hover {
+		background: #AADFFD;
+		border-color: #78C3F3;
+		color: #004974;
+		text-decoration: none;
+	}
+</style>
+<script>
+    var itime = 59; //定义一个变量，倒计时初始化，从59秒开始
+    function getTime() {
+        if (itime >= 0) {
+            if (itime == 0) {
+                //倒计时变成0时，
+                //要清除计时器
+                clearTimeout(act);
+                //设置按钮为初始状态
+                $("#getCodeBtn").val('免费获取手机验证码').attr('disabled', false);
+                itime = 59;
+            } else {
+                //延迟一秒中执行该函数。
+                var act = setTimeout('getTime()', 1000);
+                //把倒计时的秒显示到按钮中
+                $("#getCodeBtn").val('还剩' + itime + '秒');
+                itime = itime - 1;
             }
         }
-        $(function() {
-            //定义一个函数,用于完成倒计时效果
-            $("#getCodeBtn").click(function() {
-                //获取输入的手机号码
-                var telphone = $("#telphone").val();
+    }
+    $(function() {
+        //定义一个函数,用于完成倒计时效果
+        $("#getCodeBtn").click(function() {
+            //获取输入的手机号码
+            var telphone = $("#telphone").val();
 
-                if(telphone) {
-                    //ajax请求文件，调用短信发送的接口
-                    $.ajax({
-                        type: 'get',
-                        url: '{:url("code/get_code")}',
-                        data:{
+            if(telphone) {
+                //ajax请求文件，调用短信发送的接口
+                $.ajax({
+                    type: 'get',
+                    url: '{:url("code/get_code")}',
+                    data:{
 
-                            user_phone:telphone,
-                            is_exist:0
+                        user_phone:telphone,
+                        is_exist:0
 
-                        },
-                        success: function(msg) {
-                            //判断调用短信发送接口是否成功，
-                            if (msg == 1) {
-                                //调用接口已经成功
-                                alert('发送失败');
-                                $("#getCodeBtn").attr('disabled', true); //要禁用该按钮
-                                //调用一个函数，完成倒计时效果。
-                                getTime();
-                            } else{
-                                alert('短信验证码已经发送成功');
-                                $("#getCodeBtn").attr('disabled', true);
-                                getTime();
-                            }
+                    },
+                    success: function(msg) {
+                        //判断调用短信发送接口是否成功，
+                        if (msg == 1) {
+                            //调用接口已经成功
+                            alert('发送失败');
+                            $("#getCodeBtn").attr('disabled', true); //要禁用该按钮
+                            //调用一个函数，完成倒计时效果。
+                            getTime();
+                        } else{
+                            alert('短信验证码已经发送成功');
+                            $("#getCodeBtn").attr('disabled', true);
+                            getTime();
                         }
-                    });
-                } else{
-                    alert('请输入手机号');
-                }
+                    }
+                });
+            } else{
+                alert('请输入手机号');
+            }
 
-            });
         });
-	</script>
-	<body>
-	<div class="header">
-		{include file="public/header"}
-	</div>
-		<div class="full_wid">			
-			<div class="wrap ">	
-				<div class="person_center">
-					<div class="person_left">
-						<div class="person_info">
-							<div class="user_avatar"><img src="__STATIC__/img/yhtx.png" alt="" /></div>
-							<p class="uphone">{$Think.session.phone}</p>
-							<p>向阳二手车一号店</p>							
-						</div>
-						<div class="tab_choose">
-							<ul>
-								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_man"><b class="icon_xb1"> </b>管理店铺<i class="icon iconfont icon-jiantou"></i></a></li>
-								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_rele"><b class="icon_xb2"></b>发布车辆信息<i class="icon iconfont icon-jiantou"></i></a></li>
-								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_pub.html"><b class="icon_xb3"></b>发布过的<i class="icon iconfont icon-jiantou"></i></a></li>
-								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_buse.html"><b class="icon_xb4"></b>商家入驻<i class="icon iconfont icon-jiantou"></i></a></li>
-								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_oppo.html"><b class="icon_xb5"></b>商机<i class="icon iconfont icon-jiantou"></i></a></li>
-								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_info.html"><b class="icon_xb6"></b>个人资料<i class="icon iconfont icon-jiantou"></i></a></li>
-								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_coll.html"><b class="icon_xb7"></b>我的收藏<i class="icon iconfont icon-jiantou"></i></a></li>
-								<li class="active"><a href="{$domain}/{$Think.session.cityurl}/per_his"><b class="icon_xb8"></b>浏览记录<i class="icon iconfont icon-jiantou"></i></a></li>
-								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_feed.html"><b class="icon_xb9"></b>意见反馈<i class="icon iconfont icon-jiantou"></i></a></li>
-								<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_ord.html"><b class="icon_xb10"></b>我的预约<i class="icon iconfont icon-jiantou"></i></a></li>
-							</ul>
+    });
+</script>
+<body>
+<div class="header">
+	{include file="public/header"}
+</div>
+<div class="full_wid">
+	<div class="wrap ">
+		<div class="person_center">
+			<div class="person_left">
+				<div class="person_info">
+					<div class="user_avatar"><img src="__STATIC__/img/yhtx.png" alt="" /></div>
+					<p class="uphone">{$Think.session.phone}</p>
+					<p>向阳二手车一号店</p>
+				</div>
+				<div class="tab_choose">
+					<ul>
+						<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_man"><b class="icon_xb1"> </b>管理店铺<i class="icon iconfont icon-jiantou"></i></a></li>
+						<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_rele"><b class="icon_xb2"></b>发布车辆信息<i class="icon iconfont icon-jiantou"></i></a></li>
+						<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_pub.html"><b class="icon_xb3"></b>发布过的<i class="icon iconfont icon-jiantou"></i></a></li>
+						<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_buse.html"><b class="icon_xb4"></b>商家入驻<i class="icon iconfont icon-jiantou"></i></a></li>
+						<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_oppo.html"><b class="icon_xb5"></b>商机<i class="icon iconfont icon-jiantou"></i></a></li>
+						<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_info.html"><b class="icon_xb6"></b>个人资料<i class="icon iconfont icon-jiantou"></i></a></li>
+						<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_coll.html"><b class="icon_xb7"></b>我的收藏<i class="icon iconfont icon-jiantou"></i></a></li>
+						<li class="active"><a href="{$domain}/{$Think.session.cityurl}/per_his"><b class="icon_xb8"></b>浏览记录<i class="icon iconfont icon-jiantou"></i></a></li>
+						<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_feed.html"><b class="icon_xb9"></b>意见反馈<i class="icon iconfont icon-jiantou"></i></a></li>
+						<li class=""><a href="{$domain}/{$Think.session.cityurl}/per_ord.html"><b class="icon_xb10"></b>我的预约<i class="icon iconfont icon-jiantou"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="person_right">
+				<h1 class="borbt"><span class="release">个人资料</span></h1>
+				<ul class="tab_info gj_clear">
+					<li class="active">基本信息</li>
+					<li>绑定设置</li>
+					<li>修改密码</li>
+				</ul>
+				<div class="editCont">
+					<div class="info_base info_ipt">
+						<form action="{:url('user/set_userinfo')}" enctype="multipart/form-data"  method="post">
+							<div class="">
+								<span class="my_form_tit">上传头像：</span>
+								<a href="javascript:;" class="file">选择文件
+									<input type="file" name="header_pic">
+								</a>
+								{if condition="$res['header_pic']"}
+								<img src="__UPLOA__{$res.header_pic}" height="40" style="margin-left: 20px;">
+								{else /}
+								暂无头像
+								{/if}
+							</div>
+							<div class="ipt"><span>昵称：</span><input type="nickname"  name="nickname" placeholder="{$res.nickname}"/></div>
+							<div  class="ipt"><span>所在地：</span><input type="address" name="address" placeholder="{$res.address}"/></div>
+							<div class="ipt"><span>性别：</span>
+								<input type="radio" name='sex' value="1" checked="checked"/>男&nbsp;&nbsp;
+								<input type="radio" name='sex' value="2" />女&nbsp;&nbsp;
+							</div>
+							<div class="ipt"><span>出生年月：</span><input type="text"  name="birthday" placeholder="{$res.birthday}" id="year"/></div>
+							<p class="sub_btn submit"><input type="submit" value="提交" /></p>
+						</form>
+					</div>
+					<div style="display: none;" class="info_ipt">
+						<div class="upLoad_form">
+							<form action="{:url('user/bind_phone')}" enctype="multipart/form-data"  method="post">
+								<ul class="motify_ipt">
+									<li><span class="my_form_tit">手机号：</span><p class="uphone" >{$Think.session.phone}</p></li>
+									<li><span class="my_form_tit">新手机号：</span>
+										<div class="fleft myform_ipt"><input type="text" name="phone" id="telphone" placeholder="请输入您新绑定的手机号"/></div>
+									</li>
+									<li><span class="my_form_tit">验证码：</span>
+										<div class="fleft myform_ipt"><input type="text" name="code" placeholder="请输入您的验证码"/><span class="getcode"><input type="button" value="获取手机验证码" id="getCodeBtn" style="width: 105px;height: 40px;font-size:12px; padding-left:1px;color:#333; " /></span></div>
+									</li>
+								</ul>
+								<p class="sub_btn pwd_submit"><input type="submit" /></p>
+							</form>
+
 						</div>
 					</div>
-					<div class="person_right">
-						<h1 class="borbt"><span class="release">个人资料</span></h1>
-						<ul class="tab_info gj_clear">
-							<li class="active">基本信息</li>
-							<li>绑定设置</li>
-							<li>修改密码</li>
-						</ul>
-						<div class="editCont">
-							<div class="info_base info_ipt">
-								<form action="{:url('user/set_userinfo')}" enctype="multipart/form-data"  method="post">
-								<div class="avatar"><span>头像: </span><img src="{$res.header_pic}" alt="" /><input type="file" name="header_pic"> </div>
-								<div class="ipt"><span>昵称：</span><input type="nickname"  name="nickname" placeholder="{$res.nickname}"/></div>
-								<div  class="ipt"><span>所在地：</span><input type="address" name="address" placeholder="{$res.address}"/></div>
-								<div class="ipt"><span>性别：</span><input type="radio1" placeholder="{$res.sex}" name="sex"/></div>
-								<div class="ipt"><span>出生年月：</span><input type="text" name="birthday" placeholder="{$res.birthday}" id="year"/></div>
-								<p class="sub_btn submit">修改<input type="submit" value="提交" /></p>
-								</form>
-							</div>
-							<div style="display: none;" class="info_ipt">
-								<div class="upLoad_form">
-									<form action="{:url('user/bind_phone')}" enctype="multipart/form-data"  method="post">
-							<ul class="motify_ipt">
-								<li><span class="my_form_tit">手机号：</span><p class="uphone" >{$Think.session.phone}</p></li>
-								<li><span class="my_form_tit">新手机号：</span>
-									<div class="fleft myform_ipt"><input type="text" name="phone" id="telphone" placeholder="请输入您新绑定的手机号"/></div>
-								</li>
-								<li><span class="my_form_tit">验证码：</span>
-									<div class="fleft myform_ipt"><input type="text" name="code" placeholder="请输入您的验证码"/><span class="getcode"><input type="button" value="获取手机验证码" id="getCodeBtn" style="width: 105px;height: 40px;font-size:12px; padding-left:1px;color:#333; " /></span></div>
-								</li>
-							</ul>
-										<p class="sub_btn pwd_submit"><input type="submit" /></p>
-									</form>
+					<div style="display: none;" class="motifypwd info_ipt">
+						<div class="upLoad_form">
+							<form action="{:url('user/change_pwd')}" enctype="multipart/form-data"  method="post">
+								<ul class="motify_ipt">
+									<li><span class="my_form_tit">手机号：</span><p class="uphone" ><span id="phones">{$Think.session.phone}</span></p></li>
 
+									<li><span class="my_form_tit">原密码：</span>
+										<div class="fleft myform_ipt"><input type="password" name="user_ini_pwd" placeholder="请输入您的验证码"/></div>
+									</li>
+									<li><span class="my_form_tit">新密码：</span>
+										<div class="fleft myform_ipt"><input type="password"  name="user_pwd" placeholder="请输入您新绑定的手机号"/><span class="getcode"><input type="button" value="获取手机验证码" id="getCodeBtns" style="width: 105px;height: 40px;font-size:12px; padding-left:1px;color:#333; " /></span></div>
+									</li>
+									<li><span class="my_form_tit">验证码：</span>
+										<div class="fleft myform_ipt"><input type="text" name="code" placeholder="请输入您的验证码" /></div>
+									</li>
+								</ul>
+								<p class="sub_btn pwd_submit"><input type="submit"/></p>
+							</form>
 						</div>
-							</div>
-							<div style="display: none;" class="motifypwd info_ipt">
-								<div class="upLoad_form">
-									<form action="{:url('user/change_pwd')}" enctype="multipart/form-data"  method="post">
-									<ul class="motify_ipt">
-										<li><span class="my_form_tit">手机号：</span><p class="uphone" ><span id="phones">{$Think.session.phone}</span></p></li>
-										
-										<li><span class="my_form_tit">原密码：</span>
-											<div class="fleft myform_ipt"><input type="password" name="user_ini_pwd" placeholder="请输入您的验证码"/></div>
-										</li>
-										<li><span class="my_form_tit">新密码：</span>
-											<div class="fleft myform_ipt"><input type="password"  name="user_pwd" placeholder="请输入您新绑定的手机号"/><span class="getcode"><input type="button" value="获取手机验证码" id="getCodeBtns" style="width: 105px;height: 40px;font-size:12px; padding-left:1px;color:#333; " /></span></div>
-										</li>
-										<li><span class="my_form_tit">验证码：</span>
-											<div class="fleft myform_ipt"><input type="text" name="code" placeholder="请输入您的验证码" /></div>
-										</li>
-									</ul>
-									<p class="sub_btn pwd_submit"><input type="submit"/></p>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>	
+					</div>
 				</div>
 			</div>
 		</div>
-	<div class="footer">
-		{include file="public/footer"}
 	</div>
-		
-	</body>
-	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
-	<script src="__STATIC__/js/laydate.js"></script>
-	<script src="__STATIC__/js/common.js" type="text/javascript" charset="utf-8"></script>
-	<script>
-        var itime = 59; //定义一个变量，倒计时初始化，从59秒开始
-        function getTime() {
-            if (itime >= 0) {
-                if (itime == 0) {
-                    //倒计时变成0时，
-                    //要清除计时器
-                    clearTimeout(act);
-                    //设置按钮为初始状态
-                    $("#getCodeBtns").val('免费获取手机验证码').attr('disabled', false);
-                    itime = 59;
-                } else {
-                    //延迟一秒中执行该函数。
-                    var act = setTimeout('getTime()', 1000);
-                    //把倒计时的秒显示到按钮中
-                    $("#getCodeBtns").val('还剩' + itime + '秒');
-                    itime = itime - 1;
-                }
+</div>
+<div class="footer">
+	{include file="public/footer"}
+</div>
+
+</body>
+<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+<script src="__STATIC__/js/laydate.js"></script>
+<script src="__STATIC__/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var itime = 59; //定义一个变量，倒计时初始化，从59秒开始
+    function getTime() {
+        if (itime >= 0) {
+            if (itime == 0) {
+                //倒计时变成0时，
+                //要清除计时器
+                clearTimeout(act);
+                //设置按钮为初始状态
+                $("#getCodeBtns").val('免费获取手机验证码').attr('disabled', false);
+                itime = 59;
+            } else {
+                //延迟一秒中执行该函数。
+                var act = setTimeout('getTime()', 1000);
+                //把倒计时的秒显示到按钮中
+                $("#getCodeBtns").val('还剩' + itime + '秒');
+                itime = itime - 1;
             }
         }
-        $(function() {
-            //定义一个函数,用于完成倒计时效果
-            $("#getCodeBtns").click(function() {
-                //获取输入的手机号码
-                var phones = '{$Think.session.phone}';
+    }
+    $(function() {
+        //定义一个函数,用于完成倒计时效果
+        $("#getCodeBtns").click(function() {
+            //获取输入的手机号码
+            var phones = '{$Think.session.phone}';
 
-                if(phones) {
-                    //ajax请求文件，调用短信发送的接口
-                    $.ajax({
-                        type: 'get',
-                        url: '{:url("code/get_code")}',
-                        data:{
+            if(phones) {
+                //ajax请求文件，调用短信发送的接口
+                $.ajax({
+                    type: 'get',
+                    url: '{:url("code/get_code")}',
+                    data:{
 
-                            user_phone:phones,
-                            is_exist:0
+                        user_phone:phones,
+                        is_exist:0
 
-                        },
-                        success: function(msg) {
-                            //判断调用短信发送接口是否成功，
-                            if (msg == 1) {
-                                //调用接口已经成功
-                                alert('发送失败');
-                                $("#getCodeBtns").attr('disabled', true); //要禁用该按钮
-                                //调用一个函数，完成倒计时效果。
-                                getTime();
-                            } else{
-                                alert('短信验证码已经发送成功');
-                                $("#getCodeBtns").attr('disabled', true);
-                                getTime();
-                            }
+                    },
+                    success: function(msg) {
+                        //判断调用短信发送接口是否成功，
+                        if (msg == 1) {
+                            //调用接口已经成功
+                            alert('发送失败');
+                            $("#getCodeBtns").attr('disabled', true); //要禁用该按钮
+                            //调用一个函数，完成倒计时效果。
+                            getTime();
+                        } else{
+                            alert('短信验证码已经发送成功');
+                            $("#getCodeBtns").attr('disabled', true);
+                            getTime();
                         }
-                    });
-                } else{
-                    alert('请输入手机号');
-                }
+                    }
+                });
+            } else{
+                alert('请输入手机号');
+            }
 
-            });
         });
-	</script>
-	<script>		
-		$(function(){			
-		$(".uphone").text($(".uphone").text().substring(0, 3) + "****" + $(".uphone").text().substring(7, 11));
-		$(".tab_info li").click(function(){
-			$(this).addClass('active').siblings().removeClass('active');
-			var i=$(this).index();
-			$(".info_ipt").eq(i).show().siblings().hide()
-		})
-			
-	})
+    });
+</script>
+<script>
+    $(function(){
+        $(".uphone").text($(".uphone").text().substring(0, 3) + "****" + $(".uphone").text().substring(7, 11));
+        $(".tab_info li").click(function(){
+            $(this).addClass('active').siblings().removeClass('active');
+            var i=$(this).index();
+            $(".info_ipt").eq(i).show().siblings().hide()
+        })
+
+    })
 </script>
 </html>
