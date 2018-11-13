@@ -1235,6 +1235,9 @@ class User  extends Common {
      * 浏览记录
      */
     public function person_history(){
+        if(!Session::get('phone')) {
+            return '请登录';
+        }
 
         $city_pin = input('city');
 
