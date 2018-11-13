@@ -123,11 +123,8 @@ class Common extends Controller{
             ),
         ),
         'Newcar' => array(
-//            'index'=>array(
-//                'user_id' =>'number',
-//            ),
             'index'=>array(
-                'city' =>'\w+',
+                'user_id' =>'number',
             ),
             'newcardetails'=>array(
                 'brand_id' =>'number',
@@ -273,10 +270,6 @@ class Common extends Controller{
                 'user_id' =>['require','number'],//两种方式 有正则就用数组形式，没有就用下面也行
                 'user_icon'  =>'require|image|fileSize:5000000|fileExt:jpg,png,bmg.jpeg',
             ),
-            'upload_image' => array(
-                'type' =>['require'],//两种方式 有正则就用数组形式，没有就用下面也行
-                'file'  =>'require|image|fileSize:5000000|fileExt:jpg,png,bmg.jpeg',
-            ),
 
             'change_pwd' => array(
                 'user_phone' =>'',//两种方式 有正则就用数组形式，没有就用下面也行
@@ -379,7 +372,7 @@ class Common extends Controller{
 
             ),
         ),
-          'Api' => array(
+        'Api' => array(
             'sale_car'=>array(
                 'user_phone' =>['require'],
 
@@ -404,15 +397,15 @@ class Common extends Controller{
 
         $this->request = Request::instance();
 
-       // $this->set_session($this->request->except(['city']));
+        // $this->set_session($this->request->except(['city']));
 
-      //  $this->check_time($this->request->only(['atime']));//验证是否超时
+        //  $this->check_time($this->request->only(['atime']));//验证是否超时
 
-      //  $this->check_token($this->request->param());//检查token值
+        //  $this->check_token($this->request->param());//检查token值
 
-      // $this->params = $this->check_params($this->request->except(['atime','token']));
+        // $this->params = $this->check_params($this->request->except(['atime','token']));
 
-       $this->params = $this->check_params($this->request->param(true));
+        $this->params = $this->check_params($this->request->param(true));
 
     }
 
@@ -432,7 +425,7 @@ class Common extends Controller{
 
             //$cityurl = $city_all['pin'];
 
-           // $city_id = $city_all['id'];
+            // $city_id = $city_all['id'];
 
             return $city_all;
 
@@ -463,7 +456,7 @@ class Common extends Controller{
 
         if (!isset($arr['atime']) || intval($arr['atime']) <=1){
 
-             $this->return_msg(400,'时间戳不存在');
+            $this->return_msg(400,'时间戳不存在');
         }
 
         if (time()-intval($arr['atime']) >6000){
@@ -516,7 +509,7 @@ class Common extends Controller{
 
     public function check_token($arr){
 
-         /* api 传过来的token */
+        /* api 传过来的token */
         if(!isset($arr['token']) || empty($arr['token'])){
 
             $this->return_msg(400,'token不能为空！');
@@ -535,7 +528,7 @@ class Common extends Controller{
             $service_token .=$value;
         }
 
-       // dump($service_token);
+        // dump($service_token);
 
         $service_token = md5($service_token); //服务端token
 
@@ -548,9 +541,9 @@ class Common extends Controller{
 
             $this->return_msg(400,'token 验证不对');
         }
-        
+
     }
-    
+
     /*
      * 检测有效参数
      * 验证参数
@@ -583,8 +576,7 @@ class Common extends Controller{
      */
     public function check_username($username){
 
-        //$is_email = Validate::is($username,'email')?1:0;
-        $is_email = 0;
+        $is_email = Validate::is($username,'email')?1:0;
 
         $is_phone = preg_match('/^[1][3,4,5,7,8][0-9]{9}$/',$username)?4:2;
 
@@ -593,7 +585,7 @@ class Common extends Controller{
         switch ($flag){
 
             case 2:
-                $this->return_msg(400,'手机号格式不正确');
+                $this->return_msg(400,'邮箱和手机号不正确');
                 break;
             case 3:
                 return 'email';
@@ -612,30 +604,30 @@ class Common extends Controller{
      */
     public function check_exist($username,$type,$exist){
 
-       $type_num = $type == "phone"?2:4;
+        $type_num = $type == "phone"?2:4;
 
-       $flag = $type_num + $exist;
+        $flag = $type_num + $exist;
 
-       $res_phone = Db::name('user') ->where('phone',$username)->find();
+        $res_phone = Db::name('user') ->where('phone',$username)->find();
 
 
-       switch ($flag){
+        switch ($flag){
 
-           case 2:
-               if ($res_phone){
+            case 2:
+                if ($res_phone){
 
-                   $this->return_msg(400,'此手机号已被占用');
-               }
+                    $this->return_msg(400,'此手机号已被占用');
+                }
 
-               break;
-           case 3:
-               if (!$res_phone){
+                break;
+            case 3:
+                if (!$res_phone){
 
-                   $this->return_msg(400,'此手机号不存在');
-               }
+                    $this->return_msg(400,'此手机号不存在');
+                }
 
-               break;
-       }
+                break;
+        }
 
     }
 
@@ -661,12 +653,12 @@ class Common extends Controller{
 
         if (Session::get('code') !== $md5_code){
 
-            $this->return_msg(400,'验证码不正确');
+            $this->return_msg(400,'验证码不正确1');
         }
 
         /*不管正确与否，每个验证码只能验证一次*/
 
-        //Session::set('code',null);
+        Session::set('code',null);
 
     }
 
@@ -677,22 +669,19 @@ class Common extends Controller{
     */
     public function upload_file($file,$type = ''){
 
-
         $info = $file -> move(ROOT_PATH.'public'.DS.'uploads');
 
         if ($info){
 
-           $path = '/uploads/'.$info->getSaveName();
-           $path = str_replace('\\','/',$path);
+            $path = '/uploads/'.$info->getSaveName();
 
-           /*裁剪图片*/
+            /*裁剪图片*/
             if (!empty($type)){
 
-                //$this->image_edit($path,$type);
+                $this->image_edit($path,$type);
             }
 
-            //return str_replace('\\','/',$path);
-            return $path;
+            return str_replace('\\','/',$path);
         }else{
 
             $this->return_msg(400,$file->getError());
@@ -732,32 +721,48 @@ class Common extends Controller{
         return str_replace('\\','/',$path);
     }
 
- /*
-  * 图文压缩
-  */
+    public function upload2(){
+        // 获取表单上传文件
+        $files = request()->file('subface_img');
+        foreach($files as $file){
+            // 移动到框架应用根目录/public/uploads/ 目录下
+            $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+            if($info){
+                // 输出 42a79759f284b767dfcb2a0197904287.jpg
+                return $info->getSaveName();
+            }else{
+                // 上传失败获取错误信息
+                echo $file->getError();
+            }
+        }
+    }
+
+    /*
+     * 图文压缩
+     */
     public function image_edit($path,$type){
 
         $image = Image::open(ROOT_PATH.'public'.$path);
 
         switch ($type){
 
-                case 'head_img':
+            case 'head_img':
 
-                 $image->thumb(200,200,Image::THUMB_CENTER)->save(ROOT_PATH.'public'.$path);
+                $image->thumb(200,200,Image::THUMB_CENTER)->save(ROOT_PATH.'public'.$path);
                 break;
-                case 'bp_img':
+            case 'bp_img':
 
                 $image->thumb(100,100,Image::THUMB_CENTER)->save(ROOT_PATH.'public'.$path);
                 break;
-                case 'door_photo':
+            case 'door_photo':
 
                 $image->thumb(200,200,Image::THUMB_CENTER)->save(ROOT_PATH.'public'.$path);
                 break;
-                case 'shop_licence':
+            case 'shop_licence':
 
                 $image->thumb(200,200,Image::THUMB_CENTER)->save(ROOT_PATH.'public'.$path);
                 break;
-                case 'car_img':
+            case 'car_img':
 
                 $image->thumb(400,400,Image::THUMB_CENTER)->save(ROOT_PATH.'public'.$path);
                 break;
@@ -832,7 +837,7 @@ class Common extends Controller{
         $city=$arr[0];
         //获取city_id 123
         $city_id=Db::table('city')->field("id")->where("name like '%".$city."%'")->find();
-      //  dump( Db::table('city')->getLastSql());die;
+        //  dump( Db::table('city')->getLastSql());die;
 
         if(!$city_id){
             $city_id['id']=1;
@@ -846,7 +851,7 @@ class Common extends Controller{
 
         $res = Db::table('car_brand')->field("name,upid")->where("id",$cartype_id)->find();
 
-       // dump($res['upid']);die;
+        // dump($res['upid']);die;
         $res2 = Db::table('car_brand')->field("name")->where("id",$res['upid'])->find();
 
         return $res2['name'].' '.$res['name'];
@@ -887,7 +892,7 @@ class Common extends Controller{
         //获取配置信息
         $param_info=Db::table("param")->field("id,cartype,price,motor,jqxings")->where("brand='".$brand."' and sys='".$sys."' and years like '%".$years."%'")->select();
 
-       // dump( Db::table('param')->getLastSql());die;
+        // dump( Db::table('param')->getLastSql());die;
 
 
         foreach ($param_info as $k => $v) {
@@ -1101,7 +1106,7 @@ class Common extends Controller{
         }else{
             $res=6;
         }
-       // dump($res);die;
+        // dump($res);die;
         return $res;
     }
     // 里程
@@ -1301,7 +1306,7 @@ class Common extends Controller{
         }
     }
     // 车身
-   public function car_body($id){
+    public function car_body($id){
         $arr = array(
             array(
                 'id'=> '1',
@@ -1428,7 +1433,7 @@ class Common extends Controller{
 
     }
 
-   public function list_brand($initial){
+    public function list_brand($initial){
         $res = Db::table('car_brand')->field('id,img_id,initial,name')
             ->where(array('initial_num'=>$initial,'status'=>1,'level'=>1))
             ->order('sort desc')
@@ -1446,7 +1451,7 @@ class Common extends Controller{
      * [Capital_ASCII 大写字母与ASCII码]
      * @return [type] [description]
      */
-   public function Capital_ASCII($id){
+    public function Capital_ASCII($id){
         $arr = array(
             array( 'letter'=> 'A', 'num' => 65 ),
             array( 'letter'=> 'B', 'num' => 66 ),
@@ -1508,7 +1513,7 @@ class Common extends Controller{
      */
     public function er_car($city_id){
 
-        $er_car=Db::table("rele_car")->field("pu_id,cartype_id,price,car_cardtime,car_mileage,img_300")->where("status=1 and up_under=1 and city_id=$city_id")->order("create_time desc")->limit(8)->select();
+        $er_car=Db::table("rele_car")->field("pu_id,cartype_id,price,car_cardtime,car_mileage,img_300")->where("status=1 and up_under=1 and city_id=$city_id")->order("create_time desc")->limit(10)->select();
         foreach ($er_car as $k => $val) {
             $er_car[$k]['name']=$this->get_carname($val['cartype_id']);
             $er_car[$k]['img_url']=$this->get_carimg($val['img_300'],1);
@@ -1569,10 +1574,10 @@ class Common extends Controller{
 
         return $new_car;
 
-     }
-     /*
-     * 获取新车详情 写入数据库
-     */
+    }
+    /*
+    * 获取新车详情 写入数据库
+    */
     public function new_car_his($city_id,$id){
 
         $where['is_tj'] = 1;
@@ -1591,11 +1596,11 @@ class Common extends Controller{
 
         return $new_car;
 
-     }
+    }
 
-     /*
-      * 获取零首付 推荐
-      */
+    /*
+     * 获取零首付 推荐
+     */
     public function car_zero($city_id){
 
         $car_zero=Db::table("l_car")->field("id,cartype_id,price,img_300,pay0_s2,pay0_y2,pay0_n2")->where("is_tj=1 and status=1 and city_id=$city_id")->order("create_time desc")->limit(5)->select();
@@ -2106,314 +2111,314 @@ class Common extends Controller{
     public function lots_two_cars($sort = 0){
 
 
-            //接受参数
-            $data = $this->params;
+        //接受参数
+        $data = $this->params;
 
 
-            $data['sort'] = $sort;
+        $data['sort'] = $sort;
 
-            if (!empty($data['user_id'])){
+        if (!empty($data['user_id'])){
 
-                $user_id = $data['user_id'];
+            $user_id = $data['user_id'];
+        }
+
+        if (!empty($data['page'])){
+
+            $page = $data['page'];
+        }
+        if (empty($data['num'])){
+            $PageSize = 10;
+        }else{
+            $PageSize = $data['num'];
+        }
+        if (empty($data['page'])){
+
+            $PageIndex = 1;
+
+        }else{
+            $PageIndex = $data['page'];
+        }
+
+        if (!empty($data['brand_id'])){
+
+            $brand_id = $data['brand_id'];//品牌id
+        }
+        if (!empty($data['sys_id'])){
+
+            $sys_id = $data['sys_id'];//车系id
+        }
+        if (!empty($data['cartype_id'])){
+
+            $cartype_id = $data['cartype_id'];//车型id
+        }
+        if (!empty($data['price_range'])){
+
+            $price_range = $data['price_range'];//价格区间id
+        }
+
+        if (!empty($data['car_mileage'])){
+
+            $car_mileage = $data['car_mileage'];//里程区间id
+        }
+
+        if (!empty($data['car_age'])){
+
+            $car_age = $data['car_age'];//车龄id
+        }
+
+        if (!empty($data['subface'])){
+
+            $subface = $data['subface'];//级别id
+        }
+
+        if (!empty($data['output'])){
+
+            $output = $data['output'];//排量id
+        }
+        if (!empty($data['gearbox'])){
+
+            $gearbox = $data['gearbox'];//变速箱id
+        }
+
+        if (!empty($data['blowdown'])){
+
+            $blowdown = $data['blowdown'];//排放标准id
+        }
+
+        if (!empty($data['car_drive'])){
+
+            $car_drive = $data['car_drive'];//驱动id
+        }
+
+        if (!empty($data['car_body'])){
+
+            $car_body = $data['car_body'];//车身id
+        }
+        if (!empty($data['color'])){
+
+            $color = $data['color'];//颜色id
+        }
+        if (!empty($data['fuel'])){
+
+            $fuel = $data['fuel'];//燃料id
+        }
+        if (!empty($data['sort'])){
+
+            $sort = $data['sort'];//排序  1价格最低 2价格最高 3车龄最短 4车龄最长 5里程最多 6里程最少
+        }
+        if (!empty($data['search'])){
+
+            $search = $data['search'];
+        }
+
+        //获取城市id
+
+        //$city_id = $this->city_id();
+        $city_id = 1;
+
+        $WhereStr = "  and rele_car.status = 1 and rele_car.up_under = 1 and user.is_fenghao = 2 and rele_car.city_id=".$city_id;
+        if(!empty($data['user_id'])){
+            $WhereStr .= "  and rele_car.user_id = $user_id ";
+        }
+        if(!empty($data['brand_id'])){
+            $WhereStr .= "  and rele_car.brand_id = $brand_id ";
+        }
+
+        // dump($brand_id);die;
+        if(!empty($data['sys_id'])){
+            $WhereStr .= "  and rele_car.sys_id = $sys_id ";
+        }
+        if(!empty($data['cartype_id'])){
+            $WhereStr .= "  and rele_car.cartype_id = $cartype_id ";
+        }
+        if(!empty($data['fuel'])){
+            $WhereStr .= "  and rele_car.fuel = $fuel ";
+        }
+        if(!empty($data['color'])){
+            $WhereStr .= "  and rele_car.color = $color ";
+        }
+        if(!empty($data['car_body'])){
+            $WhereStr .= "  and rele_car.car_body = $car_body ";
+        }
+        if(!empty($data['car_drive'])){
+            $WhereStr .= "  and rele_car.car_drive = $car_drive ";
+        }
+        if(!empty($data['blowdown'])){
+            $WhereStr .= "  and rele_car.blowdown = $blowdown ";
+        }
+        if(!empty($data['gearbox'])){
+            $WhereStr .= "  and rele_car.gearbox = $gearbox ";
+        }
+        if(!empty($data['output'])){
+            $WhereStr .= "  and rele_car.output = $output ";
+        }
+        if(!empty($data['subface'])){
+            $WhereStr .= "  and rele_car.subface = $subface ";
+        }
+        if(!empty($data['car_age'])){
+            $WhereStr .= "  and rele_car.car_age = $car_age ";
+        }
+        if(!empty($data['search'])){
+            $WhereStr .= " and rele_car.name_li like '%".$search."%'";
+        }
+        if(!empty($data['price_range'])){
+            switch ($data['price_range']) {
+                case '2':
+                    //3万内
+                    $WhereStr .= " and rele_car.price <= 3 ";
+                    break;
+                case '3':
+                    //3-5万
+                    $WhereStr .= " and rele_car.price between 3 and 5 ";
+                    break;
+                case '4':
+                    //5-8万
+                    $WhereStr .= " and rele_car.price between 5 and 8 ";
+                    break;
+                case '5':
+                    //8-10万
+                    $WhereStr .= " and rele_car.price between 8 and 10 ";
+                    break;
+                case '6':
+                    //10-15万
+                    $WhereStr .= " and rele_car.price between 10 and  15";
+                    break;
+                case '7':
+                    //15-20万
+                    $WhereStr .= " and rele_car.price between 15 and 20 ";
+                    break;
+                case '8':
+                    //20-30万
+                    $WhereStr .= " and rele_car.price between 20 and 30 ";
+                    break;
+                case '9':
+                    //30-50万
+                    $WhereStr .= " and rele_car.price between 30 and 50 ";
+                    break;
+                case '10':
+                    //5-8万
+                    $WhereStr .= " and rele_car.price between 50 and 100 ";
+                    break;
+                case '11':
+                    //5-8万
+                    $WhereStr .= " and rele_car.price > 100 ";
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+        }
+        if(!empty($data['car_mileage'])){
+            switch ($car_mileage) {
+                case '1':
+                    //1万公里内
+                    $WhereStr .= " and rele_car.car_mileage <= 1 ";
+                    break;
+                case '2':
+                    //3万公里内
+                    $WhereStr .= " and rele_car.car_mileage between 1 and 3 ";
+                    break;
+                case '3':
+                    //5万公里内
+                    $WhereStr .= " and rele_car.car_mileage between 3 and 5 ";
+                    break;
+                case '4':
+                    //10万公里内
+                    $WhereStr .= " and rele_car.car_mileage between 5 and 10 ";
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+        }
+
+        if (!empty($data['sort'])) {
+
+            if ($data['sort'] == 1) {
+                // 排序方式
+                $OrderKey = "rele_car.price";
+                $OrderType = "asc";
+            } elseif ($data['sort'] == 2) {
+                // 排序方式
+                $OrderKey = "rele_car.price";
+                $OrderType = "desc";
+            } elseif ($data['sort'] == 3) {
+                // 排序方式
+                $OrderKey = "rele_car.car_age";
+                $OrderType = "desc";
+            } elseif ($data['sort'] == 4) {
+                // 排序方式
+                $OrderKey = "rele_car.car_age";
+                $OrderType = "asc";
+            } elseif ($data['sort'] == 5) {
+                // 排序方式
+                $OrderKey = "rele_car.car_mileage";
+                $OrderType = "desc";
+            } elseif ($data['sort'] == 6) {
+                // 排序方式
+                $OrderKey = "rele_car.car_mileage";
+                $OrderType = "asc";
+            } else {
+                // 排序方式
+                $OrderKey = "rele_car.create_time";
+                $OrderType = "desc";
+            }
+        }
+        // 分类
+
+        if (!empty($data['type'])){
+
+            $type=$data['type'];
+            if($type){
+                $WhereStr .= " and user_shop.is_yx = $type ";
+                $join = "join user on user.user_id = rele_car.user_id join user_shop on user.user_id=user_shop.user_id";
             }
 
-            if (!empty($data['page'])){
+        }else{
+            $join = "join user on user.user_id = rele_car.user_id";
+        }
 
-                $page = $data['page'];
-            }
-            if (empty($data['num'])){
-                $PageSize = 10;
-            }else{
-                $PageSize = $data['num'];
-            }
-            if (empty($data['page'])){
-
-                $PageIndex = 1;
-
-            }else{
-                $PageIndex = $data['page'];
-            }
-
-            if (!empty($data['brand_id'])){
-
-                $brand_id = $data['brand_id'];//品牌id
-            }
-            if (!empty($data['sys_id'])){
-
-                $sys_id = $data['sys_id'];//车系id
-            }
-            if (!empty($data['cartype_id'])){
-
-                $cartype_id = $data['cartype_id'];//车型id
-            }
-            if (!empty($data['price_range'])){
-
-                $price_range = $data['price_range'];//价格区间id
-            }
-
-            if (!empty($data['car_mileage'])){
-
-                $car_mileage = $data['car_mileage'];//里程区间id
-            }
-
-            if (!empty($data['car_age'])){
-
-                $car_age = $data['car_age'];//车龄id
-            }
-
-            if (!empty($data['subface'])){
-
-                $subface = $data['subface'];//级别id
-            }
-
-            if (!empty($data['output'])){
-
-                $output = $data['output'];//排量id
-            }
-            if (!empty($data['gearbox'])){
-
-                $gearbox = $data['gearbox'];//变速箱id
-            }
-
-            if (!empty($data['blowdown'])){
-
-                $blowdown = $data['blowdown'];//排放标准id
-            }
-
-            if (!empty($data['car_drive'])){
-
-                $car_drive = $data['car_drive'];//驱动id
-            }
-
-            if (!empty($data['car_body'])){
-
-                $car_body = $data['car_body'];//车身id
-            }
-            if (!empty($data['color'])){
-
-                $color = $data['color'];//颜色id
-            }
-            if (!empty($data['fuel'])){
-
-                $fuel = $data['fuel'];//燃料id
-            }
-            if (!empty($data['sort'])){
-
-                $sort = $data['sort'];//排序  1价格最低 2价格最高 3车龄最短 4车龄最长 5里程最多 6里程最少
-            }
-            if (!empty($data['search'])){
-
-                $search = $data['search'];
-            }
-
-            //获取城市id
-
-            //$city_id = $this->city_id();
-            $city_id = 1;
-
-            $WhereStr = "  and rele_car.status = 1 and rele_car.up_under = 1 and user.is_fenghao = 2 and rele_car.city_id=".$city_id;
-            if(!empty($data['user_id'])){
-                $WhereStr .= "  and rele_car.user_id = $user_id ";
-            }
-            if(!empty($data['brand_id'])){
-                $WhereStr .= "  and rele_car.brand_id = $brand_id ";
-            }
-
-            // dump($brand_id);die;
-            if(!empty($data['sys_id'])){
-                $WhereStr .= "  and rele_car.sys_id = $sys_id ";
-            }
-            if(!empty($data['cartype_id'])){
-                $WhereStr .= "  and rele_car.cartype_id = $cartype_id ";
-            }
-            if(!empty($data['fuel'])){
-                $WhereStr .= "  and rele_car.fuel = $fuel ";
-            }
-            if(!empty($data['color'])){
-                $WhereStr .= "  and rele_car.color = $color ";
-            }
-            if(!empty($data['car_body'])){
-                $WhereStr .= "  and rele_car.car_body = $car_body ";
-            }
-            if(!empty($data['car_drive'])){
-                $WhereStr .= "  and rele_car.car_drive = $car_drive ";
-            }
-            if(!empty($data['blowdown'])){
-                $WhereStr .= "  and rele_car.blowdown = $blowdown ";
-            }
-            if(!empty($data['gearbox'])){
-                $WhereStr .= "  and rele_car.gearbox = $gearbox ";
-            }
-            if(!empty($data['output'])){
-                $WhereStr .= "  and rele_car.output = $output ";
-            }
-            if(!empty($data['subface'])){
-                $WhereStr .= "  and rele_car.subface = $subface ";
-            }
-            if(!empty($data['car_age'])){
-                $WhereStr .= "  and rele_car.car_age = $car_age ";
-            }
-            if(!empty($data['search'])){
-                $WhereStr .= " and rele_car.name_li like '%".$search."%'";
-            }
-            if(!empty($data['price_range'])){
-                switch ($data['price_range']) {
-                    case '2':
-                        //3万内
-                        $WhereStr .= " and rele_car.price <= 3 ";
-                        break;
-                    case '3':
-                        //3-5万
-                        $WhereStr .= " and rele_car.price between 3 and 5 ";
-                        break;
-                    case '4':
-                        //5-8万
-                        $WhereStr .= " and rele_car.price between 5 and 8 ";
-                        break;
-                    case '5':
-                        //8-10万
-                        $WhereStr .= " and rele_car.price between 8 and 10 ";
-                        break;
-                    case '6':
-                        //10-15万
-                        $WhereStr .= " and rele_car.price between 10 and  15";
-                        break;
-                    case '7':
-                        //15-20万
-                        $WhereStr .= " and rele_car.price between 15 and 20 ";
-                        break;
-                    case '8':
-                        //20-30万
-                        $WhereStr .= " and rele_car.price between 20 and 30 ";
-                        break;
-                    case '9':
-                        //30-50万
-                        $WhereStr .= " and rele_car.price between 30 and 50 ";
-                        break;
-                    case '10':
-                        //5-8万
-                        $WhereStr .= " and rele_car.price between 50 and 100 ";
-                        break;
-                    case '11':
-                        //5-8万
-                        $WhereStr .= " and rele_car.price > 100 ";
-                        break;
-                    default:
-                        # code...
-                        break;
-                }
-            }
-            if(!empty($data['car_mileage'])){
-                switch ($car_mileage) {
-                    case '1':
-                        //1万公里内
-                        $WhereStr .= " and rele_car.car_mileage <= 1 ";
-                        break;
-                    case '2':
-                        //3万公里内
-                        $WhereStr .= " and rele_car.car_mileage between 1 and 3 ";
-                        break;
-                    case '3':
-                        //5万公里内
-                        $WhereStr .= " and rele_car.car_mileage between 3 and 5 ";
-                        break;
-                    case '4':
-                        //10万公里内
-                        $WhereStr .= " and rele_car.car_mileage between 5 and 10 ";
-                        break;
-                    default:
-                        # code...
-                        break;
-                }
-            }
-
-            if (!empty($data['sort'])) {
-
-                if ($data['sort'] == 1) {
-                    // 排序方式
-                    $OrderKey = "rele_car.price";
-                    $OrderType = "asc";
-                } elseif ($data['sort'] == 2) {
-                    // 排序方式
-                    $OrderKey = "rele_car.price";
-                    $OrderType = "desc";
-                } elseif ($data['sort'] == 3) {
-                    // 排序方式
-                    $OrderKey = "rele_car.car_age";
-                    $OrderType = "desc";
-                } elseif ($data['sort'] == 4) {
-                    // 排序方式
-                    $OrderKey = "rele_car.car_age";
-                    $OrderType = "asc";
-                } elseif ($data['sort'] == 5) {
-                    // 排序方式
-                    $OrderKey = "rele_car.car_mileage";
-                    $OrderType = "desc";
-                } elseif ($data['sort'] == 6) {
-                    // 排序方式
-                    $OrderKey = "rele_car.car_mileage";
-                    $OrderType = "asc";
-                } else {
-                    // 排序方式
-                    $OrderKey = "rele_car.create_time";
-                    $OrderType = "desc";
-                }
-            }
-            // 分类
-
-            if (!empty($data['type'])){
-
-                $type=$data['type'];
-                if($type){
-                    $WhereStr .= " and user_shop.is_yx = $type ";
-                    $join = "join user on user.user_id = rele_car.user_id join user_shop on user.user_id=user_shop.user_id";
-                }
-
-            }else{
-                $join = "join user on user.user_id = rele_car.user_id";
-            }
-
-            $joinid = "pu_id";
-            $Coll="rele_car.pu_id,rele_car.user_id,rele_car.cartype_id,rele_car.price,rele_car.name_li,rele_car.news_price,rele_car.car_mileage,rele_car.car_cardtime,rele_car.img_300";
-            $sql = $this->CreateSql($TableName="rele_car",$Coll,$WhereStr,$WhereStr,$PageIndex,$PageSize,$OrderKey,$OrderType,$join,$joinid);
-            //print_r($sql);
+        $joinid = "pu_id";
+        $Coll="rele_car.pu_id,rele_car.user_id,rele_car.cartype_id,rele_car.price,rele_car.name_li,rele_car.news_price,rele_car.car_mileage,rele_car.car_cardtime,rele_car.img_300";
+        $sql = $this->CreateSql($TableName="rele_car",$Coll,$WhereStr,$WhereStr,$PageIndex,$PageSize,$OrderKey,$OrderType,$join,$joinid);
+        //print_r($sql);
 //        $Model = M("rele_car");
 
-            $res = Db::query($sql);
+        $res = Db::query($sql);
 
-            if($res){
-                foreach ($res as $key => $val) {
-                    $res[$key]['news_price'] = $val['news_price']== 0.00 ? "未知" : $val['news_price'].'万';
-                    // 通过cartype_id查车系名和车型名称
-                    //$res[$key]['name'] = $this->get_carname($val['cartype_id']);查询名称不对 coll 内增加rele.car_name_li
-                    $res[$key]['img_url'] = $this->get_carimg(explode(',',$val['img_300'])[0],1);
-                    unset($res[$key]['img_300']);
-                    unset($res[$key]['cartype_id']);
-                    //获取汽车的首付
-                    //dump($val['pu_id']);die;
-                    $pay=$this->get_rele_car_fenqi($val['pu_id']);
-                    if (!empty($pay)){
+        if($res){
+            foreach ($res as $key => $val) {
+                $res[$key]['news_price'] = $val['news_price']== 0.00 ? "未知" : $val['news_price'].'万';
+                // 通过cartype_id查车系名和车型名称
+                //$res[$key]['name'] = $this->get_carname($val['cartype_id']);查询名称不对 coll 内增加rele.car_name_li
+                $res[$key]['img_url'] = $this->get_carimg(explode(',',$val['img_300'])[0],1);
+                unset($res[$key]['img_300']);
+                unset($res[$key]['cartype_id']);
+                //获取汽车的首付
+                //dump($val['pu_id']);die;
+                $pay=$this->get_rele_car_fenqi($val['pu_id']);
+                if (!empty($pay)){
 
-                        $res[$key]['pay_20s']=$pay['pay_20s']?$pay['pay_20s']:'';
-                        $res[$key]['pay_20y']=$pay['pay_20y']?$pay['pay_20y']:'';
-                        $res[$key]['pay_20n']=$pay['pay_20n']?$pay['pay_20n']:'';
-                    }
-
-                    //fenye
-                    //暂时注销
-                    //$count = Db::table('rele_car')->join($join)->where('1=1 '.$WhereStr)->count();
-                    //$res[$key]['page_num']=ceil($count/10);
-                    $res[$key]['page']=$PageIndex;
+                    $res[$key]['pay_20s']=$pay['pay_20s']?$pay['pay_20s']:'';
+                    $res[$key]['pay_20y']=$pay['pay_20y']?$pay['pay_20y']:'';
+                    $res[$key]['pay_20n']=$pay['pay_20n']?$pay['pay_20n']:'';
                 }
+
+                //fenye
+                //暂时注销
+                //$count = Db::table('rele_car')->join($join)->where('1=1 '.$WhereStr)->count();
+                //$res[$key]['page_num']=ceil($count/10);
+                $res[$key]['page']=$PageIndex;
             }
-
-
-
-            $res = $res ? $res : array();
-
-            return $res;
-
         }
+
+
+
+        $res = $res ? $res : array();
+
+        return $res;
+
+    }
 
     public function search_news_carlist($chx,$px){
 
@@ -2687,7 +2692,7 @@ class Common extends Controller{
         return $ss;
 
     }
-    
+
     /*
      * 获取发布车辆
      */
@@ -2695,7 +2700,7 @@ class Common extends Controller{
     public function my_shop_fabu($user_id,$min_num,$page_size,$status,$up_under=1){
 
 
-       // user_id = $user_id and up_under=1 and is_show!=1 and status = 1
+        // user_id = $user_id and up_under=1 and is_show!=1 and status = 1
 
         $where['user_id'] = $user_id;
         if (!empty($up_under)){
@@ -2710,7 +2715,7 @@ class Common extends Controller{
         $where['is_show'] = 2;
 
 
-       //dump($where);die;
+        //dump($where);die;
 
         //获取发布的车辆
         $fabu_car=Db::table("rele_car")->field("pu_id,cartype_id,price,car_cardtime,car_mileage,img_300,create_time")->where($where)->order("pu_id desc")->limit($min_num,$page_size)->select();
@@ -2724,7 +2729,7 @@ class Common extends Controller{
             unset($fabu_car[$key]['cartype_id']);
             unset($fabu_car[$key]['img_300']);
         }
-      //  dump($fabu_car);die;
+        //  dump($fabu_car);die;
 
         return $fabu_car;
     }
@@ -2890,7 +2895,7 @@ class Common extends Controller{
         return $safe;
     }
     //获取图片路径
-   public function get_uplodes_imgs($imgs){
+    public function get_uplodes_imgs($imgs){
         $data=explode(",",$imgs);
         foreach($data as $k => $v){
             if(strpos($v,'www.gj2car.com') !==false){
@@ -2903,7 +2908,7 @@ class Common extends Controller{
         return $arr;
     }
     //获取图片路径
-   public function get_uplodes_imgs_512($imgs){
+    public function get_uplodes_imgs_512($imgs){
         $data=explode(",",$imgs);
         foreach($data as $k => $v){
             $url=array();
@@ -2945,7 +2950,7 @@ class Common extends Controller{
      * @param  [type] $level [当前级别]
      * @return [type]        [description]
      */
-   public function get_brand_firm_sysname($id,$level){
+    public function get_brand_firm_sysname($id,$level){
         if($level == 2){
             $br = Db::table('car_brand')->field('name,id,pin')->where("id = $id")->find();
             // 查找品牌
