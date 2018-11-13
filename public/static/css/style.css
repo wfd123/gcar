@@ -163,7 +163,7 @@ option {
     -webkit-appearance: none; /*去除系统默认的样式*//* Safari 和 Chrome */
     appearance: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* 点击去除高亮的颜色*/
-    background-color: #ff !important; /*当input框禁止输入的时候会有一个灰色的底色 项目需要我设置了 白色底 跟页面背景一个颜色。*/
+    background-color: #fff !important; /*当input框禁止输入的时候会有一个灰色的底色 项目需要我设置了 白色底 跟页面背景一个颜色。*/
 }
 
 /* --背景色字体颜色--*/
@@ -612,8 +612,9 @@ option:hover {
 
 /*车列表信息                     一排5个*/
 .list .items5 {
+    position: relative;
     width: 226px;
-    height: 330px;
+    height: 400px;
     border: 1px solid #ddd;
     float: left;
     margin-bottom: 13px;
@@ -629,12 +630,12 @@ option:hover {
 }
 
 .list .items5 .car_img {
-    width: 226px;
-    height: 140px;
+    padding: 10px;
 }
 
 .list .items5 .car_img img {
-    height: 120px;
+    width: 100%;
+    height: 140px;
 }
 
 .list .items5 .car_desc {
@@ -668,15 +669,16 @@ option:hover {
 }
 
 .list .items5 .car_desc .che_ordered {
+    position: absolute;
+    bottom: 10px;
+    width: 94%;
     border: 1px solid #ff8402;
     height: 35px;
     overflow: hidden;
     line-height: 35px;
     color: #ff8402;
     font-size: 16px;
-    width: 195px;
     text-align: center;
-    margin: 10px auto;
     cursor: pointer;
 }
 
