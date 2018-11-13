@@ -267,7 +267,8 @@
 				<ul class="list">
 					{volist name="items" id="vo"}
 					<li class="items5">
-						<a href="{$domain}/{$Think.session.cityurl}/details/{$vo.pu_id}" class="car_img flex_center"><img src="__UPLOA__{$vo.subface_img}" alt="" /></a>
+						<a href="{$domain}/{$Think.session.cityurl}/details/{$vo.pu_id}" class="car_img flex_center"> {if condition="$vo['subface_img']"} <img src="__UPLOA__{$vo.subface_img}"/> {else /}<img
+								src="__STATIC__/img/baner112.png">{/if} </a>
 						<a href="{$domain}/{$Think.session.cityurl}/details/{$vo.pu_id}" class="car_desc">
 							<h3>{$vo.pu_id}{$vo.name_li}</h3>
 							<p><span class="car_price"><b></b>{if condition="$vo['news_price']"}{$vo.news_price}万{else }0.00万{/if}</span><span class="car_sui">新车含税万</span></p>
@@ -276,7 +277,7 @@
 					</li>
 					{/volist}
 				</ul>
-				<p>{$cat->render()}</p>
+				<p style="margin-left: 50px;">{$cat->render()}</p>
 			</div>
 		</div>
 		<div class="list_right">
