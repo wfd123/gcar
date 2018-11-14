@@ -132,16 +132,15 @@
 								<div class="mblack"> </div>
 								<div class="sel_type"><span>店铺名称</span><input type="text" id="shop_name" name="shop_name" value="{$edit.shop_name}" placeholder="请输入公司店铺名称"/></div>
 								<div class="mblack"> </div>
-								<div class="sel_type">
-								<div class=" demo_inputype selected_ipt ">
+								<div id="businessRange" class="sel_type" style="display: none;">
+								<div class="demo_inputype selected_ipt ">
 									<div class="input_inline">
 										<span >经营范围</span>
 										<input type="hidden" id="car_brand_id" name="brand_id"/>
-										<input type="hidden" id="car_sys_id" name="sys_id"/>
-										<input type="hidden" id="car_type_id" name="years"/>
-										<input type="text" name="name_li" class="upload_info hid" readonly id="sltCar_name" placeholder="请输入公司经营范围"/>
+										<input type="hidden" id="car_firm_id" name="firm_id"/>
+										<input type="text" name="business_range" class="upload_info hid" readonly id="sltCar_name" placeholder="请输入公司经营范围"/>
 										<div class="position_r">
-											<div class="gjcar_box">
+											<div style="left: 92px;" class="gjcar_box">
 												<div class="gjcar_select_car">
 													<!--选择结果展示-->
 													<div class="bread_subnav gj_clear">
@@ -152,8 +151,7 @@
 													<!--选择标题-->
 													<div class="choose_car_t oh">
 														<a href="javascript:;" onclick="set('bd0',1,3)" id="bd01" class="active" >请选择品牌</a>
-														<a href="javascript:;" onclick="set('bd0',2,3)" id="bd02">请选择车系</a>
-														<a href="javascript:;" onclick="set('bd0',3,3)" id="bd03">请选择年代款</a>
+														<a href="javascript:;" onclick="set('bd0',2,3)" id="bd02">请选择厂商</a>
 													</div>
 													<!--选择品牌-->
 													<div class="choose_cartab">
@@ -195,32 +193,15 @@
 
 															</div>
 														</div>
-														<!--选择车款-->
-														<div class=" choose_cartab3 gj_clear" style="display: none;" id="conbd03">
-															<div class="choose_caryear gj_clear">
-																<div class="year_content gj_clear">
-																	<!--<p class="year_tit">2018款</p>-->
-																	<div class="year_car oh">
-																	</div>
-																	<!--<p class="year_tit">2018款</p>-->
-																	<!--<div class="year_car">-->
-																	<!--<a href="javascript:;">2018款 30周年年型 30 TFSI 进取型</a>-->
-																	<!--<a href="javascript:;">2018款 30周年年型 30 TFSI 进取型</a>-->
-																	<!--<a href="javascript:;">2018款 30周年年型 30 TFSI 进取型</a>-->
-																	<!--</div>-->
-																</div>
-															</div>
-														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
+
 								</div>
 								</div>
-								<div class="mblack"> </div>
-								<div class="sel_type"><span>经营范围</span><input type="text" id="business_range" name="business_range" value="{$edit.business_range}" placeholder="请输入公司经营范围"/></div>
-								<div class="mblack"> </div>
+                                <div class="mblack"> </div>
 								<div class="sel_type"><span>公司地址</span><input type="text" id="shop_address" name="shop_address" value="{$edit.shop_address}" placeholder="请输入公司经营地址"/></div>
 								<div class="mblack"> </div>
 							</div>
@@ -277,15 +258,15 @@
 
 </body>
 
-<script src="__STATIC__/js/webuploader.min.js"></script>
+<script src="__STATIC__/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script>
     function btn_car_brand(id){
         $("#car_brand_id").val(id);
         $.ajax({
             type: "POST",
             async: false,
-            url: "http://39.106.67.47/new_api/user/newcar/getcar_brand_sys",
-            data:{brand_id:id},
+            url: "http://39.106.67.47/new_api/User/newapi/get_firm",
+            data:{brand:id},
             success: function (data)
             {
                 var obj = JSON.parse(data);
@@ -296,7 +277,7 @@
                 var str = "";
                 for(var i = 0; i<brand_sys.length;i++){
                     var sys  = brand_sys[i];
-                    str += '<a onclick=btn_car_sys(' + sys.sys_id + ") " + 'href="javascript:;">' + sys.sys + '</a>'
+                    str += '<a id=' + sys.id +  ' href="javascript:;">' + sys.name + '</a>'
                 }
                 //将html动态拼接到对应的div上面
                 $('.chooseSeries').html(str);
@@ -304,30 +285,6 @@
         });
     }
 
-    function btn_car_sys(id){
-        $("#car_sys_id").val(id);
-        $.ajax({
-            type: "GET",
-            async: false,
-            url: "http://39.106.67.47//new_api/User/Index/get_cartype?id=" + id,
-            success: function (data)
-            {
-                var obj = JSON.parse(data);
-                var car_type = obj.body[0].list;
-                //先将元素对应清空
-
-                $('.year_car').empty();
-
-                var str = "";
-                for(var i = 0; i<car_type.length;i++){
-                    var type  = car_type[i];
-                    str += '<a id=' + type.id  + ' href="javascript:;">' + type.name + '</a>'
-                }
-                //将html动态拼接到对应的div上面
-                $('.year_car').html(str);
-            }
-        });
-    }
     $(function(){
         $(".businesType").click(function(){
             $(this).parents('.sel_type').addClass('active');
@@ -336,9 +293,15 @@
             var result=$(this).text();
             $(".businesType").val(result);
             $(this).parents('.sel_type').removeClass('active');
-            $("#business").val($(this).attr("id"));
-            $("#business_Form").validate().element($(".businesType"));
 
+            var businessType = $(this).attr("id");
+            if (businessType == 1){
+                $("#businessRange").css("display", "block");
+            } else {
+                $("#businessRange").css("display", "none");
+            }
+            $("#business").val(businessType);
+            $("#business_Form").validate().element($(".businesType"));
         })
 
         $(".choose_car_t a").click(function(){
@@ -365,7 +328,6 @@
                 $(this).parents(".selected_ipt").removeClass('active');
 
             }
-
         })
 
         $("#sltCar_name").click(function(){
@@ -382,8 +344,12 @@
                     var sel_series=$(this).text();
                     $("#seriesName").text('>'+sel_series);
                     $(".choose_cartab2").hide();
-                    $(".choose_cartab3").show();
-                    $("#bd03").addClass("active").siblings().removeClass("active");
+                    $(this).parents(".selected_ipt").removeClass('active');
+                    $("#sltCar_name").val(sel_series);
+                    $("#car_firm_id").val($("#car_brand_id").val() + "_" + $(this).attr("id"));
+                    $("#business_Form").validate().element($("#sltCar_name"))
+                    //$(".choose_cartab3").show();
+                    //$("#bd03").addClass("active").siblings().removeClass("active");
                     $(".year_car  a").click(function(){
                         var carname=$(this).text();
                         $("#carName").text('>'+carname);
@@ -391,7 +357,7 @@
                         $(this).parents(".selected_ipt").removeClass('active');
                         $("#sltCar_name").val(sel_brand+sel_series+carname);
                         $("#car_type_id").val($(this).attr("id"));
-                        $("#release_form").validate().element($("#sltCar_name"))
+                        $("#business_Form").validate().element($("#sltCar_name"))
                         $(".bread_subnav").empty()
                     })
                 })
@@ -406,7 +372,7 @@
                 shop_name:"required",
                 business_range:"required",
                 shop_address:"required",
-                code:"required"
+                code:"required",
             },
             messages: {
                 business_type:"请选择商家入驻类型",
@@ -415,7 +381,7 @@
                 shop_name:"店铺名称不能为空",
                 business_range:"经营范围不能为空",
                 shop_address:"公司地址不能为空",
-				code:"请填写验证码"
+				code:"请填写验证码",
             },
             success:function(label){
                 label.html("&nbsp;").addClass("checked");
@@ -427,6 +393,9 @@
                     error.appendTo(element.parent().next());
                 else if (element.is(":checkbox"))
                     error.appendTo(element.next());
+                else if (element.is("input[name=business_range]")){
+                    error.appendTo(element.parents("#businessRange").next());
+                }
                 else {
                     error.appendTo(element.parent().next());
                 }
