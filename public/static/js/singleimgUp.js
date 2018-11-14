@@ -8,7 +8,7 @@ $(function(){
     function fileChange(){
         // var idFile = $(this).attr("id");
         // var file = document.getElementById(idFile);
-        var imgContainer = $(this).parents(".z_photo"); //存放图片的父亲元素
+        var imgContainer = $(this).parents("#singleUpContainer"); //存放图片的父亲元素
         var fileList = this.files; //获取的图片文件
         var input = $(this).parent();//文本框的父亲元素
         var imgArr = [];
@@ -23,8 +23,8 @@ $(function(){
             for(var i = 0;i<fileList.length;i++){
                 var imgUrl = window.URL.createObjectURL(fileList[i]);
                 imgArr.push(imgUrl);
-                var $section = $("<section class='up-section  loading'>");
-                imgContainer.append($section);
+                var $section = $("<section class='up-section1 up-section  loading'>");
+                imgContainer.prepend($section);
                 var $span = $("<span class='up-span'>");
                 $span.appendTo($section);
 
@@ -44,15 +44,7 @@ $(function(){
                 $input.appendTo($section);
                 var $input2 = $("<input id='tags' name='img_300' value='' type='hidden'/>");
                 $input2.appendTo($section);
-
                 $(this).parent().addClass("hidden");
-                var $sec_inp = $("<section class=\"z_file fl\">");
-                var $img_add = $("<img src=\"/static/img/upimg.png\" class=\"add-img\">");
-                var $file_inp = $("<input type=\"file\" name=\"subface_img[]\"  class=\"file\" />");
-                $img_add.appendTo($sec_inp);
-                $file_inp.appendTo($sec_inp);
-                $sec_inp.appendTo(imgContainer);
-                $file_inp.change(fileChange);
             }
         }
         setTimeout(function(){
@@ -78,9 +70,11 @@ $(function(){
 		$(".works-mask").hide();
 		var numUp = delParent.siblings().length;
 		if(numUp < 11){
-			delParent.prev().remove();
+			delParent.parent().find(".z_file").removeClass("hidden");
 		}
+        delParent.next().children("input")[0].value = "";
 		 delParent.remove();
+
 	});
 	
 	$(".wsdel-no").click(function(){

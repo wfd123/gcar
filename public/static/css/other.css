@@ -618,7 +618,7 @@ text-align:center;background: url(../img/btn_orange.png) ;font-size: 16px;color:
 .upLoad_form .sel_box_info .car_color{overflow: hidden;padding: 15px;}
 .upLoad_form .sel_box_info .slt_color{width:100px ;float: left;margin-left: 20px;margin-bottom: 15px;}
 .upLoad_form .sel_box_info .slt_color span{height: 30px;line-height: 30px;display: block;float: left;}
-.upLoad_form .sel_box_info .slt_color .eq{width: 29px;height:29px ;}
+.upLoad_form .sel_box_info .slt_color .eq{float: left;width: 29px;height:29px ;}
 .upLoad_form .sel_box_info .slt_color .eq .mini_color{display: block;float: left;width: 50%;height: 50%;} 
 .upLoad_form .sel_box_info .slt_color .text{width:69px;height:30px ;text-align: center;border: 1px solid #ddd;box-sizing: border-box;}
 .upLoad_form .sel_box_info .slt_color.active .text{background: url(../img/active_c.png) no-repeat;border: none;}
@@ -633,6 +633,7 @@ text-align:center;background: url(../img/btn_orange.png) ;font-size: 16px;color:
 .z_photo .z_file{position: relative;}
 .z_file  .file{   width: 100%;height: 100%;opacity: 0;position: absolute;top: 0px;left: 0px;z-index: 100;}
 .z_photo .up-section{position: relative;margin-right: 20px;margin-bottom: 20px;}
+.up-section1{position: relative;margin-right: 20px;margin-bottom: 20px;}
 .fl{float: left;}
 .up-section .close-upimg{position: absolute;top: 6px;right: 8px;display: none;z-index: 10;}
 .up-section .up-span{display: block;width: 100%;height: 100%;visibility: hidden;position: absolute;top: 0px;left: 0px;z-index: 9;background: rgba(0,0,0,.2);}
@@ -640,10 +641,12 @@ text-align:center;background: url(../img/btn_orange.png) ;font-size: 16px;color:
 .up-section:hover .close-upimg{display: block;}
 .up-section:hover .up-span{visibility: visible;}
 .z_photo .up-img{display: block;width:auto;vertical-align: middle;max-height: 190px;max-width: 180px;}
+.up-img{display: block;width:auto;vertical-align: middle;max-height: 190px;max-width: 180px;}
 .loading{border: 1px solid #D1D1D1;background:url(../img/loading.gif) no-repeat center;}
 .up-opcity{opacity: 0;}
 .img-name-p{display: none;}
 .upimg-div .up-section {width: 190px;height: 180px; overflow: hidden; line-height: 180px; text-align: center;display: flex;align-items: center; border: 1px solid #ddd; justify-content: center;float: left;}
+#singleUpContainer .up-section {width: 190px;height: 180px; overflow: hidden; line-height: 180px; text-align: center;display: flex;align-items: center; border: 1px solid #ddd; justify-content: center;float: left;}
 .img-box .upimg-div .z_file { width: 74px;height: 74px;    margin-bottom: 20px;}
 .z_file .add-img {display: block;width: 74px;height: 74px;}
 /*遮罩层样式*/
@@ -739,7 +742,7 @@ display: block;color: #fff;text-align: center;line-height: 40px;cursor: pointer;
 .business_enter .sel_type{width: 620px;height:47px;line-height:47px;margin: 0 auto;background:#fff;border: 1px solid #EAEAEA;}
 .business_enter .sel_type .businesType{width:600px;height:47px;font-size:18px;background: url(../img/jtdown1.png) no-repeat center right;cursor: pointer;}
 .p_r{position: relative;}
-.bform_ipt .sel_type{margin-bottom: 20px;padding-left: 20px;font-size: 18px;}
+.bform_ipt .sel_type{padding-left: 20px;font-size: 18px;}
 .bform_ipt .sel_type span{font-size: 18px;padding-right: 20px;}
 .bform_ipt .sel_type input{font-size: 16px;}
 .business_enter .selList{position: absolute;top: 0;left: -2px;width:620px;background: #fff;border: 1px solid #EAEAEA;}
@@ -750,7 +753,7 @@ display: block;color: #fff;text-align: center;line-height: 40px;cursor: pointer;
 display: block;float: right;text-align: center;cursor: pointer;}
 .business_enter .bform_ipt .slt_type{width: 480px;background: url(../img/jtdown1.png) no-repeat center right;cursor: pointer;}
 .img_l .fleft{width: 50%;}
-.img_l .fleft .imgCont{width:274px;height:195px;background:rgba(255,255,255,1);border: 1px solid #EAEAEA;margin-left:130px}
+.img_l .fleft .imgCont{width:274px;height:195px;margin-left:130px;}
 .up-progress{position: relative;top: 40%; text-align: center;font-size: 26px;color: #ffa546;}
 .img_l #uploadForm{background: #fff;width: 130px;height: 130px;margin: 30px auto;}
 .img_l #uploadForm .upLoad_pic img{width: 130px;height: 130px;}

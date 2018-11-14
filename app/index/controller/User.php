@@ -371,12 +371,12 @@ class User  extends Common {
      * [pulish_add 发布]
      * @return [type] [description]
      */
-    public function pulish_adds()
-    {
-        dump(input('post.'));die;
-    }
+//    public function pulish_adds()
+//    {
+//        dump(input('post.'));die;
+//    }
 
-    public function pulish_adds1(){
+    public function pulish_adds(){
 
         $data = $this->params;
 
@@ -688,9 +688,10 @@ class User  extends Common {
         $this->assign('city',$city);
         $this->assign('domain',$domain);
 
-        $brand = $this->brand();//品牌
+        //$brand = $this->brand();//品牌
+        $ABC = $this->app_brand_ios();//A b c  按车型排序
 
-        $this->assign('brand',$brand);
+        $this->assign('ABC',$ABC);
         return $this->fetch();
 
     }

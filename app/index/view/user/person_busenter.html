@@ -7,8 +7,11 @@
 <link rel="icon" type="image/x-icon" href="favicon.png">
 <link rel="stylesheet" href="__STATIC__/css/style.css" />
 <link rel="stylesheet" href="__STATIC__/css/other.css" />
-<link rel="stylesheet" href="__STATIC__/css/webuploader.css" />
 <script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+<script src="__STATIC__/js/jquery.form.js"></script>
+<script src="__STATIC__/js/jquery.validate.min.js"></script>
+<script src="__STATIC__/layer/layer.js"></script>
+<script src="__STATIC__/js/singleimgUp.js"></script>
 <style>
 	.file {
 		position: relative;
@@ -35,6 +38,33 @@
 		border-color: #78C3F3;
 		color: #004974;
 		text-decoration: none;
+	}
+
+
+	.mblack
+	{
+		padding-top: 5px;
+		padding-bottom: 5px;
+		padding-left: 144px;
+		vertical-align: top;
+		white-space: nowrap;
+	}
+	.validate-result{
+		height: 40px; text-align: center;color: red;font-size: 18px;margin-top: 15px;
+	}
+	.error {
+		background:url("__STATIC__/img/false.png") no-repeat 0px 4px;
+		font-weight: bold;
+		padding-left:20px;
+		color: #EA5200;
+	}
+	.checked {
+		background:url("__STATIC__/img/true.png") no-repeat center center;
+	}
+	.hidden{
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
 	}
 </style>
 <body>
@@ -69,74 +99,164 @@
 			<div class="person_right">
 				<h1 class="borbt"><span class="release">商家入驻</span></h1>
 				<h2 class="step"></h2>
-				<form  action="{:url('user/business_entry')}" method='post' enctype='multipart/form-data'>
+				<form  id="business_Form" action="{:url('user/business_entry')}" method='post' enctype='multipart/form-data'>
 					<div class="business_enter">
 						<div>
 							<h3>选择类型 <span>请选择您的入驻类型</span></h3>
 							<div class="sel_type gj_clear">
-								<!--<input type="text" readonly placeholder="新车商户" class="businesType"/>-->
-								<select name="type" class="sel_type gj_clear businesType">
-									<option value="1">新车商户</option>
-									<option value="2">二手车商户</option>
-									<option value="3">零首付商户</option>
-									<option value="4">新能源商户</option>
-								</select>
-								<!--<div class="position_r">-->
-								<!--<select name="type" class="sel_type gj_clear">-->
-								<!--<option value="1">新车商户</option>-->
-								<!--<option value="2">二手车商户</option>-->
-								<!--<option value="3">零首付商户</option>-->
-								<!--<option value="4">新能源商户</option>-->
-								<!--</select>-->
-
-								<!--</div>-->
+								<input name="business_type" type="text" readonly placeholder="新车商户" class="businesType"/>
+								<div class="position_r">
+									<input id="business" name="business" type="hidden"/>
+									<ul class="selList">
+										<li id="1">新车</li>
+										<li id="2">二手车</li>
+									</ul>
+								</div>
 							</div>
+							<div class="mblack"> </div>
 						</div>
 						<div>
 							<h3>上传资料  </h3>
 							<div class="bform_ipt">
 								<div class="sel_type"><span>法人姓名</span><input type="text" name = "name" placeholder="请输入公司法人姓名" /></div>
+								<div class="mblack"> </div>
 								<div class="sel_type"><span>法人手机号</span><input type="text" name="phone" placeholder="请输入公司法人手机号"/></div>
-								<div class="sel_type"><span>验证码</span><input type="text" placeholder="请输入验证码" class="verfity"/><span class="getcode">获取验证码</span></div>
+								<div class="mblack"> </div>
+								<div class="sel_type"><span>验证码</span><input name="code" type="text" name="code" placeholder="请输入验证码" class="verfity"/><span class="getcode">获取验证码</span></div>
+								<div class="mblack"> </div>
 								<div class="sel_type"><span>店铺名称</span><input type="text" name="shop_name" placeholder="请输入公司店铺名称"/></div>
-								<div class="sel_type"><span>经营范围</span><input type="text" name="business_range" placeholder="请输入公司经营范围"/></div>
-								<div class="sel_type"><span>公司地址</span><input type="text" name="address" placeholder="请输入公司经营地址"/></div>
+								<div class="mblack"> </div>
+								<div class="sel_type">
+								<div class=" demo_inputype selected_ipt ">
+									<div class="input_inline">
+										<span >经营范围</span>
+										<input type="hidden" id="car_brand_id" name="brand_id"/>
+										<input type="hidden" id="car_sys_id" name="sys_id"/>
+										<input type="hidden" id="car_type_id" name="years"/>
+										<input type="text" name="name_li" class="upload_info hid" readonly id="sltCar_name" placeholder="请输入公司经营范围"/>
+										<div class="position_r">
+											<div class="gjcar_box">
+												<div class="gjcar_select_car">
+													<!--选择结果展示-->
+													<div class="bread_subnav gj_clear">
+														<a href="javascript:;" style="cursor: default;" id="brandName"></a>
+														<a href="javascript:;" style="cursor: default;" id="seriesName"></a>
+														<a href="javascript:;" style="cursor: default;" id="carName"></a>
+													</div>
+													<!--选择标题-->
+													<div class="choose_car_t oh">
+														<a href="javascript:;" onclick="set('bd0',1,3)" id="bd01" class="active" >请选择品牌</a>
+														<a href="javascript:;" onclick="set('bd0',2,3)" id="bd02">请选择车系</a>
+														<a href="javascript:;" onclick="set('bd0',3,3)" id="bd03">请选择年代款</a>
+													</div>
+													<!--选择品牌-->
+													<div class="choose_cartab">
+														<div class=" choose_cartab1 oh" id="conbd01">
+															<div class="choosecar_letter">
+																<a href="javascript:;" class="active"><span>A</span><span>B</span></a>
+																<a href="javascript:;"><span>C</span><span>D</span></a>
+																<a href="javascript:;"><span>E</span><span>F</span></a>
+																<a href="javascript:;"><span>G</span><span>H</span></a>
+																<a href="javascript:;"><span>I</span><span>J</span></a>
+																<a href="javascript:;"><span>K</span><span>L</span></a>
+																<a href="javascript:;"><span>M</span><span>N</span></a>
+																<a href="javascript:;"><span>O</span><span>P</span></a>
+																<a href="javascript:;"><span>Q</span><span>R</span></a>
+																<a href="javascript:;"><span>S</span><span>T</span></a>
+																<a href="javascript:;"><span>U</span><span>V</span></a>
+																<a href="javascript:;"><span>W</span><span>X</span></a>
+																<a href="javascript:;"><span>Y</span><span>Z</span></a>
+															</div>
+															<div id="brand_content" class="brand_content ">
+																<ul class="letter_box">
+																	{volist name="ABC" id="vol"}
+																	<li id="brand_letter_{$vol.initial}" class="oh">
+																		<span class="brand_letter">{$vol.initial}</span>
+																		<p>
+																			{volist name="vol['list']" id="vo"}
+																			<a onclick="btn_car_brand('{$vo.id}')" href="javascript:;">{$vo.name}</a>
+																			{/volist}
 
+																		</p>
+																	</li>
+																	{/volist}
+																</ul>
+															</div>
+														</div>
+														<!--选择厂商-->
+														<div class=" choose_cartab2 gj_clear" style="display: none;" id="conbd02">
+															<div class="chooseSeries">
+
+															</div>
+														</div>
+														<!--选择车款-->
+														<div class=" choose_cartab3 gj_clear" style="display: none;" id="conbd03">
+															<div class="choose_caryear gj_clear">
+																<div class="year_content gj_clear">
+																	<!--<p class="year_tit">2018款</p>-->
+																	<div class="year_car oh">
+																	</div>
+																	<!--<p class="year_tit">2018款</p>-->
+																	<!--<div class="year_car">-->
+																	<!--<a href="javascript:;">2018款 30周年年型 30 TFSI 进取型</a>-->
+																	<!--<a href="javascript:;">2018款 30周年年型 30 TFSI 进取型</a>-->
+																	<!--<a href="javascript:;">2018款 30周年年型 30 TFSI 进取型</a>-->
+																	<!--</div>-->
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								</div>
+								<div class="mblack"> </div>
+								<div class="sel_type"><span>经营范围</span><input type="text" name="business_range" placeholder="请输入公司经营范围"/></div>
+								<div class="mblack"> </div>
+								<div class="sel_type"><span>公司地址</span><input type="text" name="address" placeholder="请输入公司经营地址"/></div>
+								<div class="mblack"> </div>
 							</div>
 						</div>
+
 						<div class="img_l gj_clear">
 							<div class="fleft">
 								<h3>上传营业执照  </h3>
 								<div class="imgCont">
-									<div id="up_progress_a" class="up-progress" style="display: none;">100%</div>
-									<div id="prev_img_a" style="display: none;">
+									<div id="singleUpContainer">
+										<section class="z_file fl" style="position: relative;display: block;margin-top: 30px;">
+											<img src="__STATIC__/img/upimg.png" class="add-img">
+											<input type="file" name="mimg"  class="file" style="width: 74px;height: 74px;" />
+										</section>
 									</div>
-									<div id="uploadForm">
-										<div id="file_inp"></div>
-										<div class="upLoad_pic">
-											<a href="javascript:;" class="file" style="margin-top: 40px;">选择文件
-												<input type="file" name="shop_licence">
-											</a>
+									<aside class="mask works-mask">
+										<div class="mask-content">
+											<p class="del-p ">您确定要删除上传的图片吗？</p>
+											<p class="check-p"><span class="del-com wsdel-ok">确定</span><span class="wsdel-no">取消</span></p>
 										</div>
-									</div>
+									</aside>
 								</div>
 							</div>
 							<div class="fleft">
 								<h3>店铺logo  </h3>
 								<div class="imgCont">
-									<div id="up_progress_b" class="up-progress" style="display: none;">100%</div>
-									<div id="prev_img_b" style="display: none;"><img style="width:274px;height:195px;" src="__STATIC__/img/967.jpg"></img></div>
-									<div id="uploadForm1">
-										<div id="file_inp1"></div>
-										<a href="javascript:;" class="file" style="margin-top: 40px;">选择文件
-											<input type="file" name="door_photo">
-										</a>
+									<div id="singleUpContainer">
+										<section class="z_file fl" style="position: relative;display: block;margin-top: 30px;">
+											<img src="__STATIC__/img/upimg.png" class="add-img">
+											<input type="file" name="mimg"  class="file" style="width: 74px;height: 74px;" />
+										</section>
 									</div>
+									<aside class="mask works-mask">
+										<div class="mask-content">
+											<p class="del-p ">您确定要删除上传的图片吗？</p>
+											<p class="check-p"><span class="del-com wsdel-ok">确定</span><span class="wsdel-no">取消</span></p>
+										</div>
+									</aside>
 								</div>
 							</div>
-
 						</div>
-						<div class="submit sub_btn"><input type="submit" value="提交" /></div>
+						<div style="text-align: center"><input class="submit sub_btn" type="submit" value="提交" /></div>
 					</div>
 				</form>
 			</div>
@@ -153,6 +273,55 @@
 
 <script src="__STATIC__/js/webuploader.min.js"></script>
 <script>
+    function btn_car_brand(id){
+        $("#car_brand_id").val(id);
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "http://39.106.67.47/new_api/user/newcar/getcar_brand_sys",
+            data:{brand_id:id},
+            success: function (data)
+            {
+                var obj = JSON.parse(data);
+                var brand_sys = obj.body;
+                //先将元素对应清空
+
+                $('.chooseSeries').empty();
+                var str = "";
+                for(var i = 0; i<brand_sys.length;i++){
+                    var sys  = brand_sys[i];
+                    str += '<a onclick=btn_car_sys(' + sys.sys_id + ") " + 'href="javascript:;">' + sys.sys + '</a>'
+                }
+                //将html动态拼接到对应的div上面
+                $('.chooseSeries').html(str);
+            }
+        });
+    }
+
+    function btn_car_sys(id){
+        $("#car_sys_id").val(id);
+        $.ajax({
+            type: "GET",
+            async: false,
+            url: "http://39.106.67.47//new_api/User/Index/get_cartype?id=" + id,
+            success: function (data)
+            {
+                var obj = JSON.parse(data);
+                var car_type = obj.body[0].list;
+                //先将元素对应清空
+
+                $('.year_car').empty();
+
+                var str = "";
+                for(var i = 0; i<car_type.length;i++){
+                    var type  = car_type[i];
+                    str += '<a id=' + type.id  + ' href="javascript:;">' + type.name + '</a>'
+                }
+                //将html动态拼接到对应的div上面
+                $('.year_car').html(str);
+            }
+        });
+    }
     $(function(){
         $(".businesType").click(function(){
             $(this).parents('.sel_type').addClass('active');
@@ -161,162 +330,119 @@
             var result=$(this).text();
             $(".businesType").val(result);
             $(this).parents('.sel_type').removeClass('active');
+            $("#business").val($(this).attr("id"));
+            $("#business_Form").validate().element($(".businesType"));
+
         })
-        // $(".header").load("templates/header.html");
 
-        var
-            // 优化retina, 在retina下这个值是2
-            ratio = window.devicePixelRatio || 1,
+        $(".choose_car_t a").click(function(){
+            $(this).addClass("active").siblings().removeClass("active");
+        })
 
-            // 缩略图大小
-            thumbnailWidth = 100 * ratio,
-            thumbnailHeight = 100 * ratio,
+        //			选择品牌
+        $(".choosecar_letter a").click(function(){
+            $(this).addClass('active').siblings().removeClass('active');
+            var letter = $(this).children().first().text();
 
-            // Web Uploader实例
-            uploader,
-            uploader1;
+            var top_o = $("#brand_letter_A").offset().top;
+            var top_n = $("#"+"brand_letter_"+letter).offset().top;
+            $("#brand_content").scrollTop(top_n - top_o);
+        })
 
-        // 初始化Web Uploader
-        uploader = WebUploader.create({
-            formData: {
-                img_type: 'door_photo'
+
+        $(".upload_info").click(function(){
+
+            if($(this).next(".position_r").is(":hidden")){
+                $(this).parents(".selected_ipt").addClass('active');
+
+            }else{
+                $(this).parents(".selected_ipt").removeClass('active');
+
+            }
+
+        })
+
+        $("#sltCar_name").click(function(){
+            $(".choose_cartab1").show();
+            $("#bd01").addClass("active").siblings().removeClass("active")
+            $(".letter_box p a").click(function(){
+                var sel_brand=$(this).text()
+                $("#brandName").text(sel_brand);
+                $(".choose_cartab1").hide();
+                $(".choose_cartab2").show();
+                $("#bd02").addClass("active").siblings().removeClass("active");
+                $(".choosecar_letter a:first").addClass("active").siblings().removeClass("active");
+                $(".chooseSeries a").click(function(){
+                    var sel_series=$(this).text();
+                    $("#seriesName").text('>'+sel_series);
+                    $(".choose_cartab2").hide();
+                    $(".choose_cartab3").show();
+                    $("#bd03").addClass("active").siblings().removeClass("active");
+                    $(".year_car  a").click(function(){
+                        var carname=$(this).text();
+                        $("#carName").text('>'+carname);
+                        $(".choose_cartab3").hide();
+                        $(this).parents(".selected_ipt").removeClass('active');
+                        $("#sltCar_name").val(sel_brand+sel_series+carname);
+                        $("#car_type_id").val($(this).attr("id"));
+                        $("#release_form").validate().element($("#sltCar_name"))
+                        $(".bread_subnav").empty()
+                    })
+                })
+            })
+        })
+
+        $("#business_Form").validate({
+            rules: {
+                business_type:"required",
+                name:"required",
+                phone:"required",
+                shop_name:"required",
+                business_range:"required",
+                address:"required",
+                code:"required"
             },
-            // 自动上传。
-            auto: true,
+            messages: {
+                business_type:"请选择商家入驻类型",
+                name: "法人姓名不能为空",
+                phone:"法人手机号不能为空",
+                shop_name:"店铺名称不能为空",
+                business_range:"经营范围不能为空",
+                address:"公司地址不能为空",
+				code:"请填写验证码"
+            },
+            success:function(label){
+                label.html("&nbsp;").addClass("checked");
+            },
+            // the errorPlacement has to take the table layout into account
+            errorPlacement: function(error, element) {
 
-            // swf文件路径
-            swf: '__STATIC__/js/Uploader.swf',
-
-            // 文件接收服务端。
-            server: 'upload_image',
-
-            // 选择文件的按钮。可选。
-            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-            pick: '#file_inp',
-
-            // 只允许选择文件，可选。
-            accept: {
-                title: 'Images',
-                extensions: 'jpg,jpeg,bmp,png',
-                mimeTypes: 'image/jpg,image/jpeg,image/png'
+                if (element.is(":radio"))
+                    error.appendTo(element.parent().next());
+                else if (element.is(":checkbox"))
+                    error.appendTo(element.next());
+                else {
+                    error.appendTo(element.parent().next());
+                }
+            },
+            // specifying a submitHandler prevents the default submit, good for the demo
+            submitHandler: function() {
+                $("#business_Form").ajaxSubmit({
+                    clearForm:true,
+                    success: function (data) {
+                        var ret = JSON.parse(data);
+                        if (ret.code == 200) {
+                            layer.msg('店铺信息修改成功!', {icon: 1, time: 2000});
+                        } else {
+                            $("#result").text(ret.msg);
+                        }
+                    }
+                });
+                return false;
+            },
+            highlight: function(element, errorClass) {
+                $(element).parent().next().find("." + errorClass).removeClass("checked");
             }
-        });
-
-        // 当有文件添加进来的时候
-        uploader.on('fileQueued', function( file ) {
-            $("#up_progress_a").css("display", 'block');
-            $("#prev_img_a").css("display", 'none');
-            $("#uploadForm").css("display", 'none');
-
-            $img = $("#prev_img_a").find('img');
-
-            // 创建缩略图
-            uploader.makeThumb( file, function( error, src ) {
-                if ( error ) {
-                    $img.replaceWith('<span>不能预览</span>');
-                    return;
-                }
-                $img.attr( 'src', src );
-            }, thumbnailWidth, thumbnailHeight );
-
-        });
-
-        // 文件上传过程中创建进度条实时显示。
-        uploader.on( 'uploadProgress', function( file, percentage ) {
-            $("#up_progress_a").text(percentage * 100 + '%');
-            if (percentage * 100 == 100){
-
-            }
-        });
-
-        // 文件上传成功，给item添加成功class, 用样式标记上传成功。
-        uploader.on( 'uploadSuccess', function( file ) {
-            $img = $("#prev_img_a").find('img');
-            // 创建缩略图
-            uploader.makeThumb( file, function( error, src ) {
-                if ( error ) {
-                    $img.replaceWith('<span>不能预览</span>');
-                    return;
-                }
-                $("#up_progress_a").css("display", 'none');
-                $("#prev_img_a").css("display", 'block');
-                $("#uploadForm").css("display", 'none');
-                $img.attr( 'src', src );
-            }, thumbnailWidth, thumbnailHeight );
-        });
-
-        // 文件上传失败，现实上传出错。
-        uploader.on( 'uploadError', function( file ) {
-            $("#up_progress_a").text("上传失败");
-        });
-
-
-        uploader1 = WebUploader.create({
-
-            // 自动上传。
-            auto: true,
-
-            // swf文件路径
-            swf: '__STATIC__/js/Uploader.swf',
-
-            // 文件接收服务端。
-            server: 'upload_image',
-
-            // 选择文件的按钮。可选。
-            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-            pick: '#file_inp1',
-
-            // 只允许选择文件，可选。
-            accept: {
-                title: 'Images',
-                extensions: 'jpg,jpeg,bmp,png',
-                mimeTypes: 'image/jpg,image/jpeg,image/png'
-            }
-        });
-
-        // 当有文件添加进来的时候
-        uploader1.on('fileQueued', function( file ) {
-            $("#up_progress_b").css("display", 'block');
-            $("#prev_img_b").css("display", 'none');
-            $("#uploadForm1").css("display", 'none');
-
-            $img = $("#prev_img_b").find('img');
-
-            // 创建缩略图
-            uploader.makeThumb( file, function( error, src ) {
-                if ( error ) {
-                    $img.replaceWith('<span>不能预览</span>');
-                    return;
-                }
-                $img.attr( 'src', src );
-            }, thumbnailWidth, thumbnailHeight );
-
-        });
-
-        // 文件上传过程中创建进度条实时显示。
-        uploader1.on( 'uploadProgress', function( file, percentage ) {
-            $("#up_progress_b").text(percentage * 100 + '%');
-        });
-
-        // 文件上传成功，给item添加成功class, 用样式标记上传成功。
-        uploader1.on( 'uploadSuccess', function( file ) {
-            $img = $("#prev_img_a").find('img');
-            // 创建缩略图
-            uploader.makeThumb( file, function( error, src ) {
-                if ( error ) {
-                    $img.replaceWith('<span>不能预览</span>');
-                    return;
-                }
-                $("#up_progress_b").css("display", 'none');
-                $("#prev_img_b").css("display", 'block');
-                $("#uploadForm1").css("display", 'none');
-                $img.attr( 'src', src );
-            }, thumbnailWidth, thumbnailHeight );
-        });
-
-        // 文件上传失败，现实上传出错。
-        uploader1.on( 'uploadError', function( file ) {
-            $("#up_progress_b").text("上传失败");
         });
     })
 </script>

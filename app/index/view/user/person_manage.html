@@ -7,6 +7,7 @@
 	<script src="__STATIC__/js/jquery.form.js"></script>
 	<script src="__STATIC__/js/jquery.validate.min.js"></script>
 	<script src="__STATIC__/layer/layer.js"></script>
+	<script src="__STATIC__/js/singleimgUp.js"></script>
 </head>
 <link rel="icon" type="image/x-icon" href="favicon.png">
 <link rel="stylesheet" href="__STATIC__/css/style.css" />
@@ -59,6 +60,11 @@
 		border-color: #78C3F3;
 		color: #004974;
 		text-decoration: none;
+	}
+	.hidden{
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
 	}
 
 </style>
@@ -120,14 +126,43 @@
 							</li>
 							<li>
 								<span class="my_form_tit">上传门头：</span>
-								<a href="javascript:;" class="file">选择文件
-									<input type="file" name="mimg">
-								</a>
-								{if condition="$shop_info['mimg']"}
-								<img src="__UPLOA__{$shop_info.mimg}" height="40" style="margin-left: 20px;">
-								{else /}
-								<font color="#00ffff">暂无门头照</font>
-								{/if}
+								<!--<a href="javascript:;" class="file">选择文件-->
+									<!--<input type="file" name="mimg">-->
+								<!--</a>-->
+
+								<!--{if condition="$shop_info['mimg']"}-->
+								<!--<div id="singleUpContainer">-->
+								<!--<section class="z_file fl" style="position: relative;display: none;">-->
+									<!--<img src="__STATIC__/img/upimg.png" class="add-img">-->
+									<!--<input type="file" name="subface_img[]"  class="file" style="width: 74px;height: 74px;" />-->
+								<!--</section>-->
+								<!--<section class="up-section">-->
+									<!--<span class="up-span"></span>-->
+									<!--<img class="close-upimg" src="img/del1.png">-->
+									<!--<img class="up-img" src="__UPLOA__{$shop_info.mimg}" style="width: 200px;height: 200px;">-->
+									<!--<input id="taglocation" name="img_512" value="" type="hidden">-->
+								<!--</section>-->
+								<!--</div>-->
+								<!--{else /}-->
+								<!--<div id="singleUpContainer">-->
+									<!--<section class="z_file fl" style="position: relative;display: block;">-->
+										<!--<img src="__STATIC__/img/upimg.png" class="add-img">-->
+										<!--<input type="file" name="subface_img[]"  class="file" style="width: 74px;height: 74px;" />-->
+									<!--</section>-->
+								<!--</div>-->
+								<!--{/if}-->
+								<div id="singleUpContainer">
+									<section class="z_file fl" style="position: relative;display: block;">
+										<img src="__STATIC__/img/upimg.png" class="add-img">
+										<input type="file" name="mimg"  class="file" style="width: 74px;height: 74px;" />
+									</section>
+								</div>
+								<aside class="mask works-mask">
+									<div class="mask-content">
+										<p class="del-p ">您确定要删除上传的图片吗？</p>
+										<p class="check-p"><span class="del-com wsdel-ok">确定</span><span class="wsdel-no">取消</span></p>
+									</div>
+								</aside>
 							</li>
 						</ul>
 						<div class="validate-result" id="result"></div>
