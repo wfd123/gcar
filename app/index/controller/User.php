@@ -792,6 +792,8 @@ class User  extends Common {
 
         $session = Session::get('user_id');
         $cat = Db::table('rele_car')->where(['user_id' => $session])->order('pu_id desc')->paginate(10);
+        $shop = Db::table('user_shop')->where(['user_id' => $session])->find();
+        $this->assign('shop',$shop);
         $this->assign('cat',$cat);
         $this->assign('brand',$brand);
 
