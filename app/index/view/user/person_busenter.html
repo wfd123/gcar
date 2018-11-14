@@ -104,12 +104,12 @@
 						<div>
 							<h3>选择类型 <span>请选择您的入驻类型</span></h3>
 							<div class="sel_type gj_clear">
-								<input name="business_type" type="text" readonly placeholder="新车商户" class="businesType"/>
+								<input name="business_type" type="text" value="" readonly placeholder="新车商户" class="businesType"/>
 								<div class="position_r">
-									<input id="business" name="business" type="hidden"/>
-									<ul class="selList">
-										<li id="1">新车</li>
-										<li id="2">二手车</li>
+									<input id="business" name="qid" value="" type="hidden"/>
+									<ul class="selList" name="qid" id="qid">
+										<li id="1" value="1"  >新车</li>
+										<li id="2" value="2">二手车</li>
 									</ul>
 								</div>
 							</div>
@@ -118,13 +118,13 @@
 						<div>
 							<h3>上传资料  </h3>
 							<div class="bform_ipt">
-								<div class="sel_type"><span>法人姓名</span><input type="text" name = "name" placeholder="请输入公司法人姓名" /></div>
+								<div class="sel_type"><span>法人姓名</span><input type="text" id="frname" name = "frname" value="{$edit.frname}" placeholder="请输入公司法人姓名" /></div>
 								<div class="mblack"> </div>
-								<div class="sel_type"><span>法人手机号</span><input type="text" name="phone" placeholder="请输入公司法人手机号"/></div>
+								<div class="sel_type"><span>法人手机号</span><input type="text" id="frphone" name="frphone" value="{$edit.frphone}" placeholder="请输入公司法人手机号"/></div>
 								<div class="mblack"> </div>
 								<div class="sel_type"><span>验证码</span><input name="code" type="text" name="code" placeholder="请输入验证码" class="verfity"/><span class="getcode">获取验证码</span></div>
 								<div class="mblack"> </div>
-								<div class="sel_type"><span>店铺名称</span><input type="text" name="shop_name" placeholder="请输入公司店铺名称"/></div>
+								<div class="sel_type"><span>店铺名称</span><input type="text" id="shop_name" name="shop_name" value="{$edit.shop_name}" placeholder="请输入公司店铺名称"/></div>
 								<div class="mblack"> </div>
 								<div class="sel_type">
 								<div class=" demo_inputype selected_ipt ">
@@ -213,9 +213,9 @@
 								</div>
 								</div>
 								<div class="mblack"> </div>
-								<div class="sel_type"><span>经营范围</span><input type="text" name="business_range" placeholder="请输入公司经营范围"/></div>
+								<div class="sel_type"><span>经营范围</span><input type="text" id="business_range" name="business_range" value="{$edit.business_range}" placeholder="请输入公司经营范围"/></div>
 								<div class="mblack"> </div>
-								<div class="sel_type"><span>公司地址</span><input type="text" name="address" placeholder="请输入公司经营地址"/></div>
+								<div class="sel_type"><span>公司地址</span><input type="text" id="shop_address" name="shop_address" value="{$edit.shop_address}" placeholder="请输入公司经营地址"/></div>
 								<div class="mblack"> </div>
 							</div>
 						</div>
@@ -227,7 +227,7 @@
 									<div id="singleUpContainer">
 										<section class="z_file fl" style="position: relative;display: block;margin-top: 30px;">
 											<img src="__STATIC__/img/upimg.png" class="add-img">
-											<input type="file" name="mimg"  class="file" style="width: 74px;height: 74px;" />
+											<input id="yimg" type="file" name="yimg"  class="file" style="width: 74px;height: 74px;" />
 										</section>
 									</div>
 									<aside class="mask works-mask">
@@ -244,7 +244,7 @@
 									<div id="singleUpContainer">
 										<section class="z_file fl" style="position: relative;display: block;margin-top: 30px;">
 											<img src="__STATIC__/img/upimg.png" class="add-img">
-											<input type="file" name="mimg"  class="file" style="width: 74px;height: 74px;" />
+											<input id="mimg" type="file" name="mimg"  class="file" style="width: 74px;height: 74px;" />
 										</section>
 									</div>
 									<aside class="mask works-mask">
@@ -395,20 +395,20 @@
         $("#business_Form").validate({
             rules: {
                 business_type:"required",
-                name:"required",
-                phone:"required",
+                frname:"required",
+                frphone:"required",
                 shop_name:"required",
                 business_range:"required",
-                address:"required",
+                shop_address:"required",
                 code:"required"
             },
             messages: {
                 business_type:"请选择商家入驻类型",
-                name: "法人姓名不能为空",
-                phone:"法人手机号不能为空",
+                frname: "法人姓名不能为空",
+                frphone:"法人手机号不能为空",
                 shop_name:"店铺名称不能为空",
                 business_range:"经营范围不能为空",
-                address:"公司地址不能为空",
+                shop_address:"公司地址不能为空",
 				code:"请填写验证码"
             },
             success:function(label){
@@ -445,5 +445,34 @@
             }
         });
     })
+</script>
+
+
+<script>
+	function tijiao() {
+        event.preventDefault();
+        var qid = $('#qid').val();
+        var frname = $('#frname').val();
+        var frphone = $('#frphone').val();
+        var shop_name = $('.shop_name').val();
+        var business_range = $('#business_range').val();
+        var shop_address = $('#shop_address').val();
+        $.ajax({
+            type: "POST",
+            data:{qid:qid,frname:frname,frphone:frphone,shop_name:shop_name,business_range:business_range,shop_address:shop_address},
+            dataType: "json",
+            url: "{:url('user/business_entry')}" ,
+            success:function (res) {
+                if(res == 200) {
+                    alert('成功');
+                } else {
+                    alert('失败');
+                }
+            },
+            error:function () {
+                alert("异常");
+            }
+        });
+    }
 </script>
 </html>
