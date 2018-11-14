@@ -174,13 +174,13 @@
 								<ul class="motify_ipt">
 									<li><span class="my_form_tit">手机号：</span><p class="uphone" >{$Think.session.phone}</p></li>
 									<li><span class="my_form_tit">新手机号：</span>
-										<div class="fleft myform_ipt"><input type="text" name="phone" id="telphone" placeholder="请输入您新绑定的手机号"/></div>
+										<div class="fleft myform_ipt"><input type="text" id="newphone" name="phone" id="telphone" placeholder="请输入您新绑定的手机号"/></div>
 									</li>
 									<li><span class="my_form_tit">验证码：</span>
-										<div class="fleft myform_ipt"><input type="text" name="code" placeholder="请输入您的验证码"/><span class="getcode"><input type="button" value="获取手机验证码" id="getCodeBtn" style="width: 105px;height: 40px;font-size:12px; padding-left:1px;color:#333; " /></span></div>
+										<div class="fleft myform_ipt"><input type="text" id="code" name="code" placeholder="请输入您的验证码"/><span class="getcode"><input type="button" value="获取手机验证码" id="getCodeBtn" style="width: 105px;height: 40px;font-size:12px; padding-left:1px;color:#333; " /></span></div>
 									</li>
 								</ul>
-								<p class="sub_btn pwd_submit"><input type="submit" /></p>
+								<p class="sub_btn pwd_submit"><input type="submit" onclick="bind_phone()" /></p>
 							</form>
 
 						</div>
@@ -243,7 +243,6 @@
         $("#getCodeBtns").click(function() {
             //获取输入的手机号码
             var phones = '{$Think.session.phone}';
-
             if(phones) {
                 //ajax请求文件，调用短信发送的接口
                 $.ajax({
@@ -316,4 +315,6 @@
 		});
     }
 </script>
+
+
 </html>
