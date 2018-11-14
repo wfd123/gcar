@@ -388,6 +388,8 @@ class User  extends Common {
             $data['subface_img'] = $this->upload($data['subface_img']);
             $data['subface_img'] = implode(',',$data['subface_img']);
             $data['car_desc'] = strip_tags($data['car_desc']);
+            $data['user_id'] = Session::get('user_id');
+            $data['create_time'] = date('Y-m-d H:i:s',time());
             $insert = Db::table('rele_car')->insert($data);
             if($insert) {
                 return $this->success('发布成功');
@@ -692,6 +694,17 @@ class User  extends Common {
         }
     }
 
+    public function person_public1()
+    {
+        $domain = $this->request->domain();
+
+        $city = Db::table('city')->where('status',1)->select();
+
+        $this->assign('city',$city);
+        $this->assign('domain',$domain);
+        return $this->fetch();
+    }
+
 
     public function person_public(){
 
@@ -777,6 +790,9 @@ class User  extends Common {
 
         $brand = $this->brand();//品牌
 
+        $session = Session::get('user_id');
+        $cat = Db::table('rele_car')->where(['user_id' => $session])->order('pu_id desc')->paginate(10);
+        $this->assign('cat',$cat);
         $this->assign('brand',$brand);
 
 
