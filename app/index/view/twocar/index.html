@@ -10,7 +10,12 @@
 <script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
 <script src="__STATIC__/js/jquery.lazyload.min.js" type="text/javascript" charset="utf-8"></script>
 <style>
-
+	.pagination li{
+		float: left;
+		margin:0 5px;
+		color: red;
+		font-size: 15px;
+	}
 </style>
 <body>
 <div class="header">
@@ -277,7 +282,7 @@
 					</li>
 					{/volist}
 				</ul>
-				<p style="margin-left: 50px;">{$cat->render()}</p>
+				<p class="pege">{$cat->render()}</p>
 			</div>
 		</div>
 		<div class="list_right">
