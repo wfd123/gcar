@@ -2131,12 +2131,14 @@ class User  extends Common {
             Session::set('phone',$data['phone']);
             //$this->success('绑定成功','person_info');
 
-            $this->return_msg(200,'绑定成功');
+            #$this->return_msg(200,'绑定成功');
+            echo 200;
 
         }else{
             //$this->error('绑定失败');
 
-            $this->return_msg(400,'绑定失败');
+            #$this->return_msg(400,'绑定失败');
+            echo -200;
         }
     }
 
