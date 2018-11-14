@@ -120,7 +120,7 @@
 				<div class="person_info">
 					<div class="user_avatar"><img src="__STATIC__/img/yhtx.png" alt="" /></div>
 					<p class="uphone">{$Think.session.phone}</p>
-					<p>向阳二手车一号店</p>
+					<p>{$shop_name.shop_name}</p>
 				</div>
 				<div class="tab_choose">
 					<ul>
@@ -146,11 +146,11 @@
 				</ul>
 				<div class="editCont">
 					<div class="info_base info_ipt">
-						<form action="{:url('user/set_userinfo')}" enctype="multipart/form-data"  method="post">
+						<form action="" enctype="multipart/form-data"  method="post">
 							<div class="">
 								<span class="my_form_tit">上传头像：</span>
 								<a href="javascript:;" class="file">选择文件
-									<input type="file" name="header_pic">
+									<input type="file" id="header_pic" name="header_pic" value="{$res.header_pic}">
 								</a>
 								{if condition="$res['header_pic']"}
 								<img src="__UPLOA__{$res.header_pic}" height="40" style="margin-left: 20px;">
@@ -158,14 +158,14 @@
 								暂无头像
 								{/if}
 							</div>
-							<div class="ipt"><span>昵称：</span><input type="nickname"  name="nickname" placeholder="{$res.nickname}"/></div>
-							<div  class="ipt"><span>所在地：</span><input type="address" name="address" placeholder="{$res.address}"/></div>
+							<div class="ipt"><span>昵称：</span><input type="nickname" id="nickname"  name="nickname" value="{$res.nickname}" placeholder="{$res.nickname}"/></div>
+							<div  class="ipt"><span>所在地：</span><input type="address" id="address" name="address" value="{$res.address}" placeholder="{$res.address}"/></div>
 							<div class="ipt"><span>性别：</span>
-								<input type="radio" name='sex' value="1" checked="checked"/>男&nbsp;&nbsp;
-								<input type="radio" name='sex' value="2" />女&nbsp;&nbsp;
+								<input type="radio" class="sex" name='sex' value="1" {if condition="$res['sex'] eq 1"} checked="checked" {/if}/>男&nbsp;&nbsp;
+								<input type="radio" class="sex" name='sex' value="2" {if condition="$res['sex'] eq 2"} checked="checked" {/if}/>女&nbsp;&nbsp;
 							</div>
-							<div class="ipt"><span>出生年月：</span><input type="text"  name="birthday" placeholder="{$res.birthday}" id="year"/></div>
-							<p class="sub_btn submit"><input type="submit" value="提交" /></p>
+							<div class="ipt"><span>出生年月：</span><input type="text"  name="birthday" value="{$res.birthday}" placeholder="{$res.birthday}" id="year"/></div>
+							<p class="sub_btn submit"><input type="submit" onclick="editData()" value="提交" /></p>
 						</form>
 					</div>
 					<div style="display: none;" class="info_ipt">
@@ -277,6 +277,7 @@
         });
     });
 </script>
+<script src="__STATIC__/js/webuploader.min.js"></script>
 <script>
     $(function(){
         $(".uphone").text($(".uphone").text().substring(0, 3) + "****" + $(".uphone").text().substring(7, 11));
@@ -287,5 +288,32 @@
         })
 
     })
+</script>
+
+<script>
+    function editData() {
+        event.preventDefault();
+        var header_pic = $('#header_pic').val();
+        var nickname = $('#nickname').val();
+        var address = $('#address').val();
+        var sex = $('.sex').val();
+        var year = $('#year').val();
+		$.ajax({
+            type: "POST",
+			data:{header_pic:header_pic,nickname:nickname,address:address,sex:sex,birthday:year},
+            dataType: "json",
+            url: "{:url('user/set_userinfo')}" ,
+			success:function (res) {
+				if(res == 200) {
+				    alert('成功');
+				} else {
+				    alert('失败');
+				}
+            },
+			error:function () {
+				alert("异常");
+            }
+		});
+    }
 </script>
 </html>
