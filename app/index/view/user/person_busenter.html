@@ -69,17 +69,17 @@
 			<div class="person_right">
 				<h1 class="borbt"><span class="release">商家入驻</span></h1>
 				<h2 class="step"></h2>
-				<form  action="{:url('user/business_entry')}" method='post' enctype='multipart/form-data'>
+				<form id="tijiao" action="" method='post' enctype='multipart/form-data'>
 					<div class="business_enter">
 						<div>
 							<h3>选择类型 <span>请选择您的入驻类型</span></h3>
 							<div class="sel_type gj_clear">
 								<!--<input type="text" readonly placeholder="新车商户" class="businesType"/>-->
-								<select name="type" class="sel_type gj_clear businesType">
-									<option value="1">新车商户</option>
-									<option value="2">二手车商户</option>
-									<option value="3">零首付商户</option>
-									<option value="4">新能源商户</option>
+								<select id="type" name="type" class="sel_type gj_clear businesType">
+									<option value="1" {if condition="$edit['type'] eq 1"}selected="selected" {/if}>新车商户</option>
+									<option value="2" {if condition="$edit['type'] eq 2"}selected="selected" {/if}>二手车商户</option>
+									<option value="3" {if condition="$edit['type'] eq 3"}selected="selected" {/if}>零首付商户</option>
+									<option value="4" {if condition="$edit['type'] eq 4"}selected="selected" {/if}>新能源商户</option>
 								</select>
 								<!--<div class="position_r">-->
 								<!--<select name="type" class="sel_type gj_clear">-->
@@ -95,13 +95,12 @@
 						<div>
 							<h3>上传资料  </h3>
 							<div class="bform_ipt">
-								<div class="sel_type"><span>法人姓名</span><input type="text" name = "name" placeholder="请输入公司法人姓名" /></div>
-								<div class="sel_type"><span>法人手机号</span><input type="text" name="phone" placeholder="请输入公司法人手机号"/></div>
+								<div class="sel_type"><span>法人姓名</span><input id="name" type="text" name="name" value="{$edit.name}" placeholder="请输入公司法人姓名" /></div>
+								<div class="sel_type"><span>法人手机号</span><input id="phone" type="text" name="phone" value="{$edit.phone}" placeholder="请输入公司法人手机号"/></div>
 								<div class="sel_type"><span>验证码</span><input type="text" placeholder="请输入验证码" class="verfity"/><span class="getcode">获取验证码</span></div>
-								<div class="sel_type"><span>店铺名称</span><input type="text" name="shop_name" placeholder="请输入公司店铺名称"/></div>
-								<div class="sel_type"><span>经营范围</span><input type="text" name="business_range" placeholder="请输入公司经营范围"/></div>
-								<div class="sel_type"><span>公司地址</span><input type="text" name="address" placeholder="请输入公司经营地址"/></div>
-
+								<div class="sel_type"><span>店铺名称</span><input id="shop_name" type="text" name="shop_name" value="{$edit.shop_name}" placeholder="请输入公司店铺名称"/></div>
+								<div class="sel_type"><span>经营范围</span><input id="business_range" type="text" value="{$edit.business_range}" name="business_range" placeholder="请输入公司经营范围"/></div>
+								<div class="sel_type"><span>公司地址</span><input id="address" type="text" name="address" value="{$edit.address}" placeholder="请输入公司经营地址"/></div>
 							</div>
 						</div>
 						<div class="img_l gj_clear">
@@ -115,7 +114,7 @@
 										<div id="file_inp"></div>
 										<div class="upLoad_pic">
 											<a href="javascript:;" class="file" style="margin-top: 40px;">选择文件
-												<input type="file" name="shop_licence">
+												<input type="file" name="shop_licence" id="shop_lic">
 											</a>
 										</div>
 									</div>
@@ -129,14 +128,14 @@
 									<div id="uploadForm1">
 										<div id="file_inp1"></div>
 										<a href="javascript:;" class="file" style="margin-top: 40px;">选择文件
-											<input type="file" name="door_photo">
+											<input type="file" name="door_photo" id="logo">
 										</a>
 									</div>
 								</div>
 							</div>
 
 						</div>
-						<div class="submit sub_btn"><input type="submit" value="提交" /></div>
+						<div class="submit sub_btn"><input type="submit" value="提交" onclick="login()" /></div>
 					</div>
 				</form>
 			</div>
@@ -161,7 +160,7 @@
             var result=$(this).text();
             $(".businesType").val(result);
             $(this).parents('.sel_type').removeClass('active');
-        })
+        });
         // $(".header").load("templates/header.html");
 
         var
@@ -312,12 +311,50 @@
                 $("#uploadForm1").css("display", 'none');
                 $img.attr( 'src', src );
             }, thumbnailWidth, thumbnailHeight );
-        });
 
+        });
         // 文件上传失败，现实上传出错。
         uploader1.on( 'uploadError', function( file ) {
             $("#up_progress_b").text("上传失败");
         });
-    })
+
+    });
+
+
+    function login(){
+        event.preventDefault();
+        var type = $('#type').val();
+        var name = $('#name').val();
+        var phone = $('#phone').val();
+        var shop_name = $('#shop_name').val();
+        var business_range = $('#business_range').val();
+        var address = $('#address').val();
+        var shop_lic = $('#shop_lic').val();
+        var logo = $('#logo').val();
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            data:{type:type,name:name,phone:phone,shop_name:shop_name,business_range:business_range,address:address,shop_licence:shop_lic,door_photo:logo},
+            dataType: "json",//预期服务器返回的数据类型
+            url: "{:url('user/business_entry')}" ,//url
+            success: function (result) {
+                if (result == 200) {
+                    alert("成功");
+                } else {
+                    alert("失败");
+                }
+            },
+            error : function() {
+                alert("异常！");
+            }
+        });
+	}
+
+
+    $('#btn1').click(function () {
+
+    });
+
+
 </script>
 </html>
