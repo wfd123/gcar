@@ -289,8 +289,8 @@ class User  extends Common {
 
         //处理城市问题
         if (request()->isPost()) {
-            $data = input('post.');
-            $data['subface_img'] = $this->upload2($data['subface_img']);
+            $data = $this->params;
+            $data['subface_img'] = $this->upload($data['subface_img']);
             $data['car_desc'] = strip_tags($data['car_desc']);
             $insert = Db::table('rele_car')->insert($data);
             if($insert) {
@@ -384,9 +384,12 @@ class User  extends Common {
     {
         //处理城市问题
         if (request()->isPost()) {
-            $data = input('post.');
-//            $data['subface_img'] = $this->upload2($data['subface_img']);
+            $data = $this->params;
+            $data['subface_img'] = $this->upload($data['subface_img']);
+            $data['subface_img'] = implode(',',$data['subface_img']);
             $data['car_desc'] = strip_tags($data['car_desc']);
+            $data['user_id'] = Session::get('user_id');
+            $data['create_time'] = date('Y-m-d H:i:s',time());
             $insert = Db::table('rele_car')->insert($data);
             if($insert) {
                 return $this->success('发布成功');
@@ -659,7 +662,7 @@ class User  extends Common {
     {
         $session = Session::get('user_id');
         if(request()->isAjax()) {
-            $data = input('post.');
+            $data = $this->params;
             $data['mimg'] = $this->upload_file($data['mimg'],'door_photo');
             $data['yimg'] = $this->upload_file($data['yimg'],'door_photo');
             unset($data['code']);
@@ -667,6 +670,8 @@ class User  extends Common {
             unset($data['sys_id']);
             unset($data['years']);
             unset($data['name_li']);
+            unset($data['img_512']);
+            unset($data['img_300']);
             $user_shop = Db::table('user_shop')->where(['user_id' => $session])->find();
             if($user_shop) {
                 $update = Db::table('user_shop')->where(['user_id' => $session])->update($data);
@@ -687,6 +692,17 @@ class User  extends Common {
                 }
             }
         }
+    }
+
+    public function person_public1()
+    {
+        $domain = $this->request->domain();
+
+        $city = Db::table('city')->where('status',1)->select();
+
+        $this->assign('city',$city);
+        $this->assign('domain',$domain);
+        return $this->fetch();
     }
 
 
@@ -774,6 +790,11 @@ class User  extends Common {
 
         $brand = $this->brand();//品牌
 
+        $session = Session::get('user_id');
+        $cat = Db::table('rele_car')->where(['user_id' => $session])->order('pu_id desc')->paginate(10);
+        $shop = Db::table('user_shop')->where(['user_id' => $session])->find();
+        $this->assign('shop',$shop);
+        $this->assign('cat',$cat);
         $this->assign('brand',$brand);
 
 

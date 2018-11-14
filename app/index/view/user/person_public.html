@@ -24,7 +24,7 @@
 						<div class="person_info">
 							<div class="user_avatar"><img src="__STATIC__/img/yhtx.png" alt="" /></div>
 							<p class="uphone">{$Think.session.phone}</p>
-							<p>向阳二手车一号店</p>							
+							<p>{$shop.shop_name}</p>
 						</div>
 						<div class="tab_choose">
 							<ul>
@@ -42,36 +42,33 @@
 						</div>
 					</div>
 					<div class="person_right">
-						<h1 class="borbt"><span class="release">发布过的</span>
-							<ul class="fright sel_status">
+						<h1 class="borbt"><span class="release">发布列表</span>
+							<!--<ul class="fright sel_status">
 								<li class="active" data-status='0'><b></b><span>全部</span></li>
 								<li data-status='1'><b></b><span>审核中</span></li>
 								<li data-status='2'><b></b><span>发布成功</span></li>
 								<li data-status='3'><b></b><span>发布失败</span></li>
 								<li data-status='4'><b></b><span>已下架</span></li>
-							</ul>
+							</ul>-->
 						</h1>
 						<ul id="che_fb0" class="p_list">
-							{notempty name="all_car"}
-							{volist name="all_car" id="val"}
+							{volist name="cat" id="vo"}
 							<li class="item">
-								<div class="car_img"><img src="{$val.img_url}" alt="" /></div>
-								<div class="car_desc"><h3>{$val.name}</h3>
-									<p>{$val.car_mileage}万公里 | {$val.create_time}| 郑州</p>
-									<div><span class="cprice"><b>{$val.price}</b>万</span>
+								<div class="car_img"><img src="{$vo.subface_img}"/></div>
+								<div class="car_desc"><h3></h3>
+									<p>{$vo.car_mileage}万公里 &nbsp&nbsp|&nbsp&nbsp{$vo.create_time}&nbsp&nbsp| 郑州</p>
+									<div><span class="cprice"><b>{$vo.price}</b>万</span>
 										<!--<span class="nprice">13.22万</span>-->
 									</div>
 								</div>
 								<div class="car_status">
 									<!--<img src="__STATIC__/img/shenhez .png" alt="" />-->
 								</div>
-
 							</li>
 							{/volist}
-							{/notempty}
-
+							<p>{$cat->render()}</p>
 						</ul>
-						<ul id="che_fb1" class="p_list" style="display: none;">
+						<!--<ul id="che_fb1" class="p_list" style="display: none;">
 							{notempty name="dai_audit"}
 							{volist name="dai_audit" id="val"}
 							<li class="item">
@@ -79,7 +76,7 @@
 								<div class="car_desc"><h3>{$val.name}</h3>
 									<p>{$val.car_mileage}万公里 | {$val.create_time} | {$val.name}郑州</p>
 									<div><span class="cprice"><b>{$val.price}</b>万</span>
-										<!--<span class="nprice">{$val.price}万</span>-->
+										&lt;!&ndash;<span class="nprice">{$val.price}万</span>&ndash;&gt;
 									</div>
 								</div>
 								<div class="car_status"><img src="__STATIC__/img/shenhez .png" alt="" /></div>
@@ -97,7 +94,7 @@
 								<div class="car_desc"><h3>789{$val.name}</h3>
 									<p>{$val.car_mileage}万公里 | {$val.create_time}  | 郑州</p>
 									<div><span class="cprice"><b>{$val.price}</b>万</span>
-										<!--<span class="nprice">13.22万</span></div>-->
+										&lt;!&ndash;<span class="nprice">13.22万</span></div>&ndash;&gt;
 								</div>
 								<div class="car_status"><img src="__STATIC__/img/fabuchengg.png" alt="" /></div>
 								<div class="car_res">
@@ -117,7 +114,7 @@
 								<div class="car_desc"><h3>456{$val.name}</h3>
 									<p>{$val.car_mileage}万公里 | {$val.create_time}  | 郑州</p>
 									<div><span class="cprice"><b>{$val.price}</b>万</span>
-										<!--<span class="nprice">13.22万</span></div>-->
+										&lt;!&ndash;<span class="nprice">13.22万</span></div>&ndash;&gt;
 								</div>
 								<div class="car_status"><img src="__STATIC__/img/fabushibai.png" alt="" /></div>
 								<div class="car_res">
@@ -137,7 +134,7 @@
 								<div class="car_desc"><h3>123{$val.name}</h3>
 									<p>{$val.car_mileage}万公里 | {$val.create_time} | 郑州</p>
 									<div><span class="cprice"><b>{$val.price}</b>万</span>
-										<!--<span class="nprice">13.22万</span></div>-->
+										&lt;!&ndash;<span class="nprice">13.22万</span></div>&ndash;&gt;
 								</div>
 								<div class="car_status"><img src="__STATIC__/img/fabushibai.png" alt="" /></div>
 								<div class="car_res">
@@ -177,7 +174,7 @@
 									<p class="bgorg">上架</p>
 									<p class="bgred">删除</p>
 								</div>
-							</li>
+							</li>-->
 						</ul>
 					</div>	
 				</div>
