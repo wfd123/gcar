@@ -351,6 +351,10 @@ class User  extends Common {
 
         $ABC = $this->app_brand_ios();//A b c  按车型排序
 
+        $session = Session::get('user_id');
+        $shop_name = Db::name('company_apply_list')->where(['user_id' => $session])->find();
+        $this->assign('shop_name',$shop_name);
+
         $this->assign('brand',$brand);
         $this->assign('price',$price);
         $this->assign('subface',$subface);
@@ -598,7 +602,7 @@ class User  extends Common {
 
         if($shop_info['qid']!=2){
 
-            $this->return_msg('200','用户参数错误');
+            /*$this->return_msg('200','用户参数错误');*/
         }
         //分页
         if (empty($data['page'])){
@@ -689,6 +693,9 @@ class User  extends Common {
         $this->assign('domain',$domain);
 
         $brand = $this->brand();//品牌
+        $session = Session::get('user_id');
+        $edit = Db::name('company_apply_list')->where(['user_id' => $session])->find();
+        $this->assign('edit',$edit);
 
         $this->assign('brand',$brand);
         return $this->fetch();
@@ -789,35 +796,40 @@ class User  extends Common {
 
     }
 
+    public function business_entry2()
+    {
+        dump(input('post.'));exit();
+    }
+
     public function business_entry()
     {
         $session = Session::get('user_id');
-        if(request()->isPost()) {
+        if(request()->isAjax()) {
             $data = input('post.');
-            if($_FILES['door_photo']['tmp_name']) {
+            /*if($_FILES['door_photo']['tmp_name']) {
                 $data['door_photo'] = $this->upload1('door_photo');
             }
             if($_FILES['shop_licence']['tmp_name']) {
                 $data['shop_licence'] = $this->upload1('shop_licence');
-            }
+            }*/
             $user_shop = Db::table('company_apply_list')->where(['user_id' => $session])->find();
             if($user_shop) {
-                Db::table('company_apply_list')->where(['user_id' => $session])->update($data);
-                echo '成功';
-                /*if($update) {
-                    return $this->success('入驻成功');
+                $update = Db::table('company_apply_list')->where(['user_id' => $session])->update($data);
+                if($update) {
+                    echo 200;
                 } else {
-                    return $this->error('入驻失败');
-                }*/
+                    echo -200;
+                }
             } else {
                 $data['user_id'] = $session;
-                Db::table('company_apply_list')->insert($data);
-                echo '成功';
-                /*if($insert) {
-                    return $this->success('入驻成功');
+                $data['door_photo'] = $this->upload1('door_photo');
+                $data['shop_licence'] = $this->upload1('shop_licence');
+                $insert = Db::table('company_apply_list')->insert($data);
+                if($insert) {
+                    echo 200;
                 } else {
-                    return $this->error('入驻失败');
-                }*/
+                    echo -200;
+                }
             }
         }
         $edit = Db::name('company_apply_list')->where(['user_id' => $session])->find();
