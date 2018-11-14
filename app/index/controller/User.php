@@ -351,6 +351,10 @@ class User  extends Common {
 
         $ABC = $this->app_brand_ios();//A b c  按车型排序
 
+        $session = Session::get('user_id');
+        $shop_name = Db::name('company_apply_list')->where(['user_id' => $session])->find();
+        $this->assign('shop_name',$shop_name);
+
         $this->assign('brand',$brand);
         $this->assign('price',$price);
         $this->assign('subface',$subface);
@@ -690,6 +694,10 @@ class User  extends Common {
 
         //$brand = $this->brand();//品牌
         $ABC = $this->app_brand_ios();//A b c  按车型排序
+        $brand = $this->brand();//品牌
+        $session = Session::get('user_id');
+        $edit = Db::name('company_apply_list')->where(['user_id' => $session])->find();
+        $this->assign('edit',$edit);
 
         $this->assign('ABC',$ABC);
         return $this->fetch();
