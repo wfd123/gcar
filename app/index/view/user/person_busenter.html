@@ -232,8 +232,12 @@
 								<div class="imgCont">
 									<div id="singleUpContainer">
 										<section class="z_file fl" style="position: relative;display: block;margin-top: 30px;">
+											{if condition="$edit['mimg']"}
+											<img src="{$edit.mimg}">
+											{else /}
 											<img src="__STATIC__/img/upimg.png" class="add-img">
-											<input id="yimg" type="file" name="yimg"  class="file" style="width: 74px;height: 74px;" />
+											{/if}
+											<input id="yimg" type="file" name="yimg" value="{$edit.mimg}"  class="file" style="width: 74px;height: 74px;" />
 										</section>
 									</div>
 									<aside class="mask works-mask">
@@ -249,8 +253,12 @@
 								<div class="imgCont">
 									<div id="singleUpContainer">
 										<section class="z_file fl" style="position: relative;display: block;margin-top: 30px;">
+											{if condition="$edit['yimg']"}
+											<img src="{$edit.yimg}">
+											{else /}
 											<img src="__STATIC__/img/upimg.png" class="add-img">
-											<input id="mimg" type="file" name="mimg"  class="file" style="width: 74px;height: 74px;" />
+											{/if}
+											<input id="mimg" value="{$edit.yimg}" type="file" name="mimg"  class="file" style="width: 74px;height: 74px;" />
 										</section>
 									</div>
 									<aside class="mask works-mask">
