@@ -245,7 +245,7 @@ class User  extends Common {
                 $this->return_msg('204','参数不能为空');
             }
 
-//            $info['mimg'] = $this->upload_file($data['door_photo'],'door_photo');
+            $info['mimg'] = $this->upload_file($data['mimg'],'door_photo');
 //        $info['mimg']=str_replace("http://www.gj2car.com/Uploads/relecar/","",$door_photo);
 //        if($info['mimg']==$door_photo){
 //            $info['mimg']=str_replace("http://39.106.67.47/butler_car/Uploads/relecar/","",$door_photo);
@@ -260,7 +260,7 @@ class User  extends Common {
             $res=Db::table("user_shop")->insert([
                 "user_id" =>$user_id,
                 "qid" =>0,
-                "mimg" => $this->upload1('mimg'),
+                "mimg" => $info['mimg'],
                 "yimg" =>'default',
                 "shop_address" =>$info['shop_address'],
                 "shop_phone" =>$info['shop_phone'],
@@ -380,7 +380,94 @@ class User  extends Common {
 //        dump(input('post.'));die;
 //    }
 
-    public function pulish_adds(){
+    public function pulish_adds()
+    {
+        //处理城市问题
+        if (request()->isPost()) {
+            $data = input('post.');
+//            $data['subface_img'] = $this->upload2($data['subface_img']);
+            $data['car_desc'] = strip_tags($data['car_desc']);
+            $insert = Db::table('rele_car')->insert($data);
+            if($insert) {
+                return $this->success('发布成功');
+            } else {
+                return $this->error('发布失败');
+            }
+        }
+        $city_pin = input('city');
+
+        $city_info = $this->set_session_url($city_pin);
+
+        if (empty($city_info)){
+
+            $city_id = 1;
+
+            $cityurl = 'zhengzhou';
+        }else{
+
+            $cityurl = $city_info['pin'];
+
+            $city_id = $city_info['id'];
+        }
+
+        Session::set('cityurl',$cityurl);
+
+        $domain = $this->request->domain();
+
+        $city = Db::table('city')->where('status',1)->select();
+
+        $this->assign('city',$city);
+        $this->assign('domain',$domain);
+
+        $price=$this->price(); //价格
+
+        $subface=$this->subface();//级别
+
+        //  dump($subface);die;
+
+        $age=$this->get_car_allage();//车龄
+
+        $licheng=$this->car_mileage();//里程
+
+        $output=$this->output('');//排量
+
+        $gearbox=$this->gearbox('');//变速箱
+
+        $blowdown=$this->blowdown('');//排放标准
+
+        $fuel=$this->fuel('');//燃料
+
+        $car_body=$this->car_body('');//车身
+
+        $car_drive=$this->car_drive('');//燃气
+
+        $color =$this->color('');//颜色
+        $brand = $this->brand();//品牌
+
+        $ABC = $this->app_brand_ios();//A b c  按车型排序
+
+        $session = Session::get('user_id');
+        $shop_name = Db::name('company_apply_list')->where(['user_id' => $session])->find();
+        $this->assign('shop_name',$shop_name);
+
+        $this->assign('brand',$brand);
+        $this->assign('price',$price);
+        $this->assign('subface',$subface);
+        $this->assign('ABC',$ABC);
+        $this->assign('age',$age);
+        $this->assign('licheng',$licheng);
+        $this->assign('output',$output);
+        $this->assign('gearbox',$gearbox);
+        $this->assign('fuel',$fuel);
+        $this->assign('blowdown',$blowdown);
+        $this->assign('car_drive',$car_drive);
+        $this->assign('car_body',$car_body);
+        $this->assign('color',$color);
+        return $this->fetch();
+    }
+
+
+    public function pulish_adds1(){
 
         $data = $this->params;
 
@@ -566,6 +653,43 @@ class User  extends Common {
     /*
      * 展示登录
      */
+
+    #商家入驻
+    public function business_entry()
+    {
+        $session = Session::get('user_id');
+        if(request()->isAjax()) {
+            $data = input('post.');
+            $data['mimg'] = $this->upload_file($data['mimg'],'door_photo');
+            $data['yimg'] = $this->upload_file($data['yimg'],'door_photo');
+            unset($data['code']);
+            unset($data['brand_id']);
+            unset($data['sys_id']);
+            unset($data['years']);
+            unset($data['name_li']);
+            $user_shop = Db::table('user_shop')->where(['user_id' => $session])->find();
+            if($user_shop) {
+                $update = Db::table('user_shop')->where(['user_id' => $session])->update($data);
+                if($update) {
+                    echo 200;
+                } else {
+                    echo -200;
+                }
+            } else {
+                $data['user_id'] = $session;
+                $data['mimg'] = $this->upload_file($data['mimg'],'door_photo');
+                $data['yimg'] = $this->upload_file($data['yimg'],'door_photo');
+                $insert = Db::table('user_shop')->insert($data);
+                if($insert) {
+                    echo 200;
+                } else {
+                    echo -200;
+                }
+            }
+        }
+    }
+
+
     public function person_public(){
 
 
@@ -602,7 +726,7 @@ class User  extends Common {
 
         if($shop_info['qid']!=2){
 
-            $this->return_msg('200','用户参数错误');
+            /*$this->return_msg('200','用户参数错误');*/
         }
         //分页
         if (empty($data['page'])){
@@ -696,7 +820,7 @@ class User  extends Common {
         $ABC = $this->app_brand_ios();//A b c  按车型排序
         $brand = $this->brand();//品牌
         $session = Session::get('user_id');
-        $edit = Db::name('company_apply_list')->where(['user_id' => $session])->find();
+        $edit = Db::name('user_shop')->where(['user_id' => $session])->find();
         $this->assign('edit',$edit);
         $this->assign('ABC',$ABC);
         $this->assign('brand',$brand);
@@ -798,7 +922,7 @@ class User  extends Common {
 
     }
 
-    public function business_entry()
+    public function business_entry3()
     {
         $session = Session::get('user_id');
         if(request()->isPost()) {
