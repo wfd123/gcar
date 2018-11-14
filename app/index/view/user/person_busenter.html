@@ -104,7 +104,13 @@
 						<div>
 							<h3>选择类型 <span>请选择您的入驻类型</span></h3>
 							<div class="sel_type gj_clear">
-								<input name="business_type" type="text" value="" readonly placeholder="新车商户" class="businesType"/>
+								{if condition="$edit['qid'] eq 1"}
+								<input name="qid" type="text" value="" readonly placeholder="新车" class="businesType"/>
+								{elseif condition="$edit['qid'] eq 2"}
+								<input name="qid" type="text" value="" readonly placeholder="二手车" class="businesType"/>
+								{else /}
+								<input name="qid" type="text" value="" readonly placeholder="新车商户" class="businesType"/>
+								{/if}
 								<div class="position_r">
 									<input id="business" name="qid" value="" type="hidden"/>
 									<ul class="selList" name="qid" id="qid">
