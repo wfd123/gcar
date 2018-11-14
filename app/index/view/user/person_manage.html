@@ -153,9 +153,13 @@
 								<!--{/if}-->
 								<div id="singleUpContainer">
 									<section class="z_file fl" style="position: relative;display: block;">
+										{if condition="$shop_info['mimg']"}
+										<img src="{$shop_info.mimg}">
+										{else /}
 										<img src="__STATIC__/img/upimg.png" class="add-img">
-										<input type="file" name="mimg"  class="file" style="width: 74px;height: 74px;" />
-										<img src="{$shop_info.mimg}" height="70" style="margin-top: 20px;">
+										{/if}
+										<input type="file" value="{shop_info.mimg}" name="mimg"  class="file" style="width: 74px;height: 74px;" />
+
 									</section>
 
 								</div>
