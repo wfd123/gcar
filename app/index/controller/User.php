@@ -698,8 +698,8 @@ class User  extends Common {
         $session = Session::get('user_id');
         $edit = Db::name('company_apply_list')->where(['user_id' => $session])->find();
         $this->assign('edit',$edit);
-
         $this->assign('ABC',$ABC);
+        $this->assign('brand',$brand);
         return $this->fetch();
 
     }
