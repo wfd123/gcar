@@ -52,21 +52,21 @@
 							</ul>-->
 						</h1>
 						<ul id="che_fb0" class="p_list">
-							{volist name="all_car" id="val"}
+							{volist name="cat" id="vo"}
 							<li class="item">
-								<div class="car_img"><img src="{$val.img_url}" alt="" /></div>
-								<div class="car_desc"><h3>{$val.name}</h3>
-									<p>{$val.car_mileage}万公里 | {$val.create_time}| 郑州</p>
-									<div><span class="cprice"><b>{$val.price}</b>万</span>
+								<div class="car_img"><img src="{$vo.subface_img}"/></div>
+								<div class="car_desc"><h3></h3>
+									<p>{$vo.car_mileage}万公里 &nbsp&nbsp|&nbsp&nbsp{$vo.create_time}&nbsp&nbsp| 郑州</p>
+									<div><span class="cprice"><b>{$vo.price}</b>万</span>
 										<!--<span class="nprice">13.22万</span>-->
 									</div>
 								</div>
 								<div class="car_status">
 									<!--<img src="__STATIC__/img/shenhez .png" alt="" />-->
 								</div>
-
 							</li>
 							{/volist}
+							<p>{$cat->render()}</p>
 						</ul>
 						<!--<ul id="che_fb1" class="p_list" style="display: none;">
 							{notempty name="dai_audit"}
