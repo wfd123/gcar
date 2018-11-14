@@ -1037,6 +1037,7 @@ class User  extends Common {
 
 
         $phone = Session::get('phone');
+        $userId = Session::get('user_id');
 
         if ($phone){
 
@@ -1045,6 +1046,9 @@ class User  extends Common {
             $res = Db::table('user')->where('phone',$phone)->find();
 
             $this->assign('brand',$brand);
+
+            $shop_name = Db::table('user_shop')->where(['user_id' => $userId])->find();
+            $this->assign('shop_name',$shop_name);
 
             $this->assign('res',$res);
             return $this->fetch();
@@ -2140,7 +2144,7 @@ class User  extends Common {
      * 一次性设置
      * 上面为单一设置
      */
-    public function set_userinfo()
+    public function set_userinfo1()
     {
 
         // if ($this->request->isPost()){
@@ -2204,24 +2208,21 @@ class User  extends Common {
 
     }
 
-    public function set_userinfo1()
+    public function set_userinfo()
     {
         $session = Session::get('phone');
-        if(request()->isPost()) {
-            $data =  $this->params;
-            if($_FILES['header_pic']['tmp_name']) {
+        if(request()->isAjax()) {
+            $data =  input('post.');
+            /*if($_FILES['header_pic']['tmp_name']) {
                 $data['header_pic'] = $this->upload1('header_pic');
-            }
-            Db::name('user')->where(['phone' => $session])->update($data);
-            echo '成功';
-            /*if(json($update)) {
-                return $this->success('修改成功','user/index');
-            } else {
-                return $this->error('修改失败');
             }*/
+            $update = Db::name('user')->where(['phone' => $session])->update($data);
+            if($update) {
+                echo 200;
+            } else {
+                echo -200;
+            }
         }
-        $edit = Db::table('user')->where(['phone' => $session])->find();
-        $this->assign('edit',$edit);
     }
 
     /*
