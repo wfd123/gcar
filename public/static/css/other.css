@@ -33,7 +33,27 @@
 .btn_sell_ping span{float: left;display: block;height: 37px;line-height: 37px;color: #fff;font-size: 16px;text-align: center;border-radius: 3px;}
 .btn_sell_ping .sell_car{background: #F28F1B;width: 152px;margin-right: 20px;}
 .btn_sell_ping .free_ping{background: #F7BD01;width: 122px;}
-
+/*新车已选择*/
+.car-selected li{float: left;padding-right: 10px;padding-bottom: 10px;}
+.car-selected .list{overflow: hidden}
+.car-model{
+    padding: 2px 10px;
+}
+.list_detail_sel li .active2{
+    border: 1px solid #ff8402;
+    color: #333;
+}
+.car-selected .list .close{
+    background-color: #ff8402;
+    color: #333;
+    display: inline-block;
+    padding: 3px 5px;
+    text-align: center;
+    margin-left: -4px;
+}
+.car-selected .list .close .cha{
+    color: #fff;
+}
 /*推荐栏目新车二手车零首付*/
 .recom_new_tit h2{float: left;height: 22px;line-height: 22px;border-left:2px solid #FF8402;font-weight: bold;font-size: 20px;padding-left:13px}
 .recom_new_tit ul li{float: left;font-size: 16px;margin-left:80px;cursor: pointer;}

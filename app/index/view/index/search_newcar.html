@@ -23,7 +23,7 @@
 						<div class="list_brand  slide_up list_item gj_clear">
 							<div class="list_title">品牌</div>
 							<div class="screening-margin gj_clear">							
-								<div class="list_car_brand list_detail_sel">{volist name="brand" id="val"}<a href="{$domain}/{$Think.session.cityurl}/search_newcar?brand_id={$val.id}">{$val.name}</a>{/volist}</div>
+								<div class="list_car_brand list_detail_sel">{volist name="brand" id="val"}<a class="item" href="{$domain}/{$Think.session.cityurl}/search_newcar?brand_id={$val.id}">{$val.name}</a>{/volist}</div>
 								<span class="more">更多品牌<i><img src="__STATIC__/img/down1.png" alt="" width="12"/></i></span>
 							</div>
 						</div>
@@ -129,45 +129,45 @@
 										  </div>
 							            </div>
 							          </li>
-							          <!--<li>-->
-							            <!--<div data-toggle="select" class="select-menu" id="select8">-->
-							              <!--<div class="menu-selected">驱动</div>-->
-							              <!--<div class="menu menu9" style="display: none;" id="aselect8">-->
-											  <!--{volist name="car_drive" id="val"}-->
-											  <!--<dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/search_newcar?qd={$val.id}" data-for='hidden_q' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>-->
-											  <!--{/volist}-->
-							                <!--&lt;!&ndash;<dd> <a rel="nofollow" href="#" data-for="hidden_q" data-valueid="0" class="preventdefault" title="不限二手车">前驱</a> </dd>&ndash;&gt;-->
-							                <!--&lt;!&ndash;<dd> <a rel="nofollow" href="#" data-for="hidden_q" data-valueid="2" class="preventdefault" title="2座二手车">前驱</a> </dd>&ndash;&gt;-->
-							                <!--&lt;!&ndash;<dd> <a rel="nofollow" href="#" data-for="hidden_q" data-valueid="4" class="preventdefault" title="4座二手车">前驱</a> </dd>&ndash;&gt;-->
-							              <!--</div>-->
-							            <!--</div>-->
-							          <!--</li>-->
-							          <!--<li>-->
-							            <!--<div data-toggle="select" class="select-menu" id="select12">-->
-							              <!--<div class="menu-selected">车身</div>-->
-							              <!--<div class="menu menu12" style="display: none;" id="aselect12">-->
-											  <!--{volist name="car_body" id="val"}-->
-											  <!--<dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/search_newcar?car_body={$val.id}" data-for='hidden_x' data-valueid='' class='preventdefault' title='不限二手车'>{$val.name}</a>-->
-							                <!--&lt;!&ndash;<dd> <a rel="nofollow" href="#" data-for="hidden_x" data-valueid="0" class="preventdefault" title="不限二手车">前驱</a> </dd>&ndash;&gt;-->
-							                <!--&lt;!&ndash;<dd> <a rel="nofollow" href="#" data-for="hidden_x" data-valueid="2" class="preventdefault" title="2座二手车">前驱</a> </dd>&ndash;&gt;-->
-							                <!--&lt;!&ndash;<dd> <a rel="nofollow" href="#" data-for="hidden_x" data-valueid="4" class="preventdefault" title="4座二手车">前驱</a> </dd>&ndash;&gt;-->
-											  <!--{/volist}-->
-							              <!--</div>-->
-							            <!--</div>-->
-							          <!--</li>-->
+							          <li>
+							            <div data-toggle="select" class="select-menu" id="select8">
+							              <div class="menu-selected">驱动</div>
+							              <div class="menu menu9" style="display: none;" id="aselect8">
+											  {volist name="car_drive" id="val"}
+											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/search_newcar?qd={$val.id}" data-for='hidden_q' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											  {/volist}
+							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_q" data-valueid="0" class="preventdefault" title="不限二手车">前驱</a> </dd>-->
+							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_q" data-valueid="2" class="preventdefault" title="2座二手车">前驱</a> </dd>-->
+							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_q" data-valueid="4" class="preventdefault" title="4座二手车">前驱</a> </dd>-->
+							              </div>
+							            </div>
+							          </li>
+							          <li>
+							            <div data-toggle="select" class="select-menu" id="select12">
+							              <div class="menu-selected">车身</div>
+							              <div class="menu menu12" style="display: none;" id="aselect12">
+											  {volist name="car_body" id="val"}
+											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/search_newcar?car_body={$val.id}" data-for='hidden_x' data-valueid='' class='preventdefault' title='不限二手车'>{$val.name}</a>
+							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_x" data-valueid="0" class="preventdefault" title="不限二手车">前驱</a> </dd>-->
+							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_x" data-valueid="2" class="preventdefault" title="2座二手车">前驱</a> </dd>-->
+							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_x" data-valueid="4" class="preventdefault" title="4座二手车">前驱</a> </dd>-->
+											  {/volist}
+							              </div>
+							            </div>
+							          </li>
 							
-							          <!--<li>-->
-							            <!--<div data-toggle="select" class="select-menu" id="select6">-->
-							              <!--<div class="menu-selected">颜色</div>-->
-							              <!--<div class="menu menu7 radius menuCar07" style="display: none;" id="aselect6">-->
-							                <!--<dd> <a rel="nofollow" href="" data-for="hidden_c" data-valueid="0" class="preventdefault c0" title="不限二手车">不限</a> </dd>-->
-											  <!--{volist name="color" id="val"}-->
-											  <!--<dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/search_newcar?ys={$val.id}" data-for='hidden_c' data-valueid='' class='preventdefault c15' title=''>{$val.name}</a> </dd>-->
-							                <!--&lt;!&ndash;<dd> <a rel="nofollow" href="#" data-for="hidden_c" data-valueid="1" class="preventdefault c1" title="黑色二手车">黑色</a> </dd>&ndash;&gt;-->
-											  <!--{/volist}-->
-							              <!--</div>-->
-							            <!--</div>-->
-							          <!--</li>-->
+							          <li>
+							            <div data-toggle="select" class="select-menu" id="select6">
+							              <div class="menu-selected">颜色</div>
+							              <div class="menu menu7 radius menuCar07" style="display: none;" id="aselect6">
+							                <dd> <a rel="nofollow" href="" data-for="hidden_c" data-valueid="0" class="preventdefault c0" title="不限二手车">不限</a> </dd>
+											  {volist name="color" id="val"}
+											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/search_newcar?ys={$val.id}" data-for='hidden_c' data-valueid='' class='preventdefault c15' title=''>{$val.name}</a> </dd>
+							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_c" data-valueid="1" class="preventdefault c1" title="黑色二手车">黑色</a> </dd>-->
+											  {/volist}
+							              </div>
+							            </div>
+							          </li>
 							          <li>
 							            <div data-toggle="select" class="select-menu" id="select10">
 							              <div class="menu-selected menu-selected12">燃料</div>
@@ -186,21 +186,30 @@
 								</div>
 							</div>
 						</div>
+						<div class="list_jibie list_item gj_clear">
+							<div class="list_title">已选择</div>
+							<div class="screening-margin gj_clear">
+								<ul class="list_detail_sel car-selected">
+
+								</ul>
+								<!--<span class="more">多选<i>+</i></span>-->
+							</div>
+						</div>
 					</div>
-					<div class="list_subNav">
-						<ul>
-							<li class="active"><a href="" class="">郑州二手车</a></li>
-							<!--<li><a href="">分期购车</a></li>-->
-							<!--<li><a href="">商家车</a></li>-->
-							<!--<li><a href="">个人车</a></li>-->
-							<!--<li><a href="">商家认证</a></li>-->
-						</ul>
-					</div>
+					<!--<div class="list_subNav">-->
+						<!--<ul>-->
+							<!--<li class="active"><a href="" class="">郑州二手车</a></li>-->
+							<!--&lt;!&ndash;<li><a href="">分期购车</a></li>&ndash;&gt;-->
+							<!--&lt;!&ndash;<li><a href="">商家车</a></li>&ndash;&gt;-->
+							<!--&lt;!&ndash;<li><a href="">个人车</a></li>&ndash;&gt;-->
+							<!--&lt;!&ndash;<li><a href="">商家认证</a></li>&ndash;&gt;-->
+						<!--</ul>-->
+					<!--</div>-->
 					<div class="list_sort">
 						<ul class="sort_sel">
 							<li class="current"><a href="">综合排序</a></li>
-							<!--<li><a href="">最新发布</a></li>-->
-							<!--<li><a href="">价格最低</a></li>-->
+							<li><a href="">最新发布</a></li>
+							<li><a href="">价格最低</a></li>
 							<!--<li><a href="">车龄最短</a></li>-->
 							<!--<li><a href="">里程最短</a></li>-->
 						</ul>
@@ -315,6 +324,27 @@
 	           $(this).slideUp(300)
 	           $(this).prevAll(".slide_up").slideDown(300);
 	        });
+            //已选车型
+            $(".list_detail_sel").on("click",".item",function(){
+                var carName = $(this).text() //获取当前的元素内容
+                var arr = [10]
+
+                for(var i = 0;i< arr;i++){
+                    console.log(carName.indexOf(arr[i]))
+                    if(carName.indexOf(arr[i]) == -1){
+                        console.log(1);
+                        arr.push(carName)
+                        $(".car-selected").append(
+                            "<li class='list'><span class='active2 car-model'>"+carName+"</span><span class='close'><span class='cha'>×</span></span></li>"
+                        );
+                    }
+                }
+
+            })
+            //点击删除已选车型
+            $(".car-selected ").on("click",".close",function(){
+                $(this).parent().remove();
+            })
 	        //防止鼠标移出移入子元素触发mouseout事件
 	        function isMouseLeaveOrEnter(e, handler) {    
 	          var reltg=e.relatedTarget?e.relatedTarget:e.type=='mouseout'?e.toElement:e.fromElement;    
