@@ -22,8 +22,9 @@
 					<div class="list_screen_cont">
 						<div class="list_brand  slide_up list_item gj_clear">
 							<div class="list_title">品牌</div>
-							<div class="screening-margin gj_clear">							
-								<div class="list_car_brand list_detail_sel">{volist name="brand" id="val"}<a class="item" href="{$domain}/{$Think.session.cityurl}/search_newcar?brand_id={$val.id}">{$val.name}</a>{/volist}</div>
+							<div class="screening-margin gj_clear">
+
+								<div class="list_car_brand list_detail_sel">{volist name="brand" id="val"}  <a class="item" href="{$domain}/{$Think.session.cityurl}/search_newcar?brand_id={$val.id}">{$val.name}</a>{/volist}</div>
 								<span class="more">更多品牌<i><img src="__STATIC__/img/down1.png" alt="" width="12"/></i></span>
 							</div>
 						</div>
@@ -190,7 +191,11 @@
 							<div class="list_title">已选择</div>
 							<div class="screening-margin gj_clear">
 								<ul class="list_detail_sel car-selected">
+									{if condition="$names['name']"}
+									<li class='list'><span class='active2 car-model'>{$names.name}</span><span class='close'><span class='cha'>×</span></span></li>
+									{else /}
 
+									{/if}
 								</ul>
 								<!--<span class="more">多选<i>+</i></span>-->
 							</div>
@@ -208,8 +213,8 @@
 					<div class="list_sort">
 						<ul class="sort_sel">
 							<li class="current"><a href="">综合排序</a></li>
-							<li><a href="">最新发布</a></li>
-							<li><a href="">价格最低</a></li>
+							<!--<li><a href="">最新发布</a></li>
+							<li><a href="">价格最低</a></li>-->
 							<!--<li><a href="">车龄最短</a></li>-->
 							<!--<li><a href="">里程最短</a></li>-->
 						</ul>
@@ -325,22 +330,22 @@
 	           $(this).prevAll(".slide_up").slideDown(300);
 	        });
             //已选车型
-            $(".list_detail_sel").on("click",".item",function(){
-                var carName = $(this).text() //获取当前的元素内容
-                var arr = [10]
+            /*$(".list_detail_sel").on("click",".item",function(){
+                    var carName = $(this).text() //获取当前的元素内容
+                    var arr = [10]
 
-                for(var i = 0;i< arr;i++){
-                    console.log(carName.indexOf(arr[i]))
-                    if(carName.indexOf(arr[i]) == -1){
-                        console.log(1);
-                        arr.push(carName)
-                        $(".car-selected").append(
-                            "<li class='list'><span class='active2 car-model'>"+carName+"</span><span class='close'><span class='cha'>×</span></span></li>"
-                        );
+                    for(var i = 0;i< arr;i++){
+                        console.log(carName.indexOf(arr[i]))
+                        if(carName.indexOf(arr[i]) == -1){
+                            console.log(1);
+                            arr.push(carName)
+                            $(".car-selected").append(
+                                "<li class='list'><span class='active2 car-model'>"+carName+"</span><span class='close'><span class='cha'>×</span></span></li>"
+                            );
+                        }
                     }
-                }
 
-            })
+            })*/
             //点击删除已选车型
             $(".car-selected ").on("click",".close",function(){
                 $(this).parent().remove();
