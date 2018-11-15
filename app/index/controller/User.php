@@ -663,8 +663,13 @@ class User  extends Common {
         $session = Session::get('user_id');
         if(request()->isAjax()) {
             $data = $this->params;
-            $data['mimg'] = $this->upload_file($data['mimg'],'door_photo');
-            $data['yimg'] = $this->upload_file($data['yimg'],'door_photo');
+            if(!empty($_FILES)) {
+                $data['mimg'] = $this->upload_file($data['mimg'],'door_photo');
+                $data['yimg'] = $this->upload_file($data['yimg'],'door_photo');
+            } else {
+                unset($data['mimg']);
+                unset($data['yimg']);
+            }
             unset($data['code']);
             unset($data['brand_id']);
             unset($data['sys_id']);
@@ -672,6 +677,7 @@ class User  extends Common {
             unset($data['name_li']);
             unset($data['img_512']);
             unset($data['img_300']);
+            unset($data['firm_id']);
             $user_shop = Db::table('user_shop')->where(['user_id' => $session])->find();
             if($user_shop) {
                 $update = Db::table('user_shop')->where(['user_id' => $session])->update($data);
@@ -792,7 +798,12 @@ class User  extends Common {
 
         $session = Session::get('user_id');
         $cat = Db::table('rele_car')->where(['user_id' => $session])->order('pu_id desc')->paginate(10);
+        $items = $cat->items();
+        foreach ($cat as $k => $v) {
+            $items[$k]['subface_img'] = explode(',',$v['subface_img']);
+        }
         $shop = Db::table('user_shop')->where(['user_id' => $session])->find();
+        $this->assign('items',$items);
         $this->assign('shop',$shop);
         $this->assign('cat',$cat);
         $this->assign('brand',$brand);
