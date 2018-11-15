@@ -678,7 +678,7 @@ class Common extends Controller{
             /*裁剪图片*/
             if (!empty($type)){
 
-                $this->image_edit($path,$type);
+                //$this->image_edit($path,$type);
             }
 
             return str_replace('\\','/',$path);
