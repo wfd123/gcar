@@ -25,8 +25,8 @@
 			</p>
 			<div class="gj_clear"></div>
 			<ul class="shop_nav gj_clear">
-				<li class="active"><a href="{$domain}/{$Think.session.cityurl}/shop">店铺首页</a></li>
-				<li><a href="{$domain}/{$Think.session.cityurl}/shop_list">在售车源</a></li>
+				<li><a href="{$domain}/{$Think.session.cityurl}/shop">店铺首页</a></li>
+				<li class="active"><a href="{$domain}/{$Think.session.cityurl}/shop_list">在售车源</a></li>
 				<li><a href="{$domain}/{$Think.session.cityurl}/shop_info">公司信息</a></li>
 			</ul>
 		</div>
@@ -42,7 +42,7 @@
 							<div class="classify">
 								<a href="" class="active" >不限</a>
 								{volist name="brand" id="val"}
-								<a href="{:url('index/lots_cars')}?brand_id={$val.id}&page=1&sort=1">{$val.name}</a>
+								<a href="lots_cars/?brand_id={$val.id}&page=1&sort=1">{$val.name}</a>
 								{/volist}
 							</div>
 						</li>
@@ -51,7 +51,7 @@
 							<div class="classify">
 								<a href="" class="active" >不限</a>
 								{volist name="price" id="val"}
-								<a href="{:url('index/lots_cars')}?price_range={$val.id}&page=1&sort=1">{$val.name}</a>
+								<a href="lots_cars/?price_range={$val.id}&page=1&sort=1">{$val.name}</a>
 								{/volist}
 							</div>
 						</li>
@@ -59,14 +59,14 @@
 							<h3>级别<b>全部</b></h3>
 							<div class="classify">
 								<a href="" class="active" >不限</a>
-								{volist name="subface" id="val"}<a href="{:url('index/lots_cars')}?car_age={$val.id}&page=1&sort=1">{$val.name}</a>{/volist}
+								{volist name="subface" id="val"}<a href="lots_cars/?car_age={$val.id}&page=1&sort=1">{$val.name}</a>{/volist}
 							</div>
 						</li>
 						<li>
 							<h3>车龄 <b>全部</b></h3>
 							<div class="classify">
 								<a href="" class="active" >不限</a>
-								{volist name="age" id="val"}<a href="{:url('index/lots_cars')}?age={$val.id}&page=1&sort=1">{$val.cheling}</a>{/volist}
+								{volist name="age" id="val"}<a href="lots_cars/?age={$val.id}&page=1&sort=1">{$val.cheling}</a>{/volist}
 							</div>
 						</li>
 					</ul>
@@ -77,17 +77,17 @@
 				<!--右侧车源以及筛选-->			
 				<div class="listImg">
 					<div class="gj_clear">
-						<ul  class="sort_s">
+						<!--<ul  class="sort_s">
 							<li class=""><a href="">默认排序</a></li>
 							<li class=""><a href="">价格<b class="actives"></b><i></i></a></li>
 							<li class=""><a href="">车龄<b></b><i class="actives"></i></a></li>
 							<li class=""><a href="">级别<b></b><i></i></a></li>
 							<li class=""><a href="">里程<b></b><i></i></a></li>
-						</ul>
-						<div class="search_box">
+						</ul>-->
+						<!--<div class="search_box">
 							<input type="text" value=""/>
 							<a href="">搜索</a>
-						</div>
+						</div>-->
 					</div>
 					<div class="gj_clear" >
 						<ul class="store_list gj_clear">
