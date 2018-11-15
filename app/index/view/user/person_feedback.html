@@ -14,7 +14,6 @@
 	<div class="header">
 		{include file="public/header"}
 	</div>
-
 		<div class="full_wid">			
 			<div class="wrap ">	
 				<div class="person_center">
@@ -44,16 +43,16 @@
 						<h2 class="step"></h2>
 						<div class="upLoad_form">
 
-							<form action="{:url('user/person_feedback')}" method="post">
+							<form action="per_feed" method="post">
 								<ul class="motify_ipt">
-									<li><span class="my_form_tit">姓名：</span><div class="fleft myform_ipt"><input type="name" name="name" placeholder="请输入您的姓名"/></div></li>
+									<li><span class="my_form_tit">姓名：</span><div class="fleft myform_ipt"><input type="name" name="name" id="name" placeholder="请输入您的姓名"/></div></li>
 									<li><span class="my_form_tit">手机号：</span>
-										<div class="fleft myform_ipt"><input type="phone" name="phone" placeholder="请输入您的手机号" /></div>
+										<div class="fleft myform_ipt"><input type="phone" name="phone" id="phone" placeholder="请输入您的手机号" /></div>
 									</li>
 									<li><span class="my_form_tit">详细描述：</span>
-										<div class="fleft "><textarea name="con" rows="" cols="" class="store_desc" placeholder="请用10-400字以内描述您所遇到的问题"></textarea></div>
+										<div class="fleft "><textarea name="content" rows="" cols="" class="store_desc" id="desc" placeholder="请用10-400字以内描述您所遇到的问题"></textarea></div>
 									</li>
-									<p style="text-align: center"><input class="sub_btn pwd_submit" type="submit" value="提交" /></p>
+									<p style="text-align: center"><input class="sub_btn pwd_submit" type="submit" onclick="subm()" value="提交" /></p>
 									</ul>
 							</form>
 					</div>
@@ -61,15 +60,15 @@
 				
 			</div>
 		</div>
+		</div>
 	<div class="footer">
 		{include file="public/footer"}
 	</div>
-		
 		<div class="mask1"></div>
 	</body>
 	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
-	<script>		
-		$(function(){			
+	<script>
+		$(function(){
 
 //			手机号隐藏中间4位
 			$(".uphone").text($(".uphone").text().substring(0, 3) + "****" + $(".uphone").text().substring(7, 11));
@@ -77,8 +76,37 @@
 		    $(".header").load("templates/header.html");
 //		    $(".footer").load("templates/footer.html");
 
-			
-	})
+
+	});
+
+
+
+
 
 </script>
+
+	<script>
+        function subm() {
+            event.preventDefault();
+            var name = $('#name').val();
+            var phone = $('#phone').val();
+            var desc = $('#desc').val();
+            $.ajax({
+                type: "POST",
+                data:{name:name,phone:phone,content:desc},
+                dataType: "json",
+                url: "per_feed" ,
+                success:function (res) {
+                    if(res == 200) {
+                        alert('反馈成功');
+                    } else {
+                        alert('反馈失败');
+                    }
+                },
+                error:function () {
+                    alert('成功');
+                }
+            });
+        }
+	</script>
 </html>
