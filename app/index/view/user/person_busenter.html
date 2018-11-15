@@ -214,7 +214,7 @@
 									<div id="singleUpContainer">
 										<section class="z_file fl" style="position: relative;display: block;margin-top: 30px;">
 											{if condition="$edit['mimg']"}
-											<img src="{$edit.mimg}">
+											<img src="{$edit.mimg}" height="100">
 											{else /}
 											<img src="__STATIC__/img/upimg.png" class="add-img">
 											{/if}
@@ -235,9 +235,9 @@
 									<div id="singleUpContainer">
 										<section class="z_file fl" style="position: relative;display: block;margin-top: 30px;">
 											{if condition="$edit['yimg']"}
-											<img src="{$edit.yimg}">
+											<img src="{$edit.yimg}" height="100">
 											{else /}
-											<img src="__STATIC__/img/upimg.png" class="add-img">
+											<img src="__STATIC__/img/upimg.png"  class="add-img">
 											{/if}
 											<input id="mimg" value="{$edit.yimg}" type="file" name="mimg"  class="file" style="width: 74px;height: 74px;" />
 										</section>
