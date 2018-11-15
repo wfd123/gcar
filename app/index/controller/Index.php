@@ -41,7 +41,6 @@ class Index  extends Common
             $banner[$key]['img_url']=$this->get_carimg($val['img'],1);
         }
 
-
         $brand=$this->brand();//获取筛选模块 推荐品牌
 
         $price=$this->price(); //价格
@@ -258,8 +257,9 @@ class Index  extends Common
                 $where['pin'] = $data['pinpai'];
 
                 $ppdata = Db::table('car_brand')->where($where)->select();
-
-                $bid = $ppdata['id'];
+                foreach ($ppdata as $k => $v) {
+                    $bid = $ppdata['id'];
+                }
 
                 $where.=" and brand_id=$bid  ";
             }
@@ -473,9 +473,13 @@ class Index  extends Common
                 }
 
         }
-
-
-        $ss = Db::table('new_car')->where($where)->limit(20)->select();
+        $wheres = [];
+        if(input('brand')) {
+            $wheres['brand_id'] = input('brand');
+        } else {
+            $wheres = '';
+        }
+        $ss = Db::table('new_car')->where($wheres)->where($where)->limit(20)->select();
 
         foreach ($ss as $key => $val) {
             $ss[$key]['img_url']=$this->get_carimg($val['img_300'],2);
@@ -484,8 +488,9 @@ class Index  extends Common
             $ss[$key]['pay10_y2']=$val['pay10_y2'];
             unset($ss[$key]['img_300']);
         }
-
-        //dump($ss);die;
+        $id = input('brand_id');
+        $names = Db::table('car_brand')->where(['id' => $id])->find();
+        $this->assign('names',$names);
 
         $this->assign('city',$city);
         $this->assign('domain',$domain);
