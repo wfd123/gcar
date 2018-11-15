@@ -4,10 +4,10 @@
 			<div class="footer_logo"><img src="__STATIC__/img/1024.png" alt="" width="80"/><p>管家车易站</p></div>
 			<div class="basic_info">
 				<div>
-					<a href="{:url('index/join_us')}">关于我们</a>
-					<a href="{:url('index/link_us')}">联系我们</a>
-					<a href="{:url('index/service')}">服务保障</a>
-					<a href="{:url('index/website')}">网站地图</a>
+					<a href="join_us">关于我们</a>
+					<a href="link_us">联系我们</a>
+					<a href="service">服务保障</a>
+					<a href="website">网站地图</a>
 				</div>
 				<p>
 					版权所有：河南管家车销售有限公司 <br /> 
@@ -28,21 +28,21 @@
 			<p class="link_tit">热门品牌：</p>
 			<span class="more_dwon"></span>
 			{volist name="brand" id="val"}
-			<a href="{:url('index/lots_cars')}?brand_id={$val.id}&page=1&sort=1">{$val.name}</a>
+			<a href="lots_cars/?brand_id={$val.id}&page=1&sort=1">{$val.name}</a>
 			{/volist}
 
 		</div>
 		<div class="optimize_link">
-			<p class="link_tit ">热门车系123：</p>
+			<!--<p class="link_tit ">热门车系123：</p>
 			<span class="more_dwon"></span>
 			<a href="">大众</a>
-			<a href="">大众</a>
+			<a href="">大众</a>-->
 
 		</div>
 		<div class="optimize_link gj_clear">
-			<p class="link_tit">友情链接123：</p>
+			<!--<p class="link_tit">友情链接123：</p>
 			<span class="more_dwon"></span>
-			<a href="">大众</a>
+			<a href=""></a>-->
 
 
 
