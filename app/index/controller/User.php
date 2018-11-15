@@ -48,6 +48,7 @@ class User  extends Common {
 
     }
 
+
     /*
      * 退出
      */
@@ -1486,7 +1487,60 @@ class User  extends Common {
     /*
      * 意见反馈
      */
-    public function person_feedback(){
+    public function person_feedback()
+    {
+        $city_pin = input('city');
+
+        $city_info = $this->set_session_url($city_pin);
+
+        if (empty($city_info)){
+
+            $city_id = 1;
+
+            $cityurl = 'zhengzhou';
+        }else{
+
+            $cityurl = $city_info['pin'];
+
+            $city_id = $city_info['id'];
+        }
+
+        Session::set('cityurl',$cityurl);
+
+        $domain = $this->request->domain();
+
+        $city = Db::table('city')->where('status',1)->select();
+
+        $this->assign('city',$city);
+        $this->assign('domain',$domain);
+
+        /*接收参数*/
+        if(request()->isAjax()){
+            $userId = Session::get('user_id');
+            $data =  $this->params;
+            $res = Db::table('advises')->insert(['userid'=>$userId,'name'=>$data['name'],'telephone'=>$data['phone'],'content'=>$data['content'],'create_date'=>date('Y-m-d H:i:s',time())]);
+
+            if ($res){
+                echo 200;
+                //$this->success('意见反馈已收到','user/person_feedback');
+
+
+            }else{
+                echo -200;
+                // $this->error('失败');
+
+            }
+
+
+        }
+        $brand = $this->brand();//品牌
+
+        $this->assign('brand',$brand);
+        return $this->fetch();
+    }
+
+
+    public function person_feedback1(){
 
         $city_pin = input('city');
 
