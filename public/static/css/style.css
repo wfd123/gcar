@@ -614,7 +614,7 @@ option:hover {
 .list .items5 {
     position: relative;
     width: 226px;
-    height: 400px;
+    height: 330px;
     border: 1px solid #ddd;
     float: left;
     margin-bottom: 13px;
@@ -623,7 +623,9 @@ option:hover {
     overflow: hidden;
     background: #fff;
 }
-
+.list .items5 .car_img{
+    height: 140px;
+}
 .list .items5 a {
     display: block;
     width: 226px;
