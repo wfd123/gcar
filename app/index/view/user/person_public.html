@@ -52,9 +52,9 @@
 							</ul>-->
 						</h1>
 						<ul id="che_fb0" class="p_list">
-							{volist name="cat" id="vo"}
+							{volist name="items" id="vo"}
 							<li class="item">
-								<div class="car_img"><img src="{$vo.subface_img}"/></div>
+								<div class="car_img"><img src="{$vo.subface_img[0]}"/></div>
 								<div class="car_desc"><h3></h3>
 									<p>{$vo.car_mileage}万公里 &nbsp&nbsp|&nbsp&nbsp{$vo.create_time}&nbsp&nbsp| 郑州</p>
 									<div><span class="cprice"><b>{$vo.price}</b>万</span>
