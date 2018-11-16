@@ -7,6 +7,7 @@ use think\Controller;
 use think\Session;
 class Index  extends Common
 {
+    #烂代码
     public function index(){
 
            //处理城市问题
@@ -667,7 +668,7 @@ class Index  extends Common
             }
             if (empty($data['sort'])){
 
-                $data['sort'] = 1;;//排序  1价格最低 2价格最高 3车龄最短 4车龄最长 5里程最多 6里程最少
+                $data['sort'] = 1;//排序  1价格最低 2价格最高 3车龄最短 4车龄最长 5里程最多 6里程最少
             }
 
             if (!empty($data['search'])){
