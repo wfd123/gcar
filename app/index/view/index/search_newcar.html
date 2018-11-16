@@ -434,9 +434,9 @@
                 type: "POST",
                 data:{minprice:min,maxprice:max},
                 dataType: "json",
-                url: "{:url('index/search_newcar')}" ,
-				success:function () {
-					alert('查询成功');
+                url: "search_newcar" ,
+				success:function (data) {
+
                 },
 				error:function () {
 					alert('异常');
