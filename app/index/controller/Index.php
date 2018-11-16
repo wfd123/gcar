@@ -479,8 +479,16 @@ class Index  extends Common
         } else {
             $wheres = '';
         }
-        $ss = Db::table('new_car')->where($wheres)->where($where)->limit(20)->select();
 
+        $wher = [];
+        $min = input('minprice');
+        $max = input('maxprice');
+        if($min && $max) {
+            $wher['price'] =  $min  . '>' . 'and'  . '<'  . $max;
+        } else {
+            $wher = '';
+        }
+        $ss = Db::table('new_car')->where($wher)->where($wheres)->where($where)->limit(20)->select();
         foreach ($ss as $key => $val) {
             $ss[$key]['img_url']=$this->get_carimg($val['img_300'],2);
             $ss[$key]['name']=$this->get_carname($val['cartype_id']);
