@@ -237,13 +237,27 @@
 				</ul>
 			</div>
 			<div class="list_sort">
+
 				<ul class="sort_sel">
 					<li class="current"><a href="">综合排序</a></li>
-					<!--<li><a href="">最新发布</a></li>
-					<li><a href="">价格最低</a></li>
-					<li><a href="">车龄最短</a></li>
+					<!--<?php foreach($cat as $k => $val): ?>
+					<?php if($val){ echo  "<li></li>"; }break; ?>
+					<?php endforeach; ?>-->
+
+
+					{volist name="min_price" id="val"}
+					<?php if($val){ echo "<li><a href='lots_cars?price=1&page=1&sort=1'>价格最低</a> </li>";}break; ?>
+					{/volist}
+					{volist name="min_age" id="val"}
+					<?php if($val){ echo "<li><a href='lots_cars?years=2&page=1&sort=1'>车龄最短</a> </li>";}break; ?>
+					{/volist}
+					{volist name="min_licheng" id="val"}
+					<?php if($val){ echo "<li><a href='lots_cars?car_mileage=3&page=1&sort=1'>里程最短</a> </li>";}break; ?>
+					{/volist}
+					<!--<li><a href="">车龄最短</a></li>
 					<li><a href="">里程最短</a></li>-->
 				</ul>
+
 				<ul class="check_item flex_center">
 					<!--<li class="checked"><img src="__STATIC__/img/img_checked.png" alt="" width=""/>准新车</li>
 					<li><img src="__STATIC__/img/img_uncheck.png" alt="" />七日内上新</li>
@@ -279,7 +293,7 @@
 					</li>
 					{/volist}
 				</ul>
-				<p class="pege">{$cat->render()}</p>
+				<p class="pege"><!--{$cat->render()}--></p>
 			</div>
 		</div>
 		<div class="list_right">
