@@ -86,11 +86,13 @@ class Twocar extends Common
         $min_licheng = $this->lots_two_cars(6);//二手 里程最短
 
         $ABC = $this->app_brand_ios();//A b c  按车型排序
-
+        $this->assign('min_price',$min_price);
+        $this->assign('min_age',$min_age);
+        $this->assign('min_licheng',$min_licheng);
         //dump($er_car);die;
+        $where = [];
 
-
-        $cat = Db::table('rele_car')->where("status=1 and up_under=1 and city_id=$city_id")->order('pu_id asc')->paginate(8);
+        $cat = Db::table('rele_car')->where($where)->where("status=1 and up_under=1 and city_id=$city_id")->order('pu_id asc')->paginate(12);
         $items = $cat->items();
         foreach ($cat as $k => $v){
             $items[$k]['news_price'] = Db::table('new_car')->where(['id' => $v['news_price']])->find();
