@@ -158,7 +158,6 @@ class Newcar extends Common
 
         //接受参数
         $data = $this->params;
-
         $where="1=1  and city_id =".$city_id;
 
         if (!empty($data['brand']) && $data['brand'] != "s" ) {
