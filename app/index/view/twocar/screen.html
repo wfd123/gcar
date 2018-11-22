@@ -7,11 +7,11 @@
 	<link rel="stylesheet" href="__STATIC__/css/style.css" />
 	<link rel="stylesheet" href="__STATIC__/css/other.css" />
 	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
-	<script src="__STATIC__/js/jquery.lazyload.min.js" type="text/javascript" charset="utf-8"></script>		
+	<script src="__STATIC__/js/jquery.lazyload.min.js" type="text/javascript" charset="utf-8"></script>
 	<style>
 
 	</style>
-	<body>		
+	<body>
 		<div class="header">
 			{include file="public/header"}
 		</div>
@@ -22,7 +22,7 @@
 					<div class="list_screen_cont">
 						<div class="list_brand  slide_up list_item gj_clear">
 							<div class="list_title">品牌</div>
-							<div class="screening-margin gj_clear">							
+							<div class="screening-margin gj_clear">
 								<div class="list_car_brand list_detail_sel">{volist name="brand" id="val"}<a href="{$domain}/{$Think.session.cityurl}/lots_cars?brand_id={$val.id}&page=1&sort=1">{$val.name}</a>{/volist}</div>
 								<span class="more">更多品牌<i><img src="__STATIC__/img/down1.png" alt="" width="12"/></i></span>
 							</div>
@@ -42,7 +42,7 @@
 									   {/volist}
 							</dl>
                                    {/volist}
-			
+
 			                </div>
 						</div>
 						<!--<div class="list_series slide_up list_item gj_clear">-->
@@ -75,7 +75,7 @@
 						</div>
 						<div class="list_price list_item gj_clear">
 							<div class="list_title">价格</div>
-							<div class="screening-margin gj_clear">							
+							<div class="screening-margin gj_clear">
 								<div class="list_detail_sel">
 									{volist name="price" id="vo"}
 									<a href="{$domain}/{$Think.session.cityurl}/lots_cars?price_range={$vo.id}&page=1&sort=1">{$vo.name}</a>
@@ -85,11 +85,11 @@
 									<div class="box"><input type="text" />万</div><em>-</em><div class="box"><input type="text" />万</div><a href="javascript:;" class="sure">确定</a>
 								</div>
 							</div>
-							
+
 						</div>
 						<div class="list_jibie list_item gj_clear">
 							<div class="list_title">级别</div>
-							<div class="screening-margin gj_clear">							
+							<div class="screening-margin gj_clear">
 								<div class="list_detail_sel">
 									{volist name="subface" id="vo"}
 									<a href="{$domain}/{$Think.session.cityurl}/lots_cars?subface={$vo.id}&page=1&sort=1" class="active">{$vo.name}</a>
@@ -100,7 +100,7 @@
 						</div>
 						<div class="list_other list_item gj_clear">
 							<div class="list_title">其他</div>
-							<div class="screening-margin gj_clear">							
+							<div class="screening-margin gj_clear">
 								<div class=" list_detail_sel">
 									 <ul class="select-box searchCond" style="background: none">
 							          <li>
@@ -126,7 +126,7 @@
 										  </dl>
 							            </div>
 							          </li>
-							
+
 							          <li>
 							            <div data-toggle="select" class="select-menu" id="select4">
 							              <div class="menu-selected" >排量</div>
@@ -192,7 +192,7 @@
 							              </div>
 							            </div>
 							          </li>
-							
+
 							          <li>
 							            <div data-toggle="select" class="select-menu" id="select6">
 							              <div class="menu-selected">颜色</div>
@@ -215,7 +215,7 @@
 											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/lots_cars?fuel={$val.id}&page=1&sort=1" data-for='hidden_w' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_d" data-valueid="1" class="preventdefault" title="汽油二手车">汽油</a> </dd>-->
 											  {/volist}
-							          
+
 							              </div>
 							            </div>
 							          </li>
@@ -245,7 +245,7 @@
 							<li class="checked"><img src="__STATIC__/img/img_checked.png" alt="" width=""/>准新车</li>
 							<li><img src="__STATIC__/img/img_uncheck.png" alt="" />七日内上新</li>
 							<li><img src="__STATIC__/img/img_uncheck.png" alt="" />质保</li>
-							
+
 						</ul>
 						<!--<span class="more">更多<i><img src="__STATIC__/img/down1.png" alt="" /></i></span>-->
 					</div>
@@ -268,7 +268,7 @@
                            {/volist}
 						</ul>
 					</div>
-					
+
 				</div>
 				<div class="list_right">
 					<div class="list_service">
@@ -313,7 +313,7 @@
 			<!--{include file="public/footer"}-->
 		<!--</div>-->
 	</body>
-	<script>		
+	<script>
 		$(function(){
             $($(".wrap li")[2]).addClass("active").siblings().removeClass("active");
 		    // $(".header").load("templates/header.html");
@@ -352,7 +352,7 @@
                      $(this).slideUp(300);
                  }
              });
-             $(this).parents(".js-screening-up").slideUp(300) 
+             $(this).parents(".js-screening-up").slideUp(300)
              $(".js-screening-multi").slideDown(300);
          });
 
@@ -367,13 +367,13 @@
 	           $(this).prevAll(".slide_up").slideDown(300);
 	        });
 	        //防止鼠标移出移入子元素触发mouseout事件
-	        function isMouseLeaveOrEnter(e, handler) {    
-	          var reltg=e.relatedTarget?e.relatedTarget:e.type=='mouseout'?e.toElement:e.fromElement;    
+	        function isMouseLeaveOrEnter(e, handler) {
+	          var reltg=e.relatedTarget?e.relatedTarget:e.type=='mouseout'?e.toElement:e.fromElement;
 	          while (reltg && reltg != handler){
-	             reltg = reltg.parentNode; 
-	          }       
-	          return (reltg != handler);    
-	        } 
+	             reltg = reltg.parentNode;
+	          }
+	          return (reltg != handler);
+	        }
 //	        其他筛选条件
  		 $(".select-menu").hover(function () {
             $("#a"+$(this).attr("id")).show();
@@ -437,7 +437,7 @@
                 console.log("没有获取到数据");
             }
         });
-	        
+
 
 
 
