@@ -7,11 +7,14 @@
 	<link rel="stylesheet" href="__STATIC__/css/style.css" />
 	<link rel="stylesheet" href="__STATIC__/css/other.css" />
 	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
-	<script src="__STATIC__/js/jquery.lazyload.min.js" type="text/javascript" charset="utf-8"></script>		
+	<script src="__STATIC__/js/jquery.lazyload.min.js" type="text/javascript" charset="utf-8"></script>
 	<style>
-
+		.pagination {}
+		.pagination li {display: inline-block;margin-right: -1px;padding: 5px;border: 1px solid #e2e2e2;min-width: 20px;text-align: center;}
+		.pagination li.active {background: #009688;color: #fff;border: 1px solid #009688;}
+		.pagination li a {display: block;text-align: center;}
 	</style>
-	<body>		
+	<body>
 		<div class="header">
 			{include file="public/header"}
 		</div>
@@ -22,8 +25,8 @@
 					<div class="list_screen_cont">
 						<div class="list_brand  slide_up list_item gj_clear">
 							<div class="list_title">品牌</div>
-							<div class="screening-margin gj_clear">							
-								<div class="list_car_brand list_detail_sel">{volist name="brand" id="val"}<a href="{$domain}/{$Think.session.cityurl}/lots_cars?brand_id={$val.id}">{$val.name}</a>{/volist}</div>
+							<div class="screening-margin gj_clear">
+								<div class="list_car_brand list_detail_sel">{volist name="brand" id="val"}<a href="{$domain}/{$Think.session.cityurl}/{$val.pin}">{$val.name}</a>{/volist}</div>
 								<span class="more">更多品牌<i><img src="__STATIC__/img/down1.png" alt="" width="12"/></i></span>
 							</div>
 						</div>
@@ -42,7 +45,7 @@
 									   {/volist}
 							</dl>
                                    {/volist}
-			
+
 			                </div>
 						</div>
 						<!--<div class="list_series slide_up list_item gj_clear">-->
@@ -75,7 +78,7 @@
 						</div>
 						<div class="list_price list_item gj_clear">
 							<div class="list_title">价格</div>
-							<div class="screening-margin gj_clear">							
+							<div class="screening-margin gj_clear">
 								<div class="list_detail_sel">
 									{volist name="price" id="vo"}
 									<a href="{$domain}/{$Think.session.cityurl}/lots_cars?price_range={$vo.id}">{$vo.name}</a>
@@ -85,11 +88,11 @@
 									<div class="box"><input type="text" />万</div><em>-</em><div class="box"><input type="text" />万</div><a href="javascript:;" class="sure">确定</a>
 								</div>
 							</div>
-							
+
 						</div>
 						<div class="list_jibie list_item gj_clear">
 							<div class="list_title">级别</div>
-							<div class="screening-margin gj_clear">							
+							<div class="screening-margin gj_clear">
 								<div class="list_detail_sel">
 									{volist name="subface" id="vo"}
 									<a href="{$domain}/{$Think.session.cityurl}/lots_cars?subface={$vo.id}" class="active">{$vo.name}</a>
@@ -100,7 +103,7 @@
 						</div>
 						<div class="list_other list_item gj_clear">
 							<div class="list_title">其他</div>
-							<div class="screening-margin gj_clear">							
+							<div class="screening-margin gj_clear">
 								<div class=" list_detail_sel">
 									 <ul class="select-box searchCond" style="background: none">
 							          <li>
@@ -126,7 +129,7 @@
 										  </dl>
 							            </div>
 							          </li>
-							
+
 							          <li>
 							            <div data-toggle="select" class="select-menu" id="select4">
 							              <div class="menu-selected" >排量</div>
@@ -192,7 +195,7 @@
 							              </div>
 							            </div>
 							          </li>
-							
+
 							          <li>
 							            <div data-toggle="select" class="select-menu" id="select6">
 							              <div class="menu-selected">颜色</div>
@@ -215,12 +218,24 @@
 											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/lots_cars?fuel={$val.id}" data-for='hidden_w' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_d" data-valueid="1" class="preventdefault" title="汽油二手车">汽油</a> </dd>-->
 											  {/volist}
-							          
+
 							              </div>
 							            </div>
 							          </li>
 							        </ul>
 								</div>
+							</div>
+						</div>
+						<div class="list_jibie list_item gj_clear">
+							<div class="list_title">已选择</div>
+							<div class="screening-margin gj_clear">
+								<ul class="list_detail_sel car-selected">
+									{if condition="!empty($brand_name)"}
+									<li class='list'><span class='active2 car-model'>{$brand_name}</span><span class='close'><span class='cha'>×</span></span></li>
+									{else /}
+									{/if}
+								</ul>
+								<!--<span class="more">多选<i>+</i></span>-->
 							</div>
 						</div>
 					</div>
@@ -252,11 +267,11 @@
 					<div class="marbt30 carList_info">
 						 <ul class="list">
 
-                           {volist name="res" id="val" offset="1" length="8"}
+                           {volist name="res" id="val" offset="1" }
 
 							<li class="items5">
 
-								<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_img flex_center"><img src="{$val.img_url}" alt="" /></a>
+								<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_img flex_center"><img src="__STATIC__/img/car111.png" /></a>
 								<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_desc">
 									<h3>{$val.pu_id}{$val.name_li}</h3>
 									<p><span class="car_price"><b>{$val.price}</b>万</span><span class="car_sui">新车含税{$val.news_price}万</span></p>
@@ -264,11 +279,11 @@
 									<div class="che_ordered">立即预约</div></a>
 
 							</li>
-
                            {/volist}
+							 <p>{$res->render()}</p>
 						</ul>
 					</div>
-					
+
 				</div>
 				<div class="list_right">
 					<div class="list_service">
@@ -299,7 +314,7 @@
 			<!--{include file="public/footer"}-->
 		<!--</div>-->
 	</body>
-	<script>		
+	<script>
 		$(function(){
             $($(".wrap li")[2]).addClass("active").siblings().removeClass("active");
 		    // $(".header").load("templates/header.html");
@@ -338,9 +353,18 @@
                      $(this).slideUp(300);
                  }
              });
-             $(this).parents(".js-screening-up").slideUp(300) 
+             $(this).parents(".js-screening-up").slideUp(300)
              $(".js-screening-multi").slideDown(300);
          });
+
+            //点击删除已选车型
+            $(".car-selected ").on("click",".close",function(){
+
+                if ($(this).parent().siblings().length == 0) {
+                    $(this).parent().remove();
+                    window.location.href = "{$domain}/{$Think.session.cityurl}/s";
+                }
+            });
 
 
 		    $(".slide_down").mouseout(function(ev){
@@ -353,13 +377,13 @@
 	           $(this).prevAll(".slide_up").slideDown(300);
 	        });
 	        //防止鼠标移出移入子元素触发mouseout事件
-	        function isMouseLeaveOrEnter(e, handler) {    
-	          var reltg=e.relatedTarget?e.relatedTarget:e.type=='mouseout'?e.toElement:e.fromElement;    
+	        function isMouseLeaveOrEnter(e, handler) {
+	          var reltg=e.relatedTarget?e.relatedTarget:e.type=='mouseout'?e.toElement:e.fromElement;
 	          while (reltg && reltg != handler){
-	             reltg = reltg.parentNode; 
-	          }       
-	          return (reltg != handler);    
-	        } 
+	             reltg = reltg.parentNode;
+	          }
+	          return (reltg != handler);
+	        }
 //	        其他筛选条件
  		 $(".select-menu").hover(function () {
             $("#a"+$(this).attr("id")).show();
@@ -423,7 +447,7 @@
                 console.log("没有获取到数据");
             }
         });
-	        
+
 
 
 
