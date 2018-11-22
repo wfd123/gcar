@@ -44,6 +44,7 @@
     color: #333;
 }
 .car-selected .list .close{
+    cursor: pointer;
     background-color: #ff8402;
     color: #333;
     display: inline-block;
