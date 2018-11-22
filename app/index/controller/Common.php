@@ -46,6 +46,7 @@ class Common extends Controller{
             'lots_cars'=>array(
 
             ),
+            'version' => array(),
             'filter_list'=>array(
 
             ),
@@ -125,6 +126,8 @@ class Common extends Controller{
         'Newcar' => array(
             'index'=>array(
                 'user_id' =>'number',
+            ),
+            'search_newcar'=>array(
             ),
             'newcardetails'=>array(
                 'brand_id' =>'number',
@@ -1434,7 +1437,7 @@ class Common extends Controller{
     }
 
     public function list_brand($initial){
-        $res = Db::table('car_brand')->field('id,img_id,initial,name')
+        $res = Db::table('car_brand')->field('id,img_id,initial,name,pin')
             ->where(array('initial_num'=>$initial,'status'=>1,'level'=>1))
             ->order('sort desc')
             ->select();
@@ -1624,12 +1627,11 @@ class Common extends Controller{
      */
     public function brand(){
 
-        $brand=Db::table("car_brand")->field("id,img_id,name")->where("id in (1,9,10,19,20,22)")->select();
+        $brand=Db::table("car_brand")->field("id,img_id,name,pin")->where("id in (1,9,10,19,20,22)")->select();
         foreach ($brand as $key => $val) {
             $brand[$key]['img_url']=$this->get_carimg($val['img_id'],3);
             unset($brand[$key]["img_id"]);
         }
-
         return $brand;
     }
 
@@ -1649,7 +1651,6 @@ class Common extends Controller{
     public function subface()
     {
         $subface=Db::table("subface")->field("face_id as id,name,img")->order("level asc")->limit(5)->select();
-
         return $subface;
     }
 

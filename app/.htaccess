@@ -1,1 +1,1 @@
-deny from all
+RewriteRule ^sn_(c[1-9]+)(w[1-9]+)(g[1-9]+)$ index/index/lots_cars?c=$1&w=$2&g=$3

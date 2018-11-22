@@ -24,8 +24,7 @@
    			 	<h2>品牌</h2>
    			 	<ul>
 					{volist name="brand" id="val"}
-					<input type="hidden" name="id" value="{$val.id}">
-   			 		<li><a href="{$domain}/{$Think.session.cityurl}/search_newcar?brand={$val.id}">  <img src="{$val.img_url}" alt="" /><p>{$val.name}</p></a></li>
+   			 		<li><a href="{$domain}/{$Think.session.cityurl}/{$val.pin}">  <img src="{$val.img_url}" alt="" /><p>{$val.name}</p></a></li>
 				    {/volist}
    			 	</ul>
    			 </div>

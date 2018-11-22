@@ -7,6 +7,9 @@ use think\Controller;
 use think\Session;
 class Index  extends Common
 {
+    public function version(){
+        exit(THINK_VERSION);
+}
     #烂代码
     public function index(){
 
@@ -155,6 +158,7 @@ class Index  extends Common
     }
 
     public function search_newcar(){
+
 
         //处理城市问题
 
@@ -579,11 +583,13 @@ class Index  extends Common
 
             $car_drive=$this->car_drive('');//燃气
 
-            $color =$this->color('');//颜色
+        $color =$this->color('');//颜色
 
 
             //接受参数
             $data = $this->params;
+
+
 
             if (!empty($data['user_id'])){
 
@@ -891,6 +897,7 @@ class Index  extends Common
         $this->assign('car_body',$car_body);
         $this->assign('color',$color);
         $this->assign('res',$res);
+        $this->assign('param',"sz_p1r2");
 
         return $this->fetch();
 
@@ -1249,37 +1256,6 @@ class Index  extends Common
         return $this->fetch();
     }
 
-    /*
-     * 新车
-     */
-    public function newcar(){
-
-        $city_pin = input('city');
-
-        $city_info = $this->set_session_url($city_pin);
-
-        if (empty($city_info)){
-
-            $city_id = 1;
-
-            $cityurl = 'zhengzhou';
-        }else{
-
-            $cityurl = $city_info['pin'];
-
-            $city_id = $city_info['id'];
-        }
-
-        Session::set('cityurl',$cityurl);
-
-        $domain = $this->request->domain();
-
-        $city = Db::table('city')->where('status',1)->select();
-
-        $this->assign('city',$city);
-        $this->assign('domain',$domain);
-        return $this->fetch();
-    }
 
     /*
      * 二手车
