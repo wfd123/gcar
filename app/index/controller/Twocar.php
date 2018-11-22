@@ -18,7 +18,7 @@ class Twocar extends Common
      * 首页展示
      */
     public function index(){
-
+        /*die;*/
         //处理城市问题
 
         $city_pin = input('city');
