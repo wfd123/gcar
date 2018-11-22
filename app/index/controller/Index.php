@@ -583,13 +583,12 @@ class Index  extends Common
 
             $car_drive=$this->car_drive('');//燃气
 
-        $color =$this->color('');//颜色
+            $color =$this->color('');//颜色
 
 
             //接受参数
             $data = $this->params;
-
-
+            dump($data);
 
             if (!empty($data['user_id'])){
 
@@ -609,10 +608,18 @@ class Index  extends Common
                 $PageIndex = $data['page'];
             }
 
-            if (!empty($data['brand_id'])){
-
-                $brand_id = $data['brand_id'];//品牌id
+            $where = "1=1  and city_id =".$city_id;
+            if (!empty($data['brand']) && $data['brand'] != "s" ) {
+                $b_id = Db::table("car_brand")->field("id, name")->where('pin', 'eq', $data['brand'])->select();
+                if (!empty($b_id)){
+                    $where.=" and brand_id = ".$b_id[0]["id"];
+                    /*$brand_id = $b_id[0]["id"];*/
+                    $brand_name = $b_id[0]["name"];
+                }
             }
+            /*if (!empty($data['brand_id'])){
+                $brand_id = $data['brand_id'];//品牌id
+            }*/
             if (!empty($data['sys_id'])){
 
                 $sys_id = $data['sys_id'];//车系id
@@ -849,7 +856,7 @@ class Index  extends Common
             $Coll="rele_car.pu_id,rele_car.user_id,rele_car.cartype_id,rele_car.price,rele_car.name_li,rele_car.news_price,rele_car.car_mileage,rele_car.car_cardtime,rele_car.img_300";
             $sql = $this->CreateSql($TableName="rele_car",$Coll,$WhereStr,$WhereStr,$PageIndex,$PageSize,$OrderKey,$OrderType,$join,$joinid);
 
-            $res = Db::query($sql);
+            /*$res = Db::query($sql);
 
             if($res){
                 foreach ($res as $key => $val) {
@@ -875,12 +882,13 @@ class Index  extends Common
                     //$res[$key]['page_num']=ceil($count/10);
                     $res[$key]['page']=$PageIndex;
                 }
-            }
+            }*/
 
+        $res = Db::table('rele_car')->where($where)->paginate(13);
         $ABC = $this->app_brand_ios();//A b c  按车型排序
 
-        $res = $res ? $res : array();
-
+        /*$res = $res ? $res : array();*/
+        $this->assign('brand_name',empty($brand_name)?"": $brand_name);
         $this->assign('city',$city);
         $this->assign('domain',$domain);
         $this->assign('brand',$brand);
