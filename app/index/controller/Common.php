@@ -989,29 +989,41 @@ class Common extends Controller{
     }
 
     // 变速箱
-    function gearbox($id){
+    function gearbox($id, $data = []){
+        $param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
         $arr = array(
             array(
                 'id' => '1',
-                'name' => '手动'
+                'name' => '手动',
+                'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,'g',1 ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'])
             ),
             array(
                 'id' => '2',
-                'name' => '自动'
+                'name' => '自动',
+                'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,'g',2 ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'])
             ),
             array(
                 'id' => '3',
-                'name' => '手自一体'
+                'name' => '手自一体',
+                'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,'g',3 ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'])
             ),
             array(
                 'id' => '4',
-                'name' => '无级变速'
+                'name' => '无级变速',
+                'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,'g',4 ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'])
             ),
             array(
                 'id' => '5',
-                'name' => '双离合'
+                'name' => '双离合',
+                'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,'g',5 ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'])
             ),
         );
+        $param = empty($data)? "" : sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,'','' ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+        if (!empty($param)){
+            array_unshift($arr, ['id' => '0', 'name' => '不限', 'param' => 'sn_'.$param]);
+        } else {
+            array_unshift($arr, ['id' => '0', 'name' => '不限', 'param' => '']);
+        }
         if($id){
             $name = '';
             foreach ($arr as $key => $val) {
@@ -1028,6 +1040,7 @@ class Common extends Controller{
 
     //获取排量
     public function get_output($id){
+
         $output=Db::table('pailiang')->where("id=$id")->find();
         if($output){
             return $output['pailiang'];
@@ -1036,29 +1049,43 @@ class Common extends Controller{
         }
     }
     // 排量
-    function output($id){
+    function output($id, $data){
+        $param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
         $arr = array(
             array(
                 'id' => '1',
-                'name' => '1.0升以下'
+                'name' => '1.0升以下',
+                'param' => "sn_".sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,'o','1' ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'])
             ),
             array(
                 'id' => '2',
-                'name' => '1.1-1.5升'
+                'name' => '1.1-1.5升',
+                'param' => "sn_".sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,'o','2' ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'])
             ),
             array(
                 'id' => '3',
-                'name' => '1.6-2.0升'
+                'name' => '1.6-2.0升',
+                'param' => "sn_".sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,'o','3' ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'])
             ),
             array(
                 'id' => '4',
-                'name' => '2.1-3.0升'
+                'name' => '2.1-3.0升',
+                'param' => "sn_".sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,'o','4' ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'])
             ),
             array(
                 'id' => '5',
-                'name' => '3.1升以上'
+                'name' => '3.1升以上',
+                'param' => "sn_".sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,'o','5' ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'])
             ),
         );
+
+        $param = empty($data)? "" : sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,'','' ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+        if (!empty($param)){
+            array_unshift($arr, ['id' => '0', 'name' => '不限', 'param' => "sn_".$param]);
+        } else {
+            array_unshift($arr, ['id' => '0', 'name' => '不限', 'param' => ""]);
+        }
+
         if($id){
             $name = '';
             foreach ($arr as $key => $val) {
@@ -1162,37 +1189,52 @@ class Common extends Controller{
         }
     }
     // 燃料
-    public function fuel($id){
+    public function fuel($id, $data = []){
+        $param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
         $arr = array(
             array(
                 'id' => '1',
-                'name' => '汽油'
+                'name' => '汽油',
+                'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,'f','1' ,$data['k_n'],$data['v_n'])
             ),
             array(
                 'id' => '2',
-                'name' => '柴油'
+                'name' => '柴油',
+                'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,'f','2' ,$data['k_n'],$data['v_n'])
             ),
             array(
                 'id' => '3',
-                'name' => '油气混合'
+                'name' => '油气混合',
+                'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,'f','3' ,$data['k_n'],$data['v_n'])
             ),
             array(
                 'id' => '4',
-                'name' => '油电混合'
+                'name' => '油电混合',
+                'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,'f','4' ,$data['k_n'],$data['v_n'])
             ),
             array(
                 'id' => '5',
-                'name' => '电力'
+                'name' => '电力',
+                'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,'f','5' ,$data['k_n'],$data['v_n'])
             ),
             array(
                 'id' => '6',
-                'name' => 'LPG'
+                'name' => 'LPG',
+                'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,'f','6' ,$data['k_n'],$data['v_n'])
             ),
             array(
                 'id' => '7',
-                'name' => 'CNG'
+                'name' => 'CNG',
+                'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,'f','7' ,$data['k_n'],$data['v_n'])
             ),
         );
+
+        $param = empty($data)? "" : sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,'','' ,$data['k_n'],$data['v_n']);
+        if (!empty($param)){
+            array_unshift($arr, ['id' => '0', 'name' => '不限', 'param' => 'sn_'.$param]);
+        } else {
+            array_unshift($arr, ['id' => '0', 'name' => '不限', 'param' => '']);
+        }
 
         if($id){
             $name = '';
@@ -1272,12 +1314,28 @@ class Common extends Controller{
         }
     }
     // 颜色
-    public function color(){
+    public function color($id, $data = []){
+        $param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
         $res = Db::table('car_color1')->select();
         foreach ($res as $key => $val) {
             $res[$key]['img_url'] = "http://39.106.67.47/butler_car/".ltrim($val['img_url'],'.');
+            $res[$key]['param'] = empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,'c',$val['id'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+            if (!empty($id) && $id == $val['id']){
+                $name = $val['name'];
+            }
         }
-        return $res;
+
+        $param = empty($data)? "" : sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,'','' ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+        if (!empty($param)){
+            array_unshift($res, ['face_id' => '0', 'name' => '不限', 'param' => 'sn_'.$param]);
+        } else {
+            array_unshift($res, ['face_id' => '0', 'name' => '不限', 'param' => '']);
+        }
+        if (!empty($id)){
+            return empty($name) ? "" : $name;
+        } else {
+            return $res;
+        }
     }
     // 驱动
     public function car_drive($id){
@@ -1625,11 +1683,17 @@ class Common extends Controller{
     /*
      * 获取品牌
      */
-    public function brand(){
+    public function brand($brand_param = ''){
 
         $brand=Db::table("car_brand")->field("id,img_id,name,pin")->where("id in (1,9,10,19,20,22)")->select();
         foreach ($brand as $key => $val) {
             $brand[$key]['img_url']=$this->get_carimg($val['img_id'],3);
+            if (!empty($brand_param)){
+                $brand[$key]['param'] = "sn_".$brand_param;
+            } else {
+                $brand[$key]['param'] = "";
+            }
+
             unset($brand[$key]["img_id"]);
         }
         return $brand;
@@ -1638,19 +1702,115 @@ class Common extends Controller{
     /*
      * 价格
      */
-    public function price(){
+    public function price($data = ''){
 
         $price=Db::table("price_range")->field("price_id as id,name")->order("level asc")->limit(4)->select();
+        $brand_param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
 
+        foreach ($price as $key => $val) {
+            switch ($price[$key]['id']) {
+                case 2:
+                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","0-3" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+                    break;
+                case 3:
+                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","3-5" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+                    break;
+                case 4:
+                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","5-8" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+                    break;
+                case 5:
+                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","8-10" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+                    break;
+                case 6:
+                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","10-15" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+                    break;
+                case 7:
+                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","15-20" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+                    break;
+                case 8:
+                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","20-30" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+                    break;
+                case 9:
+                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","30-50" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+                    break;
+                case 10:
+                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","50-100" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+                    break;
+                case 11:
+                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","100-" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+                    break;
+                default :
+                    $param = empty($data) ? "" : sprintf($brand_param_format, "","" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+                    break;
+            }
+            if (!empty($param)){
+                $price[$key]['param'] = "sn_".$param;
+            } else {
+                $price[$key]['param'] = "";
+            }
+        }
+
+        return $price;
+    }
+
+    public function get_price($val){
+
+        switch ($val) {
+            case '0-3':
+                $price = "3万内";
+                break;
+            case '3-5':
+                $price = "3-5万";
+                break;
+            case 4:
+                $price = "5-8万";
+                break;
+            case 5:
+                return "8-10万";
+                break;
+            case 6:
+                $price = "10-15万";
+                break;
+            case 7:
+                $price = "15-20万";
+                break;
+            case 8:
+                $price = "20-30万";
+                break;
+            case 9:
+                $price = "30-50万";
+                break;
+            case 10:
+                $price = "50-100万";
+                break;
+            case 11:
+                $price = "100万以上";
+                break;
+            default :
+                $price = "";
+        }
         return $price;
     }
 
     /*
      * 级别
      */
-    public function subface()
+    public function subface($data = [])
     {
-        $subface=Db::table("subface")->field("face_id as id,name,img")->order("level asc")->limit(5)->select();
+        $param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
+        $subface = Db::table("subface")->field("face_id as id,name,img")->order("level asc")->limit(5)->select();
+        foreach ($subface as $key => $value) {
+            $param = empty($data) ? "" : sprintf($param_format, $data['k_p'],$data['v_p'] ,"s",$value['id'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+            if (!empty($param)){
+                $subface[$key]['param'] = "sn_".$param;
+            } else {
+                $subface[$key]['param'] = "";
+            }
+        }
+
+        $param = empty($data) ? "" : sprintf($param_format, $data['k_p'],$data['v_p'] ,"","" ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+        array_unshift($subface, ['id' => 0, 'name' => '不限', 'param' => empty($param) ? "" : "sn_".$param]);
+
         return $subface;
     }
 

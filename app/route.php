@@ -23,9 +23,8 @@ Route::domain('xin',[
     // 动态注册域名的路由规则
     ':city$' => ['index/newcar/index',['method'=>'GET'], ['city'=>'[a-z]+$']],
     ':city/:brand$'=> ['index/newcar/search_newcar', ['method'=>'GET'], ['city'=>'[a-z]+$','brand'=>'[a-z]+$']],
-    ':city/:brand$'=> ['index/newcar/search_newcar', ['method'=>'GET'], ['city'=>'[a-z]+$','brand'=>'[a-z]+$']],
-    ':city/:brand/sn_<k_p?><v_p?><k_w?><v_w?><k_g?><v_g?><k_p?><v_p?><k_j?><v_j?><k_h?><v_h?><k_l?><v_l?><k_m?><v_m?><k_n?><v_n?><k_x?><v_x?><k_y?><v_y?><k_z?><v_z?>' => [
-        'index/newcar/search_newcar', ['method'=>'GET'],['k_p'=>'p','v_p'=>'\d{1,2}-\d{1,2}','k_w'=>'w','v_w'=>'\d+','k_g'=>'g','v_g'=>'\d+','k_p'=>'p','v_p'=>'\d+','k_j'=>'j','v_j'=>'\d+','k_h'=>'h','v_h'=>'\d+','k_l'=>'l','v_l'=>'\d+','k_m'=>'m','v_m'=>'\d+','k_n'=>'n','v_n'=>'\d+','k_x'=>'x','v_x'=>'\d+','k_y'=>'y','v_y'=>'\d+','k_z'=>'z','v_z'=>'\d+']
+    ':city/:brand/sn_<k_p?><v_p?><k_s?><v_s?><k_o?><v_o?><k_g?><v_g?><k_d?><v_d?><k_b?><v_b?><k_c?><v_c?><k_f?><v_f?><k_n?><v_n?>' => [
+        'index/newcar/search_newcar', ['method'=>'GET'], ['k_p'=>'p','v_p'=>'\d{1,2}-\d{1,2}','k_s'=>'s','v_s'=>'\d+','k_o'=>'o','v_o'=>'\d+','k_g'=>'g','v_g'=>'\d+','k_d'=>'d','v_d'=>'\d+','k_b'=>'b','v_b'=>'\d+','k_c'=>'c','v_c'=>'\d+','k_f'=>'f','v_f'=>'\d+','k_n'=>'n','v_n'=>'\d+']
     ]
 ]);
 

@@ -134,30 +134,10 @@ class Newcar extends Common
 
         $city = Db::table('city')->where('status',1)->select();
 
-        $brand = $this->brand();//品牌
-
-        $price=$this->price(); //价格
-
-        $subface=$this->subface();//级别
-
-        $output=$this->output('');//排量
-
-        $gearbox=$this->gearbox('');//变速箱
-
-        $blowdown=$this->blowdown('');//排放标准
-
-        $fuel=$this->fuel('');//燃料
-
-        $car_body=$this->car_body('');//车身
-
-        $car_drive=$this->car_drive('');//燃气
-
-        $color =$this->color('');//颜色
-
-        $ABC = $this->app_brand_ios();//A b c  按车型排序
-
         //接受参数
         $data = $this->params;
+        $param_array = [];
+
         $where="1=1  and city_id =".$city_id;
 
         if (!empty($data['brand']) && $data['brand'] != "s" ) {
@@ -173,113 +153,43 @@ class Newcar extends Common
         }
 
         //级别suv
-        if (!empty($data['subface'])){
-            $where.=" and subface=".$data['subface'];
+        if (!empty($data['v_s'])){
+            $where.=" and subface=".$data['v_s'];
+            $subface_res = Db::table("subface")->field("name")->where("face_id", 'eq', $data['v_s'])->select();
+            $param_array[$data['k_s'].$data['v_s']]['name'] = $subface_res[0]['name'];
+        } else {
+            $data['k_s'] = "";
+            $data['v_s'] = "";
         }
 
-        if(!empty($data['name'])){
-            $where.=" order by id desc";
-        }
-        //
-        if (!empty($data['brand_id'])){
-            $where.=" and brand_id=".$data['brand_id'];
-        }
-
-        //汉字品牌  大众 奥迪
-        if (!empty($data['brand_name'])){
-
-            $where['name'] = $data['brand_name'];
-
-            $where['level'] = 3;
-
-            $bdata = Db::table('car_brand')->where($where)->select();
-
-            $sys_id=$bdata['id'];
-            $where.=" and sys_id=$sys_id ";
-
-        }
-        //
-        if (!empty($data['chek'])){
-            $where.=" and cartype_id=".$data['chek'];
-            //echo $where;
-        }
-        //具体价格
-        if(!empty($data['tprice'])){
-            $where.=" and price=".$data['tprice'] ;
-        }
-        if(!empty($data['sys_id'])){
-            $where.="and sys_id= ".$data['sys_id'];
-        }
-
-        //品牌 拼音
-        if(!empty($data['pinpai'])){
-
-            $where['level'] = 1;
-
-            $where['pin'] = $data['pinpai'];
-
-            $ppdata = Db::table('car_brand')->where($where)->select();
-            foreach ($ppdata as $k => $v) {
-                $bid = $ppdata['id'];
-            }
-
-            $where.=" and brand_id=$bid  ";
-        }
-        //车龄
-        if(!empty($data['cheling'])){
-            switch($data['cheling']){
-                case 1;
-                    $where.=" and car_age between 0 and 1";
-                    break;
-                case 2;
-                    $where.="  and car_age between 0 and 2";
-                    break;
-                case 3;
-                    $where.="  and car_age between 0 and 3";
-                    break;
-                case 4;
-                    $where.="  and car_age between 3 and 5";
-                    break;
-                case 5;
-                    $where.="  and car_age between 5 and 8";
-                    break;
-                case 6;
-                    $where.="  and car_age > 8";
-                    break;
-            }
-        }
-        //里程
-        if(!empty($data['licheng'])){
-            switch($data['licheng']){
-
-                case 2;
-                    $where.=" and  car_mileage <=2";
-                    break;
-                case 3;
-                    $where.=" and  car_mileage <=3";
-                    break;
-                case 4;
-                    $where.=" and car_mileage between 3 and 5";
-                    break;
-                case 5;
-                    $where.=" and car_mileage between 5 and 8";
-
-            }
-
-        }
         //颜色
-        if (!empty($data['ys'])){
-            $where.="and color=".$data['ys'];
+        if (!empty($data['v_c'])){
+            $where.="and color=".$data['v_c'];
+            array_push($param_array, $data['k_c'].$data['v_c']);
+            $param_array[$data['k_c'].$data['v_c']]['name'] = $this->color($data['v_c']);
+        } else {
+            $data['k_c'] = "";
+            $data['v_c'] = "";
         }
 
         //排量
 
-        if (!empty($data['pailiang'])){
-            $where.=" and output=".$data['pailiang'];
+        if (!empty($data['v_o'])){
+            $where.=" and output=".$data['v_o'];
+            $pailiang_res = Db::table("pailiang")->field("pailiang")->where("id", 'eq', $data['v_o'])->select();
+            $param_array[$data['k_o'].$data['v_o']]['name'] = $pailiang_res[0]['pailiang'];
+        } else {
+            $data['k_o'] = "";
+            $data['v_o'] = "";
         }
         //变速箱
-        if (!empty($data['bsx'])){
-            $where.=" and gearbox= ".$data['bsx'];
+        if (!empty($data['v_g'])){
+            $where.=" and gearbox= ".$data['v_g'];
+            $param_array[$data['k_g'].$data['v_g']]['name'] = $this->gearbox($data['v_g']);
+
+        } else {
+            $data['k_g'] = "";
+            $data['v_g'] = "";
         }
 //            //排放标准 OBD 京V 欧V 国V  暂时废弃  表里没有改字段
 //            if (!empty($data['pfbz'])){
@@ -296,161 +206,32 @@ class Newcar extends Common
 //                $where.=" and car_body=".$data['cs'];
 //            }
         //汽油 柴油 油漆混合
-        if (!empty($data['ny'])){
-            $where.=" and fuel= ".$data['ny'];
-        }
-        // 进气方式
-        if (!empty($data['jinqi'])){
-            $where.=" and inlet_air= ".$data['jinqi'];
-        }
-        //百分之三十月供
-        if (!empty($data['sy'])){
-            switch($data['sy']){
-                case 1;
-                    $where.=" and pay30_s2 between 0 and 1";
-                    break;
-                case 2;
-                    $where.=" and pay30_s2 between 1 and 2 ";
-                    break;
-                case 3;
-                    $where.=" and pay30_s2 between 2 and 3";
-                    break;
-                case 4;
-                    $where.=" and pay30_s2 between 3 and 4 ";
-                    break;
-                case 5;
-                    $where.=" and pay30_s2 between 4 and 5";
-                    break;
-                case 6;
-                    $where.=" and pay30_s2 >5 ";
-                    break;
-            }
-        }
-
-        //百分之三十月供
-        if (!empty($data['yg'])){
-            switch($data['yg']){
-                case 1;
-                    $where.=" and pay30_y2 between 0 and 0.1";
-                    break;
-                case 2;
-                    $where.=" and pay30_y2 between 0.1 and 0.2 ";
-                    break;
-                case 3;
-                    $where.=" and pay30_y2 between 0.2 and 0.3";
-                    break;
-                case 4;
-                    $where.=" and pay30_y2 between 0.3 and 0.4 ";
-                    break;
-                case 5;
-                    $where.=" and pay30_y2 between 0.4 and 0.5";
-                    break;
-                case 6;
-                    $where.=" and pay30_y2 >0.5 ";
-                    break;
-
-
-            }
+        if (!empty($data['v_f'])){
+            $where.=" and fuel= ".$data['v_f'];
+            $param_array[$data['k_f'].$data['v_f']]['name'] = $this->fuel($data['v_f']);
+        } else {
+            $data['k_f'] = "";
+            $data['v_f'] = "";
         }
 
         //价格级别
-        if (!empty($data['price'])){
-            switch($data['price']){
-                case 2;
-                    $where.=" and price <3";
-                    break;
-                case 3;
-                    $where.=" and price between 3 and 5 ";
-                    break;
-                case 4;
-                    $where.=" and price between 5 and 8 ";
-                    break;
-                case 5;
-                    $where.=" and price between 8 and 12 ";
-                    break;
-                case 6;
-                    $where.=" and price between 18 and 25";
-                    break;
-                case 7;
-                    $where.=" and price between 25 and 40";
-                    break;
-                case 8;
-                    $where.=" and price>40";
-                    break;
-
-            }
-        }
-        //月供级别
-        if (!empty($data['yueg'])){
-            switch($data['yueg']){
-                case 1;
-                    $where.=" and price <5";
-                    break;
-                case 2;
-                    $where.=" and price between 5 and 8 ";
-                    break;
-                case 3;
-                    $where.=" and price between 8 and 12";
-                    break;
-                case 4;
-                    $where.=" and price between 12 and 18 ";
-                    break;
-                case 5;
-                    $where.=" and price between 18 and 25";
-                    break;
-                case 6;
-                    $where.=" and price between 25 and 40";
-                    break;
-                case 7;
-                    $where.=" and price>40";
-                    break;
-
-            }
-        }
-        // 排序规则  筛选 月供由高到低 由低到高  价格 高低
-        if (!empty($data['px'])){
-            switch($data['px']){
-                case 1;
-                    $where.=" order by id  desc ";
-                    break;
-                case 2;
-                    $where.=" order by price  asc ";
-                    break;
-                case 3;
-                    $where.=" order by price  desc ";
-                    break;
-                case 4;
-                    $where.=" order by pay30_y2  asc "; //月供由低到高
-                    break;
-                case 5;
-                    $where.=" order by pay30_y2  desc ";//月供 由高到低
-                    break;
-                case 6;
-                    $where.=" order by pay30_s2   asc ";//首付 由低到高
-                    break;
-                case 7;
-                    $where.=" order by pay30_s2  desc ";//首付由高到低
-                    break;
-
-            }
-
-        }
-//        $wheres = [];
-//        if(input('brand')) {
-//            $wheres['brand_id'] = input('brand');
-//        } else {
-//            $wheres = '';
-//        }
-
-        $wher = [];
-        $min = input('minprice');
-        $max = input('maxprice');
-        if($min && $max) {
-            $wher['price'] =  $min  . '>' . 'and'  . '<'  . $max;
+        if (!empty($data['v_p'])){
+            $param_array[$data['k_p'].$data['v_p']]['name'] = $this->get_price($data['v_p']);
+            $prices = explode('-', $data['v_p']);
+            $where.=" and price between ".$prices[0]." and ".$prices[1];
         } else {
-            $wher = '';
+            $data['k_p'] = "";
+            $data['v_p'] = "";
         }
-        $ss = Db::table('new_car')->where($wher)->where($where)->limit(20)->select();
+
+        $data['k_d'] = "";
+        $data['v_d'] = "";
+        $data['k_b'] = "";
+        $data['v_b'] = "";
+        $data['k_n'] = "";
+        $data['v_n'] = "";
+
+        $ss = Db::table('new_car')->where($where)->limit(20)->select();
         foreach ($ss as $key => $val) {
             $ss[$key]['img_url']=$this->get_carimg($val['img_300'],2);
             $ss[$key]['name']=$this->get_carname($val['cartype_id']);
@@ -458,7 +239,70 @@ class Newcar extends Common
             $ss[$key]['pay10_y2']=$val['pay10_y2'];
             unset($ss[$key]['img_300']);
         }
+
+
+
+        $brand_param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
+        //close span label begin
+        // 价格
+        $param_close = sprintf($brand_param_format, "","" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+        if (!empty($data['k_p'])) {
+            $param_array[$data['k_p'].$data['v_p']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+        }
+        // 级别
+        $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,'','' ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+        if (!empty($data['k_s'])) {
+            $param_array[$data['k_s'].$data['v_s']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+        }
+        // 排量
+        $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,'','' ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+        if (!empty($data['k_o'])) {
+            $param_array[$data['k_o'].$data['v_o']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+        }
+        // 变速箱
+        $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,'','' ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+        if (!empty($data['k_g'])) {
+            $param_array[$data['k_g'].$data['v_g']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+        }
+        // 颜色
+        $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,'','' ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+        if (!empty($data['k_c'])) {
+            $param_array[$data['k_c'].$data['v_c']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+        }
+        // 燃料
+        $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,'','' ,$data['k_n'],$data['v_n']);
+        if (!empty($data['k_f'])) {
+            $param_array[$data['k_f'].$data['v_f']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+        }
+
+        $brand_param = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+
+        $brand = $this->brand($brand_param);//品牌
+
+        $price=$this->price($data); //价格
+
+        $subface=$this->subface($data);//级别
+
+        $output=$this->output('', $data);//排量
+
+        $gearbox=$this->gearbox('', $data);//变速箱
+
+        $blowdown=$this->blowdown('');//排放标准
+
+        $fuel=$this->fuel('', $data);//燃料
+
+        $car_body=$this->car_body('');//车身
+
+        $car_drive=$this->car_drive('');//燃气
+
+        $color =$this->color('', $data);//颜色
+
+        $ABC = $this->app_brand_ios();//A b c  按车型排序
+
+
+        $this->assign("brand_pin", $data['brand']);
         $this->assign('brand_name',empty($brand_name)?"": $brand_name);
+        $this->assign('param_array', $param_array);
         $this->assign('city',$city);
         $this->assign('domain',$domain);
         $this->assign('brand',$brand);

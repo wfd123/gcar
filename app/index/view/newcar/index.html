@@ -43,7 +43,7 @@
    			 <div class="type_new fleft oh">
    			 	<h2>车型</h2>
    			 	<ul>
-					{volist name="subface" id="val"}
+					{volist name="subface" id="val" offset="1"}
    			 		<li><a href="{$domain}/{$Think.session.cityurl}/search_newcar?subface={$val.id}"><img src="__STATIC__/img/{$val.img}" alt=""  width="100" height="100"/><p>{$val.name}</p></a></li>
 					{/volist}
    			 	</ul>
