@@ -561,33 +561,9 @@ class Index  extends Common
 
             $city = Db::table('city')->where('status',1)->select();
 
-            $brand = $this->brand();//品牌
-
-            $price=$this->price(); //价格
-
-            $subface=$this->subface();//级别
-
-            $age=$this->get_car_allage();//车龄
-
-            $licheng=$this->car_mileage();//里程
-
-            $output=$this->output('');//排量
-
-            $gearbox=$this->gearbox('');//变速箱
-
-            $blowdown=$this->blowdown('');//排放标准
-
-            $fuel=$this->fuel('');//燃料
-
-            $car_body=$this->car_body('');//车身
-
-            $car_drive=$this->car_drive('');//燃气
-
-            $color =$this->color('');//颜色
-
-
             //接受参数
             $data = $this->params;
+            $param_array = [];
             dump($data);
 
             if (!empty($data['user_id'])){
@@ -608,6 +584,7 @@ class Index  extends Common
                 $PageIndex = $data['page'];
             }
 
+            #品牌
             $where = "1=1  and city_id =".$city_id;
             if (!empty($data['brand']) && $data['brand'] != "s" ) {
                 $b_id = Db::table("car_brand")->field("id, name")->where('pin', 'eq', $data['brand'])->select();
@@ -617,6 +594,196 @@ class Index  extends Common
                     $brand_name = $b_id[0]["name"];
                 }
             }
+
+            //级别suv
+            if (!empty($data['v_s'])){
+                $where.=" and subface=".$data['v_s'];
+                $subface_res = Db::table("subface")->field("name")->where("face_id", 'eq', $data['v_s'])->select();
+                $param_array[$data['k_s'].$data['v_s']]['name'] = $subface_res[0]['name'];
+            } else {
+                $data['k_s'] = "";
+                $data['v_s'] = "";
+            }
+
+            //颜色
+            if (!empty($data['v_c'])){
+                $where.=" and color= ". $data['v_c'];
+                array_push($param_array, $data['k_c'].$data['v_c']);
+                $param_array[$data['k_c'].$data['v_c']]['name'] = $this->color($data['v_c']);
+            } else {
+                $data['k_c'] = "";
+                $data['v_c'] = "";
+            }
+
+            //排量
+
+            if (!empty($data['v_o'])){
+                $where.=" and output=".$data['v_o'];
+                $pailiang_res = Db::table("pailiang")->field("pailiang")->where("id", 'eq', $data['v_o'])->select();
+                $param_array[$data['k_o'].$data['v_o']]['name'] = $pailiang_res[0]['pailiang'];
+            } else {
+                $data['k_o'] = "";
+                $data['v_o'] = "";
+            }
+            //变速箱
+            if (!empty($data['v_g'])){
+                $where.=" and gearbox= ".$data['v_g'];
+                $bainsuxiang = Db::table("bsq")->field("bsq")->where("id", 'eq', $data['v_g'])->select();
+                $param_array[$data['k_g'].$data['v_g']]['name'] = $bainsuxiang[0]['bsq'];
+            } else {
+                $data['k_g'] = "";
+                $data['v_g'] = "";
+            }
+
+            //汽油 柴油 油漆混合
+            if (!empty($data['v_f'])){
+                $where.=" and fuel= ".$data['v_f'];
+                $param_array[$data['k_f'].$data['v_f']]['name'] = $this->fuel($data['v_f']);
+            } else {
+                $data['k_f'] = "";
+                $data['v_f'] = "";
+            }
+
+            //价格级别
+            if (!empty($data['v_p'])){
+                $param_array[$data['k_p'].$data['v_p']]['name'] = $this->get_price($data['v_p']);
+                $prices = explode('-', $data['v_p']);
+                $where.=" and price between ".$prices[0]." and ".$prices[1];
+            } else {
+                $data['k_p'] = "";
+                $data['v_p'] = "";
+            }
+
+            #驱动
+            if (!empty($data['v_d'])) {
+                $where.=" and car_drive= ".$data['v_d'];
+                $qudong = Db::table("qudong")->field("q_name")->where("id", 'eq', $data['v_d'])->select();
+                $param_array[$data['k_d'].$data['v_d']]['name'] = $qudong[0]['q_name'];
+            } else {
+                $data['k_d'] = "";
+                $data['v_d'] = "";
+            }
+
+            #车身
+            if(!empty($data['v_b'])) {
+                $where.= " and car_body= " . $data['v_b'];
+                $cheshen = Db::table('cheshen')->field('cs_name')->where(['id' => $data['v_b']])->select();
+                $param_array[$data['k_b'] . $data['v_b']]['name'] = $cheshen[0]['cs_name'];
+            } else {
+                $data['k_b'] = "";
+                $data['v_b'] = "";
+            }
+            #排放标准
+            if(!empty($data['v_l'])) {
+                $where.= " and car_body= " . $data['v_l'];
+                $cheshen = Db::table('p_bzhun')->field('biaozhun')->where(['id' => $data['v_l']])->select();
+                $param_array[$data['k_l'] . $data['v_l']]['name'] = $cheshen[0]['biaozhun'];
+            } else {
+                $data['k_l'] = "";
+                $data['v_l'] = "";
+            }
+            #里程
+            if (!empty($data['v_m'])) {
+                $where.= " and car_mileage= " . $data['v_m'];
+                $param_array[$data['k_m'] . $data['v_m']]['name'] = $this->car_mileage($data['v_m']);
+            } else {
+                $data['k_m'] = "";
+                $data['v_m'] = "";
+            }
+            /*$data['k_d'] = "";
+            $data['v_d'] = "";*/
+            /*$data['k_b'] = "";
+            $data['v_b'] = "";*/
+            $data['k_n'] = "";
+            $data['v_n'] = "";
+            /*$data['k_l'] = "";
+            $data['v_l'] = "";*/
+            /*$data['k_m'] = "";
+            $data['v_m'] = "";*/
+            $data['k_a'] = "";
+            $data['v_a'] = "";
+
+            $brand_param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
+
+            // 价格
+            $param_close = sprintf($brand_param_format, "","" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+            if (!empty($data['k_p'])) {
+                $param_array[$data['k_p'].$data['v_p']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            }
+            // 级别
+            $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,'','' ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+            if (!empty($data['k_s'])) {
+                $param_array[$data['k_s'].$data['v_s']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            }
+            // 排量
+            $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,'','' ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+            if (!empty($data['k_o'])) {
+                $param_array[$data['k_o'].$data['v_o']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            }
+            // 变速箱
+            $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,'','' ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+            if (!empty($data['k_g'])) {
+                $param_array[$data['k_g'].$data['v_g']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            }
+            // 颜色
+            $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,'','' ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+            if (!empty($data['k_c'])) {
+                $param_array[$data['k_c'].$data['v_c']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            }
+            // 燃料
+            $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,'','' ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+            if (!empty($data['k_f'])) {
+                $param_array[$data['k_f'].$data['v_f']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            }
+            #驱动
+            $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,'','' ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+            if (!empty($data['k_d'])) {
+                $param_array[$data['k_d'].$data['v_d']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            }
+            #车身
+            $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,'','' ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+            if (!empty($data['k_b'])) {
+                $param_array[$data['k_b'].$data['v_b']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            }
+            #排放标准
+            $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],'','',$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+            if (!empty($data['k_l'])) {
+                $param_array[$data['k_l'].$data['v_l']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            }
+            #里程
+            $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],'','',$data['k_a'],$data['v_a']);
+            if (!empty($data['k_m'])) {
+                $param_array[$data['k_m'].$data['v_m']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            }
+
+            $brand_param = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+
+
+            $brand = $this->brand($brand_param);//品牌
+
+            $price=$this->price($data); //价格
+
+            $subface=$this->subface($data);//级别
+
+            $age=$this->get_car_allage();//车龄
+
+            $licheng=$this->car_mileage();//里程
+
+            $output=$this->output('',$data);//排量
+
+            $gearbox=$this->gearbox('',$data);//变速箱
+
+            $blowdown=$this->blowdown('',$data);//排放标准
+
+            $fuel=$this->fuel('',$data);//燃料
+
+            $car_body=$this->car_body('',$data);//车身
+
+            $car_drive=$this->car_drive('',$data);//驱动
+
+            $color =$this->color('',$data);//颜色
+
+
             /*if (!empty($data['brand_id'])){
                 $brand_id = $data['brand_id'];//品牌id
             }*/
@@ -883,10 +1050,11 @@ class Index  extends Common
                     $res[$key]['page']=$PageIndex;
                 }
             }*/
-
         $res = Db::table('rele_car')->where($where)->paginate(13);
-        $ABC = $this->app_brand_ios();//A b c  按车型排序
 
+        $ABC = $this->app_brand_ios();//A b c  按车型排序
+        $this->assign("brand_pin", $data['brand']);
+        $this->assign('param_array', $param_array);
         /*$res = $res ? $res : array();*/
         $this->assign('brand_name',empty($brand_name)?"": $brand_name);
         $this->assign('city',$city);
@@ -1839,12 +2007,8 @@ class Index  extends Common
         //获取品牌，厂商，名字
         $carinfo['car_name']=$this->get_carname($carinfo['cartype_id']);
 
-
-
         //获取店铺的详情
         $shopinfo=Db::table("user_shop")->field("shop_id,shop_name,mimg,shop_address,shop_phone,qid,latitude as lat,longitude as lng")->where("user_id=".$carinfo['user_id'])->find();
-
-
         //获取店铺de平均评分
         $remark_info=Db::table("remark")->field("id,all_score")->where("shop_id",$shopinfo['shop_id'])->select();
         $all_score="";
