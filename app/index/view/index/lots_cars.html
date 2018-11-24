@@ -26,7 +26,7 @@
 						<div class="list_brand  slide_up list_item gj_clear">
 							<div class="list_title">品牌</div>
 							<div class="screening-margin gj_clear">
-								<div class="list_car_brand list_detail_sel">{volist name="brand" id="val"}<a href="{$domain}/{$Think.session.cityurl}/{$val.pin}">{$val.name}</a>{/volist}</div>
+								<div class="list_car_brand list_detail_sel">{volist name="brand" id="val"}<a href="{$domain}/{$Think.session.cityurl}/{$val.pin}/">{$val.name}</a>{/volist}</div>
 								<span class="more">更多品牌<i><img src="__STATIC__/img/down1.png" alt="" width="12"/></i></span>
 							</div>
 						</div>
@@ -81,7 +81,7 @@
 							<div class="screening-margin gj_clear">
 								<div class="list_detail_sel">
 									{volist name="price" id="vo"}
-									<a href="{$domain}/{$Think.session.cityurl}/lots_cars?price_range={$vo.id}">{$vo.name}</a>
+									<a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.param}">{$vo.name}</a>
 									{/volist}
 								</div>
 								<div class="price_handle">
@@ -95,7 +95,7 @@
 							<div class="screening-margin gj_clear">
 								<div class="list_detail_sel">
 									{volist name="subface" id="vo"}
-									<a href="{$domain}/{$Think.session.cityurl}/lots_cars?subface={$vo.id}" class="active">{$vo.name}</a>
+									<a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.param}" class="active">{$vo.name}</a>
 								    {/volist}
 								</div>
 								<!--<span class="more">多选<i>+</i></span>-->
@@ -124,7 +124,7 @@
 							                <dd> <a rel="nofollow" href="#" data-for="hidden_k" data-valueid="0" class="preventdefault" title="不限二手车">不限</a> </dd>
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_k" data-valueid="0-1" class="preventdefault" title="1万公里以内二手车">1万公里以内</a> </dd>-->
 											  {volist name="licheng" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/lots_cars?car_mileage={$val.id}" data-for='hidden_k' data-valueid='' class='preventdefault' title=''>{$val.name}</a></dd>
+											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_k' data-valueid='' class='preventdefault' title=''>{$val.name}</a></dd>
 											  {/volist}
 										  </dl>
 							            </div>
@@ -136,7 +136,7 @@
 							              <div class="menu menu6" style="display: none;" id="aselect4">
 							                <dd> <a rel="nofollow" href="#" data-for="hidden_j" data-valueid="0" class="preventdefault" title="不限二手车">不限</a> </dd>
 											  {volist name="output" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/lots_cars?output={$val.id}" data-for='hidden_j' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_j' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
 											  {/volist}
 											  <!--<dd> <a rel="nofollow" href="#" data-for="hidden_j" data-valueid="0-1" class="preventdefault" title="1.0L以下二手车">1.0L以下</a> </dd>-->
 							              </div>
@@ -150,7 +150,7 @@
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_g" data-valueid="1" class="preventdefault" title="自动档二手车">自动</a> </dd>-->
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_g" data-valueid="2" class="preventdefault" title="手动档二手车">手动</a> </dd>-->
 											  {volist name="gearbox" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/lots_cars?gearbox={$val.id}" data-for='hidden_g' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_g' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
 											  {/volist}
 										  </div>
 							            </div>
@@ -164,7 +164,7 @@
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_h" data-valueid="4-" class="preventdefault" title="国四以上二手车">国四以上</a> </dd>-->
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_h" data-valueid="5" class="preventdefault" title="国五二手车">国五</a> </dd>-->
 											  {volist name="blowdown" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/lots_cars?blowdown={$val.id}" data-for='hidden_h' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_h' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
 											  {/volist}
 							              </dl>
 							            </div>
@@ -174,7 +174,7 @@
 							              <div class="menu-selected">驱动</div>
 							              <div class="menu menu9" style="display: none;" id="aselect8">
 											  {volist name="car_drive" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/lots_cars?car_drive={$val.id}" data-for='hidden_q' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_q' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
 											  {/volist}
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_q" data-valueid="0" class="preventdefault" title="不限二手车">前驱</a> </dd>-->
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_q" data-valueid="2" class="preventdefault" title="2座二手车">前驱</a> </dd>-->
@@ -187,7 +187,7 @@
 							              <div class="menu-selected">车身</div>
 							              <div class="menu menu12" style="display: none;" id="aselect12">
 											  {volist name="car_body" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/lots_cars?car_body={$val.id}" data-for='hidden_x' data-valueid='' class='preventdefault' title='不限二手车'>{$val.name}</a>
+											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_x' data-valueid='' class='preventdefault' title='不限二手车'>{$val.name}</a>
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_x" data-valueid="0" class="preventdefault" title="不限二手车">前驱</a> </dd>-->
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_x" data-valueid="2" class="preventdefault" title="2座二手车">前驱</a> </dd>-->
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_x" data-valueid="4" class="preventdefault" title="4座二手车">前驱</a> </dd>-->
@@ -200,10 +200,8 @@
 							            <div data-toggle="select" class="select-menu" id="select6">
 							              <div class="menu-selected">颜色</div>
 							              <div class="menu menu7 radius menuCar07" style="display: none;" id="aselect6">
-							                <dd> <a rel="nofollow" href="" data-for="hidden_c" data-valueid="0" class="preventdefault c0" title="不限二手车">不限</a> </dd>
 											  {volist name="color" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/lots_cars?color={$val.id}" data-for='hidden_c' data-valueid='' class='preventdefault c15' title=''>{$val.name}</a> </dd>
-							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_c" data-valueid="1" class="preventdefault c1" title="黑色二手车">黑色</a> </dd>-->
+											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_c' data-valueid='' class='preventdefault c15' title=''>{$val.name}</a> </dd>
 											  {/volist}
 							              </div>
 							            </div>
@@ -215,7 +213,7 @@
 
 							                <dd> <a rel="nofollow" href="" data-for="hidden_d" data-valueid="0" class="preventdefault" title="不限二手车">不限</a> </dd>
 											  {volist name="fuel" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/lots_cars?fuel={$val.id}" data-for='hidden_w' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_w' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_d" data-valueid="1" class="preventdefault" title="汽油二手车">汽油</a> </dd>-->
 											  {/volist}
 
@@ -232,8 +230,10 @@
 								<ul class="list_detail_sel car-selected">
 									{if condition="!empty($brand_name)"}
 									<li class='list'><span class='active2 car-model'>{$brand_name}</span><span class='close'><span class='cha'>×</span></span></li>
-									{else /}
 									{/if}
+									{volist name="param_array" id="param"}
+									<li class='list'><span class='active2 car-model'>{$param.name}</span><span class="close" id="{$param.param}" class='close'><span class='cha'>×</span></span></li>
+									{/volist}
 								</ul>
 								<!--<span class="more">多选<i>+</i></span>-->
 							</div>
@@ -363,6 +363,8 @@
                 if ($(this).parent().siblings().length == 0) {
                     $(this).parent().remove();
                     window.location.href = "{$domain}/{$Think.session.cityurl}/s";
+                }else {
+                    window.location.href = "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + $(this).attr("id");
                 }
             });
 
