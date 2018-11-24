@@ -136,6 +136,7 @@ class Newcar extends Common
 
         //接受参数
         $data = $this->params;
+        dump($data);
         $param_array = [];
 
         $where="1=1  and city_id =".$city_id;
@@ -230,6 +231,12 @@ class Newcar extends Common
         $data['v_b'] = "";
         $data['k_n'] = "";
         $data['v_n'] = "";
+        $data['k_l'] = "";
+        $data['v_l'] = "";
+        $data['k_m'] = "";
+        $data['v_m'] = "";
+        $data['k_a'] = "";
+        $data['v_a'] = "";
 
         $ss = Db::table('new_car')->where($where)->limit(20)->select();
         foreach ($ss as $key => $val) {
@@ -291,7 +298,7 @@ class Newcar extends Common
 
         $fuel=$this->fuel('', $data);//燃料
 
-        $car_body=$this->car_body('');//车身
+        $car_body=$this->car_body('',$data);//车身
 
         $car_drive=$this->car_drive('');//燃气
 
