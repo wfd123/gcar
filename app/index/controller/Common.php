@@ -1272,42 +1272,42 @@ class Common extends Controller{
             ),
             array(
                 'id' => '2',
-                'name' => '京5',
+                'name' => '京Ⅴ',
                 'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],'l','2',$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a'])
             ),
             array(
                 'id' => '3',
-                'name' => '欧5',
+                'name' => '欧Ⅴ',
                 'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],'l','3',$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a'])
             ),
             array(
                 'id' => '4',
-                'name' => '欧4',
+                'name' => '欧Ⅳ',
                 'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],'l','4',$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a'])
             ),
             array(
                 'id' => '5',
-                'name' => '欧3',
+                'name' => '欧Ⅲ',
                 'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],'l','5',$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a'])
             ),
             array(
                 'id' => '6',
-                'name' => '国5',
+                'name' => '国Ⅴ',
                 'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],'l','6',$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a'])
             ),
             array(
                 'id' => '7',
-                'name' => '国4',
+                'name' => '国Ⅳ',
                 'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],'l','7',$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a'])
             ),
             array(
                 'id' => '8',
-                'name' => '国3',
+                'name' => '国Ⅲ',
                 'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],'l','8',$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a'])
             ),
             array(
                 'id' => '9',
-                'name' => '国2',
+                'name' => '国Ⅱ',
                 'param' => empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],'l','9',$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a'])
             ),
         );
@@ -1760,7 +1760,7 @@ class Common extends Controller{
      */
     public function price($data = ''){
 
-        $price=Db::table("price_range")->field("price_id as id,name")->order("level asc")->limit(4)->select();
+        $price=Db::table("price_range")->field("price_id as id,name")->order("level asc")->limit(6)->select();
         $brand_param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
 
         foreach ($price as $key => $val) {
@@ -1822,7 +1822,7 @@ class Common extends Controller{
                 $price = "5-8万";
                 break;
             case 5:
-                return "8-10万";
+                return "5-8万";
                 break;
             case 6:
                 $price = "10-15万";
@@ -1831,16 +1831,22 @@ class Common extends Controller{
                 $price = "15-20万";
                 break;
             case 8:
-                $price = "20-30万";
+                $price = "8-10万";
                 break;
             case 9:
                 $price = "30-50万";
                 break;
             case 10:
-                $price = "50-100万";
+                $price = "10-15万";
                 break;
             case 11:
-                $price = "100万以上";
+                $price = "15-20万";
+                break;
+            case 12:
+                $price = "15-20万";
+                break;
+            case 13:
+                $price = "15-20万";
                 break;
             default :
                 $price = "";
