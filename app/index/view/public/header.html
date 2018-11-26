@@ -43,9 +43,9 @@
 	        </div>
 	        <div class="ipt_cont">
 	        	  <div class="search_ipts">
-		        	 <input type="text"  name="txtNewcar" autocomplete="off" placeholder="" />
+		        	 <input type="text" id="mingzi"  name="twocat" autocomplete="off" placeholder="" />
 					  <button type="submit" class="search_btn"><i class="fa fa-search"></i> 搜索</button>
-		        </div>
+				  </div>
 		       	<!--<div class="fn_hide search_ipts">
 		        	 <input type="text"  name="txtNewcar" autocomplete="off" placeholder="请输入喜欢的品牌或车型" />
 		        	 <a class="search_btn">搜索</a>
@@ -118,7 +118,16 @@
 	    $(a).on("click",c,function(){
 	        $(this).addClass('active').siblings().removeClass('active');
 	        $(b).eq($(this).index()).show().siblings().hide();
-	    })
+	    });
+
+        $(".search_ipts").on("click",".search_btn",function(){
+            var mingzi = $('#mingzi').val();
+            if(mingzi.length == 0) {
+				alert('空');
+			} else {
+                window.location.href = "{$domain}/{$Think.session.cityurl}/" + mingzi;
+			}
+        });
 	}
 //	$('.wrap li').click(function(){
 //		
