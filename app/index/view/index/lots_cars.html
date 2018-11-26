@@ -249,12 +249,12 @@
 									{/volist}
 								</div>
 								<div class="price_handle">
-									{if condition="!empty($datas)"}
+									<!--{if condition="!empty($datas)"}-->
 									<div class="box">
-										<input type="text" id="min" name="min" value="{$datas[0]}" />万</div><em>-</em><div class="box"><input type="text" id="max" name="max" value="{$datas[2]}" />万
+										<input type="text" id="min" name="min" value="" />万</div><em>-</em><div class="box"><input type="text" id="max" name="max" value="" />万
 									</div>
 									<a href="javascript:;" class="sure" >确定</a>
-									{/if}
+									<!--{/if}-->
 								</div>
 							</div>
 
@@ -548,9 +548,9 @@
                     console.log(a)
                 }
             });
-            var minnum = $('#min').val();
+            /*var minnum = $('#min').val();
             var maxnum = $('#max').val();
-            $('.car-model').html(minnum + '万-' + maxnum + '万');
+            $('.car-model').html(minnum + '万-' + maxnum + '万');*/
 
 
 		    $(".slide_down").mouseout(function(ev){
