@@ -563,10 +563,10 @@ class Index  extends Common
 
             //接受参数
             $data = $this->params;
-            if(!empty($data['v_p'])) {
+            /*if(!empty($data['v_p'])) {
                 $datas = str_split($data['v_p']);
                 $this->assign('datas',$datas);
-            }
+            }*/
             $param_array = [];
             if (!empty($data['user_id'])){
 
@@ -595,6 +595,10 @@ class Index  extends Common
                     /*$brand_id = $b_id[0]["id"];*/
                     $brand_name = $b_id[0]["name"];
                 }
+            }
+            #搜索
+            if(!empty($data['key'])){
+                $where.=" and name_li like '%".$data['key']."%'  ";
             }
 
             //级别suv
@@ -1051,11 +1055,6 @@ class Index  extends Common
                     $res[$key]['page']=$PageIndex;
                 }
             }*/
-        $key = input('key');
-        $where = [];
-        if($key && $key !== ""){
-            $where['name_li'] = ['like',"%" . $key . "%"];
-        }
         $res = Db::table('rele_car')->where($where)->paginate(13);
         $ABC = $this->app_brand_ios();//A b c  按车型排序
         $this->assign("brand_pin", $data['brand']);
