@@ -16,12 +16,12 @@ use think\Paginator;
 class Bootstrap extends Paginator
 {
 
-    /**
+    /*
      * 上一页按钮
      * @param string $text
      * @return string
      */
-    protected function getPreviousButton($text = "&laquo;")
+    protected function getPreviousButton($text = "上一页")
     {
 
         if ($this->currentPage() <= 1) {
@@ -40,7 +40,7 @@ class Bootstrap extends Paginator
      * @param string $text
      * @return string
      */
-    protected function getNextButton($text = '&raquo;')
+    protected function getNextButton($text = '下一页')
     {
         if (!$this->hasMore) {
             return $this->getDisabledTextWrapper($text);
@@ -49,6 +49,41 @@ class Bootstrap extends Paginator
         $url = $this->url($this->currentPage() + 1);
 
         return $this->getPageLinkWrapper($url, $text);
+    }
+
+    /**
+     * 首页按钮
+     * @param string $text
+     * @return string
+     */
+    protected function getFirstButton($text = '首页')
+    {
+        $nowPage = $this->rollPage;//计算分页临时变量
+        //当  总页数大于定义的页数时  且  当前页数大于前几页时  显示首页
+        if ($this->lastPage > $this->showPage && $this->currentPage > $nowPage) {
+
+            $url = $this->url(1);
+
+            return $this->getPageLinkWrapper($url, $text);
+        }
+    }
+
+    /**
+     * 末页按钮
+     * @param string $text
+     * @return string
+     */
+    protected function getLastButton($text = '末页')
+    {
+        $nowPage = $this->rollPage;//计算分页临时变量
+
+        //当  总页数大于定义的页数时  且  当前页数小于最后的几页时  显示末页
+        if ($this->lastPage > $this->showPage && $this->currentPage < ($this->lastPage - $nowPage)) {
+
+            $url = $this->url($this->lastPage);
+
+            return $this->getPageLinkWrapper($url, $text);
+        }
     }
 
     /**
