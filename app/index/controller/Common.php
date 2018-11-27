@@ -1140,7 +1140,7 @@ class Common extends Controller{
         return $res;
     }
     // 里程
-    function car_mileage($data=[]){
+    function car_mileage($id,$data=[]){
         $param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
         $arr = array(
             array(
