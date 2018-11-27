@@ -7,7 +7,8 @@
 	<link rel="stylesheet" href="__STATIC__/css/style.css" />
 	<link rel="stylesheet" href="__STATIC__/css/other.css" />
 	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
-	<script src="__STATIC__/js/jquery.lazyload.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__STATIC__/js/jquery.lazyload.min.js"></script>
+	<script src="__STATIC__/js/layer/layer.js"></script>
 	<style>
 		/*分页样式*/
 		.pagination{text-align:center;margin-top:20px;margin-bottom: 20px;}
@@ -18,6 +19,9 @@
 						}
 		.pagination .active{background-color: #EA5200;color: #fff;}
 		.pagination .disabled{color:#aaa;}
+		body .layui-layer{
+			top:35% !important;
+		}
 	</style>
 	<body>
 		<div class="header">
@@ -249,10 +253,17 @@
 									{/volist}
 								</div>
 								<div class="price_handle">
+									{if condition="!empty($datas)"}
+									<div class="box">
+										<input type="text" id="min" name="min" value="{$datas[0]}" />万</div><em>-</em><div class="box"><input type="text" id="max" name="max" value="{$datas[1]}" />万
+									</div>
+									<a href="javascript:;" class="sure" >确定</a>
+									{else /}
 									<div class="box">
 										<input type="text" id="min" name="min" value="" />万</div><em>-</em><div class="box"><input type="text" id="max" name="max" value="" />万
 									</div>
 									<a href="javascript:;" class="sure" >确定</a>
+									{/if}
 								</div>
 							</div>
 
@@ -479,6 +490,7 @@
 			<!--{include file="public/footer"}-->
 		<!--</div>-->
 	</body>
+
 	<script>
 		$(function(){
 
@@ -538,22 +550,34 @@
                 var min = $('#min').val();
                 var max = $('#max').val();
                 var reg = /^[0-9]*$/;
-                /*if(min.length == 0 && max.length == 0) {
-                    alert(11);
-				}*/
-                if(!reg.test(min) && !reg.test(max)){
-                    alert("请输入数字");
-                }else{
-                    var a = $(this).parent().siblings().children("a").eq(1).attr('id');
-                    window.location.href = "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + "sn_p"+min+"-"+max;
-                    console.log(a)
-                }
+                if(min.length == 0 && max.length == 0) {
+                    layer.msg('请输入内容!',);
+				} else {
+                    if(!reg.test(min) && !reg.test(max)){
+                        alert("请输入数字");
+                    }else{
+                        var a = $(this).parent().siblings().children("a").eq(1).attr('href');
+                        var b = a.split('/');
+						var c = (b[b.length-1]);
+                        var d = [];
+						for (var i=0;i<c.length;i++) {
+                            d.push(c[i])
+						}
+						d.splice(4,1,min);
+						d.splice(6,1,max);
+						var e = d.join('');
+						// b.splice(5,1,e);
+						// var f = b.join('');
+						// console.log(f);
+                        window.location.href = "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + e;
+                    }
+				}
             });
             /*var minnum = $('#min').val();
             var maxnum = $('#max').val();
-            $('.car-model').html(minnum + '万-' + maxnum + '万');*/
-
-
+            if(minnum.length !== 0 && maxnum.length !== 0) {
+                $('.car-selected .list').append("<li class='list'><span class='active2 car-model'>"+minnum+'-'+maxnum+"</span><span class='close'><span class='cha'>×</span></span></li>")
+            }*/
 		    $(".slide_down").mouseout(function(ev){
        		 var box=document.getElementById($(this).attr("id"));
 	             var ev=ev||window.event;
