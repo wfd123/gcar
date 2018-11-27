@@ -136,7 +136,6 @@ class Newcar extends Common
 
         //接受参数
         $data = $this->params;
-        dump($data);
         $param_array = [];
 
         $where="1=1  and city_id =".$city_id;
@@ -149,8 +148,10 @@ class Newcar extends Common
             }
         }
         //模糊查找 如 大众 奥迪 朗逸
-        if(!empty($data['key'])){
-            $where.=" and name like '%".$data['key']."%'  ";
+
+        if(!empty($data['keys'])){
+            dump($data['keys']);
+            $where.=" and name_li like '%".$data['keys']."%'  ";
         }
 
         //级别suv
@@ -238,14 +239,14 @@ class Newcar extends Common
         $data['k_a'] = "";
         $data['v_a'] = "";
 
-        $ss = Db::table('new_car')->where($where)->limit(20)->select();
-        foreach ($ss as $key => $val) {
+        $ss = Db::table('new_car')->where($where)->paginate(12);
+        /*foreach ($ss as $key => $val) {
             $ss[$key]['img_url']=$this->get_carimg($val['img_300'],2);
             $ss[$key]['name']=$this->get_carname($val['cartype_id']);
             $ss[$key]['pay10_s2']=$val['pay10_s2'];
             $ss[$key]['pay10_y2']=$val['pay10_y2'];
             unset($ss[$key]['img_300']);
-        }
+        }*/
 
 
 
