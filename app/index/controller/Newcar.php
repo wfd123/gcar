@@ -150,7 +150,6 @@ class Newcar extends Common
         //模糊查找 如 大众 奥迪 朗逸
 
         if(!empty($data['keys'])){
-            dump($data['keys']);
             $where.=" and name_li like '%".$data['keys']."%'  ";
         }
 
