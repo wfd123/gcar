@@ -563,6 +563,8 @@ class Index  extends Common
 
             //接受参数
             $data = $this->params;
+            dump($data);
+            /*dump(explode(",",$data['v_p']));*/
             /*if(!empty($data['v_p'])) {
                 $datas = str_split($data['v_p']);
                 $this->assign('datas',$datas);
@@ -690,7 +692,8 @@ class Index  extends Common
             #里程
             if (!empty($data['v_m'])) {
                 $where.= " and car_mileage= " . $data['v_m'];
-                $param_array[$data['k_m'] . $data['v_m']]['name'] = $this->car_mileage($data['v_m']);
+                $licheng = Db::table('licheng')->where(['id' => $data['v_m']])->select();
+                $param_array[$data['k_m'] . $data['v_m']]['name'] = $licheng[0]['name'];
             } else {
                 $data['k_m'] = "";
                 $data['v_m'] = "";
@@ -772,7 +775,7 @@ class Index  extends Common
 
             $age=$this->get_car_allage();//车龄
 
-            $licheng=$this->car_mileage();//里程
+            $licheng=$this->car_mileage('',$data);//里程
 
             $output=$this->output('',$data);//排量
 
