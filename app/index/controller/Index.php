@@ -563,7 +563,6 @@ class Index  extends Common
 
             //接受参数
             $data = $this->params;
-            dump($data);
             /*dump(explode(",",$data['v_p']));*/
             /*if(!empty($data['v_p'])) {
                 $datas = str_split($data['v_p']);
@@ -715,6 +714,7 @@ class Index  extends Common
 
             // 价格
             $param_close = sprintf($brand_param_format, "","" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+
             if (!empty($data['k_p'])) {
                 $param_array[$data['k_p'].$data['v_p']]['param'] = empty($param_close)? "" : "sn_".$param_close;
             }
@@ -768,8 +768,16 @@ class Index  extends Common
 
 
             $brand = $this->brand($brand_param);//品牌
-
-            $price=$this->price($data); //价格
+            if($data['v_p'] == "0-3" || $data['v_p'] == "3-5" || $data['v_p'] == "5-8" || $data['v_p'] == "8-10" || $data['v_p'] == "10-15" || $data['v_p'] == "") {
+                $price=$this->price($data); //价格
+            } else {
+                $datas = explode("-",$data['v_p']);
+                if(!empty($datas)) {
+                    $param_array[$data['k_p'].$data['v_p']]['name'] = $datas[0] . '-' . $datas[1] . '万';
+                    $this->assign('datas',$datas);
+                }
+                $price=$this->price($data);
+            }
 
             $subface=$this->subface($data);//级别
 
