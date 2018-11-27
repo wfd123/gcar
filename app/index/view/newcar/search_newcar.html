@@ -251,9 +251,17 @@
 									<a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.param}">{$vo.name}</a>
 									{/volist}
 								</div>
-								<div class="price_handle">
-									<div class="box"><input type="text" name="minprice" id="mins" />万</div><em>-</em><div class="box"><input type="text" name="maxprice" id="maxs"/>万</div><a href="javascript:;" onclick="sub()" class="sure">确定</a>
-								</div>
+                                {if condition="!empty($datas)"}
+                                <div class="box">
+                                    <input type="text" id="min" name="min" value="{$datas[0]}" />万</div><em>-</em><div class="box"><input type="text" id="max" name="max" value="{$datas[1]}" />万
+                                </div>
+                                <a href="javascript:;" class="sure" >确定</a>
+                                {else /}
+                                <div class="box">
+                                    <input type="text" id="min" name="min" value="" />万</div><em>-</em><div class="box"><input type="text" id="max" name="max" value="" />万
+                                </div>
+                                <a href="javascript:;" class="sure" >确定</a>
+                                {/if}
 							</div>
 						</div>
 						<div class="list_jibie list_item gj_clear">
