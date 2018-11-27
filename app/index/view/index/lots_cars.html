@@ -249,12 +249,10 @@
 									{/volist}
 								</div>
 								<div class="price_handle">
-									<!--{if condition="!empty($datas)"}-->
 									<div class="box">
 										<input type="text" id="min" name="min" value="" />万</div><em>-</em><div class="box"><input type="text" id="max" name="max" value="" />万
 									</div>
 									<a href="javascript:;" class="sure" >确定</a>
-									<!--{/if}-->
 								</div>
 							</div>
 
@@ -287,15 +285,15 @@
 							            </div>-->
 							          </li>
 							          <li>
-							            <!--<div data-toggle="select" name="k" class="select-menu" id="select3">
+							            <div data-toggle="select" name="k" class="select-menu" id="select3">
 							              <div class="menu-selected">里程</div>
 							              <dl class="menu menu5" style="display: none;" id="aselect3">
-							                &lt;!&ndash;<dd> <a rel="nofollow" href="#" data-for="hidden_k" data-valueid="0-1" class="preventdefault" title="1万公里以内二手车">1万公里以内</a> </dd>&ndash;&gt;
+							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_k" data-valueid="0-1" class="preventdefault" title="1万公里以内二手车">1万公里以内</a> </dd>-->
 											  {volist name="licheng" id="val"}
 											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_k' data-valueid='' class='preventdefault' title=''>{$val.name}</a></dd>
 											  {/volist}
 										  </dl>
-							            </div>-->
+							            </div>
 							          </li>
 
 							          <li>
@@ -540,6 +538,9 @@
                 var min = $('#min').val();
                 var max = $('#max').val();
                 var reg = /^[0-9]*$/;
+                /*if(min.length == 0 && max.length == 0) {
+                    alert(11);
+				}*/
                 if(!reg.test(min) && !reg.test(max)){
                     alert("请输入数字");
                 }else{
