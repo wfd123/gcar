@@ -7,14 +7,183 @@
 	<link rel="stylesheet" href="__STATIC__/css/style.css" />
 	<link rel="stylesheet" href="__STATIC__/css/other.css" />
 	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
-	<script src="__STATIC__/js/jquery.lazyload.min.js" type="text/javascript" charset="utf-8"></script>		
-	<style>
-
-	</style>
+	<script src="__STATIC__/js/jquery.lazyload.min.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        /*分页样式*/
+        .pagination{text-align:center;margin-top:20px;margin-bottom: 20px;}
+        .pagination li{    margin: 0px 3px;
+            border: 1px solid #e6e6e6;
+            padding: 6px 12px;
+            display: inline-block;
+        }
+        .pagination .active{background-color: #EA5200;color: #fff;}
+        .pagination .disabled{color:#aaa;}
+    </style>
 	<body>		
 		<div class="header">
-			{include file="public/header"}
-		</div>
+            <div class="site_nav">
+                <div class="site_nav_bd">
+                    <div class="fleft">你好，欢迎来到管家车易站！
+                        欢迎用户{empty name="Think.cookie.phone"}
+                        <a href="{$domain}/{$Think.session.cityurl}/login" class="coloryel">【登录】</a>,免费<a href="{$domain}/{$Think.session.cityurl}/register" class="coloryel">【注册】</a>
+                        {else /}
+                        {$Think.cookie.phone}
+                        {/empty}</div>
+                    <div class="fright">
+                        <ul class="site_nav_menu">
+                            <li><a href="{$domain}/{$Think.session.cityurl}/"><img src="__STATIC__/img/shouye.png" alt="" />首页</a></li>
+                            <li class="sec_li"><a href="{$domain}/{$Think.session.cityurl}/twocar"><img src="__STATIC__/img/maic.png" alt="" />我要买车</a></li>
+                            <li><a href="{$domain}/{$Think.session.cityurl}/sell"><img src="__STATIC__/img/maic.png" alt="" />我要卖车</a></li>
+                            <li><a href="{$domain}/{$Think.session.cityurl}/appdownload"><img src="__STATIC__/img/xiazai.png" alt="" />APP下载</a></li>
+                            <li><a href=""><img src="__STATIC__/img/wangahn.png" alt="" />网站导航</a></li>
+                            {notempty name="Think.cookie.phone"}<li><a href="{$domain}/{$Think.session.cityurl}/per_his"><img src="__STATIC__/img/wangahn.png" alt="" />会员中心</a></li>{/notempty}
+                            {notempty name="Think.cookie.phone"}<li><a href="{$domain}/{$Think.session.cityurl}/logout"><img src="__STATIC__/img/wangahn.png" alt="" />安全退出</a></li>{/notempty}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="fn_show gj_clear header_show">
+                <div class="wrap gj_clear marginbt">
+                    <div class="logo">
+                        <h1> <a href="/index/index/index.html">二手车交易市场</a></h1>
+                    </div>
+                    <div class="city_current">
+                        <div class="address"><span>郑州</span><b class="icon1"></b></div>
+                        <div class="white-line"></div>
+                        <div class="city"  style="display: none;" >
+                            <ol>
+                                {volist name="city" id="val"}
+                                <a href="/{$val.pin}"> <li>{$val.name}</li></a>
+                                {/volist}
+
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="search gj_clear">
+
+                        <div class="search_tab">
+                            <a href="twocar" class="" id="">二手车</a>
+                            <a href="newcar" class="s_new">新车</a>
+                        </div>
+
+                        <div class="ipt_cont">
+                            <form name="admin_list_sea" class="form-search" method="post" action="">
+                            <div class="search_ipts">
+                                <input type="text" id="mingzi"  name="keys" autocomplete="off" placeholder="" />
+                                <button type="submit" class="search_btn"><i class="fa fa-search"></i> 搜索</button>
+                            </div>
+							</form>
+                            <!--<div class="fn_hide search_ipts">
+                              <input type="text"  name="txtNewcar" autocomplete="off" placeholder="请输入喜欢的品牌或车型" />
+                              <a class="search_btn">搜索</a>
+                         </div>
+                           <div class="fn_hide search_ipts">
+                                  <input type="text"  name="txtzerocar" autocomplete="off" placeholder="请输入喜欢的品牌或车型" />
+                              <a class="search_btn" >搜索</a>
+                         </div>-->
+
+                        </div>
+                        <!-- 搜索历史记录 -->
+                        <div id="history_list" class="search_list" style="display:none;"></div>
+                    </div>
+                </div>
+                <div class="nav gj_clear">
+                    <ul class="wrap">
+                        <li><a href="{$domain}">首页</a></li>
+                        <li ><a href="{$domain}/{$Think.session.cityurl}/newcar" class="sec_li">新车</a></li>
+                        <li><a href="{$domain}/{$Think.session.cityurl}/brand">二手车</a></li>
+                        <!--<li><a href="zeroCar.html">零首付</a></li>-->
+                        <li><a href="{$domain}/{$Think.session.cityurl}/sell">卖车</a></li>
+                        <li><a href="{$domain}/{$Think.session.cityurl}/change">置换</a></li>
+                        <li><a href="{$domain}/{$Think.session.cityurl}/news">新闻资讯</a></li>
+                        <li><a href="{$domain}/{$Think.session.cityurl}/appdownload">APP下载</a></li>
+                        {empty name="Think.cookie.phone"}<li><a href="{$domain}/{$Think.session.cityurl}/login">登录/注册</a></li>{/empty}
+                        <li><a href="{$domain}/{$Think.session.cityurl}/join_us">关于我们</a></li>
+                        <li><a href="{$domain}/{$Think.session.cityurl}/shop">优选商家</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="fn_hide gj_clear header_hide borbt">
+                <div class="wrap" >
+                    <div class="logo" >
+                        <h1 style="">
+                            <a href="/index/index/index.html"></a>
+                        </h1>
+                    </div>
+                    <div class="city_current">
+                        <div class="address"><span>郑州</span><b class="icon1"></b></div>
+                        <div class="white-line"></div>
+                        <div class="city"  style="display: none;" >
+
+                            <ol>
+                                <li></li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="header_tel">
+                        <img src="__STATIC__/img/phone1.png" alt="" height="17"/>
+                        0371-53375515
+                    </div>
+                    <div class="nav">
+                        <ul>
+                            <li><a href="{$domain}">首页</a></li>
+                            <li><a href="{$domain}/{$Think.session.cityurl}/twocar">二手车</a></li>
+                            <li><a href="{$domain}/{$Think.session.cityurl}/newcar">新车</a></li>
+                            <!--<li><a href="zeroCar.html">零首付</a></li>-->
+                            <li><a href="{$domain}/{$Think.session.cityurl}/sell">卖车</a></li>
+                            <li><a href="{$domain}/{$Think.session.cityurl}/change">置换</a></li>
+                            <li><a href="{$domain}/{$Think.session.cityurl}/news">新闻资讯</a></li>
+                            <li><a href="{$domain}/{$Think.session.cityurl}/appdownload">APP下载</a></li>
+                            {empty name="Think.session.phone"}<li><a href="{$domain}/{$Think.session.cityurl}/login">登录/注册</a></li>{/empty}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <script>
+
+                function tab(a,b,c){
+                    $(a).on("click",c,function(){
+                        $(this).addClass('active').siblings().removeClass('active');
+                        $(b).eq($(this).index()).show().siblings().hide();
+                    });
+
+                    $(".search_ipts").on("click",".search_btn",function(){
+                        var mingzi = $('#mingzi').val();
+                        if(mingzi.length == 0) {
+                            alert('空');
+                        } else {
+                            window.location.href = "{$domain}/{$Think.session.cityurl}/" + mingzi;
+                        }
+                    });
+                }
+                //	$('.wrap li').click(function(){
+                //
+                //		$(this).addClass('active').siblings().removeClass('active')
+                //	})
+                tab(".search_tab",".ipt_cont .search_ipts","a");
+                $(window).on('scroll',function(){
+                    var bH=$("body").outerHeight();
+                    var wH=$(window).innerHeight();
+
+                    var wsH=$(window).scrollTop();
+                    var sH=$(".header .fn_show").height();
+                    //	console.log(bH+'页面高度---页面可用高度'+wH+'-----滚动高度'+wsH+'-----页面头部高度'+sH)
+                    //	console.log(bH-wH)
+                    if(wsH+50>sH){
+                        $(".header .header_hide").css('display','block');
+                        $(".header .header_show").css('display','none');
+                        $(".header").addClass('fixedTop')
+                    }else{
+                        $(".header .header_hide").css('display','none');
+                        $(".header .header_show").css('display','block');
+                        $(".header").removeClass('fixedTop')
+                    }
+
+                })
+
+            </script>
+
+        </div>
 		<div class="full_wid">
 			<div class="breadnav">您的位置：<a href="#">郑州新车购买市场</a>>><a href="#">新车 >></a></div>
 			<div class="wrap">
@@ -229,17 +398,15 @@
 
 							<li class="items5">
 
-								<a href="{$domain}/{$Think.session.cityurl}/detail/{$val.id}" class="car_img flex_center">{if condition="$val['img_url']"}<img src="{$val.img_url}" alt="" />{else /}
-									<img src="__STATIC__/img/car111.png"> {/if}</a>
+								<a href="{$domain}/{$Think.session.cityurl}/detail/{$val.id}" class="car_img flex_center"></a>
 								<a href="{$domain}/{$Think.session.cityurl}/detail/{$val.id}" class="car_desc">
 									<h3>{$val.name}</h3>
 									<p><span class="car_price"><b>{$val.can_price}</b>万</span><span class="car_sui">新车含税{$val.price}万</span></p>
 									<p><span>首付{$val.pay10_s2}</span> <span class="padlt20">月供{$val.pay10_y2}</span> </p>
 									<div class="che_ordered">立即预约</div></a>
-
 							</li>
-
                            {/volist}
+                             <p>{$ss->render()}</p>
 						</ul>
 					</div>
 					
