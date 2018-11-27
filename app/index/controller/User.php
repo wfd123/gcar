@@ -333,7 +333,7 @@ class User  extends Common {
 
         $age=$this->get_car_allage();//车龄
 
-        $licheng=$this->car_mileage();//里程
+        $licheng=$this->car_mileage('',$data=[]);//里程
 
         $output=$this->output('');//排量
 
@@ -343,11 +343,11 @@ class User  extends Common {
 
         $fuel=$this->fuel('');//燃料
 
-        $car_body=$this->car_body('');//车身
+        $car_body=$this->car_body('',$data);//车身
 
         $car_drive=$this->car_drive('');//燃气
 
-        $color =$this->color('');//颜色
+        $color =$this->color('',$data=[]);//颜色
         $brand = $this->brand();//品牌
 
         $ABC = $this->app_brand_ios();//A b c  按车型排序
