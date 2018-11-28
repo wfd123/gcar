@@ -1070,6 +1070,9 @@ class Index  extends Common
                 }
             }*/
         $res = Db::table('rele_car')->where($where)->paginate(13);
+        #关键字
+        $desc = Db::table('webkey')->where(['remark' => '二手车'])->find();
+        $this->assign('desc',$desc);
         $ABC = $this->app_brand_ios();//A b c  按车型排序
         $this->assign("brand_pin", $data['brand']);
         $this->assign('param_array', $param_array);
