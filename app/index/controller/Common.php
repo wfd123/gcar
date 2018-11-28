@@ -1348,7 +1348,7 @@ class Common extends Controller{
             $res[$key]['img_url'] = "http://39.106.67.47/butler_car/".ltrim($val['img_url'],'.');
             $res[$key]['param'] = empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,'c',$val['id'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
             if (!empty($id) && $id == $val['id']){
-                $name = $val['name'];
+                $name = empty($val['name'])? "" : $val['name'];
             }
         }
 
@@ -1364,6 +1364,7 @@ class Common extends Controller{
             return $res;
         }
     }
+
     // 驱动
     public function car_drive($id,$data=[]){
         $param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
@@ -1760,7 +1761,7 @@ class Common extends Controller{
      */
     public function price($data = ''){
 
-        $price=Db::table("price_range")->field("price_id as id,name")->order("level asc")->select();
+        $price=Db::table("price_range")->field("price_id as id,name")->order("level asc")->limit(8)->select();
         $brand_param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
 
         foreach ($price as $key => $val) {
@@ -1846,6 +1847,23 @@ class Common extends Controller{
                 $price = "";
         }
         return $price;
+    }
+
+    #排序
+    public function orde($data=[]) {
+        $param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
+        $pai = Db::name('rele_car')->order('pu_id desc')->select();
+        foreach ($pai as $k => $v) {
+            $param = empty($data) ? "" : sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,'n',$v['pu_id'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+            if (!empty($param)){
+                $subface[$k]['param'] = "sn_".$param;
+            } else {
+                $subface[$k]['param'] = "sn_s".$v['id'];
+            }
+        }
+        $param = empty($data) ? "" : sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,'','',$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+        array_unshift($subface, ['id' => 0, 'name' => '不限', 'param' => empty($param) ? "" : "sn_".$param]);
+        return $subface;
     }
 
     /*
