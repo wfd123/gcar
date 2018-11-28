@@ -48,7 +48,9 @@ class Change  extends Common
         $this->assign('domain',$domain);
 
         $er_car = $this->er_car($city_id);
-
+        #关键字
+        $desc = Db::table('webkey')->where(['remark' => '置换'])->find();
+        $this->assign('desc',$desc);
         $brand = $this->brand();//品牌
 
         //dump( $er_car);die;
