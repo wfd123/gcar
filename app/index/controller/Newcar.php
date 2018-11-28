@@ -98,7 +98,9 @@ class Newcar extends Common
         $new_car = $this->new_car($city_id); //新车
 
        // dump($new_car);die;
-
+        #关键字
+        $desc = Db::table('webkey')->where(['remark' => '新车'])->find();
+        $this->assign('desc',$desc);
         $this->assign('brand',$brand);
         $this->assign('price',$price);
         $this->assign('subface',$subface);
