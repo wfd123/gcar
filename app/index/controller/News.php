@@ -58,9 +58,7 @@ class News extends Common
         $new3 = $this->new_list(3);//媒体报道
         $new4 = $this->new_list(4);//特色活动
         $new5 = $this->new_list(5);//新车资讯
-        #关键字
-        $desc = Db::table('webkey')->where(['remark' => '新闻资讯首页'])->find();
-        $this->assign('desc',$desc);
+
         //dump($new1);die;
         $this->assign('er_car',$er_car);
         $this->assign('new_car',$new_car);
