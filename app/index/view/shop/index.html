@@ -43,7 +43,7 @@
 							<div class="classify">
 								<a href="" class="active" >不限</a>
 								{volist name="brand" id="val"}
-								<a href="lots_cars/?brand_id={$val.id}&page=1&sort=1">{$val.name}</a>
+								<a href="lots_cars">{$val.name}</a>
 								{/volist}
 							</div>
 						</li>
@@ -52,7 +52,7 @@
 						<div class="classify">
 							<a href="" class="active" >不限</a>
 							{volist name="price" id="val"}
-							<a href="lots_cars/?price_range={$val.id}&page=1&sort=1">{$val.name}</a>
+							<a href="lots_cars">{$val.name}</a>
 							{/volist}
 						</div>
 						</li>
@@ -60,14 +60,14 @@
 							<h3>级别<b>全部</b></h3>
 							<div class="classify">
 							<a href="" class="active" >不限</a>
-								{volist name="subface" id="val"}<a href="lots_cars/?car_age={$val.id}&page=1&sort=1">{$val.name}</a>{/volist}
+								{volist name="subface" id="val"}<a href="lots_cars">{$val.name}</a>{/volist}
 							</div>
 						</li>
 						<li>
 							<h3>车龄 <b>全部</b></h3>
 							<div class="classify">
 								<a href="" class="active" >不限</a>
-								{volist name="age" id="val"}<a href="lots_cars/?age={$val.id}&page=1&sort=1">{$val.cheling}</a>{/volist}
+								{volist name="age" id="val"}<a href="lots_cars">{$val.cheling}</a>{/volist}
 							</div>
 						</li>
 					</ul>
