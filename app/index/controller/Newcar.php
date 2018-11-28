@@ -286,7 +286,17 @@ class Newcar extends Common
 
         $brand = $this->brand($brand_param);//品牌
 
-        $price=$this->price($data); //价格
+        if($data['v_p'] == "0-3" || $data['v_p'] == "3-5" || $data['v_p'] == "5-8" || $data['v_p'] == "8-10" || $data['v_p'] == "10-15" || $data['v_p'] == "") {
+            $price=$this->price($data); //价格
+        } else {
+            $datas = explode("-",$data['v_p']);
+            if(!empty($datas)) {
+                $param_array[$data['k_p'].$data['v_p']]['name'] = $datas[0] . '-' . $datas[1] . '万';
+                $this->assign('datas',$datas);
+            }
+            $price=$this->price($data);
+        }
+        /*$price=$this->price($data); //价格*/
 
         $subface=$this->subface($data);//级别
 
