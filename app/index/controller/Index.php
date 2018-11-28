@@ -1089,7 +1089,7 @@ class Index  extends Common
         $desc = Db::table('webkey')->where(['remark' => '二手车'])->find();
         $this->assign('desc',$desc);
         $ABC = $this->app_brand_ios();//A b c  按车型排序
-        $this->assign("brand_pin", $data['brand']);
+        $this->assign("brand_pin", $data['brand']??'');
         $this->assign('param_array', $param_array);
         /*$res = $res ? $res : array();*/
         $this->assign('brand_name',empty($brand_name)?"": $brand_name);
