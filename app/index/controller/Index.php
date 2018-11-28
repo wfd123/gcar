@@ -1499,7 +1499,9 @@ class Index  extends Common
         $er_car = $this->er_car($city_id);
 
         $brand = $this->brand();//品牌
-
+        #关键字
+        $desc = Db::table('webkey')->where(['remark' => '卖车'])->find();
+        $this->assign('desc',$desc);
         $this->assign('res',$res);
         $this->assign('er_car',$er_car);
         $this->assign('brand',$brand);
