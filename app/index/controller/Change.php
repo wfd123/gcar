@@ -72,7 +72,7 @@ class Change  extends Common
 
             $data = $this->params;
 
-            //dump($data);die;
+            dump($data);die;
 
             //$old_brand = $data['old_brand'];//旧车品牌
             $old_brand = 19;
@@ -118,7 +118,7 @@ class Change  extends Common
 
                 $this->return_msg('200','提交失败，请重新上传');
             }
-        };
+        }
 
 
     }
