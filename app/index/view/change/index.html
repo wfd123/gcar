@@ -78,14 +78,14 @@
 		<div class="full_wid">			
 			<div class="banner chang_ban">
 				<div class="wrap">
-					<div class="change_user">
+					<!--<div class="change_user">
 						<span class="change_address">郑州<img src="__STATIC__/img/jtdown.png" alt="" /></span>
 						<div class="change_ipt"><input type="text" placeholder="请输入手机号"/>
 						<span class="chang_btn">我要置换</span>						
 						</div>	
 						<span class="sellcar_btn"><a href="">我要卖车</a></span>
-					</div>
-					<div class="tip"><p class="agree">提交代表我同意<a href="">《个人信息保护声明》</a>，并接受合作商的来电服务</p></div>
+					</div>-->
+					<!--<div class="tip"><p class="agree">提交代表我同意<a href="">《个人信息保护声明》</a>，并接受合作商的来电服务</p></div>-->
 				</div>				
 			</div>
 			<div class="wrap">
@@ -93,7 +93,7 @@
 				<div class="flex_center title_er"><h2 class="tit_erjie">置换</h2><p class="small_tit">用旧车换新车，优惠开新车</p></div>
 				<div class="change_flow"><img src="__STATIC__/img/change_flow.png" alt="" /></div>
 				<div class="flex_center title_er"><h2 class="tit_erjie">选定意向新车</h2></div>
-				<form action="{:url('change/displace')}" enctype="multipart/form-data"  method="post">
+				<form action="{:url('change/111')}" enctype="multipart/form-data"  method="post">
 				<div class="change_sel flex_center">
 					<span class="change_form_name">品牌车型</span>
 					<div class="selectcarnam flex_center">
@@ -120,13 +120,12 @@
 				<div class="flex_center title_er"><h2 class="tit_erjie">旧车信息提交</h2></div>
 
 				<div class="change_form">
-					<div class="ipt"><label for="">旧车信息：</label><input type="text" name="old_brand" placeholder="请选择您车辆的品牌"/></div>
+					<div class="ipt"><label for="">旧车信息：</label><input type="text" name="old_brand" placeholder="请输入车辆的品牌"/></div>
 					<div class="ipt"><label for="">姓名：</label><input type="text"  name="name" placeholder="请输入您的姓名"/></div>
 					<div class="ipt"><label for="">手机号：</label><input type="text" id="telphone" name="phone" placeholder="请输入您的手机号"/></div>
 					<div class="ipt_code"><label for="">验证码:</label><input type="text" name="code" placeholder="请输入您获取到的验证码"/><span class="getcode"><input type="button" value="获取手机验证码" id="getCodeBtn" style="width: 105px;height: 40px;font-size:12px; padding-left:1px;color:#333; " /></span></div>
 					<div class="sub"><input type="submit"/></div>
 				</div>
-
 				</form>
 				<div class="flex_center title_er"><h2 class="tit_erjie">新车推荐</h2></div>
 				<div class="car_list">
