@@ -33,12 +33,11 @@
    			 <div class="price_new fleft oh">
    			 	<h2>价格</h2>
    			 	<ul>
-   			 		<li><a href="">分期购</a></li>
-   			 		<li><a href="" class="coloryel">一成购新车</a></li>
+   			 		<!--<li><a href="">价格</a></li>-->
+   			 		<!--<li><a href="" class="coloryel">一成购新车</a></li>-->
 					{volist name="price" id="val"}
-   			 		<li><a href="{$domain}/{$Think.session.cityurl}/search_newcar?price={$val.id}">{$val.name}</a></li>
+   			 		<li><a href="{$domain}/{$Think.session.cityurl}/s/{$val.param}">{$val.name}</a></li>
 					{/volist}
-
    			 	</ul>
 
    			 </div>
@@ -46,11 +45,11 @@
    			 	<h2>车型</h2>
    			 	<ul>
 					{volist name="subface" id="val" offset="1"}
-   			 		<li><a href="{$domain}/{$Think.session.cityurl}/search_newcar?subface={$val.id}"><img src="__STATIC__/img/{$val.img}" alt=""  width="100" height="100"/><p>{$val.name}</p></a></li>
+   			 		<li><a href="{$domain}/{$Think.session.cityurl}/s/{$val.param}"><img src="{$val.img}" alt=""  width="100" height="100"/><p>{$val.name}</p></a></li>
 					{/volist}
    			 	</ul>
    			 </div>
-   			<a href="" class="coloryel more_lok">MORE>></a>
+   			<a href="{$domain}/{$Think.session.cityurl}/s/" class="coloryel more_lok">MORE>></a>
    		</div>
    </div>
 	<div class="wrap">
@@ -62,11 +61,17 @@
 		    <div class="img_fac">
 			 <div class="more_slt">
 			 	<div class="gj_clear">
-			 		<a href="">5-8万</a>
-			 		<a href="">5-8万</a>
-				 	<a href="">20-30万</a>
-				 	<a href="">5-8万</a>
+					{volist name="price" id="val" offset="2" length="4"}
+					<a href="{$domain}/{$Think.session.cityurl}/s/{$val.param}">{$val.name}</a>
+					{/volist}
+					{volist name="brand" id="val" length="4"}
+					<a href="{$domain}/{$Think.session.cityurl}/{$val.pin}"> {$val.name}</a>
+					{/volist}
+					{volist name="subface" id="val" offset="1" length="4"}
+					<a href="{$domain}/{$Think.session.cityurl}/s/{$val.param}">{$val.name}</a>
+					{/volist}
 			 	</div>
+
 
 			<p><a href="">查看更多>></a></p>
 
@@ -122,7 +127,7 @@
 			<li><img src="__STATIC__/img/zhifu.png" alt="" /><p>支付费用</p></li>
 			<li><img src="__STATIC__/img/jiantou00.png" alt="" /></li>
 			<li><img src="__STATIC__/img/kaiche.png" alt="" /><p>坐等新车</p></li>
-
+		</ul>>
 		</div>
 	<div class="adv_img">
 		<h2>想开什么车 ？管家车易站应有尽有.</h2>

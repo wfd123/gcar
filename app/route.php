@@ -22,16 +22,18 @@ use think\Route;
 Route::domain('xin',[
     // 动态注册域名的路由规则
     ':city$' => ['index/newcar/index',['method'=>'GET'], ['city'=>'[a-z]+$']],
+    ':city/index$' => ['index/newcar/index',['method'=>'GET'], ['city'=>'[a-z]+$']],
     ':city/:brand$'=> ['index/newcar/search_newcar', ['method'=>'GET'], ['city'=>'[a-z]+$','brand'=>'[a-z]+$']],
     ':city/:brand/sn_<k_p?><v_p?><k_s?><v_s?><k_o?><v_o?><k_g?><v_g?><k_d?><v_d?><k_b?><v_b?><k_c?><v_c?><k_f?><v_f?><k_n?><v_n?>' => [
         'index/newcar/search_newcar', ['method'=>'GET'], ['k_p'=>'p','v_p'=>'\d{1,2}-\d{1,2}','k_s'=>'s','v_s'=>'\d+','k_o'=>'o','v_o'=>'\d+','k_g'=>'g','v_g'=>'\d+','k_d'=>'d','v_d'=>'\d+','k_b'=>'b','v_b'=>'\d+','k_c'=>'c','v_c'=>'\d+','k_f'=>'f','v_f'=>'\d+','k_n'=>'n','v_n'=>'\d+']
-    ]
+    ],
+    ':city/detail/:id' => ['index/newcar/newcardetails',['method'=>'GET'], ['city'=>'[a-z]+$', 'id' => '\d+']],
 ]);
 
 Route::rule('/', 'index/index/index');
 Route::rule(':city$','index/index/index');
-Route::rule(':city/detail/:brand_id/:sys_id','index/Newcar/newcardetails');
-Route::rule(':city/newcar','index/newcar/index');
+//Route::rule(':city/detail/:brand_id/:sys_id','index/Newcar/newcardetails');
+//Route::rule(':city/newcar','index/newcar/index');
 Route::rule(':city/twocar','index/twocar/index');
 Route::rule(':city/sell','index/index/sell');
 Route::rule(':city/change','index/change/index');
@@ -63,16 +65,13 @@ Route::rule(':city/search_newcar','index/index/search_newcar');//新车筛选
 
 
 Route::rule(':city/details/:cheid','index/index/details');//二手车详情
-Route::rule(':city/detail/:id','index/newcar/newcardetails');//新车详情
 Route::rule(':city/detai/:cheid','index/zerocar/zerocardetails');//零首付详情
-Route::rule(':city/detail/:id','index/newcar/newcardetails');
 Route::rule('zhang/:id','index/index/zhang');
 Route::rule('db','index/index/index');
 Route::rule('test/:id','api/gongneng/test');//一旦设置参数必须填写
 
 Route::rule('jun','api/gongneng/zhang');
 Route::rule(':city/newcar','index/Newcar/index');
-Route::rule(':city/detail/:id','index/Newcar/newcardetails');
 
 
 Route::rule(':city/:brand$','index/index/lots_cars');//二手车筛选

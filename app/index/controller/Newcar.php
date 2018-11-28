@@ -168,7 +168,6 @@ class Newcar extends Common
         //颜色
         if (!empty($data['v_c'])){
             $where.="and color=".$data['v_c'];
-            array_push($param_array, $data['k_c'].$data['v_c']);
             $param_array[$data['k_c'].$data['v_c']]['name'] = $this->color($data['v_c']);
         } else {
             $data['k_c'] = "";
@@ -241,13 +240,14 @@ class Newcar extends Common
         $data['v_a'] = "";
 
         $ss = Db::table('new_car')->where($where)->paginate(12);
-        /*foreach ($ss as $key => $val) {
-            $ss[$key]['img_url']=$this->get_carimg($val['img_300'],2);
-            $ss[$key]['name']=$this->get_carname($val['cartype_id']);
-            $ss[$key]['pay10_s2']=$val['pay10_s2'];
-            $ss[$key]['pay10_y2']=$val['pay10_y2'];
-            unset($ss[$key]['img_300']);
-        }*/
+        $newData = $ss->all();
+        foreach ($newData as $key => $val) {
+            $newData[$key]['img_url']=$this->get_carimg($val['img_300'],2);
+            $newData[$key]['name']=$this->get_carname($val['cartype_id']);
+            $newData[$key]['pay10_s2']=$val['pay10_s2'];
+            $newData[$key]['pay10_y2']=$val['pay10_y2'];
+            unset($newData[$key]['img_300']);
+        }
 
 
 
@@ -335,7 +335,7 @@ class Newcar extends Common
         $this->assign('car_drive',$car_drive);
         $this->assign('car_body',$car_body);
         $this->assign('color',$color);
-        $this->assign('ss',$ss);
+        $this->assign('ss',$newData);
 
         return $this->fetch();
 

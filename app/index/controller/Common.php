@@ -1741,7 +1741,7 @@ class Common extends Controller{
      */
     public function brand($brand_param = ''){
 
-        $brand=Db::table("car_brand")->field("id,img_id,name,pin")->where("id in (1,9,10,19,20,22)")->select();
+        $brand=Db::table("car_brand")->field("id,img_id,name,pin")->where("id in (1,2,3,7,9,10,15,19,20,22,54,46)")->order("initial asc")->select();
         foreach ($brand as $key => $val) {
             $brand[$key]['img_url']=$this->get_carimg($val['img_id'],3);
             if (!empty($brand_param)){
@@ -1760,8 +1760,8 @@ class Common extends Controller{
      */
     public function price($data = ''){
 
-        $price=Db::table("price_range")->field("price_id as id,name")->order("level asc")->limit(6)->select();
-        $brand_param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
+        $price=Db::table("price_range")->field("price_id as id,name")->order("level asc")->select();
+        $brand_param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
 
         foreach ($price as $key => $val) {
             switch ($price[$key]['id']) {
@@ -1818,35 +1818,29 @@ class Common extends Controller{
             case '3-5':
                 $price = "3-5万";
                 break;
-            case 4:
+            case '5-8':
                 $price = "5-8万";
                 break;
-            case 5:
-                return "5-8万";
+            case '8-10':
+                return "8-10万";
                 break;
-            case 6:
+            case '10-15':
                 $price = "10-15万";
                 break;
-            case 7:
+            case '15-20':
                 $price = "15-20万";
                 break;
-            case 8:
-                $price = "8-10万";
+            case '20-30':
+                $price = "20-30万";
                 break;
-            case 9:
+            case '30-50':
                 $price = "30-50万";
                 break;
-            case 10:
-                $price = "10-15万";
+            case '50-100':
+                $price = "50-100万";
                 break;
-            case 11:
-                $price = "15-20万";
-                break;
-            case 12:
-                $price = "15-20万";
-                break;
-            case 13:
-                $price = "15-20万";
+            case '100-':
+                $price = "100万以上";
                 break;
             default :
                 $price = "";
@@ -1860,14 +1854,17 @@ class Common extends Controller{
     public function subface($data = [])
     {
         $param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
-        $subface = Db::table("subface")->field("face_id as id,name,img")->order("level asc")->limit(5)->select();
+        $subface = Db::table("subface")->field("face_id as id,name,img")->order("level asc")->select();
         foreach ($subface as $key => $value) {
             $param = empty($data) ? "" : sprintf($param_format, $data['k_p'],$data['v_p'] ,"s",$value['id'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
             if (!empty($param)){
                 $subface[$key]['param'] = "sn_".$param;
             } else {
-                $subface[$key]['param'] = "";
+                $subface[$key]['param'] = "sn_s".$value['id'];
+
+
             }
+            $subface[$key]['img'] = "http://39.106.67.47/butler_car/Uploads/in/".$value['img'];
         }
 
         $param = empty($data) ? "" : sprintf($param_format, $data['k_p'],$data['v_p'] ,"","" ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
