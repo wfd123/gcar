@@ -85,6 +85,9 @@ class Index  extends Common
 
         $city = Db::table('city')->where('status',1)->select();
 
+        #关键字
+        $desc = Db::table('webkey')->where(['remark' => '首页'])->find();
+        $this->assign('desc',$desc);
         $this->assign('city',$city);
         $this->assign('domain',$domain);
         $this->assign('banner',$banner);
