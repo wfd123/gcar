@@ -275,7 +275,7 @@
 							<div class="screening-margin gj_clear">
 								<div class="list_detail_sel">
 									{volist name="subface" id="vo"}
-									<a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.param}" class="active">{$vo.name}</a>
+									<a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.param}">{$vo.name}</a>
 								    {/volist}
 								</div>
 								<!--<span class="more">多选<i>+</i></span>-->
@@ -429,10 +429,9 @@
 					<div class="list_sort">
 						<ul class="sort_sel">
 							<li class="current"><a href="">综合排序</a></li>
-							<!--<li><a href="">最新发布</a></li>-->
-							<!--<li><a href="">价格最低</a></li>-->
-							<!--<li><a href="">车龄最短</a></li>-->
-							<!--<li><a href="">里程最短</a></li>-->
+							<li><a href="">价格最低</a></li>
+							<li><a href="">车龄最短</a></li>
+							<li><a href="">里程最短</a></li>
 						</ul>
 						<!--<ul class="check_item flex_center">-->
 							<!--<li class="checked"><img src="__STATIC__/img/img_checked.png" alt="" width=""/>准新车</li>-->
