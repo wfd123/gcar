@@ -700,12 +700,21 @@ class Index  extends Common
                 $data['k_m'] = "";
                 $data['v_m'] = "";
             }
+            #排序
+            if(!empty($data['v_n'])) {
+                $where.= " and car_mileage= " . $data['v_n'];
+                $twocat = Db::table('rele_car')->where(['id' => $data['v_n']])->select();
+                $param_array[$data['k_m'] . $data['v_m']]['name'] = $twocat[0]['name'];
+            } else {
+                $data['k_n'] = "";
+                $data['v_n'] = "";
+            }
             /*$data['k_d'] = "";
             $data['v_d'] = "";*/
             /*$data['k_b'] = "";
             $data['v_b'] = "";*/
-            $data['k_n'] = "";
-            $data['v_n'] = "";
+            /*$data['k_n'] = "";
+            $data['v_n'] = "";*/
             /*$data['k_l'] = "";
             $data['v_l'] = "";*/
             /*$data['k_m'] = "";
@@ -766,7 +775,11 @@ class Index  extends Common
             if (!empty($data['k_m'])) {
                 $param_array[$data['k_m'].$data['v_m']]['param'] = empty($param_close)? "" : "sn_".$param_close;
             }
-
+            #排序
+            $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,'','',$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+            if (!empty($data['k_n'])) {
+                $param_array[$data['k_n'].$data['v_n']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            }
             $brand_param = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
 
 
@@ -802,6 +815,8 @@ class Index  extends Common
 
             $color =$this->color('',$data);//颜色
 
+            $order = $this->orde($data); //排序
+            $this->assign('order',$order);
 
             /*if (!empty($data['brand_id'])){
                 $brand_id = $data['brand_id'];//品牌id
