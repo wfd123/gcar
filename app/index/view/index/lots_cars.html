@@ -429,7 +429,7 @@
 					<div class="list_sort">
 						<ul class="sort_sel">
 							<li class="current"><a href="">综合排序</a></li>
-							<li><a href="">价格最低</a></li>
+							<li><a href="lots_cars">价格最低</a></li>
 							<li><a href="">车龄最短</a></li>
 							<li><a href="">里程最短</a></li>
 						</ul>
@@ -487,9 +487,9 @@
 				</div>
 			</div>
 		</div>
-		<!--<div class="footer">-->
-			<!--{include file="public/footer"}-->
-		<!--</div>-->
+		<div class="footer">
+			{include file="public/footer"}
+		</div>
 	</body>
 
 	<script>
@@ -551,11 +551,11 @@
                 var min = $('#min').val();
                 var max = $('#max').val();
                 var reg = /^[0-9]*$/;
-                if(min.length == 0 && max.length == 0) {
+                if(min.length == 0 || max.length == 0) {
                     layer.msg('请输入内容!',);
 				} else {
-                    if(!reg.test(min) && !reg.test(max)){
-                        alert("请输入数字");
+                    if(!reg.test(min) || !reg.test(max)){
+                        layer.msg('请输入数字!',);
                     }else{
                         var a = $(this).parent().siblings().children("a").eq(1).attr('href');
                         var b = a.split('/');
