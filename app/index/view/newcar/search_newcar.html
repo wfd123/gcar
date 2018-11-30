@@ -7,9 +7,20 @@
 	<link rel="stylesheet" href="__STATIC__/css/style.css" />
 	<link rel="stylesheet" href="__STATIC__/css/other.css" />
 	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
-	<script src="__STATIC__/js/jquery.lazyload.min.js" type="text/javascript" charset="utf-8"></script>		
+	<script src="__STATIC__/js/jquery.lazyload.min.js" type="text/javascript" charset="utf-8"></script>
 	<style>
-
+		/*分页样式*/
+		.pagination{text-align:center;margin-top:20px;margin-bottom: 20px;}
+		.pagination li{    margin: 0px 3px;
+			border: 1px solid #e6e6e6;
+			padding: 6px 12px;
+			display: inline-block;
+		}
+		.pagination .active{background-color: #EA5200;color: #fff;}
+		.pagination .disabled{color:#aaa;}
+		body .layui-layer{
+			top:35% !important;
+		}
 	</style>
 	<body>		
 		<div class="header">
@@ -154,17 +165,17 @@
 							            <!--</div>-->
 							          <!--</li>-->
 							
-							          <li>
-							            <div data-toggle="select" class="select-menu" id="select6">
-							              <div class="menu-selected">颜色</div>
-							              <div class="menu menu7 radius menuCar07" style="display: none;" id="aselect6">
-											  {volist name="color" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_c' data-valueid='' class='preventdefault c15' title=''>{$val.name}</a> </dd>
-							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_c" data-valueid="1" class="preventdefault c1" title="黑色二手车">黑色</a> </dd>-->
-											  {/volist}
-							              </div>
-							            </div>
-							          </li>
+							          <!--<li>-->
+							            <!--<div data-toggle="select" class="select-menu" id="select6">-->
+							              <!--<div class="menu-selected">颜色</div>-->
+							              <!--<div class="menu menu7 radius menuCar07" style="display: none;" id="aselect6">-->
+											  <!--{volist name="color" id="val"}-->
+											  <!--<dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_c' data-valueid='' class='preventdefault c15' title=''>{$val.name}</a> </dd>-->
+							                <!--&lt;!&ndash;<dd> <a rel="nofollow" href="#" data-for="hidden_c" data-valueid="1" class="preventdefault c1" title="黑色二手车">黑色</a> </dd>&ndash;&gt;-->
+											  <!--{/volist}-->
+							              <!--</div>-->
+							            <!--</div>-->
+							          <!--</li>-->
 							          <li>
 							            <div data-toggle="select" class="select-menu" id="select10">
 							              <div class="menu-selected menu-selected12">燃料</div>
@@ -241,6 +252,7 @@
 
                            {/volist}
 						</ul>
+						<p>{$res->render()}</p>
 					</div>
 					
 				</div>

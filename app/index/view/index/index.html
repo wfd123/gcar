@@ -121,7 +121,7 @@
 						<ul class="sel_newcar_brand oh ">
 							{volist name="brand" id = "val" length='7'}
 							<li>
-								<a href="{$domain}/{$Think.session.cityurl}/lots_cars?brand_id={$val.id}"><img src="{$val.img_url}" alt="">
+								<a href="{$domain}/{$Think.session.cityurl}/{$val.pin}"><img src="{$val.img_url}" alt="">
 								<!--<a href="{$domain}/{$Think.session.cityurl}/lots_cars/{$val.id}"><img src="{$val.img_url}" alt="">-->
 									<p>{$val.name}</p>
 								</a>
@@ -156,7 +156,7 @@
 						<ul class="sel_newcar_brand oh ">
 							{volist name="brand" id = "val" length='7'}
 							<li>
-								<a href="http://xin.gjcyz.com:8090/{$Think.session.cityurl}/{$val.pin}"><img src="{$val.img_url}" alt="">
+								<a href="http://xin.gjcyz.com/{$Think.session.cityurl}/{$val.pin}"><img src="{$val.img_url}" alt="">
 									<p>{$val.name}</p>
 								</a>
 							</li>
@@ -168,7 +168,7 @@
 							</li>
 							{volist name="price" id = "val" length='6'}
 							<li class="active">
-								<a href="http://xin.gjcyz.com:8090/{$Think.session.cityurl}/s/{$val.param}">{$val.name} </a>
+								<a href="http://xin.gjcyz.com/{$Think.session.cityurl}/s/{$val.param}">{$val.name} </a>
 							</li>
 							{/volist}
 						</ul>
@@ -178,11 +178,11 @@
 							</li>
 							{volist name="subface" id = "val" offset="1" length='5'}
 							<li class="active">
-								<a href="http://xin.gjcyz.com:8090/{$Think.session.cityurl}/s/{$val.param}"> {$val.name}</a>
+								<a href="http://xin.gjcyz.com/{$Think.session.cityurl}/s/{$val.param}"> {$val.name}</a>
 							</li>
 							{/volist}
 							<li class="active fright">
-								<a href="http://xin.gjcyz.com:8090/{$Think.session.cityurl}/s" class="moretype"><img src="__STATIC__/img/quanbu.png" alt="" width="23">更多车型</a>
+								<a href="http://xin.gjcyz.com/{$Think.session.cityurl}/s" class="moretype"><img src="__STATIC__/img/quanbu.png" alt="" width="23">更多车型</a>
 							</li>
 						</ul>
 					</div>

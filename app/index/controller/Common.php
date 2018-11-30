@@ -1767,34 +1767,34 @@ class Common extends Controller{
         foreach ($price as $key => $val) {
             switch ($price[$key]['id']) {
                 case 2:
-                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","0-3" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+                    $param = empty($data) ? "p0-3" : sprintf($brand_param_format, "p","0-3" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
                     break;
                 case 3:
-                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","3-5" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+                    $param = empty($data) ? "p3-5" : sprintf($brand_param_format, "p","3-5" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
                     break;
                 case 4:
-                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","5-8" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+                    $param = empty($data) ? "p5-8" : sprintf($brand_param_format, "p","5-8" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
                     break;
                 case 5:
-                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","8-10" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+                    $param = empty($data) ? "p8-10" : sprintf($brand_param_format, "p","8-10" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
                     break;
                 case 6:
-                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","10-15" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+                    $param = empty($data) ? "p10-15" : sprintf($brand_param_format, "p","10-15" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
                     break;
                 case 7:
-                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","15-20" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+                    $param = empty($data) ? "p15-20" : sprintf($brand_param_format, "p","15-20" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
                     break;
                 case 8:
-                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","20-30" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+                    $param = empty($data) ? "p20-30" : sprintf($brand_param_format, "p","20-30" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
                     break;
                 case 9:
-                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","30-50" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+                    $param = empty($data) ? "p30-50" : sprintf($brand_param_format, "p","30-50" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
                     break;
                 case 10:
-                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","50-100" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+                    $param = empty($data) ? "p50-100" : sprintf($brand_param_format, "p","50-100" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
                     break;
                 case 11:
-                    $param = empty($data) ? "" : sprintf($brand_param_format, "p","100-" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+                    $param = empty($data) ? "p100-" : sprintf($brand_param_format, "p","100-" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
                     break;
                 default :
                     $param = empty($data) ? "" : sprintf($brand_param_format, "","" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);

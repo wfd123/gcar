@@ -336,6 +336,7 @@ class Newcar extends Common
         $this->assign('car_body',$car_body);
         $this->assign('color',$color);
         $this->assign('ss',$newData);
+        $this->assign('res',$ss);
 
         return $this->fetch();
 
