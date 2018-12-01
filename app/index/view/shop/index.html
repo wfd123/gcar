@@ -43,7 +43,7 @@
 							<div class="classify">
 								<a href="" class="active" >不限</a>
 								{volist name="brand" id="val"}
-								<a href="lots_cars">{$val.name}</a>
+								<a href="{$domain}/{$Think.session.cityurl}/{$val.pin}">{$val.name}</a>
 								{/volist}
 							</div>
 						</li>
@@ -52,7 +52,7 @@
 						<div class="classify">
 							<a href="" class="active" >不限</a>
 							{volist name="price" id="val"}
-							<a href="lots_cars">{$val.name}</a>
+							<a href="{$domain}/{$Think.session.cityurl}/s/{$val.param}">{$val.name}</a>
 							{/volist}
 						</div>
 						</li>
@@ -60,7 +60,7 @@
 							<h3>级别<b>全部</b></h3>
 							<div class="classify">
 							<a href="" class="active" >不限</a>
-								{volist name="subface" id="val"}<a href="lots_cars">{$val.name}</a>{/volist}
+								{volist name="subface" id="val"}<a href="{$domain}/{$Think.session.cityurl}/s/{$val.param}">{$val.name}</a>{/volist}
 							</div>
 						</li>
 						<li>
