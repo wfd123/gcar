@@ -90,7 +90,11 @@
 							<div class="screening-margin gj_clear">							
 								<div class="list_detail_sel">
 									{volist name="price" id="vo" length='8'}
+									{if condition="empty($q)"}
 									<a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.param}">{$vo.name}</a>
+									{else /}
+									<a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.param}?q={$q}">{$vo.name}</a>
+									{/if}
 									{/volist}
 								</div>
 								<div class="price_handle">
@@ -103,7 +107,11 @@
 							<div class="screening-margin gj_clear">							
 								<div class="list_detail_sel">
 									{volist name="subface" id="vo"}
-									<a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.param}">{$vo.name}</a>
+									{if condition="empty($q)"}
+										<a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.param}">{$vo.name}</a>
+									{else /}
+										<a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.param}?q={$q}">{$vo.name}</a>
+									{/if}
 								    {/volist}
 								</div>
 								<!--<span class="more">多选<i>+</i></span>-->
@@ -120,7 +128,12 @@
 							              <div class="menu-selected" >排量</div>
 							              <div class="menu menu6" style="display: none;" id="aselect4">
 											  {volist name="output" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_j' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											  {if condition="empty($q)"}
+											  	<dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_j' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											  {else /}
+											  	<dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}?q={$q}" data-for='hidden_j' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											  {/if}
+
 											  {/volist}
 											  <!--<dd> <a rel="nofollow" href="#" data-for="hidden_j" data-valueid="0-1" class="preventdefault" title="1.0L以下二手车">1.0L以下</a> </dd>-->
 							              </div>
@@ -133,7 +146,11 @@
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_g" data-valueid="1" class="preventdefault" title="自动档二手车">自动</a> </dd>-->
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_g" data-valueid="2" class="preventdefault" title="手动档二手车">手动</a> </dd>-->
 											  {volist name="gearbox" id="val"}
+											  {if condition="empty($q)"}
 											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_g' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											  {else /}
+											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}?q={$q}" data-for='hidden_g' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											  {/if}
 											  {/volist}
 										  </div>
 							            </div>
@@ -182,7 +199,11 @@
 							              <div class="menu menu12" style="display: none;" id="aselect10">
 
 											  {volist name="fuel" id="val"}
+											  {if condition="empty($q)"}
 											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_w' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											  {else /}
+											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}?q={$q}" data-for='hidden_w' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											  {/if}
 							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_d" data-valueid="1" class="preventdefault" title="汽油二手车">汽油</a> </dd>-->
 											  {/volist}
 							          
@@ -285,9 +306,19 @@
 			{include file="public/footer"}
 		</div>
 	</body>
-	<script>		
+	<script>
+        function GetQueryString(name)
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null)return  r[2]; return null;
+        }
 		$(function(){
-            $($(".wrap li")[2]).addClass("active").siblings().removeClass("active");
+		    if (GetQueryString("q")){
+		        $("#mingzi").val(decodeURI(GetQueryString("q")));
+                $(".search .search_tab a:last").addClass('active').siblings().removeClass('active');
+			}
+            $($(".nav li")[2]).addClass("active").siblings().removeClass("active");
 		    // $(".header").load("templates/header.html");
 		    // $(".footer").load("templates/footer.html");
 		    $('.check_item img').click(function(){

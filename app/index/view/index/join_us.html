@@ -46,7 +46,8 @@
 	</body>
 	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
 	<script>		
-		$(function(){	
+		$(function(){
+            $($(".nav li")[7]).addClass("active").siblings().removeClass("active");
 		   // $(".footer").load("templates/footer.html");
    		//    $(".header").load("templates/header.html");
 	})

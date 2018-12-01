@@ -134,7 +134,7 @@
 							</li>
 							{volist name="price" id = "val" length='6'}
 							<li class="active">
-								<a href="{$domain}/{$Think.session.cityurl}/lots_cars?price_range={$val.id}">{$val.name} </a>
+								<a href="{$domain}/{$Think.session.cityurl}/brand/{$val.param}">{$val.name} </a>
 							</li>
 							{/volist}
 						</ul>
@@ -144,7 +144,7 @@
 							</li>
 							{volist name="subface" id = "val" offset="1" length='5'}
 							<li class="active">
-								<a href="{$domain}/{$Think.session.cityurl}/lots_cars?car_age={$val.id}"> {$val.name}</a>
+								<a href="{$domain}/{$Think.session.cityurl}/brand/{$val.param}"> {$val.name}</a>
 							</li>
 							{/volist}
 							<li class="active fright">
@@ -833,7 +833,7 @@
 	</script>
 	<script>
 		$(function() {
-            $($(".wrap li")[0]).addClass("active").siblings().removeClass("active");
+            $($(".nav li")[0]).addClass("active").siblings().removeClass("active");
 			//			新闻导航切换
 			$(".home_new_nav li").click(function() {
 				$(this).addClass("active").siblings().removeClass("active")

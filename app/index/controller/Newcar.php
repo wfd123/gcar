@@ -151,8 +151,9 @@ class Newcar extends Common
         }
         //模糊查找 如 大众 奥迪 朗逸
 
-        if(!empty($data['keys'])){
-            $where.=" and name_li like '%".$data['keys']."%'  ";
+        if(!empty($data['q'])){
+            $where.=" and name like '%".$data['q']."%'  ";
+            $param_array['q']['name'] = $data['q'];
         }
 
         //级别suv
@@ -226,6 +227,8 @@ class Newcar extends Common
             $data['v_p'] = "";
         }
 
+
+
         $data['k_d'] = "";
         $data['v_d'] = "";
         $data['k_b'] = "";
@@ -239,7 +242,10 @@ class Newcar extends Common
         $data['k_a'] = "";
         $data['v_a'] = "";
 
-        $ss = Db::table('new_car')->where($where)->paginate(12);
+        $q = empty($data['q']) ? [] : ['q' => $data['q']];
+        $ss = Db::table('new_car')->where($where)->paginate(12, false, [
+            'query' => $q
+        ]);
         $newData = $ss->all();
         foreach ($newData as $key => $val) {
             $newData[$key]['img_url']=$this->get_carimg($val['img_300'],2);
@@ -253,35 +259,65 @@ class Newcar extends Common
 
         $brand_param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
         //close span label begin
+        // 关键字
+        $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
+        if (!empty($data['q'])) {
+            $param_array['q']['param'] = empty($param_close)? "" : "sn_".$param_close;
+        }
         // 价格
         $param_close = sprintf($brand_param_format, "","" ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
         if (!empty($data['k_p'])) {
-            $param_array[$data['k_p'].$data['v_p']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            if (empty($data['q'])){
+                $param_array[$data['k_p'].$data['v_p']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            } else {
+                $param_array[$data['k_p'].$data['v_p']]['param'] = (empty($param_close)? "" : "sn_".$param_close)."?q=".$data['q'];
+            }
         }
         // 级别
         $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,'','' ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
         if (!empty($data['k_s'])) {
-            $param_array[$data['k_s'].$data['v_s']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            if (empty($data['q'])){
+                $param_array[$data['k_s'].$data['v_s']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            } else {
+                $param_array[$data['k_s'].$data['v_s']]['param'] = (empty($param_close)? "" : "sn_".$param_close)."?q=".$data['q'];
+            }
+
         }
         // 排量
         $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,'','' ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
         if (!empty($data['k_o'])) {
-            $param_array[$data['k_o'].$data['v_o']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            if (empty($data['q'])){
+                $param_array[$data['k_o'].$data['v_o']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            } else {
+                $param_array[$data['k_o'].$data['v_o']]['param'] = (empty($param_close)? "" : "sn_".$param_close)."?q=".$data['q'];
+            }
         }
         // 变速箱
         $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,'','' ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
         if (!empty($data['k_g'])) {
-            $param_array[$data['k_g'].$data['v_g']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            if (empty($data['q'])){
+                $param_array[$data['k_g'].$data['v_g']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            } else {
+                $param_array[$data['k_g'].$data['v_g']]['param'] = (empty($param_close)? "" : "sn_".$param_close)."?q=".$data['q'];
+            }
         }
         // 颜色
         $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,'','' ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
         if (!empty($data['k_c'])) {
-            $param_array[$data['k_c'].$data['v_c']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            if (empty($data['q'])){
+                $param_array[$data['k_c'].$data['v_c']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            } else {
+                $param_array[$data['k_c'].$data['v_c']]['param'] = (empty($param_close)? "" : "sn_".$param_close)."?q=".$data['q'];
+            }
         }
         // 燃料
         $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,'','' ,$data['k_n'],$data['v_n']);
         if (!empty($data['k_f'])) {
-            $param_array[$data['k_f'].$data['v_f']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            if (empty($data['q'])) {
+                $param_array[$data['k_f'].$data['v_f']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+            } else {
+                $param_array[$data['k_f'].$data['v_f']]['param'] = (empty($param_close)? "" : "sn_".$param_close)."?q=".$data['q'];
+            }
         }
 
         $brand_param = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n']);
@@ -337,6 +373,7 @@ class Newcar extends Common
         $this->assign('color',$color);
         $this->assign('ss',$newData);
         $this->assign('res',$ss);
+        $this->assign('q',empty($data['q']) ? "" : $data['q']);
 
         return $this->fetch();
 
