@@ -541,7 +541,7 @@ class Index  extends Common
     public function lots_cars(){
 
             //处理城市问题
-
+//            dump(input('dataId'));
             $city_pin = input('city');
 
             $city_info = $this->set_session_url($city_pin);
@@ -701,13 +701,58 @@ class Index  extends Common
                 $data['v_m'] = "";
             }
             #排序
+
+            $order = array();
             if(!empty($data['v_n'])) {
-                dump($data['v_n']);
-                $param_array[$data['k_n'] . $data['v_n']]['name'] = $data['v_n'];
+                if($data['v_n'] == 1) {
+                    $wheres = 'create_time desc';
+                    $order['orders'] = $data['v_n'];
+                } elseif($data['v_n'] == 2) {
+                    $wheres = 'price asc';
+                    $order['orders'] = $data['v_n'];
+                } elseif($data['v_n'] == 3) {
+                    $wheres= 'car_cardtime desc';
+                    $order['orders'] = $data['v_n'];
+                } elseif ($data['v_n'] == 4) {
+                    $wheres= 'car_mileage asc';
+                    $order['orders'] = $data['v_n'];
+                } elseif ($data['v_n'] == 5) {
+                    $wheres= 'car_mileage desc';
+                    $order['orders'] = $data['v_n'];
+                } elseif ($data['v_n'] == 6) {
+                    $wheres = 'price desc';
+                    $order['orders'] = $data['v_n'];
+                }elseif ($data['v_n'] == 7) {
+                    $wheres = 'car_cardtime asc';
+                    $order['orders'] = $data['v_n'];
+                }
             } else {
+                $wheres = [];
                 $data['k_n'] = "";
                 $data['v_n'] = "";
             }
+
+            $arr = array(
+                array(
+                    'id' => 'sn_n1',
+                    'name' => '综合排序'
+                ),
+                array(
+                    'id' => 'sn_n2',
+                    'name' => '价格最低'
+                ),
+                array(
+                    'id' => 'sn_n3',
+                    'name' => '车龄最短'
+                ),
+                array(
+                    'id' => 'sn_n4',
+                    'name' => '里程最短'
+                ),
+            );
+            $this->assign('arr',$arr);
+
+
             /*$data['k_d'] = "";
             $data['v_d'] = "";*/
             /*$data['k_b'] = "";
@@ -775,13 +820,11 @@ class Index  extends Common
                 $param_array[$data['k_m'].$data['v_m']]['param'] = empty($param_close)? "" : "sn_".$param_close;
             }
             #排序
-            $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,'','',$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
-            if (!empty($data['k_n'])) {
-                $param_array[$data['k_n'].$data['v_n']]['param'] = empty($param_close)? "" : "sn_".$param_close;
-            }
+//            $param_close = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,'','',$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
+//            if (!empty($data['k_n'])) {
+//                $param_array[$data['k_n'].$data['v_n']]['param'] = empty($param_close)? "" : "sn_".$param_close;
+//            }
             $brand_param = sprintf($brand_param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
-
-
             $brand = $this->brand($brand_param);//品牌
             if($data['v_p'] == "0-3" || $data['v_p'] == "3-5" || $data['v_p'] == "5-8" || $data['v_p'] == "8-10" || $data['v_p'] == "10-15" || $data['v_p'] == "") {
                 $price=$this->price($data); //价格
@@ -1083,7 +1126,7 @@ class Index  extends Common
                     $res[$key]['page']=$PageIndex;
                 }
             }*/
-        $res = Db::table('rele_car')->where($where)->paginate(13);
+        $res = Db::table('rele_car')->where($where)->order($wheres)->paginate(13);
         #关键字
         $desc = Db::table('webkey')->where(['remark' => '二手车'])->find();
         $this->assign('desc',$desc);
