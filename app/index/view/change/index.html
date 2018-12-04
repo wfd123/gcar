@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="__STATIC__/css/other.css" />
 	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
 	<script src="__STATIC__/js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="__STATIC__/js/layer/layer.js"></script>
 	<style>
 
 
@@ -97,10 +98,10 @@
 				<div class="change_sel flex_center">
 					<span class="change_form_name">品牌车型</span>
 					<div class="selectcarnam flex_center">
-						<select name="">
+						<select name="old_cartype_id" id="old_cartype_id" style="width: 88px;">
 							<option value="">请选择</option>
 							{volist name="brand" id="vo"}
-							<option value="">{$vo.name}</option>
+							<option value="{$vo.id}">{$vo.name}</option>
 							{/volist}
 						</select>
 					</div>
@@ -165,18 +166,24 @@
         var old_brand = $('#old_brand').val();
         var username = $('#username').val();
         var phone = $('#phone').val();
-        $.ajax({
-            type: "POST",
-            data:{old_brand:old_brand,username:username,phone:phone},
-            dataType: "json",
-            url: "{:url('change/displace')}" ,
-            success:function (res) {
-
-            },
-            error:function () {
-                alert("异常");
-            }
-        });
+        var old_cartype_id = $('#old_cartype_id').val();
+        if(old_brand.length == 0 || username.length == 0 || phone.length == 0 || old_cartype_id.length == 0) {
+            layer.msg('请完善提交资料!',);
+        } else {
+            $.ajax({
+                type: "POST",
+                data:{old_brand:old_brand,username:username,phone:phone,old_cartype_id:old_cartype_id},
+                dataType: "json",
+                url: "{:url('zhengzhou/change/displace')}" ,
+                success:function (res) {
+                    if(res == 200) {
+                        layer.msg('信息提交成功!',);
+                    } else {
+                        layer.msg('信息提交失败');
+                    }
+                }
+            });
+        }
     }
 	</script>
 </html>
