@@ -428,10 +428,12 @@
 					</div>
 					<div class="list_sort">
 						<ul class="sort_sel">
-							<li class="current"><a id="1" href="">综合排序</a></li>
-							<li><a id="2" href="" onclick="prices()">价格最低</a></li>
-							<li><a href="">车龄最短</a></li>
-							<li><a href="">里程最短</a></li>
+							{volist name="arr" id="vo"}
+							<li class="item"><a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.id}">{$vo.name}</a></li>
+							{/volist}
+							<!--<li data-id="2" class="item"><a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/sn_n2">价格最低</a></li>-->
+							<!--<li data-id="3" class="item"><a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/sn_n3">车龄最短</a></li>-->
+							<!--<li data-id="4" class="item"><a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/sn_n4">里程最短</a></li>-->
 						</ul>
 						<!--<ul class="check_item flex_center">-->
 							<!--<li class="checked"><img src="__STATIC__/img/img_checked.png" alt="" width=""/>准新车</li>-->
@@ -575,9 +577,35 @@
                     }
 				}
             });
-            function prices(){
 
-			}
+				$('.sort_sel').on('click','.item',function () {
+					var str = window.location.href;
+                    var index = str .lastIndexOf("\/");
+                    str  = str .substring(index + 1, str .length);
+                    var sn1 = "sn_n1";
+                    var sn2 = "sn_n2";
+                    var sn3 = "sn_n3";
+                    var sn4 = "sn_n4";
+                    var sn5 = "sn_n5";
+                    var sn6 = "sn_n6";
+                    var sn7 = "sn_n7";
+                    var index = $(this).index();
+                    if(str == "sn_n1" && index == 0){
+                        $(this).find("a").eq(0).attr('href',"{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn1);
+					}else if(str == 'sn_n2' && index == 1){
+                        $(this).find("a").eq(0).attr('href',"{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn6);
+                    }else if(str == 'sn_n3' && index == 2) {
+                        $(this).find("a").eq(0).attr('href', "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn7);
+                    }else if(str == 'sn_n4' && index == 3) {
+                        $(this).find("a").eq(0).attr('href', "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn5);
+                    }else if(str == 'sn_n5' && index == 3) {
+                        $(this).find("a").eq(0).attr('href', "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn4);
+                    }else if(str == 'sn_n6' && index == 1) {
+                        $(this).find("a").eq(0).attr('href', "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn2);
+                    }else if(str == 'sn_n7' && index == 2) {
+                        $(this).find("a").eq(0).attr('href', "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn3);
+                    }
+                });
             /*var minnum = $('#min').val();
             var maxnum = $('#max').val();
             if(minnum.length !== 0 && maxnum.length !== 0) {
