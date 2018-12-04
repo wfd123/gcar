@@ -1852,18 +1852,32 @@ class Common extends Controller{
     #排序
     public function orde($data=[]) {
         $param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
-        $pai = Db::name('rele_car')->order('pu_id desc')->select();
-        foreach ($pai as $k => $v) {
-            $param = empty($data) ? "" : sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,'n',$v['pu_id'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
-            if (!empty($param)){
-                $subface[$k]['param'] = "sn_".$param;
-            } else {
-                $subface[$k]['param'] = "sn_s".$v['id'];
-            }
+        $arr = array(
+            array(
+                'id' => '1',
+                'param' => empty($data) ? "" : "sn_".sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],'m','1',$data['k_a'],$data['v_a'])
+            ),
+            array(
+                'id' => '2',
+                'name' => '3万公里内',
+                'param' => empty($data) ? "" : "sn_".sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],'m','2',$data['k_a'],$data['v_a'])
+            ),
+            array(
+                'id' => '3',
+                'param' => empty($data) ? "" : "sn_".sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],'m','3',$data['k_a'],$data['v_a'])
+            ),
+            array(
+                'id' => '4',
+                'param' => empty($data) ? "" : "sn_".sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],'m','4',$data['k_a'],$data['v_a'])
+            ),
+        );
+        $param = empty($data) ? "" : sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],'','',$data['k_a'],$data['v_a']);
+        if (!empty($param)){
+            array_unshift($arr, ['id' => '0', 'name' => '不限', 'param' => "sn_".$param]);
+        } else {
+            array_unshift($arr, ['id' => '0', 'name' => '不限', 'param' => ""]);
         }
-        $param = empty($data) ? "" : sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,'','',$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
-        array_unshift($subface, ['id' => 0, 'name' => '不限', 'param' => empty($param) ? "" : "sn_".$param]);
-        return $subface;
+        return $arr;
     }
 
     /*
