@@ -702,9 +702,8 @@ class Index  extends Common
             }
             #排序
             if(!empty($data['v_n'])) {
-                $where.= " and car_mileage= " . $data['v_n'];
-                $twocat = Db::table('rele_car')->where(['id' => $data['v_n']])->select();
-                $param_array[$data['k_m'] . $data['v_m']]['name'] = $twocat[0]['name'];
+                dump($data['v_n']);
+                $param_array[$data['k_n'] . $data['v_n']]['name'] = $data['v_n'];
             } else {
                 $data['k_n'] = "";
                 $data['v_n'] = "";
