@@ -51,11 +51,8 @@ class Change  extends Common
         #关键字
         $desc = Db::table('webkey')->where(['remark' => '置换'])->find();
         $this->assign('desc',$desc);
-        $brand = $this->brand();//品牌
+        $brand = Db::table('car_brand')->where("id in (1,2,3,7,9,10,11,12,13,14,15,19,20,22,54,46)")->select();//品牌
 
-        $brands = Db::table('car_brand')->select();
-        //dump( $er_car);die;
-        $this->assign('brands',$brands);
         $this->assign('er_car',$er_car);
         $this->assign('brand',$brand);
 
@@ -124,8 +121,19 @@ class Change  extends Common
     public function displace()
     {
         if(request()->isAjax()) {
-            $data = input('post.');
-            echo $data;
+            $res = Db::table('displace_car')->insert([
+                'old_brand' =>input('old_brand'),
+                'old_cartype_id' =>input('old_cartype_id'),
+                'name' =>input('username'),
+                'phone' =>input('phone'),
+                'status' =>1,
+                'create_time' =>date("Y-m-d H:i:s",time()),
+            ]);
+            if($res) {
+                echo 200;
+            } else {
+                echo -200;
+            }
         }
     }
 }
