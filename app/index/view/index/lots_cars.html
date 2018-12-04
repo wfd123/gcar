@@ -428,8 +428,8 @@
 					</div>
 					<div class="list_sort">
 						<ul class="sort_sel">
-							<li class="current"><a href="">综合排序</a></li>
-							<li><a href="lots_cars">价格最低</a></li>
+							<li class="current"><a id="1" href="">综合排序</a></li>
+							<li><a id="2" href="" onclick="prices()">价格最低</a></li>
 							<li><a href="">车龄最短</a></li>
 							<li><a href="">里程最短</a></li>
 						</ul>
@@ -575,6 +575,9 @@
                     }
 				}
             });
+            function prices(){
+
+			}
             /*var minnum = $('#min').val();
             var maxnum = $('#max').val();
             if(minnum.length !== 0 && maxnum.length !== 0) {
