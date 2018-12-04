@@ -53,8 +53,9 @@ class Change  extends Common
         $this->assign('desc',$desc);
         $brand = $this->brand();//品牌
 
+        $brands = Db::table('car_brand')->select();
         //dump( $er_car);die;
-
+        $this->assign('brands',$brands);
         $this->assign('er_car',$er_car);
         $this->assign('brand',$brand);
 
@@ -66,8 +67,7 @@ class Change  extends Common
     /*
      * [Displace 置换]
      */
-    public function displace(){
-
+    public function displace1(){
         if ($this->request->isPost()){
 
             $data = $this->params;
@@ -119,7 +119,13 @@ class Change  extends Common
                 $this->return_msg('200','提交失败，请重新上传');
             }
         }
+    }
 
-
+    public function displace()
+    {
+        if(request()->isAjax()) {
+            $data = input('post.');
+            echo $data;
+        }
     }
 }
