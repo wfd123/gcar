@@ -1,5 +1,6 @@
 <?php
 namespace app\index\controller;
+use think\Exception;
 use think\Request;
 use think\Loader;
 use think\Db;
@@ -537,6 +538,25 @@ class Index  extends Common
      * @return [type] [description]
      *
      */
+
+    #
+    public function order()
+    {
+        $status = input('status');
+        if(empty($status)) {
+            throw new Exception('请传参');
+        }
+        $where = [];
+        $where['user_id'] = 1;
+        if($status == 1) {
+            $where['type'] = $status;#代付款
+        } elseif($status == 2) {
+            $where['type'] = $status;#已付款
+        }elseif($status == 3) {
+            $where['type'] = $status;#待评价 ....
+        }
+        $order = Db::table('order')->where($where)->select();
+    }
 
     public function lots_cars(){
 
