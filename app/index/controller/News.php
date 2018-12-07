@@ -51,6 +51,8 @@ class News extends Common
 
         $new_car = $this->new_car($city_id); //新车
         $brand = $this->brand();//品牌
+        $desc = Db::table('webkey')->where(['remark' => '新闻'])->find();
+        $this->assign("desc", $desc);
 
         //dump( $er_car);die;
         $new1 = $this->new_list(1);//公司新闻

@@ -27,7 +27,7 @@ class Zerocar  extends Common
 
     /*
     * O首付详情 和 推荐车源
-    * http://39.106.67.47/new_api/User/Homepage/l_car_detail
+    * http://api.gjcyz.com/new_api/User/Homepage/l_car_detail
     */
     public function zerocardetails(){
 

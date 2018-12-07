@@ -14,5 +14,5 @@ var imghost = 'https://www.zzhmfe.com/uploads/';
 //var imghost = 'http://wx.zzhmfe.com/uploads/';
 var server = {
     login:host+'User/newapi/my_appointment',
-    fily:'http://39.106.67.47/new_api/User/newapi/my_appointment',
+    fily:'http://api.gjcyz.com/new_api/User/newapi/my_appointment',
 };

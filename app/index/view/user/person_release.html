@@ -410,7 +410,7 @@
         $.ajax({
             type: "POST",
             async: false,
-            url: "http://39.106.67.47/new_api/user/newcar/getcar_brand_sys",
+            url: "http://api.gjcyz.com/new_api/user/newcar/getcar_brand_sys",
             data:{brand_id:id},
             success: function (data)
             {
@@ -435,7 +435,7 @@
         $.ajax({
             type: "GET",
             async: false,
-            url: "http://39.106.67.47//new_api/User/Index/get_cartype?id=" + id,
+            url: "http://api.gjcyz.com//new_api/User/Index/get_cartype?id=" + id,
             success: function (data)
             {
                 var obj = JSON.parse(data);

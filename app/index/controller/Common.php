@@ -863,13 +863,13 @@ class Common extends Controller{
     //获取二手车图片
     public function get_carimg($img,$type=1){
         if($type==1){
-            $url='http://39.106.67.47/butler_car/Uploads/relecar/';
+            $url='http://api.gjcyz.com/butler_car/Uploads/relecar/';
         }elseif($type==2){
-            $url='http://39.106.67.47/butler_car/Uploads/newcar/';
+            $url='http://api.gjcyz.com/butler_car/Uploads/newcar/';
         }elseif($type==3){
-            $url="http://39.106.67.47/butler_car/Uploads/carlogo/";
+            $url="http://api.gjcyz.com/butler_car/Uploads/carlogo/";
         }elseif($type==4){
-            $url="http://39.106.67.47/butler_car/assets/computer/images/";
+            $url="http://api.gjcyz.com/butler_car/assets/computer/images/";
         }
 
         $data=explode(",",$img);
@@ -937,9 +937,9 @@ class Common extends Controller{
     //获取二手车图片
     public function get_carimgs($img,$type=1){
         if($type==1){
-            $url='http://39.106.67.47/butler_car/Uploads/relecar/';
+            $url='http://api.gjcyz.com/butler_car/Uploads/relecar/';
         }elseif($type==2){
-            $url='http://39.106.67.47/butler_car/Uploads/newcar/';
+            $url='http://api.gjcyz.com/butler_car/Uploads/newcar/';
         }
         $data=explode(",",$img);
         $img=array();
@@ -1345,7 +1345,7 @@ class Common extends Controller{
         $param_format = "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s";
         $res = Db::table('car_color1')->select();
         foreach ($res as $key => $val) {
-            $res[$key]['img_url'] = "http://39.106.67.47/butler_car/".ltrim($val['img_url'],'.');
+            $res[$key]['img_url'] = "http://api.gjcyz.com/butler_car/".ltrim($val['img_url'],'.');
             $res[$key]['param'] = empty($data)? "" : 'sn_'.sprintf($param_format, $data['k_p'],$data['v_p'] ,$data['k_s'],$data['v_s'] ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,'c',$val['id'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
             if (!empty($id) && $id == $val['id']){
                 $name = empty($val['name'])? "" : $val['name'];
@@ -1896,7 +1896,7 @@ class Common extends Controller{
 
 
             }
-            $subface[$key]['img'] = "http://39.106.67.47/butler_car/Uploads/in/".$value['img'];
+            $subface[$key]['img'] = "http://api.gjcyz.com/butler_car/Uploads/in/".$value['img'];
         }
 
         $param = empty($data) ? "" : sprintf($param_format, $data['k_p'],$data['v_p'] ,"","" ,$data['k_o'],$data['v_o'] ,$data['k_g'],$data['v_g'] ,$data['k_d'],$data['v_d'] ,$data['k_b'],$data['v_b'] ,$data['k_c'],$data['v_c'] ,$data['k_f'],$data['v_f'] ,$data['k_n'],$data['v_n'],$data['k_l'],$data['v_l'],$data['k_m'],$data['v_m'],$data['k_a'],$data['v_a']);
@@ -1928,7 +1928,7 @@ class Common extends Controller{
     }
 
     /*
-       *http://39.106.67.47/new_api/User/shop/get_carparam
+       *http://api.gjcyz.com/new_api/User/shop/get_carparam
        * 获取具体参数配置
        * 车id
        * type 1 新车 2 二手 3 零首付
@@ -3153,7 +3153,7 @@ class Common extends Controller{
             if(strpos($v,'www.gj2car.com') !==false){
                 $list[]=str_replace("http://www.gj2car.com/Uploads/relecar","",$v);
             }else{
-                $list[]=str_replace("http://39.106.67.47/butler_car/Uploads/relecar/","",$v);
+                $list[]=str_replace("http://api.gjcyz.com/butler_car/Uploads/relecar/","",$v);
             }
         }
         $arr=implode(",",$list);
@@ -3170,7 +3170,7 @@ class Common extends Controller{
             if(strpos($url,'www.gj2car.com') !==false){
                 $list[]=str_replace("http://www.gj2car.com/Uploads/relecar","",$url);
             }else{
-                $list[]=str_replace("http://39.106.67.47/butler_car/Uploads/relecar/","",$url);
+                $list[]=str_replace("http://api.gjcyz.com/butler_car/Uploads/relecar/","",$url);
             }
             //$list[]=str_replace("http://www.gj2car.com/Uploads/relecar","",$url);
         }
@@ -3188,7 +3188,7 @@ class Common extends Controller{
             if(strpos($url,'www.gj2car.com') !==false){
                 $list[]=str_replace("http://www.gj2car.com/Uploads/relecar","",$url);
             }else{
-                $list[]=str_replace("http://39.106.67.47/butler_car/Uploads/relecar/","",$url);
+                $list[]=str_replace("http://api.gjcyz.com/butler_car/Uploads/relecar/","",$url);
             }
             //$list[]=str_replace("http://www.gj2car.com/Uploads/relecar","",$url);
         }

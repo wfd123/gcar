@@ -205,7 +205,7 @@ class User  extends Common {
 
 //        $info['mimg']=str_replace("http://www.gj2car.com/Uploads/relecar/","",$door_photo);
 //        if($info['mimg']==$door_photo){
-//            $info['mimg']=str_replace("http://39.106.67.47/butler_car/Uploads/relecar/","",$door_photo);
+//            $info['mimg']=str_replace("http://api.gjcyz.com/butler_car/Uploads/relecar/","",$door_photo);
 //        }
 
 
@@ -249,7 +249,7 @@ class User  extends Common {
             $info['mimg'] = $this->upload_file($data['mimg'],'door_photo');
 //        $info['mimg']=str_replace("http://www.gj2car.com/Uploads/relecar/","",$door_photo);
 //        if($info['mimg']==$door_photo){
-//            $info['mimg']=str_replace("http://39.106.67.47/butler_car/Uploads/relecar/","",$door_photo);
+//            $info['mimg']=str_replace("http://api.gjcyz.com/butler_car/Uploads/relecar/","",$door_photo);
 //        }
 
 
@@ -862,7 +862,7 @@ class User  extends Common {
     }
     /*
      * 商家入驻
-     * http://39.106.67.47/new_api/User/newapi/business_entry
+     * http://api.gjcyz.com/new_api/User/newapi/business_entry
      */
     public function business_entry1(){
         $city_pin = input('city');
@@ -1599,7 +1599,7 @@ class User  extends Common {
      * 展示我的预约
      * my_appointment
      * 我的预约
-     * http://39.106.67.47/new_api/User/newapi/my_appointment
+     * http://api.gjcyz.com/new_api/User/newapi/my_appointment
      * user_id
      * type 代表类型 如新车//type类型1.新车，2.二手车，3.0首付
      * page
@@ -2531,7 +2531,7 @@ class User  extends Common {
     }
     /*
      * 卖车接口
-     * http://39.106.67.47/new_api/User/Salecar/Sale
+     * http://api.gjcyz.com/new_api/User/Salecar/Sale
      */
 
     public function sale_car(){

@@ -15,7 +15,7 @@ class Api extends Common
     /*
      * 卖车
      * app 卖车接口
-     * http://39.106.67.47/new_api/User/Salecar/Sale
+     * http://api.gjcyz.com/new_api/User/Salecar/Sale
      * 图片暂时无法接受
      */
     public function sale_car(){

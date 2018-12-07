@@ -530,7 +530,7 @@ class Index  extends Common
 
     /*
      * 二手车筛选
-     *http://39.106.67.47/new_api/User/Index/lots_cars
+     *http://api.gjcyz.com/new_api/User/Index/lots_cars
      *
      */
     /**
