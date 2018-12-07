@@ -293,6 +293,7 @@ class User  extends Common {
             $data = $this->params;
             $data['subface_img'] = $this->upload($data['subface_img']);
             $data['car_desc'] = strip_tags($data['car_desc']);
+            $data['is_img'] = 2;
             $insert = Db::table('rele_car')->insert($data);
             if($insert) {
                 return $this->success('发布成功');
