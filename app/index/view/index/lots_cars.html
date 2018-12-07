@@ -470,7 +470,11 @@
 								$strimg = implode(',',$val['subface_img']);
 								if($strimg):
 							?>
+							<?php if($val['is_img'] == 1):  ?>
 							<img src="http://api.gjcyz.com/butler_car/Uploads/relecar{$val.subface_img[0]}"/>
+							<?php else: ?>
+							pc图片
+							<?php endif; ?>
 							<?php else: ?>
 							<img src="__STATIC__/img/car111.png"/>
 							<?php endif; ?>
