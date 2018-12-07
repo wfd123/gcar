@@ -461,11 +461,20 @@
 			<div class="marbt30 carList_info">
 				<ul class="list">
 
-					{volist name="res" id="val" offset="1" }
+					{volist name="items" id="val" offset="1" }
 
 					<li class="items5">
 
-						<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_img flex_center"><img src="__STATIC__/img/car111.png" /></a>
+						<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_img flex_center">
+							<?php
+								$strimg = implode(',',$val['subface_img']);
+								if($strimg):
+							?>
+							<img src="http://www.car.com/uploads{$val.subface_img[0]}"/>
+							<?php else: ?>
+							<img src="__STATIC__/img/car111.png"/>
+							<?php endif; ?>
+						</a>
 						<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_desc">
 							<h3>{$val.pu_id}{$val.name_li}</h3>
 							<p><span class="car_price"><b>{$val.price}</b>万</span><span class="car_sui">新车含税{$val.news_price}万</span></p>
