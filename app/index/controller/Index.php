@@ -1148,6 +1148,12 @@ class Index  extends Common
                 }
             }*/
         $res = Db::table('rele_car')->where($where)->order($wheres)->paginate(13);
+        $items = $res->items();
+        foreach ($res as $k => $v){
+            $items[$k]['subface_img'] = explode(",",$v['subface_img']);
+        }
+//        dump($res);
+        $this->assign('items',$items);
         #关键字
         $desc = Db::table('webkey')->where(['remark' => '二手车'])->find();
         $this->assign('desc',$desc);
