@@ -621,8 +621,9 @@ class Index  extends Common
                 }
             }
             #搜索
-            if(!empty($data['key'])){
-                $where.=" and name_li like '%".$data['key']."%'  ";
+            if(!empty($data['q'])){
+                $where.=" and name_li like '%".$data['q']."%'  ";
+                $param_array['q']['name'] = $data['q'];
             }
 
             //级别suv
