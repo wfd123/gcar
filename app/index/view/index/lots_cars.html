@@ -1,640 +1,655 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title>{$desc.title}</title>
-		<meta name="keywords" content="{$desc.ke}">
-		<meta name="description" content="{$desc.des}">
-	</head>
-	<link rel="stylesheet" href="__STATIC__/css/style.css" />
-	<link rel="stylesheet" href="__STATIC__/css/other.css" />
-	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
-	<script src="__STATIC__/js/jquery.lazyload.min.js"></script>
-	<script src="__STATIC__/js/layer/layer.js"></script>
-	<style>
-		/*分页样式*/
-		.pagination{text-align:center;margin-top:20px;margin-bottom: 20px;}
-		.pagination li{    margin: 0px 3px;
-							border: 1px solid #e6e6e6;
-							padding: 6px 12px;
-							display: inline-block;
-						}
-		.pagination .active{background-color: #EA5200;color: #fff;}
-		.pagination .disabled{color:#aaa;}
-		body .layui-layer{
-			top:35% !important;
-		}
-	</style>
-	<body>
-		<div class="header">
-			<div class="site_nav">
-				<div class="site_nav_bd">
-					<div class="fleft">你好，欢迎来到管家车易站！
-						欢迎用户{empty name="Think.cookie.phone"}
-						<a href="http://www.gjcyz.com/{$Think.session.cityurl}/login" class="coloryel">【登录】</a>
-						{else /}
-						{$Think.cookie.phone}
-						{/empty}</div>
-					<div class="fright">
-						<ul class="site_nav_menu">
-							<li><a href="{$domain}/{$Think.session.cityurl}/"><img src="__STATIC__/img/shouye.png" alt="" />首页</a></li>
-							<li class="sec_li"><a href="{$domain}/{$Think.session.cityurl}/twocar"><img src="__STATIC__/img/maic.png" alt="" />我要买车</a></li>
-							<li><a href="{$domain}/{$Think.session.cityurl}/sell"><img src="__STATIC__/img/maic.png" alt="" />我要卖车</a></li>
-							<li><a href="{$domain}/{$Think.session.cityurl}/appdownload"><img src="__STATIC__/img/xiazai.png" alt="" />APP下载</a></li>
-							<li><a href=""><img src="__STATIC__/img/wangahn.png" alt="" />网站导航</a></li>
-							{notempty name="Think.cookie.phone"}<li><a href="{$domain}/{$Think.session.cityurl}/per_his"><img src="__STATIC__/img/wangahn.png" alt="" />会员中心</a></li>{/notempty}
-							{notempty name="Think.cookie.phone"}<li><a href="{$domain}/{$Think.session.cityurl}/logout"><img src="__STATIC__/img/wangahn.png" alt="" />安全退出</a></li>{/notempty}
-						</ul>
-					</div>
-				</div>
+<head>
+	<meta charset="utf-8" />
+	<title>{$desc.title}</title>
+	<meta name="keywords" content="{$desc.ke}">
+	<meta name="description" content="{$desc.des}">
+</head>
+<link rel="stylesheet" href="__STATIC__/css/style.css" />
+<link rel="stylesheet" href="__STATIC__/css/other.css" />
+<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+<script src="__STATIC__/js/jquery.lazyload.min.js"></script>
+<script src="__STATIC__/js/layer/layer.js"></script>
+<style>
+	/*分页样式*/
+	.pagination{text-align:center;margin-top:20px;margin-bottom: 20px;}
+	.pagination li{    margin: 0px 3px;
+		border: 1px solid #e6e6e6;
+		padding: 6px 12px;
+		display: inline-block;
+	}
+	.pagination .active{background-color: #EA5200;color: #fff;}
+	.pagination .disabled{color:#aaa;}
+	body .layui-layer{
+		top:35% !important;
+	}
+</style>
+<body>
+<div class="header">
+	<div class="site_nav">
+		<div class="site_nav_bd">
+			<div class="fleft">你好，欢迎来到管家车易站！
+				欢迎用户{empty name="Think.cookie.phone"}
+				<a href="{$domain}/{$Think.session.cityurl}/login" class="coloryel">【登录】</a>
+				{else /}
+				{$Think.cookie.phone}
+				{/empty}</div>
+			<div class="fright">
+				<ul class="site_nav_menu">
+					<li><a href="{$domain}/{$Think.session.cityurl}/"><img src="__STATIC__/img/shouye.png" alt="" />首页</a></li>
+					<li class="sec_li"><a href="{$domain}/{$Think.session.cityurl}/twocar"><img src="__STATIC__/img/maic.png" alt="" />我要买车</a></li>
+					<li><a href="{$domain}/{$Think.session.cityurl}/sell"><img src="__STATIC__/img/maic.png" alt="" />我要卖车</a></li>
+					<li><a href="{$domain}/{$Think.session.cityurl}/appdownload"><img src="__STATIC__/img/xiazai.png" alt="" />APP下载</a></li>
+					<li><a href=""><img src="__STATIC__/img/wangahn.png" alt="" />网站导航</a></li>
+					{notempty name="Think.cookie.phone"}<li><a href="{$domain}/{$Think.session.cityurl}/per_his"><img src="__STATIC__/img/wangahn.png" alt="" />会员中心</a></li>{/notempty}
+					{notempty name="Think.cookie.phone"}<li><a href="{$domain}/{$Think.session.cityurl}/logout"><img src="__STATIC__/img/wangahn.png" alt="" />安全退出</a></li>{/notempty}
+				</ul>
 			</div>
-			<div class="fn_show gj_clear header_show">
-				<div class="wrap gj_clear marginbt">
-					<div class="logo">
-						<h1> <a href="/index/index/index.html">二手车交易市场</a></h1>
-					</div>
-					<div class="city_current">
-						<div class="address"><span>郑州</span><b class="icon1"></b></div>
-						<div class="white-line"></div>
-						<div class="city"  style="display: none;" >
-							<ol>
-								{volist name="city" id="val"}
-								<a href="/{$val.pin}"> <li>{$val.name}</li></a>
-								{/volist}
-
-							</ol>
-						</div>
-					</div>
-					<div class="search gj_clear">
-						<div class="search_tab">
-							<a href="twocar" class="" id="">二手车</a>
-							<a href="newcar" class="s_new">新车</a>
-						</div>
-						<div class="ipt_cont">
-							<form name="admin_list_sea" class="form-search" method="post" action="">
-							<div class="search_ipts">
-								<input type="text" id="mingzi"  name="key" value="" autocomplete="off" placeholder="" />
-								<button type="submit" class="search_btn"><i class="fa fa-search"></i> 搜索</button>
-							</div>
-							</form>
-							<!--<div class="fn_hide search_ipts">
-                              <input type="text"  name="txtNewcar" autocomplete="off" placeholder="请输入喜欢的品牌或车型" />
-                              <a class="search_btn">搜索</a>
-                         </div>
-                           <div class="fn_hide search_ipts">
-                                  <input type="text"  name="txtzerocar" autocomplete="off" placeholder="请输入喜欢的品牌或车型" />
-                              <a class="search_btn" >搜索</a>
-                         </div>-->
-
-						</div>
-						<!-- 搜索历史记录 -->
-						<div id="history_list" class="search_list" style="display:none;"></div>
-					</div>
-				</div>
-				<div class="nav gj_clear">
-					<ul class="wrap">
-						<li><a href="http://www.gjcyz.com">首页</a></li>
-						<li ><a href="http://xin.gjcyz.com/{$Think.session.cityurl}/index" class="sec_li">新车</a></li>
-						<li><a href="http://www.gjcyz.com/{$Think.session.cityurl}/brand">二手车</a></li>
-						<!--<li><a href="zeroCar.html">零首付</a></li>-->
-						<li><a href="http://www.gjcyz.com/{$Think.session.cityurl}/sell">卖车</a></li>
-						<li><a href="http://www.gjcyz.com/{$Think.session.cityurl}/change">置换</a></li>
-						<li><a href="http://www.gjcyz.com/{$Think.session.cityurl}/news">新闻资讯</a></li>
-						<li><a href="http://www.gjcyz.com/{$Think.session.cityurl}/appdownload">APP下载</a></li>
-						<!--{empty name="Think.cookie.phone"}<li><a href="{$domain}/{$Think.session.cityurl}/login">登录/注册</a></li>{/empty}-->
-						<li><a href="http://www.gjcyz.com/{$Think.session.cityurl}/join_us">关于我们</a></li>
-						<li><a href="http://www.gjcyz.com/{$Think.session.cityurl}/shop">优选商家</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="fn_hide gj_clear header_hide borbt">
-				<div class="wrap" >
-					<div class="logo" >
-						<h1 style="">
-							<a href="/index/index/index.html"></a>
-						</h1>
-					</div>
-					<div class="city_current">
-						<div class="address"><span>郑州</span><b class="icon1"></b></div>
-						<div class="white-line"></div>
-						<div class="city"  style="display: none;" >
-
-							<ol>
-								<li></li>
-							</ol>
-						</div>
-					</div>
-					<div class="header_tel">
-						<img src="__STATIC__/img/phone1.png" alt="" height="17"/>
-						0371-53375515
-					</div>
-					<div class="nav">
-						<ul>
-							<li><a href="http://www.gjcyz.com">首页</a></li>
-							<li><a href="http://www.gjcyz.com/{$Think.session.cityurl}/brand">二手车</a></li>
-							<li><a href="http://xin.gjcyz.com/{$Think.session.cityurl}/index">新车</a></li>
-							<!--<li><a href="zeroCar.html">零首付</a></li>-->
-							<li><a href="http://www.gjcyz.com/{$Think.session.cityurl}/sell">卖车</a></li>
-							<li><a href="http://www.gjcyz.com/{$Think.session.cityurl}/change">置换</a></li>
-							<li><a href="http://www.gjcyz.com/{$Think.session.cityurl}/news">新闻资讯</a></li>
-							<li><a href="http://www.gjcyz.com/{$Think.session.cityurl}/appdownload">APP下载</a></li>
-							{empty name="Think.session.phone"}<li><a href="http://www.gjcyz.com/{$Think.session.cityurl}/login">登录</a></li>{/empty}
-						</ul>
-					</div>
-				</div>
-			</div>
-			<script>
-
-                function tab(a,b,c){
-                    $(a).on("click",c,function(){
-                        $(this).addClass('active').siblings().removeClass('active');
-                        $(b).eq($(this).index()).show().siblings().hide();
-                    });
-
-                    /*$(".search_ipts").on("click",".search_btn",function(){
-                        var mingzi = $('#mingzi').val();
-                        if(mingzi.length == 0) {
-                            alert('空');
-                        } else {
-                            window.location.href = "{$domain}/{$Think.session.cityurl}/" + mingzi;
-                        }
-                    });*/
-                }
-                //	$('.wrap li').click(function(){
-                //
-                //		$(this).addClass('active').siblings().removeClass('active')
-                //	})
-                tab(".search_tab",".ipt_cont .search_ipts","a");
-                $(window).on('scroll',function(){
-                    var bH=$("body").outerHeight();
-                    var wH=$(window).innerHeight();
-
-                    var wsH=$(window).scrollTop();
-                    var sH=$(".header .fn_show").height();
-				//	console.log(bH+'页面高度---页面可用高度'+wH+'-----滚动高度'+wsH+'-----页面头部高度'+sH)
-				//	console.log(bH-wH)
-                    if(wsH+50>sH){
-                        $(".header .header_hide").css('display','block');
-                        $(".header .header_show").css('display','none');
-                        $(".header").addClass('fixedTop')
-                    }else{
-                        $(".header .header_hide").css('display','none');
-                        $(".header .header_show").css('display','block');
-                        $(".header").removeClass('fixedTop')
-                    }
-
-                })
-
-			</script>
-
 		</div>
-		<div class="full_wid">
-			<div class="breadnav">您的位置：<a href="#">郑州二手交易市场</a>>><a href="#">二手车 >></a></div>
-			<div class="wrap">
-				<div class="list_left">
-					<div class="list_screen_cont">
-						<div class="list_brand  slide_up list_item gj_clear">
-							<div class="list_title">品牌</div>
-							<div class="screening-margin gj_clear">
-								<div class="list_car_brand list_detail_sel">{volist name="brand" id="val"}<a href="{$domain}/{$Think.session.cityurl}/{$val.pin}/">{$val.name}</a>{/volist}</div>
-								<span class="more">更多品牌<i><img src="__STATIC__/img/down1.png" alt="" width="12"/></i></span>
-							</div>
-						</div>
-						<div class="slide_down sel_box_more all_brandshow">
-							<span class="more">收起<i><img src="__STATIC__/img/down1.png" alt="" width="12"/></i></span>
-							<div class="brand-more">
-								   {volist name="ABC" id="vol"}
-			                       <dl class='zimu'>
+	</div>
+	<div class="fn_show gj_clear header_show">
+		<div class="wrap gj_clear marginbt">
+			<div class="logo">
+				<h1> <a href="/index/index/index.html">二手车交易市场</a></h1>
+			</div>
+			<div class="city_current">
+				<div class="address"><span>郑州</span><b class="icon1"></b></div>
+				<div class="white-line"></div>
+				<div class="city"  style="display: none;" >
+					<ol>
+						{volist name="city" id="val"}
+						<a href="/{$val.pin}"> <li>{$val.name}</li></a>
+						{/volist}
+
+					</ol>
+				</div>
+			</div>
+			<div class="search gj_clear">
+				<div class="search_tab">
+					<a id="s1" class="active">二手车</a>
+					<a id="s2">新车</a>
+				</div>
+				<div class="ipt_cont">
+					<!--<form name="admin_list_sea" class="form-search" method="post" action="">-->
+					<div class="search_ipts">
+						{if condition="!empty($param_array['q'])"}
+						<input type="text" id="mingzi"  name="key" autocomplete="off" placeholder="" value="{$param_array['q']['name']}" />
+						{else /}
+						<input type="text" id="mingzi"  name="key" autocomplete="off" placeholder="" value="" />
+						{/if}
+						<button type="submit" class="search_btn"><i class="fa fa-search"></i> 搜索</button>
+					</div>
+					<!--</form>-->
+					<!--<div class="fn_hide search_ipts">
+                      <input type="text"  name="txtNewcar" autocomplete="off" placeholder="请输入喜欢的品牌或车型" />
+                      <a class="search_btn">搜索</a>
+                 </div>
+                   <div class="fn_hide search_ipts">
+                          <input type="text"  name="txtzerocar" autocomplete="off" placeholder="请输入喜欢的品牌或车型" />
+                      <a class="search_btn" >搜索</a>
+                 </div>-->
+				</div>
+				<!-- 搜索历史记录 -->
+				<div id="history_list" class="search_list" style="display:none;"></div>
+			</div>
+		</div>
+		<div class="nav gj_clear">
+			<ul class="wrap">
+				<li><a href="{$domain}">首页</a></li>
+				<li ><a href="{$domain}/{$Think.session.cityurl}/newcar" class="sec_li">新车</a></li>
+				<li><a href="{$domain}/{$Think.session.cityurl}/brand">二手车</a></li>
+				<!--<li><a href="zeroCar.html">零首付</a></li>-->
+				<li><a href="{$domain}/{$Think.session.cityurl}/sell">卖车</a></li>
+				<li><a href="{$domain}/{$Think.session.cityurl}/change">置换</a></li>
+				<li><a href="{$domain}/{$Think.session.cityurl}/news">新闻资讯</a></li>
+				<li><a href="{$domain}/{$Think.session.cityurl}/appdownload">APP下载</a></li>
+				{empty name="Think.cookie.phone"}<li><a href="{$domain}/{$Think.session.cityurl}/login">登录/注册</a></li>{/empty}
+				<li><a href="{$domain}/{$Think.session.cityurl}/join_us">关于我们</a></li>
+				<li><a href="{$domain}/{$Think.session.cityurl}/shop">优选商家</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="fn_hide gj_clear header_hide borbt">
+		<div class="wrap" >
+			<div class="logo" >
+				<h1 style="">
+					<a href="/index/index/index.html"></a>
+				</h1>
+			</div>
+			<div class="city_current">
+				<div class="address"><span>郑州</span><b class="icon1"></b></div>
+				<div class="white-line"></div>
+				<div class="city"  style="display: none;" >
+
+					<ol>
+						<li></li>
+					</ol>
+				</div>
+			</div>
+			<div class="header_tel">
+				<img src="__STATIC__/img/phone1.png" alt="" height="17"/>
+				0371-53375515
+			</div>
+			<div class="nav">
+				<ul>
+					<li><a href="{$domain}">首页</a></li>
+					<li><a href="{$domain}/{$Think.session.cityurl}/twocar">二手车</a></li>
+					<li><a href="{$domain}/{$Think.session.cityurl}/newcar">新车</a></li>
+					<!--<li><a href="zeroCar.html">零首付</a></li>-->
+					<li><a href="{$domain}/{$Think.session.cityurl}/sell">卖车</a></li>
+					<li><a href="{$domain}/{$Think.session.cityurl}/change">置换</a></li>
+					<li><a href="{$domain}/{$Think.session.cityurl}/news">新闻资讯</a></li>
+					<li><a href="{$domain}/{$Think.session.cityurl}/appdownload">APP下载</a></li>
+					{empty name="Think.session.phone"}<li><a href="{$domain}/{$Think.session.cityurl}/login">登录/注册</a></li>{/empty}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script>
+
+        function tab(a,b,c){
+            $(a).on("click",c,function(){
+                $(this).addClass('active').siblings().removeClass('active');
+                $(b).eq($(this).index()).show().siblings().hide();
+            });
+
+            $(".search_ipts").on("click",".search_btn",function(){
+                var mingzi = $('#mingzi').val();
+                var old = $(".search .search_tab a:first").hasClass("active");
+                if (old) {
+                    var q = mingzi ? "?q=" + mingzi : "";
+                    window.location.href = "http://www.car.com:8000/{$Think.session.cityurl}/s" + q;
+                } else {
+                    var q = mingzi ? "?q=" + mingzi : "";
+                    window.location.href = "http://www.car.com:8000/{$Think.session.cityurl}/s" + q;
+                }
+            });
+
+            /*$(".search_ipts").on("click",".search_btn",function(){
+                var mingzi = $('#mingzi').val();
+                if(mingzi.length == 0) {
+                    alert('空');
+                } else {
+                    window.location.href = "{$domain}/{$Think.session.cityurl}/" + mingzi;
+                }
+            });*/
+        }
+        //	$('.wrap li').click(function(){
+        //
+        //		$(this).addClass('active').siblings().removeClass('active')
+        //	})
+        tab(".search_tab",".ipt_cont .search_ipts","a");
+        $(window).on('scroll',function(){
+            var bH=$("body").outerHeight();
+            var wH=$(window).innerHeight();
+
+            var wsH=$(window).scrollTop();
+            var sH=$(".header .fn_show").height();
+            //	console.log(bH+'页面高度---页面可用高度'+wH+'-----滚动高度'+wsH+'-----页面头部高度'+sH)
+            //	console.log(bH-wH)
+            if(wsH+50>sH){
+                $(".header .header_hide").css('display','block');
+                $(".header .header_show").css('display','none');
+                $(".header").addClass('fixedTop')
+            }else{
+                $(".header .header_hide").css('display','none');
+                $(".header .header_show").css('display','block');
+                $(".header").removeClass('fixedTop')
+            }
+
+        })
+
+	</script>
+
+</div>
+<div class="full_wid">
+	<div class="breadnav">您的位置：<a href="#">郑州二手交易市场</a>>><a href="#">二手车 >></a></div>
+	<div class="wrap">
+		<div class="list_left">
+			<div class="list_screen_cont">
+				<div class="list_brand  slide_up list_item gj_clear">
+					<div class="list_title">品牌</div>
+					<div class="screening-margin gj_clear">
+						<div class="list_car_brand list_detail_sel">{volist name="brand" id="val"}<a href="{$domain}/{$Think.session.cityurl}/{$val.pin}/">{$val.name}</a>{/volist}</div>
+						<span class="more">更多品牌<i><img src="__STATIC__/img/down1.png" alt="" width="12"/></i></span>
+					</div>
+				</div>
+				<div class="slide_down sel_box_more all_brandshow">
+					<span class="more">收起<i><img src="__STATIC__/img/down1.png" alt="" width="12"/></i></span>
+					<div class="brand-more">
+						{volist name="ABC" id="vol"}
+						<dl class='zimu'>
 							<dt>{$vol.initial}</dt>
-									   {volist name="vol['list']" id="vo"}
+							{volist name="vol['list']" id="vo"}
 							<dd class='firstname'>
 
 								<a href="{$domain}/{$Think.session.cityurl}/lots_cars?brand_id={$vo.id}&page=1&sort=1" title=''>{$vo.name}</a>
 
-															</dd>
-									   {/volist}
-							</dl>
-                                   {/volist}
-
-			                </div>
-						</div>
-						<!--<div class="list_series slide_up list_item gj_clear">-->
-							<!--<div class="list_title">车系</div>-->
-							<!--<div class="screening-margin">							-->
-								<!--<div class=" list_detail_sel"><a href="">大众</a><a href="">大众</a><a href="">大众</a><a href="">大众</a><a href="">大众</a><a href="">大众</a><a href="">大众</a></div>-->
-							    <!--<span class="more">更多<i><img src="__STATIC__/img/down1.png" alt="" width="12"/></i></span>-->
-							<!--</div>-->
-						<!--</div>-->
-						<div class="slide_down all_series sel_box_more">
-							<span class="more">收起<i><img src="__STATIC__/img/down1.png" alt="" width="12"/></i></span>
-							<div class="series_box">
-								<dl>
-									<dt>微型车</dt>
-									<dd><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a></dd>
-								</dl>
-								<dl>
-									<dt>小型车</dt>
-									<dd><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a></dd>
-								</dl>
-								<dl>
-									<dt>紧凑型</dt>
-									<dd><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a>
-										<a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a>
-										<a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a>
-									</dd>
-								</dl>
-
-							</div>
-						</div>
-						<div class="list_price list_item gj_clear">
-							<div class="list_title">价格</div>
-							<div class="screening-margin gj_clear">
-								<div class="list_detail_sel">
-									{volist name="price" id="vo"}
-									<a id="{$vo.param}" class="aa" href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.param}">{$vo.name}</a>
-									{/volist}
-								</div>
-								<div class="price_handle">
-									{if condition="!empty($datas)"}
-									<div class="box">
-										<input type="text" id="min" name="min" value="{$datas[0]}" />万</div><em>-</em><div class="box"><input type="text" id="max" name="max" value="{$datas[1]}" />万
-									</div>
-									<a href="javascript:;" class="sure" >确定</a>
-									{else /}
-									<div class="box">
-										<input type="text" id="min" name="min" value="" />万</div><em>-</em><div class="box"><input type="text" id="max" name="max" value="" />万
-									</div>
-									<a href="javascript:;" class="sure" >确定</a>
-									{/if}
-								</div>
-							</div>
-
-						</div>
-						<div class="list_jibie list_item gj_clear">
-							<div class="list_title">级别</div>
-							<div class="screening-margin gj_clear">
-								<div class="list_detail_sel">
-									{volist name="subface" id="vo"}
-									<a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.param}">{$vo.name}</a>
-								    {/volist}
-								</div>
-								<!--<span class="more">多选<i>+</i></span>-->
-							</div>
-						</div>
-						<div class="list_other list_item gj_clear">
-							<div class="list_title">其他</div>
-							<div class="screening-margin gj_clear">
-								<div class=" list_detail_sel">
-									 <ul class="select-box searchCond" style="background: none">
-							          <li>
-							            <!--<div data-toggle="select" name="r" class="select-menu"  id="select2">
-							              <div class="menu-selected">车龄</div>
-							              <dl class="menu menu4" style="display: none;" id="aselect2">
-							                <dd> <a rel="nofollow" href="#" data-for="hidden_r" data-valueid="0" class="preventdefault" title="不限二手车">不限</a> </dd>
-											  {volist name="age" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/lots_cars?age={$val.id}" data-for='hidden_r' data-valueid='' class='preventdefault' title=''>{$val.cheling}</a> </dd>
-											  {/volist}
-							              </dl>
-							            </div>-->
-							          </li>
-							          <li>
-							            <div data-toggle="select" name="k" class="select-menu" id="select3">
-							              <div class="menu-selected">里程</div>
-							              <dl class="menu menu5" style="display: none;" id="aselect3">
-							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_k" data-valueid="0-1" class="preventdefault" title="1万公里以内二手车">1万公里以内</a> </dd>-->
-											  {volist name="licheng" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_k' data-valueid='' class='preventdefault' title=''>{$val.name}</a></dd>
-											  {/volist}
-										  </dl>
-							            </div>
-							          </li>
-
-							          <li>
-							            <div data-toggle="select" class="select-menu" id="select4">
-							              <div class="menu-selected" >排量</div>
-							              <div class="menu menu6" style="display: none;" id="aselect4">
-							                <dd> <a rel="nofollow" href="#" data-for="hidden_j" data-valueid="0" class="preventdefault" title="不限二手车">不限</a> </dd>
-											  {volist name="output" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_j' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
-											  {/volist}
-											  <!--<dd> <a rel="nofollow" href="#" data-for="hidden_j" data-valueid="0-1" class="preventdefault" title="1.0L以下二手车">1.0L以下</a> </dd>-->
-							              </div>
-							            </div>
-							          </li>
-							          <li>
-							            <div data-toggle="select" class="select-menu" id="select7">
-							              <div class="menu-selected">变速箱</div>
-							              <div class="menu menu8" style="display: none;" id="aselect7">
-							                <dd> <a rel="nofollow" href="javascript:;" data-for="hidden_g" data-valueid="0" class="preventdefault" title="不限档二手车">不限</a> </dd>
-							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_g" data-valueid="1" class="preventdefault" title="自动档二手车">自动</a> </dd>-->
-							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_g" data-valueid="2" class="preventdefault" title="手动档二手车">手动</a> </dd>-->
-											  {volist name="gearbox" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_g' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
-											  {/volist}
-										  </div>
-							            </div>
-							          </li>
-							          <li>
-							            <div data-toggle="select" name="r" class="select-menu" id="select5">
-							              <div class="menu-selected">排放标准</div>
-							              <dl class="menu menu4" style="display: none;" id="aselect5">
-							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_h" data-valueid="3-" class="preventdefault" title="国三以上二手车">国三以上</a> </dd>-->
-							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_h" data-valueid="4-" class="preventdefault" title="国四以上二手车">国四以上</a> </dd>-->
-							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_h" data-valueid="5" class="preventdefault" title="国五二手车">国五</a> </dd>-->
-											  {volist name="blowdown" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_h' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
-											  {/volist}
-							              </dl>
-							            </div>
-							          </li>
-							          <li>
-							            <div data-toggle="select" class="select-menu" id="select8">
-							              <div class="menu-selected">驱动</div>
-							              <div class="menu menu9" style="display: none;" id="aselect8">
-											  {volist name="car_drive" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_q' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
-											  {/volist}
-							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_q" data-valueid="0" class="preventdefault" title="不限二手车">前驱</a> </dd>-->
-							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_q" data-valueid="2" class="preventdefault" title="2座二手车">前驱</a> </dd>-->
-							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_q" data-valueid="4" class="preventdefault" title="4座二手车">前驱</a> </dd>-->
-							              </div>
-							            </div>
-							          </li>
-							          <li>
-							            <div data-toggle="select" class="select-menu" id="select12">
-							              <div class="menu-selected">车身</div>
-							              <div class="menu menu12" style="display: none;" id="aselect12">
-											  {volist name="car_body" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_x' data-valueid='' class='preventdefault' title='不限二手车'>{$val.name}</a>
-							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_x" data-valueid="0" class="preventdefault" title="不限二手车">前驱</a> </dd>-->
-							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_x" data-valueid="2" class="preventdefault" title="2座二手车">前驱</a> </dd>-->
-							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_x" data-valueid="4" class="preventdefault" title="4座二手车">前驱</a> </dd>-->
-											  {/volist}
-							              </div>
-							            </div>
-							          </li>
-
-							          <li>
-							            <div data-toggle="select" class="select-menu" id="select6">
-							              <div class="menu-selected">颜色</div>
-							              <div class="menu menu7 radius menuCar07" style="display: none;" id="aselect6">
-											  {volist name="color" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_c' data-valueid='' class='preventdefault c15' title=''>{$val.name}</a> </dd>
-											  {/volist}
-							              </div>
-							            </div>
-							          </li>
-							          <li>
-							            <div data-toggle="select" class="select-menu" id="select10">
-							              <div class="menu-selected menu-selected12">燃料</div>
-							              <div class="menu menu12" style="display: none;" id="aselect10">
-
-							                <dd> <a rel="nofollow" href="" data-for="hidden_d" data-valueid="0" class="preventdefault" title="不限二手车">不限</a> </dd>
-											  {volist name="fuel" id="val"}
-											  <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_w' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
-							                <!--<dd> <a rel="nofollow" href="#" data-for="hidden_d" data-valueid="1" class="preventdefault" title="汽油二手车">汽油</a> </dd>-->
-											  {/volist}
-
-							              </div>
-							            </div>
-							          </li>
-							        </ul>
-								</div>
-							</div>
-						</div>
-						<div class="list_jibie list_item gj_clear">
-							<div class="list_title">已选择</div>
-							<div class="screening-margin gj_clear">
-								<ul class="list_detail_sel car-selected">
-									{if condition="!empty($brand_name)"}
-									<li class='list'><span class='active2 car-model'>{$brand_name}</span><span class='close'><span class='cha'>×</span></span></li>
-									{/if}
-									{volist name="param_array" id="param"}
-									<li class='list'><span class='active2 car-model'>{$param.name}</span><span class="close" id="{$param.param}" class='close'><span class='cha'>×</span></span></li>
-									{/volist}
-								</ul>
-								<!--<span class="more">多选<i>+</i></span>-->
-							</div>
-						</div>
-					</div>
-					<div class="list_subNav">
-						<ul>
-							<li class="active"><a href="" class="">郑州二手车</a></li>
-							<!--<li><a href="">分期购车</a></li>-->
-							<!--<li><a href="">商家车</a></li>-->
-							<!--<li><a href="">个人车</a></li>-->
-							<!--<li><a href="">商家认证</a></li>-->
-						</ul>
-					</div>
-					<div class="list_sort">
-						<ul class="sort_sel">
-							{volist name="arr" id="vo"}
-							<li class="item"><a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.id}">{$vo.name}</a></li>
+							</dd>
 							{/volist}
-							<!--<li data-id="2" class="item"><a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/sn_n2">价格最低</a></li>-->
-							<!--<li data-id="3" class="item"><a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/sn_n3">车龄最短</a></li>-->
-							<!--<li data-id="4" class="item"><a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/sn_n4">里程最短</a></li>-->
-						</ul>
-						<!--<ul class="check_item flex_center">-->
-							<!--<li class="checked"><img src="__STATIC__/img/img_checked.png" alt="" width=""/>准新车</li>-->
-							<!--<li><img src="__STATIC__/img/img_uncheck.png" alt="" />七日内上新</li>-->
-							<!--<li><img src="__STATIC__/img/img_uncheck.png" alt="" />质保</li>-->
-							<!---->
-						<!--</ul>-->
-						<!--<span class="more">更多<i><img src="__STATIC__/img/down1.png" alt="" /></i></span>-->
+						</dl>
+						{/volist}
+
 					</div>
-					<div class="marbt30 carList_info">
-						 <ul class="list">
+				</div>
+				<!--<div class="list_series slide_up list_item gj_clear">-->
+				<!--<div class="list_title">车系</div>-->
+				<!--<div class="screening-margin">							-->
+				<!--<div class=" list_detail_sel"><a href="">大众</a><a href="">大众</a><a href="">大众</a><a href="">大众</a><a href="">大众</a><a href="">大众</a><a href="">大众</a></div>-->
+				<!--<span class="more">更多<i><img src="__STATIC__/img/down1.png" alt="" width="12"/></i></span>-->
+				<!--</div>-->
+				<!--</div>-->
+				<div class="slide_down all_series sel_box_more">
+					<span class="more">收起<i><img src="__STATIC__/img/down1.png" alt="" width="12"/></i></span>
+					<div class="series_box">
+						<dl>
+							<dt>微型车</dt>
+							<dd><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a></dd>
+						</dl>
+						<dl>
+							<dt>小型车</dt>
+							<dd><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a></dd>
+						</dl>
+						<dl>
+							<dt>紧凑型</dt>
+							<dd><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a>
+								<a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a>
+								<a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a><a href="">大众up!</a>
+							</dd>
+						</dl>
 
-                           {volist name="res" id="val" offset="1" }
-
-							<li class="items5">
-
-								<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_img flex_center"><img src="__STATIC__/img/car111.png" /></a>
-								<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_desc">
-									<h3>{$val.pu_id}{$val.name_li}</h3>
-									<p><span class="car_price"><b>{$val.price}</b>万</span><span class="car_sui">新车含税{$val.news_price}万</span></p>
-									<p><span>{$val.car_cardtime}上牌</span> <span class="padlt20">{$val.car_mileage}万公里</span> </p>
-									<div class="che_ordered">立即预约</div></a>
-
-							</li>
-                           {/volist}
-
-						</ul>
-						<p>{$res->render()}</p>
+					</div>
+				</div>
+				<div class="list_price list_item gj_clear">
+					<div class="list_title">价格</div>
+					<div class="screening-margin gj_clear">
+						<div class="list_detail_sel">
+							{volist name="price" id="vo"}
+							<a id="{$vo.param}" class="aa" href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.param}">{$vo.name}</a>
+							{/volist}
+						</div>
+						<div class="price_handle">
+							{if condition="!empty($datas)"}
+							<div class="box">
+								<input type="text" id="min" name="min" value="{$datas[0]}" />万</div><em>-</em><div class="box"><input type="text" id="max" name="max" value="{$datas[1]}" />万
+						</div>
+							<a href="javascript:;" class="sure" >确定</a>
+							{else /}
+							<div class="box">
+								<input type="text" id="min" name="min" value="" />万</div><em>-</em><div class="box"><input type="text" id="max" name="max" value="" />万
+						</div>
+							<a href="javascript:;" class="sure" >确定</a>
+							{/if}
+						</div>
 					</div>
 
 				</div>
-				<div class="list_right">
-					<div class="list_service">
-						<h2 class="er_service">二手车服务</h2>
-						<ul class="">
-							<li>
-								<img src="__STATIC__/img/car111.png" alt="" />
-								<p>车辆评估</p>
-							</li>
-							<li>
-								<img src="__STATIC__/img/car222.png" alt="" />
-								<p>高价卖车</p>
-							</li>
-							<li>
-								<img src="__STATIC__/img/car333.png" alt="" />
-								<p>免费置换</p>
-							</li>
-							<li>
-								<img src="__STATIC__/img/car444.png" alt="" />
-								<p>帮买好车</p>
-							</li>
+				<div class="list_jibie list_item gj_clear">
+					<div class="list_title">级别</div>
+					<div class="screening-margin gj_clear">
+						<div class="list_detail_sel">
+							{volist name="subface" id="vo"}
+							<a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.param}">{$vo.name}</a>
+							{/volist}
+						</div>
+						<!--<span class="more">多选<i>+</i></span>-->
+					</div>
+				</div>
+				<div class="list_other list_item gj_clear">
+					<div class="list_title">其他</div>
+					<div class="screening-margin gj_clear">
+						<div class=" list_detail_sel">
+							<ul class="select-box searchCond" style="background: none">
+								<li>
+									<!--<div data-toggle="select" name="r" class="select-menu"  id="select2">
+                                      <div class="menu-selected">车龄</div>
+                                      <dl class="menu menu4" style="display: none;" id="aselect2">
+                                        <dd> <a rel="nofollow" href="#" data-for="hidden_r" data-valueid="0" class="preventdefault" title="不限二手车">不限</a> </dd>
+                                          {volist name="age" id="val"}
+                                          <dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/lots_cars?age={$val.id}" data-for='hidden_r' data-valueid='' class='preventdefault' title=''>{$val.cheling}</a> </dd>
+                                          {/volist}
+                                      </dl>
+                                    </div>-->
+								</li>
+								<li>
+									<div data-toggle="select" name="k" class="select-menu" id="select3">
+										<div class="menu-selected">里程</div>
+										<dl class="menu menu5" style="display: none;" id="aselect3">
+											<!--<dd> <a rel="nofollow" href="#" data-for="hidden_k" data-valueid="0-1" class="preventdefault" title="1万公里以内二手车">1万公里以内</a> </dd>-->
+											{volist name="licheng" id="val"}
+											<dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_k' data-valueid='' class='preventdefault' title=''>{$val.name}</a></dd>
+											{/volist}
+										</dl>
+									</div>
+								</li>
+
+								<li>
+									<div data-toggle="select" class="select-menu" id="select4">
+										<div class="menu-selected" >排量</div>
+										<div class="menu menu6" style="display: none;" id="aselect4">
+											<dd> <a rel="nofollow" href="#" data-for="hidden_j" data-valueid="0" class="preventdefault" title="不限二手车">不限</a> </dd>
+											{volist name="output" id="val"}
+											<dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_j' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											{/volist}
+											<!--<dd> <a rel="nofollow" href="#" data-for="hidden_j" data-valueid="0-1" class="preventdefault" title="1.0L以下二手车">1.0L以下</a> </dd>-->
+										</div>
+									</div>
+								</li>
+								<li>
+									<div data-toggle="select" class="select-menu" id="select7">
+										<div class="menu-selected">变速箱</div>
+										<div class="menu menu8" style="display: none;" id="aselect7">
+											<dd> <a rel="nofollow" href="javascript:;" data-for="hidden_g" data-valueid="0" class="preventdefault" title="不限档二手车">不限</a> </dd>
+											<!--<dd> <a rel="nofollow" href="#" data-for="hidden_g" data-valueid="1" class="preventdefault" title="自动档二手车">自动</a> </dd>-->
+											<!--<dd> <a rel="nofollow" href="#" data-for="hidden_g" data-valueid="2" class="preventdefault" title="手动档二手车">手动</a> </dd>-->
+											{volist name="gearbox" id="val"}
+											<dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_g' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											{/volist}
+										</div>
+									</div>
+								</li>
+								<li>
+									<div data-toggle="select" name="r" class="select-menu" id="select5">
+										<div class="menu-selected">排放标准</div>
+										<dl class="menu menu4" style="display: none;" id="aselect5">
+											<!--<dd> <a rel="nofollow" href="#" data-for="hidden_h" data-valueid="3-" class="preventdefault" title="国三以上二手车">国三以上</a> </dd>-->
+											<!--<dd> <a rel="nofollow" href="#" data-for="hidden_h" data-valueid="4-" class="preventdefault" title="国四以上二手车">国四以上</a> </dd>-->
+											<!--<dd> <a rel="nofollow" href="#" data-for="hidden_h" data-valueid="5" class="preventdefault" title="国五二手车">国五</a> </dd>-->
+											{volist name="blowdown" id="val"}
+											<dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_h' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											{/volist}
+										</dl>
+									</div>
+								</li>
+								<li>
+									<div data-toggle="select" class="select-menu" id="select8">
+										<div class="menu-selected">驱动</div>
+										<div class="menu menu9" style="display: none;" id="aselect8">
+											{volist name="car_drive" id="val"}
+											<dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_q' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											{/volist}
+											<!--<dd> <a rel="nofollow" href="#" data-for="hidden_q" data-valueid="0" class="preventdefault" title="不限二手车">前驱</a> </dd>-->
+											<!--<dd> <a rel="nofollow" href="#" data-for="hidden_q" data-valueid="2" class="preventdefault" title="2座二手车">前驱</a> </dd>-->
+											<!--<dd> <a rel="nofollow" href="#" data-for="hidden_q" data-valueid="4" class="preventdefault" title="4座二手车">前驱</a> </dd>-->
+										</div>
+									</div>
+								</li>
+								<li>
+									<div data-toggle="select" class="select-menu" id="select12">
+										<div class="menu-selected">车身</div>
+										<div class="menu menu12" style="display: none;" id="aselect12">
+											{volist name="car_body" id="val"}
+											<dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_x' data-valueid='' class='preventdefault' title='不限二手车'>{$val.name}</a>
+												<!--<dd> <a rel="nofollow" href="#" data-for="hidden_x" data-valueid="0" class="preventdefault" title="不限二手车">前驱</a> </dd>-->
+												<!--<dd> <a rel="nofollow" href="#" data-for="hidden_x" data-valueid="2" class="preventdefault" title="2座二手车">前驱</a> </dd>-->
+												<!--<dd> <a rel="nofollow" href="#" data-for="hidden_x" data-valueid="4" class="preventdefault" title="4座二手车">前驱</a> </dd>-->
+												{/volist}
+										</div>
+									</div>
+								</li>
+
+								<li>
+									<div data-toggle="select" class="select-menu" id="select6">
+										<div class="menu-selected">颜色</div>
+										<div class="menu menu7 radius menuCar07" style="display: none;" id="aselect6">
+											{volist name="color" id="val"}
+											<dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_c' data-valueid='' class='preventdefault c15' title=''>{$val.name}</a> </dd>
+											{/volist}
+										</div>
+									</div>
+								</li>
+								<li>
+									<div data-toggle="select" class="select-menu" id="select10">
+										<div class="menu-selected menu-selected12">燃料</div>
+										<div class="menu menu12" style="display: none;" id="aselect10">
+
+											<dd> <a rel="nofollow" href="" data-for="hidden_d" data-valueid="0" class="preventdefault" title="不限二手车">不限</a> </dd>
+											{volist name="fuel" id="val"}
+											<dd> <a rel='nofollow' href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$val.param}" data-for='hidden_w' data-valueid='' class='preventdefault' title=''>{$val.name}</a> </dd>
+											<!--<dd> <a rel="nofollow" href="#" data-for="hidden_d" data-valueid="1" class="preventdefault" title="汽油二手车">汽油</a> </dd>-->
+											{/volist}
+
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="list_jibie list_item gj_clear">
+					<div class="list_title">已选择</div>
+					<div class="screening-margin gj_clear">
+						<ul class="list_detail_sel car-selected">
+							{if condition="!empty($brand_name)"}
+							<li class='list'><span class='active2 car-model'>{$brand_name}</span><span class='close'><span class='cha'>×</span></span></li>
+							{/if}
+							{volist name="param_array" id="param"}
+							<li class='list'><span class='active2 car-model'>{$param.name}</span><span class="close" id="" class='close'><span class='cha'>×</span></span></li>
+							{/volist}
 						</ul>
+						<!--<span class="more">多选<i>+</i></span>-->
 					</div>
 				</div>
 			</div>
+			<div class="list_subNav">
+				<ul>
+					<li class="active"><a href="" class="">郑州二手车</a></li>
+					<!--<li><a href="">分期购车</a></li>-->
+					<!--<li><a href="">商家车</a></li>-->
+					<!--<li><a href="">个人车</a></li>-->
+					<!--<li><a href="">商家认证</a></li>-->
+				</ul>
+			</div>
+			<div class="list_sort">
+				<ul class="sort_sel">
+					{volist name="arr" id="vo"}
+					<li class="item"><a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/{$vo.id}">{$vo.name}</a></li>
+					{/volist}
+					<!--<li data-id="2" class="item"><a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/sn_n2">价格最低</a></li>-->
+					<!--<li data-id="3" class="item"><a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/sn_n3">车龄最短</a></li>-->
+					<!--<li data-id="4" class="item"><a href="{$domain}/{$Think.session.cityurl}/{$brand_pin}/sn_n4">里程最短</a></li>-->
+				</ul>
+				<!--<ul class="check_item flex_center">-->
+				<!--<li class="checked"><img src="__STATIC__/img/img_checked.png" alt="" width=""/>准新车</li>-->
+				<!--<li><img src="__STATIC__/img/img_uncheck.png" alt="" />七日内上新</li>-->
+				<!--<li><img src="__STATIC__/img/img_uncheck.png" alt="" />质保</li>-->
+				<!---->
+				<!--</ul>-->
+				<!--<span class="more">更多<i><img src="__STATIC__/img/down1.png" alt="" /></i></span>-->
+			</div>
+			<div class="marbt30 carList_info">
+				<ul class="list">
+
+					{volist name="res" id="val" offset="1" }
+
+					<li class="items5">
+
+						<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_img flex_center"><img src="__STATIC__/img/car111.png" /></a>
+						<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_desc">
+							<h3>{$val.pu_id}{$val.name_li}</h3>
+							<p><span class="car_price"><b>{$val.price}</b>万</span><span class="car_sui">新车含税{$val.news_price}万</span></p>
+							<p><span>{$val.car_cardtime}上牌</span> <span class="padlt20">{$val.car_mileage}万公里</span> </p>
+							<div class="che_ordered">立即预约</div></a>
+
+					</li>
+					{/volist}
+
+				</ul>
+				<p>{$res->render()}</p>
+			</div>
+
 		</div>
-		<div class="footer">
-			{include file="public/footer"}
+		<div class="list_right">
+			<div class="list_service">
+				<h2 class="er_service">二手车服务</h2>
+				<ul class="">
+					<li>
+						<img src="__STATIC__/img/car111.png" alt="" />
+						<p>车辆评估</p>
+					</li>
+					<li>
+						<img src="__STATIC__/img/car222.png" alt="" />
+						<p>高价卖车</p>
+					</li>
+					<li>
+						<img src="__STATIC__/img/car333.png" alt="" />
+						<p>免费置换</p>
+					</li>
+					<li>
+						<img src="__STATIC__/img/car444.png" alt="" />
+						<p>帮买好车</p>
+					</li>
+				</ul>
+			</div>
 		</div>
-	</body>
+	</div>
+</div>
+<div class="footer">
+	{include file="public/footer"}
+</div>
+</body>
 
-	<script>
-		$(function(){
+<script>
+    $(function(){
 
-            $($(".nav li")[2]).addClass("active").siblings().removeClass("active");
-		    // $(".header").load("templates/header.html");
-		    // $(".footer").load("templates/footer.html");
-		    $('.check_item img').click(function(){
-                    if($(this).attr('src') == '__STATIC__/img/img_checked.png'){
-                        $(this).attr('src','__STATIC__/img/img_uncheck.png')
-                    }else{
-                        $(this).attr('src','__STATIC__/img/img_checked.png')
-                    }
+        $($(".nav li")[2]).addClass("active").siblings().removeClass("active");
+        // $(".header").load("templates/header.html");
+        // $(".footer").load("templates/footer.html");
+        $('.check_item img').click(function(){
+            if($(this).attr('src') == '__STATIC__/img/img_checked.png'){
+                $(this).attr('src','__STATIC__/img/img_uncheck.png')
+            }else{
+                $(this).attr('src','__STATIC__/img/img_checked.png')
+            }
 
-                })
-		     // 展开收起更多筛选
-         $(".list_screen_cont").on("click", ".slide_up .more", function() {
-             $(".slide_up").each(function() {
-                 if ($(this).css('display') == 'none' ) {
-                     $(this).slideDown(300);
-                 }
-             });
-             $(".slide_down").each(function() {
-                 if ($(this).css('display') == 'block') {
-                     $(this).slideUp(300);
-                 }
-             });
-             $(this).parents(".slide_up").slideUp(300);
-             $(this).parents(".slide_up").next(".slide_down").slideDown(300);
-         });
-         $(".list_screen_cont").on("click", ".slide_down .more", function() {
-             $(this).parents(".slide_down").slideUp(300)
-             $(this).parents(".slide_down").prevAll(".slide_up").slideDown(300);
-         });
-         // 展开收起车系多选筛选
-         $("#hotseriesmore").on("click", function() {
-             $(".js-screening-down").each(function() {
-                 if ($(this).css('display') == 'block') {
-                     $(this).slideUp(300);
-                 }
-             });
-             $(this).parents(".js-screening-up").slideUp(300)
-             $(".js-screening-multi").slideDown(300);
-         });
-
-            //点击删除已选车型
-            $(".car-selected ").on("click",".close",function(){
-
-                if ($(this).parent().siblings().length == 0) {
-                    $(this).parent().remove();
-                    window.location.href = "{$domain}/{$Think.session.cityurl}/s";
-                }else {
-                    window.location.href = "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + $(this).attr("id");
+        })
+        // 展开收起更多筛选
+        $(".list_screen_cont").on("click", ".slide_up .more", function() {
+            $(".slide_up").each(function() {
+                if ($(this).css('display') == 'none' ) {
+                    $(this).slideDown(300);
                 }
             });
-
-            $(".price_handle").on("click",".sure",function(){
-                var min = $('#min').val();
-                var max = $('#max').val();
-                var reg = /^[0-9]*$/;
-                if(min.length == 0 || max.length == 0) {
-                    layer.msg('请输入内容!',);
-				} else {
-                    if(!reg.test(min) || !reg.test(max)){
-                        layer.msg('请输入数字!',);
-                    }else{
-                        var a = $(this).parent().siblings().children("a").eq(1).attr('href');
-                        var b = a.split('/');
-						var c = (b[b.length-1]);
-                        var d = [];
-						for (var i=0;i<c.length;i++) {
-                            d.push(c[i])
-						}
-						d.splice(4,1,min);
-						d.splice(6,1,max);
-						var e = d.join('');
-						// b.splice(5,1,e);
-						// var f = b.join('');
-						// console.log(f);
-                        window.location.href = "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + e;
-                    }
-				}
+            $(".slide_down").each(function() {
+                if ($(this).css('display') == 'block') {
+                    $(this).slideUp(300);
+                }
             });
+            $(this).parents(".slide_up").slideUp(300);
+            $(this).parents(".slide_up").next(".slide_down").slideDown(300);
+        });
+        $(".list_screen_cont").on("click", ".slide_down .more", function() {
+            $(this).parents(".slide_down").slideUp(300)
+            $(this).parents(".slide_down").prevAll(".slide_up").slideDown(300);
+        });
+        // 展开收起车系多选筛选
+        $("#hotseriesmore").on("click", function() {
+            $(".js-screening-down").each(function() {
+                if ($(this).css('display') == 'block') {
+                    $(this).slideUp(300);
+                }
+            });
+            $(this).parents(".js-screening-up").slideUp(300)
+            $(".js-screening-multi").slideDown(300);
+        });
 
-				$('.sort_sel').on('click','.item',function () {
-					var str = window.location.href;
-                    var index = str .lastIndexOf("\/");
-                    str  = str .substring(index + 1, str .length);
-                    var sn1 = "sn_n1";
-                    var sn2 = "sn_n2";
-                    var sn3 = "sn_n3";
-                    var sn4 = "sn_n4";
-                    var sn5 = "sn_n5";
-                    var sn6 = "sn_n6";
-                    var sn7 = "sn_n7";
-                    var index = $(this).index();
-                    if(str == "sn_n1" && index == 0){
-                        $(this).find("a").eq(0).attr('href',"{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn1);
-					}else if(str == 'sn_n2' && index == 1){
-                        $(this).find("a").eq(0).attr('href',"{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn6);
-                    }else if(str == 'sn_n3' && index == 2) {
-                        $(this).find("a").eq(0).attr('href', "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn7);
-                    }else if(str == 'sn_n4' && index == 3) {
-                        $(this).find("a").eq(0).attr('href', "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn5);
-                    }else if(str == 'sn_n5' && index == 3) {
-                        $(this).find("a").eq(0).attr('href', "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn4);
-                    }else if(str == 'sn_n6' && index == 1) {
-                        $(this).find("a").eq(0).attr('href', "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn2);
-                    }else if(str == 'sn_n7' && index == 2) {
-                        $(this).find("a").eq(0).attr('href', "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn3);
+        //点击删除已选车型
+        $(".car-selected ").on("click",".close",function(){
+
+            if ($(this).parent().siblings().length == 0) {
+                $(this).parent().remove();
+                window.location.href = "{$domain}/{$Think.session.cityurl}/s";
+            }else {
+                window.location.href = "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + $(this).attr("id");
+            }
+        });
+
+        $(".price_handle").on("click",".sure",function(){
+            var min = $('#min').val();
+            var max = $('#max').val();
+            var reg = /^[0-9]*$/;
+            if(min.length == 0 || max.length == 0) {
+                layer.msg('请输入内容!',);
+            } else {
+                if(!reg.test(min) || !reg.test(max)){
+                    layer.msg('请输入数字!',);
+                }else{
+                    var a = $(this).parent().siblings().children("a").eq(1).attr('href');
+                    var b = a.split('/');
+                    var c = (b[b.length-1]);
+                    var d = [];
+                    for (var i=0;i<c.length;i++) {
+                        d.push(c[i])
                     }
-                });
-            /*var minnum = $('#min').val();
-            var maxnum = $('#max').val();
-            if(minnum.length !== 0 && maxnum.length !== 0) {
-                $('.car-selected .list').append("<li class='list'><span class='active2 car-model'>"+minnum+'-'+maxnum+"</span><span class='close'><span class='cha'>×</span></span></li>")
-            }*/
-		    $(".slide_down").mouseout(function(ev){
-       		 var box=document.getElementById($(this).attr("id"));
-	             var ev=ev||window.event;
-	                if(!isMouseLeaveOrEnter(ev,box)){
-	                  return false;
-	                }
-	           $(this).slideUp(300)
-	           $(this).prevAll(".slide_up").slideDown(300);
-	        });
-	        //防止鼠标移出移入子元素触发mouseout事件
-	        function isMouseLeaveOrEnter(e, handler) {
-	          var reltg=e.relatedTarget?e.relatedTarget:e.type=='mouseout'?e.toElement:e.fromElement;
-	          while (reltg && reltg != handler){
-	             reltg = reltg.parentNode;
-	          }
-	          return (reltg != handler);
-	        }
+                    d.splice(4,1,min);
+                    d.splice(6,1,max);
+                    var e = d.join('');
+                    // b.splice(5,1,e);
+                    // var f = b.join('');
+                    // console.log(f);
+                    window.location.href = "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + e;
+                }
+            }
+        });
+
+        $('.sort_sel').on('click','.item',function () {
+            var str = window.location.href;
+            var index = str .lastIndexOf("\/");
+            str  = str .substring(index + 1, str .length);
+            var sn1 = "sn_n1";
+            var sn2 = "sn_n2";
+            var sn3 = "sn_n3";
+            var sn4 = "sn_n4";
+            var sn5 = "sn_n5";
+            var sn6 = "sn_n6";
+            var sn7 = "sn_n7";
+            var index = $(this).index();
+            if(str == "sn_n1" && index == 0){
+                $(this).find("a").eq(0).attr('href',"{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn1);
+            }else if(str == 'sn_n2' && index == 1){
+                $(this).find("a").eq(0).attr('href',"{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn6);
+            }else if(str == 'sn_n3' && index == 2) {
+                $(this).find("a").eq(0).attr('href', "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn7);
+            }else if(str == 'sn_n4' && index == 3) {
+                $(this).find("a").eq(0).attr('href', "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn5);
+            }else if(str == 'sn_n5' && index == 3) {
+                $(this).find("a").eq(0).attr('href', "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn4);
+            }else if(str == 'sn_n6' && index == 1) {
+                $(this).find("a").eq(0).attr('href', "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn2);
+            }else if(str == 'sn_n7' && index == 2) {
+                $(this).find("a").eq(0).attr('href', "{$domain}/{$Think.session.cityurl}/{$brand_pin}/" + sn3);
+            }
+        });
+        /*var minnum = $('#min').val();
+        var maxnum = $('#max').val();
+        if(minnum.length !== 0 && maxnum.length !== 0) {
+            $('.car-selected .list').append("<li class='list'><span class='active2 car-model'>"+minnum+'-'+maxnum+"</span><span class='close'><span class='cha'>×</span></span></li>")
+        }*/
+        $(".slide_down").mouseout(function(ev){
+            var box=document.getElementById($(this).attr("id"));
+            var ev=ev||window.event;
+            if(!isMouseLeaveOrEnter(ev,box)){
+                return false;
+            }
+            $(this).slideUp(300)
+            $(this).prevAll(".slide_up").slideDown(300);
+        });
+        //防止鼠标移出移入子元素触发mouseout事件
+        function isMouseLeaveOrEnter(e, handler) {
+            var reltg=e.relatedTarget?e.relatedTarget:e.type=='mouseout'?e.toElement:e.fromElement;
+            while (reltg && reltg != handler){
+                reltg = reltg.parentNode;
+            }
+            return (reltg != handler);
+        }
 //	        其他筛选条件
- 		 $(".select-menu").hover(function () {
+        $(".select-menu").hover(function () {
             $("#a"+$(this).attr("id")).show();
         }, function () {
             $("#a" + $(this).attr("id")).hide();
         });
-       // var url='http://www.gj2car.com/';
+        // var url='http://www.gj2car.com/';
         $.ajax({
             type:'POST',
             url: url+'Newpc/Index/filter',
@@ -696,6 +711,6 @@
 
 
 
-		})
+    })
 </script>
 </html>
