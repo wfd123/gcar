@@ -2117,7 +2117,7 @@ class Index  extends Common
         //获取店铺的详情
         $shopinfo=Db::table("user_shop")->field("shop_id,shop_name,mimg,shop_address,shop_phone,qid,latitude as lat,longitude as lng")->where("user_id=".$carinfo['user_id'])->find();
         if($shopinfo === null && empty($shopinfo)) {
-            $this->redirect('http://www.car.com:8000/zhengzhou/details');
+            $this->redirect('');
 //            throw new Exception('没有数据');
         }
         //获取店铺de平均评分
