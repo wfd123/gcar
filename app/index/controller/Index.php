@@ -621,8 +621,9 @@ class Index  extends Common
                 }
             }
             #搜索
-            if(!empty($data['key'])){
-                $where.=" and name_li like '%".$data['key']."%'  ";
+            if(!empty($data['q'])){
+                $where.=" and name_li like '%".$data['q']."%'  ";
+                $param_array['q']['name'] = $data['q'];
             }
 
             //级别suv
@@ -1147,6 +1148,12 @@ class Index  extends Common
                 }
             }*/
         $res = Db::table('rele_car')->where($where)->order($wheres)->paginate(13);
+        $items = $res->items();
+        foreach ($res as $k => $v){
+            $items[$k]['subface_img'] = explode(",",$v['subface_img']);
+        }
+//        dump($res);
+        $this->assign('items',$items);
         #关键字
         $desc = Db::table('webkey')->where(['remark' => '二手车'])->find();
         $this->assign('desc',$desc);
@@ -2109,6 +2116,10 @@ class Index  extends Common
 
         //获取店铺的详情
         $shopinfo=Db::table("user_shop")->field("shop_id,shop_name,mimg,shop_address,shop_phone,qid,latitude as lat,longitude as lng")->where("user_id=".$carinfo['user_id'])->find();
+        if($shopinfo === null && empty($shopinfo)) {
+            $this->redirect('http://www.car.com:8000/zhengzhou/details');
+//            throw new Exception('没有数据');
+        }
         //获取店铺de平均评分
         $remark_info=Db::table("remark")->field("id,all_score")->where("shop_id",$shopinfo['shop_id'])->select();
         $all_score="";
@@ -2133,7 +2144,6 @@ class Index  extends Common
         $shopinfo['all_score']=$num?$num:0;
         $shopinfo['user_num']=$user_num?$user_num:0;
         //$shopinfo['img_url']=$this->get_carimg($shopinfo['mimg']);
-
 
         //点评
         $remark=Db::table("remark")->field("id,user_id,content,create_time,all_score")->where("shop_id",$shopinfo['shop_id'])->order("create_time desc")->find();
