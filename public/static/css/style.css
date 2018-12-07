@@ -535,7 +535,7 @@ option:hover {
 
 .list .items {
     width: 280px;
-    height: 380px;
+    height: 410px;
     border: 1px solid #ddd;
     float: left;
     margin-bottom: 20px;
@@ -543,6 +543,7 @@ option:hover {
     margin-right: 10px;
     overflow: hidden;
     background: #fff;
+    position: relative;
 }
 
 .list .items a {
@@ -596,10 +597,13 @@ option:hover {
     line-height: 35px;
     color: #ff8402;
     font-size: 16px;
-    width: 195px;
+    width: 90%;
+    left: 5%;
     text-align: center;
     margin: 10px auto;
     cursor: pointer;
+    position: absolute;
+    bottom: 20px;
 }
 
 .list li:hover {
