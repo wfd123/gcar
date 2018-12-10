@@ -81,7 +81,7 @@
 		        			<ul class="btn_box">
 			        			<a href="{:url('user/collect_car')}?brand_id={$carinfo.brand_id}&sys_id={$carinfo.sys_id}&type=2&cartype_id={$carinfo.cartype_id}&cheid={$carinfo.pu_id}&name={$carinfo.car_name}&img_url={$carinfo['img_512']['0']}&shoufu={$carinfo.pay20_s2}&ygong={$carinfo.pay20_y2}&price={$carinfo.price}"><li><img src="__STATIC__/img/collect.png" alt="" /><p>收藏</p></li></a>
 								<li><img src="__STATIC__/img/PK.png" alt="" /><p>加入PK</p></li>
-			        			<li><img src="__STATIC__/img/share.png" alt="" /><p>分享</p></li>
+			        			<!--<li><img src="__STATIC__/img/share.png" alt="" /><p>分享</p></li>-->
 			        		</ul>
 	        		</div>
 	        	</div>
@@ -190,20 +190,20 @@
     <!--<div class="footer"></div>-->
   <!--底部123固定悬浮-->
     <div class="wrap_bt">
-    	<div class="wrap oh flex_center">
-    		<div class="car_descInfo">
-    			<h4 class="hid">{$carinfo.car_name} </h4>
-    			<p>{$carinfo.car_cardtime} <b>|</b>{$carinfo.car_mileage}万公里<b>|</b>{$carinfo.blowdown} <b>|</b>郑州</p>
-    		</div>
-    		<div class="car_descPri">
-    			<b>￥{$carinfo.price}万 </b>比新车省：万
-    		</div>
-    		<div class="car_descOrder flex_center">
-    			<input type="text" placeholder="请输入手机号"/>
-    			<p class="lowerPrice">询问底价</span>
-    		</div>
-    	</div>	     
-    </div>
+			<div class="wrap oh flex_center">
+				<div class="car_descInfo">
+					<h4 class="hid">{$carinfo.car_name} </h4>
+					<p>{$carinfo.car_cardtime} <b>|</b>{$carinfo.car_mileage}万公里<b>|</b>{$carinfo.blowdown} <b>|</b>郑州</p>
+				</div>
+				<div class="car_descPri">
+					<b>￥{$carinfo.price}万 </b>比新车省：万
+				</div>
+				<div class="car_descOrder flex_center">
+					<input class="car-input" type="text" name="phone" placeholder="请输入手机号"/>
+					<p class="lowerPrice xun" onclick="xun()">询问底价</p>
+				</div>
+			</div>
+		</div>
   <!--点击轮播显示大图以及预订-->    
   <div class="photoList">
   		<div class="pc_slide">
@@ -431,8 +431,15 @@
 	               			
 	               		}
 	               })
-            	})
-	            $(".config_tit1 li").click(function(){
+            	});
+
+
+		    	/*$('.flex_center').on('click','.xun',function () {
+
+				});*/
+
+
+        $(".config_tit1 li").click(function(){
 	            	var className = this.className;
 					$(this).addClass("active").siblings().removeClass("active");
 					var top = 0;
@@ -508,6 +515,19 @@
 					}
 				}
 			}
-		})
+		});
+
+		function xun(){
+			var phone =$('.car-input').val();
+			$.ajax({
+				type: "POST",
+				data:{phone:phone},
+				dataType: "json",
+				url: "{:url('index/ws')}" ,
+				success:function (data) {
+
+				}
+			});
+		}
 		</script>
 </html>
