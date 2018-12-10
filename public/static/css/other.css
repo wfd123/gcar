@@ -257,13 +257,75 @@ background-color:#686868;background-image: url(../img/newcebian.png);background-
 .change_flow img{width:1137px;height: 243px;margin:0 auto 25px;}
 .change_sel{width: 700px;height: 47px;line-height: 47px;border: 1px solid #E5E5E5;    margin: 50px auto 30px;}
 .change_form_name{width: 123px;height: 47px;background: #e5e5e5;font-size: 20px;color: #666;text-align: center;}
-.selectcarnam{width: 628px;height: 47px;line-height: 47px;}
-.selectcarnam input{width:520px ;font-size: 16px;}
+.selectcarnam{width: 628px;height: 47px;line-height: 47px;position: relative;}
+.selectcarnam input{width:585px ;font-size: 16px;line-height: 45px;cursor: pointer;}
 .selectcarnam .change_form_arrow{width: 48px;height:47px ;display: block;line-height: 47px;text-align: center;}
 .selectcarnam .change_form_arrow img{width: 20px;}
 .change_form{width: 580px;margin: 30px auto ;}
 .change_form>div{width: 580px;margin-top: 25px;height:49px;line-height:49px;}
 .change_form input{border:1px solid #E5E5E5;height:49px;font-size: 16px;}
+.change_form .ipt-submit{
+	background: -webkit-linear-gradient(#FFA84D, #FF992D); /* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(#FFA84D, #FF992D); /* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(#FFA84D, #FF992D); /* Firefox 3.6 - 15 */
+	background: linear-gradient(#FFA84D, #FF992D); /* 标准的语法 */
+	border: none; height: 44px;
+	color: #FFFFFF;
+}
+.zl_jian{position: absolute;right: 10px;top: 0;}
+.zl_jian img {
+	width: 26px;
+	height: 13px;
+}
+.dn{
+	display: none;
+}
+.car-brand{
+	position: absolute;
+	top: 55px;
+	z-index: 50;
+	background-color: rgba(0,0,0,0.6);
+	width: 585px;
+	height: 500px;
+	overflow-y: auto;
+	padding-bottom: 35px;
+}
+.brand-tit{
+	color: #333333;
+	height: 33px;
+	line-height: 33px;
+	background-color: #cecece;
+	text-indent: 25px;
+	font-size: 18px;
+}
+.brand-item{
+	background-color: #fff;
+	width: 570px;
+	margin: auto;
+}
+.brand-item ul{
+	background-color: #fff;
+}
+.brand-item2{
+	background-color: #fff;
+	width: 570px;
+	margin: auto;
+}
+.brand-item2 ul{
+	background-color: #fff;
+}
+.sel_list{
+    cursor: pointer;
+    width: 100%;
+    padding: 0 25px;
+    height: 47px;
+    font-size: 17px;
+    line-height: 47px;
+    border-bottom: 1px solid #cecece;
+}
+.sel_list:hover{
+	background-color: #cecece;
+}
 .change_form .ipt input{width:386px;}
 .change_form .ipt_code input{width:243px;}
 .change_form .getcode{width: 130px;background: #E5E5E5;height: 49px; display: inline-block;margin-left: 15px;text-align: center;font-size: 18px;color: #666;}
