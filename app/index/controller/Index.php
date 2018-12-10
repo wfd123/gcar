@@ -2037,6 +2037,11 @@ class Index  extends Common
 
         return $this->fetch();
     }
+
+    public function ws()
+    {
+        echo 111;die;
+    }
     
     /*
      * 二手车详情
