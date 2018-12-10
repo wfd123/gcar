@@ -200,7 +200,7 @@
 				</div>
 				<div class="car_descOrder flex_center">
 					<input class="car-input" type="text" name="phone" placeholder="请输入手机号"/>
-					<p class="lowerPrice xun" onclick="xun()">询问底价</p>
+					<p class="lowerPrice xun" onclick="">询问底价</p>
 				</div>
 			</div>
 		</div>
@@ -517,17 +517,5 @@
 			}
 		});
 
-		function xun(){
-			var phone =$('.car-input').val();
-			$.ajax({
-				type: "POST",
-				data:{phone:phone},
-				dataType: "json",
-				url: "{:url('index/ws')}" ,
-				success:function (data) {
-
-				}
-			});
-		}
 		</script>
 </html>
