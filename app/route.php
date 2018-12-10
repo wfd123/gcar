@@ -66,6 +66,7 @@ Route::rule(':city/search_newcar','index/index/search_newcar');//新车筛选
 
 
 Route::rule(':city/details/:cheid','index/index/details');//二手车详情
+Route::rule(':city/ws','index/index/ws');
 Route::rule(':city/detai/:cheid','index/zerocar/zerocardetails');//零首付详情
 Route::rule('zhang/:id','index/index/zhang');
 Route::rule('db','index/index/index');
@@ -73,7 +74,6 @@ Route::rule('test/:id','api/gongneng/test');//一旦设置参数必须填写
 
 Route::rule('jun','api/gongneng/zhang');
 Route::rule(':city/newcar','index/Newcar/index');
-
 
 Route::rule(':city/:brand$','index/index/lots_cars');//二手车筛选
 Route::get(':city/:brand/sn_<k_p?><v_p?><k_s?><v_s?><k_o?><v_o?><k_g?><v_g?><k_d?><v_d?><k_b?><v_b?><k_c?><v_c?><k_f?><v_f?><k_n?><v_n?><k_l?><v_l?><k_m?><v_m?><k_a?><v_a?>','index/index/lots_cars',[],
