@@ -2281,7 +2281,6 @@ class Index  extends Common
 
 
         $carparam = $this->get_carparam($cheid,2);
-
         $sys_cars=$sys_cars ? $sys_cars : array();
 
        // dump($carinfo);die;
@@ -2311,7 +2310,6 @@ class Index  extends Common
 
         $carparam = $carparam?$carparam:array();
 
-        //dump($carinfo);die;
 
         $brand = $this->brand();//品牌
         $this->assign('brand',$brand);
