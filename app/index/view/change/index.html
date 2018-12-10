@@ -137,6 +137,30 @@
 										<li class="sel_list">奥迪A8</li>
 									</ul>
 								</div>
+								<div class="brand-item2">
+									<p class="brand-tit">A</p>
+									<ul>
+										<li class="sel_list">奥迪A4</li>
+										<li class="sel_list">奥迪A6</li>
+										<li class="sel_list">奥迪A8</li>
+									</ul>
+								</div>
+								<div class="brand-item2">
+									<p class="brand-tit">A</p>
+									<ul>
+										<li class="sel_list">奥迪A4</li>
+										<li class="sel_list">奥迪A6</li>
+										<li class="sel_list">奥迪A8</li>
+									</ul>
+								</div>
+								<div class="brand-item2">
+									<p class="brand-tit">A</p>
+									<ul>
+										<li class="sel_list">奥迪A4</li>
+										<li class="sel_list">奥迪A6</li>
+										<li class="sel_list">奥迪A8</li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -197,13 +221,19 @@
 	});
 	// 选择车型图片转换
 	$('.selectcarnam').on('click','.selected-brand-ipt',function(){
+		var valipt = $('.selected-brand-ipt').val();
+		if(valipt == ""){
+			$('.car-brand').removeClass('dn');
+		}else{
+			$('.car-brand').removeClass('dn');
+			$('.brand-item').removeClass('dn');
+		}
 		var src = $('.zl_jian-img').attr('src');
 		if(src == "/static/img/jian_5.png"){
-			$('.zl_jian-img').attr('src','/static/img/jian_4.png');
-			$('.car-brand').addClass('dn');
+			$('.zl_jian-img').attr('src','/static/img/jian_4.png');		
 		}else{
 			$('.zl_jian-img').attr('src','/static/img/jian_5.png');
-			$('.car-brand').removeClass('dn');
+			
 		}
 	})
 	// 选择车型下拉框
@@ -218,6 +248,7 @@
 		var sel2 = $(this).text();
 		$(".selected-brand-ipt").val(sel+"  "+sel2);
 		$('.car-brand').addClass('dn');
+		$('.zl_jian-img').attr('src','/static/img/jian_4.png');	
 	})
 	
 	
