@@ -2011,7 +2011,7 @@ class Common extends Controller{
             // 基本信息
             // 基本信息
             $info = array(
-                array( 'name' => '车型名称', 'content' => $res['car_name'], 'is_dot' => 2, ),
+//                array( 'name' => '车型名称', 'content' => $res['car_name'], 'is_dot' => 2, ),
                 array( 'name' => '厂商指导价(元)', 'content' => $res['price'], 'is_dot' => 2,  ),
                 array( 'name' => '厂商', 'content' => $res['firm'], 'is_dot' => 2, ),
                 array( 'name' => '级别', 'content' => $res['subface'], 'is_dot' => 2, ),
