@@ -98,12 +98,47 @@
 				<div class="change_sel flex_center">
 					<span class="change_form_name">品牌车型</span>
 					<div class="selectcarnam flex_center">
-						<select name="old_cartype_id" id="old_cartype_id" style="width: 88px;">
-							<option value="">请选择</option>
-							{volist name="brand" id="vo"}
-							<option value="{$vo.id}">{$vo.name}</option>
-							{/volist}
-						</select>
+						<input type="text" placeholder="请选择您喜欢的品牌车型" class="selected-brand-ipt" readonly="readonly">
+						<div class="zl_jian">
+							<img class="zl_jian-img" src="__STATIC__/img/jian_4.png" alt="">
+						</div>
+						<div class="car-brand dn">
+							<div class="brand-item">
+								<p class="brand-tit">A</p>
+								<ul>
+									<li class="sel_list">ALPINA</li>
+									<li class="sel_list">阿斯顿·马丁</li>
+									<li class="sel_list">阿尔法·罗密欧</li>
+									<li class="sel_list">奥迪</li>
+								</ul>
+							</div>
+							<div class="brand-item">
+								<p class="brand-tit">B</p>
+								<ul>
+									<li class="sel_list">北汽幻速</li>
+									<li class="sel_list">布加迪</li>
+									<li class="sel_list">北京现代</li>
+								</ul>
+							</div>
+							<div class="brand-item">
+								<p class="brand-tit">C</p>
+								<ul>
+									<li class="sel_list">C</li>
+									<li class="sel_list">C</li>
+									<li class="sel_list">C</li>
+								</ul>
+							</div>
+							<div class="brand-chex dn">
+								<div class="brand-item2">
+									<p class="brand-tit">A</p>
+									<ul>
+										<li class="sel_list">奥迪A4</li>
+										<li class="sel_list">奥迪A6</li>
+										<li class="sel_list">奥迪A8</li>
+									</ul>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="change_recom">
@@ -129,7 +164,7 @@
 					<div class="ipt"><label for="">姓名：</label><input type="text"  name="name" id="username" placeholder="请输入您的姓名"/></div>
 					<div class="ipt"><label for="">手机号：</label><input type="text" id="phone" name="phone" placeholder="请输入您的手机号"/></div>
 					<div class="ipt_code"><label for="">验证码:</label><input type="text" name="code" placeholder="请输入您获取到的验证码"/><span class="getcode"><input type="button" value="获取手机验证码" id="getCodeBtn" style="width: 105px;height: 40px;font-size:12px; padding-left:1px;color:#333; " /></span></div>
-					<div class="sub"><input type="submit" onclick="sub()"/></div>
+					<div class="sub"><input type="submit" class="ipt-submit" onclick="sub()"/></div>
 				</div>
 				</form>
 				<div class="flex_center title_er"><h2 class="tit_erjie">新车推荐</h2></div>
@@ -160,6 +195,31 @@
 		// $(".header").load("templates/header.html");
 		// $(".footer").load("templates/footer.html")
 	});
+	// 选择车型图片转换
+	$('.selectcarnam').on('click','.selected-brand-ipt',function(){
+		var src = $('.zl_jian-img').attr('src');
+		if(src == "/static/img/jian_5.png"){
+			$('.zl_jian-img').attr('src','/static/img/jian_4.png');
+			$('.car-brand').addClass('dn');
+		}else{
+			$('.zl_jian-img').attr('src','/static/img/jian_5.png');
+			$('.car-brand').removeClass('dn');
+		}
+	})
+	// 选择车型下拉框
+	$('.brand-item').on('click','.sel_list',function(){
+		var sel = $(this).text();
+		$(".selected-brand-ipt").val(sel);
+		$(".car-brand>.brand-item").addClass('dn');
+		$('.brand-chex').removeClass('dn');
+	})
+	$('.brand-item2').on('click','.sel_list',function(){
+		var sel = $(".selected-brand-ipt").val();
+		var sel2 = $(this).text();
+		$(".selected-brand-ipt").val(sel+"  "+sel2);
+		$('.car-brand').addClass('dn');
+	})
+	
 	
 	function sub() {
         event.preventDefault();
