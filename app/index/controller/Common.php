@@ -122,7 +122,6 @@ class Common extends Controller{
             'city_name'=>array(
                 'user_id' =>'number',
             ),
-            'car_floor_price'=>array(),
         ),
         'Newcar' => array(
             'index'=>array(
@@ -159,6 +158,8 @@ class Common extends Controller{
             ),
             'displace'=>array(
                 'user_id' =>'number',
+            ),
+            'liandong'=>array(
             ),
         ),
         'News' => array(
