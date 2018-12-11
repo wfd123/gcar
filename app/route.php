@@ -37,6 +37,9 @@ Route::rule(':city$','index/index/index');
 Route::rule(':city/twocar','index/twocar/index');
 Route::rule(':city/sell','index/index/sell');
 Route::rule(':city/change$','index/change/index');
+
+Route::rule(':city/change/liandong','index/change/liandong');
+
 Route::rule(':city/change/displace','index/change/displace');
 Route::rule(':city/news','index/news/index');
 Route::rule(':city/newsdetails/:id','index/news/newsdetails');
@@ -134,5 +137,4 @@ Route::get(':city/:brand/sn_<k_p?><v_p?><k_s?><v_s?><k_o?><v_o?><k_g?><v_g?><k_d
 //        echo 'b';
 //   }
 //用此方法 方法名前 是要加get
-//Route::Controller('gongneng','api/gongneng');//访问http://www.hr.com:8083/hr/public/gongneng/
-Route::rule('index/index/car_floor_price', 'index/index/car_floor_price');//提交查询底价
+//Route::Controller('gongneng','api/gongneng');//访问http://www.hr.com:8083/hr/public/gongneng/a
