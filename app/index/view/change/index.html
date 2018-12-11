@@ -257,6 +257,7 @@
         var username = $('#username').val();
         var phone = $('#phone').val();
         var old_cartype_id = $('#old_cartype_id').val();
+		console.log(old_brand,username,phone,old_cartype_id	)
         if(old_brand.length == 0 || username.length == 0 || phone.length == 0 || old_cartype_id.length == 0) {
             layer.msg('请完善提交资料!',);
         } else {
