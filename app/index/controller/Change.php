@@ -20,10 +20,22 @@ class Change  extends Common
     /*
      * 置换首页
      */
+    public function liandong()
+    {
+        if(request()->isAjax()) {
+            $id = input('id');
+            $car = Db::table('rele_car')->where(['brand_id' => $id])->field('subface_img,name_li')->limit(3)->select();
+            $res = Db::table('car_brand')->where("upid","in","$id")->field('name')->select();
+            foreach ($res as $k => $v){
+                $res[$k]['names'] = Db::table('car_brand')->where(['id' => $id])->field('name as names')->find();
+                $res[$k]['car'] = $car;
+            }
+            return json($res);
+        }
+    }
+
     public function index(){
-
         $city_pin = input('city');
-
         $city_info = $this->set_session_url($city_pin);
 
         if (empty($city_info)){
@@ -55,6 +67,60 @@ class Change  extends Common
 
         $this->assign('er_car',$er_car);
         $this->assign('brand',$brand);
+
+
+        $a = Db::table('car_brand')->where(['initial' => 'A'])->select();
+        $this->assign('a',$a);
+        $b = Db::table('car_brand')->where(['initial' => 'B'])->select();
+        $this->assign('b',$b);
+        $c = Db::table('car_brand')->where(['initial' => 'C'])->select();
+        $this->assign('c',$c);
+        $d = Db::table('car_brand')->where(['initial' => 'D'])->select();
+        $this->assign('d',$d);
+        $e = Db::table('car_brand')->where(['initial' => 'E'])->select();
+        $this->assign('e',$e);
+        $f = Db::table('car_brand')->where(['initial' => 'F'])->select();
+        $this->assign('f',$f);
+        $g = Db::table('car_brand')->where(['initial' => 'G'])->select();
+        $this->assign('g',$g);
+        $h = Db::table('car_brand')->where(['initial' => 'H'])->select();
+        $this->assign('h',$h);
+        $i = Db::table('car_brand')->where(['initial' => 'I'])->select();
+        $this->assign('i',$i);
+        $j = Db::table('car_brand')->where(['initial' => 'J'])->select();
+        $this->assign('j',$j);
+        $k = Db::table('car_brand')->where(['initial' => 'K'])->select();
+        $this->assign('k',$k);
+        $l = Db::table('car_brand')->where(['initial' => 'L'])->select();
+        $this->assign('l',$l);
+        $m = Db::table('car_brand')->where(['initial' => 'M'])->select();
+        $this->assign('m',$m);
+        $n = Db::table('car_brand')->where(['initial' => 'N'])->select();
+        $this->assign('n',$n);
+        $o = Db::table('car_brand')->where(['initial' => 'O'])->select();
+        $this->assign('o',$o);
+        $p = Db::table('car_brand')->where(['initial' => 'P'])->select();
+        $this->assign('p',$p);
+        $q = Db::table('car_brand')->where(['initial' => 'Q'])->select();
+        $this->assign('q',$q);
+        $r = Db::table('car_brand')->where(['initial' => 'R'])->select();
+        $this->assign('r',$r);
+        $s = Db::table('car_brand')->where(['initial' => 'S'])->select();
+        $this->assign('s',$s);
+        $t = Db::table('car_brand')->where(['initial' => 'T'])->select();
+        $this->assign('t',$t);
+        $u = Db::table('car_brand')->where(['initial' => 'U'])->select();
+        $this->assign('u',$u);
+        $v = Db::table('car_brand')->where(['initial' => 'V'])->select();
+        $this->assign('v',$v);
+        $w = Db::table('car_brand')->where(['initial' => 'W'])->select();
+        $this->assign('w',$w);
+        $x = Db::table('car_brand')->where(['initial' => 'X'])->select();
+        $this->assign('x',$x);
+        $y = Db::table('car_brand')->where(['initial' => 'Y'])->select();
+        $this->assign('y',$y);
+        $z = Db::table('car_brand')->where(['initial' => 'Z'])->select();
+        $this->assign('z',$z);
 
         return $this->fetch();
 
@@ -122,7 +188,7 @@ class Change  extends Common
     {
         if(request()->isAjax()) {
             $res = Db::table('displace_car')->insert([
-                'old_brand' =>input('old_brand'),
+                'old_brand' =>input('brand'),
                 'old_cartype_id' =>input('old_cartype_id'),
                 'name' =>input('username'),
                 'phone' =>input('phone'),
