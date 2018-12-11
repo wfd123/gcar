@@ -328,9 +328,12 @@ background-color:#686868;background-image: url(../img/newcebian.png);background-
 .sel_list:hover{
 	background-color: #cecece;
 }
+body .layui-layer-hui{
+	top: 40% !important;
+}
 .change_form .ipt input{width:386px;}
 .change_form .ipt_code input{width:243px;}
-.change_form .getcode{width: 130px;background: #E5E5E5;height: 49px; display: inline-block;margin-left: 15px;text-align: center;font-size: 18px;color: #666;}
+.change_form .getcode{width: 130px;height: 49px; display: inline-block;margin-left: 15px;text-align: center;font-size: 18px;color: #666;}
 .change_form label{width:108px;height:49px;font-size: 20px;color: #666;display: inline-block;text-align: right;}
 .change_form .sub{width:500px;height:49px;line-height:49px;text-align:center;background:url(../img/btn_orange.png) repeat ;cursor: pointer;color:#fff;font-size: 20px;border-radius: 3px ;}
 .change_recom{width: 700px;margin: 0 auto;}
