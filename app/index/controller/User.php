@@ -352,7 +352,6 @@ class User  extends Common {
         $brand = $this->brand();//品牌
 
         $ABC = $this->app_brand_ios();//A b c  按车型排序
-
         $session = Session::get('user_id');
         $shop_name = Db::name('company_apply_list')->where(['user_id' => $session])->find();
         $this->assign('shop_name',$shop_name);
