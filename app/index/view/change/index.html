@@ -1,221 +1,381 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title>{$desc.title}</title>
-		<meta name="keywords" content="{$desc.ke}">
-		<meta name="description" content="{$desc.des}">
-	</head>
-	<link rel="stylesheet" href="__STATIC__/css/style.css" />
-	<link rel="stylesheet" href="__STATIC__/css/other.css" />
-	<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
-	<script src="__STATIC__/js/common.js" type="text/javascript" charset="utf-8"></script>
-    <script src="__STATIC__/js/layer/layer.js"></script>
-	<style>
+<head>
+	<meta charset="utf-8" />
+	<title>{$desc.title}</title>
+	<meta name="keywords" content="{$desc.ke}">
+	<meta name="description" content="{$desc.des}">
+</head>
+<link rel="stylesheet" href="__STATIC__/css/style.css" />
+<link rel="stylesheet" href="__STATIC__/css/other.css" />
+<script src="__STATIC__/js/jquery-1.11.0.min.js"></script>
+<script src="__STATIC__/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/layer/layer.js"></script>
+<style>
 
 
-	</style>
-	<script>
-        var itime = 59; //定义一个变量，倒计时初始化，从59秒开始
-        function getTime() {
-            if (itime >= 0) {
-                if (itime == 0) {
-                    //倒计时变成0时，
-                    //要清除计时器
-                    clearTimeout(act);
-                    //设置按钮为初始状态
-                    $("#getCodeBtn").val('免费获取手机验证码').attr('disabled', false);
-                    itime = 59;
-                } else {
-                    //延迟一秒中执行该函数。
-                    var act = setTimeout('getTime()', 1000);
-                    //把倒计时的秒显示到按钮中
-                    $("#getCodeBtn").val('还剩' + itime + '秒');
-                    itime = itime - 1;
-                }
-            }
-        }
-        $(function() {
-            //定义一个函数,用于完成倒计时效果
-            $("#getCodeBtn").click(function() {
-                //获取输入的手机号码
-                var telphone = $("#telphone").val();
+</style>
+<script>
+	var itime = 59; //定义一个变量，倒计时初始化，从59秒开始
+	function getTime() {
+		if (itime >= 0) {
+			if (itime == 0) {
+				//倒计时变成0时，
+				//要清除计时器
+				clearTimeout(act);
+				//设置按钮为初始状态
+				$("#getCodeBtn").val('免费获取手机验证码').attr('disabled', false);
+				itime = 59;
+			} else {
+				//延迟一秒中执行该函数。
+				var act = setTimeout('getTime()', 1000);
+				//把倒计时的秒显示到按钮中
+				$("#getCodeBtn").val('还剩' + itime + '秒');
+				itime = itime - 1;
+			}
+		}
+	}
+	$(function() {
+		//定义一个函数,用于完成倒计时效果
+		$("#getCodeBtn").click(function() {
+			//获取输入的手机号码
+			var telphone = $("#telphone").val();
 
-                if(telphone) {
-                    //ajax请求文件，调用短信发送的接口
-                    $.ajax({
-                        type: 'get',
-                        url: '{:url("code/get_code")}',
-                        data:{
+			if(telphone) {
+				//ajax请求文件，调用短信发送的接口
+				$.ajax({
+					type: 'get',
+					url: '{:url("code/get_code")}',
+					data:{
 
-                            user_phone:telphone,
-                            is_exist:0
+						user_phone:telphone,
+						is_exist:0
 
-                        },
-                        success: function(msg) {
-                            //判断调用短信发送接口是否成功，
-                            if (msg == 1) {
-                                //调用接口已经成功
-                                alert('发送失败');
-                                $("#getCodeBtn").attr('disabled', true); //要禁用该按钮
-                                //调用一个函数，完成倒计时效果。
-                                getTime();
-                            } else{
-                                alert('短信验证码已经发送成功');
-                                $("#getCodeBtn").attr('disabled', true);
-                                getTime();
-                            }
-                        }
-                    });
-                } else{
-                    alert('请输入手机号');
-                }
+					},
+					success: function(msg) {
+						//判断调用短信发送接口是否成功，
+						if (msg == 1) {
+							//调用接口已经成功
+							alert('发送失败');
+							$("#getCodeBtn").attr('disabled', true); //要禁用该按钮
+							//调用一个函数，完成倒计时效果。
+							getTime();
+						} else{
+							alert('短信验证码已经发送成功');
+							$("#getCodeBtn").attr('disabled', true);
+							getTime();
+						}
+					}
+				});
+			} else{
+				alert('请输入手机号');
+			}
 
-            });
-        });
-	</script>
-	<body>
-		<div class="header">{include file="public/header"}</div>
-		<div class="full_wid">
-			<div class="banner chang_ban">
-				<div class="wrap">
-					<!--<div class="change_user">
-						<span class="change_address">郑州<img src="__STATIC__/img/jtdown.png" alt="" /></span>
-						<div class="change_ipt"><input type="text" placeholder="请输入手机号"/>
-						<span class="chang_btn">我要置换</span>
+		});
+	});
+</script>
+<body>
+<div class="header">{include file="public/header"}</div>
+<div class="full_wid">
+	<div class="banner chang_ban">
+		<div class="wrap">
+			<!--<div class="change_user">
+                <span class="change_address">郑州<img src="__STATIC__/img/jtdown.png" alt="" /></span>
+                <div class="change_ipt"><input type="text" placeholder="请输入手机号"/>
+                <span class="chang_btn">我要置换</span>
+                </div>
+                <span class="sellcar_btn"><a href="">我要卖车</a></span>
+            </div>-->
+			<!--<div class="tip"><p class="agree">提交代表我同意<a href="">《个人信息保护声明》</a>，并接受合作商的来电服务</p></div>-->
+		</div>
+	</div>
+	<div class="wrap">
+		<div class="breadnav">你的位置:<a href="">首页</a>>><a href="">置换</a></div>
+		<div class="flex_center title_er"><h2 class="tit_erjie">置换</h2><p class="small_tit">用旧车换新车，优惠开新车</p></div>
+		<div class="change_flow"><img src="__STATIC__/img/change_flow.png" alt="" /></div>
+		<div class="flex_center title_er"><h2 class="tit_erjie">选定意向新车</h2></div>
+		<form action="" enctype="multipart/form-data"  method="post">
+			<div class="change_sel flex_center">
+				<span class="change_form_name">品牌车型</span>
+				<div class="selectcarnam flex_center">
+					<input type="text" placeholder="请选择您喜欢的品牌车型" class="selected-brand-ipt" readonly="readonly">
+					<div class="zl_jian">
+						<img class="zl_jian-img" src="__STATIC__/img/jian_4.png" alt="">
+					</div>
+					<div class="car-brand dn">
+						<div class="brand-item">
+							<p class="brand-tit">A</p>
+							<ul>
+								{volist name="a" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
 						</div>
-						<span class="sellcar_btn"><a href="">我要卖车</a></span>
-					</div>-->
-					<!--<div class="tip"><p class="agree">提交代表我同意<a href="">《个人信息保护声明》</a>，并接受合作商的来电服务</p></div>-->
-				</div>
-			</div>
-			<div class="wrap">
-				<div class="breadnav">你的位置:<a href="">首页</a>>><a href="">置换</a></div>
-				<div class="flex_center title_er"><h2 class="tit_erjie">置换</h2><p class="small_tit">用旧车换新车，优惠开新车</p></div>
-				<div class="change_flow"><img src="__STATIC__/img/change_flow.png" alt="" /></div>
-				<div class="flex_center title_er"><h2 class="tit_erjie">选定意向新车</h2></div>
-				<form action="" enctype="multipart/form-data"  method="post">
-				<div class="change_sel flex_center">
-					<span class="change_form_name">品牌车型</span>
-					<div class="selectcarnam flex_center">
-						<input type="text" placeholder="请选择您喜欢的品牌车型" class="selected-brand-ipt" readonly="readonly">
-						<div class="zl_jian">
-							<img class="zl_jian-img" src="__STATIC__/img/jian_4.png" alt="">
+						<div class="brand-item">
+							<p class="brand-tit">B</p>
+							<ul>
+								{volist name="b" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
 						</div>
-						<div class="car-brand dn">
-							<div class="brand-item">
-								<p class="brand-tit">A</p>
-								<ul>
-									<li class="sel_list">ALPINA</li>
-									<li class="sel_list">阿斯顿·马丁</li>
-									<li class="sel_list">阿尔法·罗密欧</li>
-									<li class="sel_list">奥迪</li>
+						<div class="brand-item">
+							<p class="brand-tit">C</p>
+							<ul>
+								{volist name="c" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">D</p>
+							<ul>
+								{volist name="d" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">E</p>
+							<ul>
+								{volist name="e" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">F</p>
+							<ul>
+								{volist name="f" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">G</p>
+							<ul>
+								{volist name="g" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">H</p>
+							<ul>
+								{volist name="h" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">I</p>
+							<ul>
+								{volist name="i" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">J</p>
+							<ul>
+								{volist name="j" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">K</p>
+							<ul>
+								{volist name="k" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">L</p>
+							<ul>
+								{volist name="l" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">M</p>
+							<ul>
+								{volist name="m" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">N</p>
+							<ul>
+								{volist name="n" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">O</p>
+							<ul>
+								{volist name="o" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">P</p>
+							<ul>
+								{volist name="p" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">Q</p>
+							<ul>
+								{volist name="q" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">R</p>
+							<ul>
+								{volist name="r" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">S</p>
+							<ul>
+								{volist name="s" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">T</p>
+							<ul>
+								{volist name="t" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">U</p>
+							<ul>
+								{volist name="u" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">V</p>
+							<ul>
+								{volist name="v" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">W</p>
+							<ul>
+								{volist name="w" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">X</p>
+							<ul>
+								{volist name="x" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">Y</p>
+							<ul>
+								{volist name="y" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-item">
+							<p class="brand-tit">Z</p>
+							<ul>
+								{volist name="z" id="vo"}
+								<li class="sel_list" value="{$vo.id}">{$vo.name}</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="brand-chex dn">
+							<div class="brand-item2">
+								<p class="brand-tit brand-tit2"></p>
+								<ul class="sel_ul">
+									<!--<li class="sel_list">奥迪A4</li>-->
+									<!--<li class="sel_list">奥迪A6</li>-->
+									<!--<li class="sel_list">奥迪A8</li>-->
 								</ul>
 							</div>
-							<div class="brand-item">
-								<p class="brand-tit">B</p>
-								<ul>
-									<li class="sel_list">北汽幻速</li>
-									<li class="sel_list">布加迪</li>
-									<li class="sel_list">北京现代</li>
-								</ul>
-							</div>
-							<div class="brand-item">
-								<p class="brand-tit">C</p>
-								<ul>
-									<li class="sel_list">C</li>
-									<li class="sel_list">C</li>
-									<li class="sel_list">C</li>
-								</ul>
-							</div>
-							<div class="brand-chex dn">
-								<div class="brand-item2">
-									<p class="brand-tit">A</p>
-									<ul>
-										<li class="sel_list">奥迪A4</li>
-										<li class="sel_list">奥迪A6</li>
-										<li class="sel_list">奥迪A8</li>
-									</ul>
-								</div>
-								<div class="brand-item2">
-									<p class="brand-tit">A</p>
-									<ul>
-										<li class="sel_list">奥迪A4</li>
-										<li class="sel_list">奥迪A6</li>
-										<li class="sel_list">奥迪A8</li>
-									</ul>
-								</div>
-								<div class="brand-item2">
-									<p class="brand-tit">A</p>
-									<ul>
-										<li class="sel_list">奥迪A4</li>
-										<li class="sel_list">奥迪A6</li>
-										<li class="sel_list">奥迪A8</li>
-									</ul>
-								</div>
-								<div class="brand-item2">
-									<p class="brand-tit">A</p>
-									<ul>
-										<li class="sel_list">奥迪A4</li>
-										<li class="sel_list">奥迪A6</li>
-										<li class="sel_list">奥迪A8</li>
-									</ul>
-								</div>
-							</div>
+
 						</div>
 					</div>
 				</div>
-				<div class="change_recom">
-					<p class="tip">精品车辆推荐</p>
-					<ul class="flex_around">
-						<li>
-							<img src="__STATIC__/img/tuijian1.png" alt="" />
-							<p>奥迪系列</p>
-						</li>
-						<li>
-							<img src="__STATIC__/img/tuijian1.png" alt="" />
-							<p>奥迪系列</p>
-						</li>
-						<li>
-							<img src="__STATIC__/img/tuijian1.png" alt="" />
-							<p>奥迪系列</p>
-						</li>
-					</ul>
-				</div>
-				<div class="flex_center title_er"><h2 class="tit_erjie">旧车信息提交</h2></div>
-				<div class="change_form">
-					<div class="ipt"><label for="">旧车信息：</label><input type="text" name="old_brand" id="old_brand" placeholder="请输入车辆的品牌"/></div>
-					<div class="ipt"><label for="">姓名：</label><input type="text"  name="name" id="username" placeholder="请输入您的姓名"/></div>
-					<div class="ipt"><label for="">手机号：</label><input type="text" id="phone" name="phone" placeholder="请输入您的手机号"/></div>
-					<div class="ipt_code"><label for="">验证码:</label><input type="text" name="code" placeholder="请输入您获取到的验证码"/><span class="getcode"><input type="button" value="获取手机验证码" id="getCodeBtn" style="width: 105px;height: 40px;font-size:12px; padding-left:1px;color:#333; " /></span></div>
-					<div class="sub"><input type="submit" class="ipt-submit" onclick="sub()"/></div>
-				</div>
-				</form>
-				<div class="flex_center title_er"><h2 class="tit_erjie">新车推荐</h2></div>
-				<div class="car_list">
-					<ul class="list">
-                         {volist name="er_car" id="val" offset="1" length="8"}
-						<li class="items">
-							<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_img flex_center"><img src="{$val.img_url}" alt="" /></a>
-							<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_desc">
-								<h3> {$val.name}</h3>
-								<p><span class="car_price"><b>{$val.new_car_price}</b>万</span><span class="car_sui">新车含税{$val.price}万</span></p>
-								<p><span>{$val.car_cardtime}上牌</span> <span class="padlt20">{$val.car_mileage}万公里</span> </p>
-								<div class="che_ordered">立即预约</div>
-							</a>
-						</li>
-						{/volist}
-					</ul>
-				</div>
 			</div>
+			<div class="change_recom">
+				<p class="tip">精品车辆推荐</p>
+				<ul class="flex_around">
+					<!--<li>
+						<img src="__STATIC__/img/tuijian1.png" alt="" />
+						<p>奥迪系列</p>
+					</li>
+					<li>
+						<img src="__STATIC__/img/tuijian1.png" alt="" />
+						<p>奥迪系列</p>
+					</li>
+					<li>
+						<img src="__STATIC__/img/tuijian1.png" alt="" />
+						<p>奥迪系列</p>
+					</li>-->
+				</ul>
+			</div>
+			<div class="flex_center title_er"><h2 class="tit_erjie">旧车信息提交</h2></div>
+			<div class="change_form">
+				<div class="ipt"><label for="">旧车信息：</label><input type="text" name="old_brand" id="old_brand" placeholder="请输入车辆的品牌"/></div>
+				<div class="ipt"><label for="">姓名：</label><input type="text"  name="name" id="username" placeholder="请输入您的姓名"/></div>
+				<div class="ipt"><label for="">手机号：</label><input type="text" id="phone" name="phone" placeholder="请输入您的手机号"/></div>
+				<div class="ipt_code"><label for="">验证码:</label><input type="text" name="code" placeholder="请输入您获取到的验证码"/><span class="getcode"><input type="button" value="获取手机验证码" id="getCodeBtn" style="width: 105px;height: 40px;font-size:12px; padding-left:1px;color:#333; " /></span></div>
+				<div class="sub"><input type="submit" class="ipt-submit" onclick="sub()"/></div>
+			</div>
+		</form>
+		<div class="flex_center title_er"><h2 class="tit_erjie">新车推荐</h2></div>
+		<div class="car_list">
+			<ul class="list">
+				{volist name="er_car" id="val" offset="1" length="8"}
+				<li class="items">
+					<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_img flex_center"><img src="{$val.img_url}" alt="" /></a>
+					<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="car_desc">
+						<h3> {$val.name}</h3>
+						<p><span class="car_price"><b>{$val.new_car_price}</b>万</span><span class="car_sui">新车含税{$val.price}万</span></p>
+						<p><span>{$val.car_cardtime}上牌</span> <span class="padlt20">{$val.car_mileage}万公里</span> </p>
+						<div class="che_ordered">立即预约</div>
+					</a>
+				</li>
+				{/volist}
+			</ul>
 		</div>
-		<div class="footer">
-			{include file="public/footer"}
-		</div>
-	</body>
-	<script>
+	</div>
+</div>
+<div class="footer">
+	{include file="public/footer"}
+</div>
+</body>
+<script>
 	$(function(){
-        $($(".nav li")[4]).addClass("active").siblings().removeClass("active");
+		$($(".nav li")[4]).addClass("active").siblings().removeClass("active");
 		// $(".header").load("templates/header.html");
 		// $(".footer").load("templates/footer.html")
 	});
@@ -230,9 +390,10 @@
 		}
 		var src = $('.zl_jian-img').attr('src');
 		if(src == "/static/img/jian_5.png"){
-			$('.zl_jian-img').attr('src','/static/img/jian_4.png');		
+			$('.zl_jian-img').attr('src','/static/img/jian_4.png');
 		}else{
 			$('.zl_jian-img').attr('src','/static/img/jian_5.png');
+
 		}
 	})
 	// 选择车型下拉框
@@ -241,40 +402,62 @@
 		$(".selected-brand-ipt").val(sel);
 		$(".car-brand>.brand-item").addClass('dn');
 		$('.brand-chex').removeClass('dn');
+		if(sel != ""){
+			$('selected-brand-ipt').val("");
+		}
 	})
 	$('.brand-item2').on('click','.sel_list',function(){
 		var sel = $(".selected-brand-ipt").val();
 		var sel2 = $(this).text();
 		$(".selected-brand-ipt").val(sel+"  "+sel2);
 		$('.car-brand').addClass('dn');
-		$('.zl_jian-img').attr('src','/static/img/jian_4.png');	
+		$('.zl_jian-img').attr('src','/static/img/jian_4.png');
 	})
-	
-	
+
+
 	function sub() {
-        event.preventDefault();
-        var old_brand = $('#old_brand').val();
-        var username = $('#username').val();
-        var phone = $('#phone').val();
-        var old_cartype_id = $('#old_cartype_id').val();
-		console.log(old_brand,username,phone,old_cartype_id	)
-        if(old_brand.length == 0 || username.length == 0 || phone.length == 0 || old_cartype_id.length == 0) {
-            layer.msg('请完善提交资料!',);
-        } else {
-            $.ajax({
-                type: "POST",
-                data:{old_brand:old_brand,username:username,phone:phone,old_cartype_id:old_cartype_id},
-                dataType: "json",
-                url: "{:url('zhengzhou/change/displace')}" ,
-                success:function (res) {
-                    if(res == 200) {
-                        layer.msg('信息提交成功!',);
-                    } else {
-                        layer.msg('信息提交失败');
-                    }
-                }
-            });
-        }
-    }
-	</script>
+		event.preventDefault();
+		var old_brand = $('#old_brand').val();
+		var username = $('#username').val();
+		var phone = $('#phone').val();
+		var brand = $('.selected-brand-ipt').val();
+		if(old_brand.length == 0 || username.length == 0 || phone.length == 0) {
+			layer.msg('请完善提交资料!',{time:5000});
+		} else {
+			$.ajax({
+				type: "POST",
+				data:{old_brand:old_brand,username:username,phone:phone,brand:brand},
+				dataType: "json",
+				url: "{:url('zhengzhou/change/displace')}" ,
+				success:function (res) {
+					if(res == 200) {
+						layer.msg('信息提交成功!',);
+					} else {
+						layer.msg('信息提交失败');
+					}
+				}
+			});
+		}
+	}
+
+	$('.sel_list').click(function () {
+		event.preventDefault();
+		var id = $(this).val();
+		$.ajax({
+			type: "POST",
+			data:{id:id},
+			dataType: "json",
+			url: "{:url('zhengzhou/change/liandong')}",
+			success:function (res) {
+				var html = "";
+				for(var i in res){
+					// $('.brand-chex .sel_ul').append("<li class='sel_list'>"+res[i].name+"</li>");
+					html += "<li class='sel_list'>" +res[i].name+ "</li>";
+					$('.brand-tit2').text(res[i].names.names);
+				}
+				$('.sel_ul').html(html);
+			}
+		});
+	});
+</script>
 </html>
