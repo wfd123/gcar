@@ -2069,7 +2069,7 @@ class Index  extends Common
         Session::set('cityurl',$cityurl);
 
         $domain = $this->request->domain();
-
+        
         $city = Db::table('city')->where('status',1)->select();
 
         $this->assign('city',$city);
@@ -2080,6 +2080,7 @@ class Index  extends Common
         $data = $this->params;
 
         $cheid=$data['cheid'];
+//        dump($cheid);die;
 
         //获取车辆信息
         $carinfo=Db::table("rele_car")->field("pu_id,user_id,brand_id,sys_id,cartype_id,price,car_mileage,car_age,output,gearbox,car_cardtime,blowdown,subface_img,img_512,car_desc,pay20_s2,pay20_y2,pay20_n2,city_id")->where("pu_id=$cheid")->find();
@@ -2572,6 +2573,35 @@ class Index  extends Common
         $this->assign('color',$color);
 
         return $this->fetch();
+    }
+
+    public function car_floor_price()
+    {
+        $param = $this->request->param();
+        if (empty($param['shop_id'])||empty($param['phone'])){
+            $this->return_msg('202','参数不足');
+        }
+        $phone = $param['phone'];
+        $str = "/^1[3456789]\d{9}$/";
+        if (!preg_match($str, $phone)){
+            $this->return_msg('202','手机号格式不正确！');
+        }
+        $data = [
+            'phone'=>$param['phone'],
+            'shop_id'=>$param['shop_id'],
+            'create_time'=>date('Y-m-d H:i:s',time())
+        ];
+        $user_id = Session::get('user_id');
+        if (!empty($user_id)){
+            $nickname =Db::name('user')->where('user_id',$user_id)->value('nickname');
+            $data['nickname'] = $nickname;
+        }
+        $res = Db::name('newcar_ask_list')->insert($data);
+        if ($res != false){
+            $this->return_msg(0,'已提交申请，请等待商家回复!');
+        }else{
+            $this->return_msg(101,'提交失败');
+        }
     }
 
 }
