@@ -115,23 +115,30 @@ class Newcar extends Common
         //处理城市问题
 
         $city_pin = input('city');
-
-        $city_info = $this->set_session_url($city_pin);
-
-        if (empty($city_info)){
-
-            $city_id = 1;
-
-            $cityurl = 'zhengzhou';
+        if (session::get('cityurl')){
+            $city_info = $this->set_session_url($city_pin);
+            $city_name  = $city_info['name'];
+            Session::set('city_name',$city_name);
+        }
+        if (empty($city_info )){
+            $ip = $_SERVER["REMOTE_ADDR"];
+//                $ip = "115.57.150.161";//郑州的Ip
+//                $ip = "1.196.61.206";//郑州的Ip
+            $city_name = $this->getCity($ip)['city'];
+            $city_info = Db::table('city')->where('name',$city_name)->field('id,name,pin')->find();
+            Session::set('cityurl',$city_info['pin']);
+            Session::set('city_name',$city_info['name']);
+        }
+//            dump($city_info);die;
+        if(is_null($city_info)){
+            $city_id = 0;
+            $cityurl = 'quanguo';
+            $city_name = "全国";
+            Session::set('cityurl',$cityurl);
+            Session::set('city_name','全国');
         }else{
-
-            $cityurl = $city_info['pin'];
-
             $city_id = $city_info['id'];
         }
-
-        Session::set('cityurl',$cityurl);
-
         $domain = $this->request->domain();
 
         $city = Db::table('city')->where('status',1)->select();
@@ -140,7 +147,11 @@ class Newcar extends Common
         $data = $this->params;
         $param_array = [];
 
-        $where="1=1  and city_id =".$city_id;
+        $where="1=1 ";
+        if(!empty($city_id)){
+        $where .=" and city_id =".$city_id;
+        }
+
 
         if (!empty($data['brand']) && $data['brand'] != "s" ) {
             $b_id = Db::table("car_brand")->field("id, name")->where('pin', 'eq', $data['brand'])->select();
