@@ -255,11 +255,11 @@
     		<div class="car_descPri">
     			<b>￥{$newcar_info.price}万 </b>
     		</div>
-    		<div class="car_descOrder flex_center">
-				<!--<input type="hidden" id="shop_id" name="shop_id" value="" >-->
+    		<!--<div class="car_descOrder flex_center">
+				&lt;!&ndash;<input type="hidden" id="shop_id" name="shop_id" value="" >&ndash;&gt;
 				<input class="car-input phone" id = 'phone'  type="text" name="phone" placeholder="请输入手机号"/>
 				<p class="lowerPrice xun" onclick="inquire({$newcar_info.shop_id})">询问底价</p>
-    		</div>
+    		</div>-->
     	</div>
     </div>
   <!--点击轮播显示大图以及预订-->
@@ -288,7 +288,7 @@
 						<!--</div>-->
 						{volist name="newcar_info['img_512']" id="vol" }
 						<div class="swiper-slide">
-							<div class="silde_img"><img src="{$vol}" alt=""></div>
+							<div class="silde_img"><img src="{$vol}" alt="" height="341"></div>
 						</div>
 						{/volist}
 						<!--<div class="swiper-slide slide6">-->
@@ -304,19 +304,19 @@
   			<div class="tag flex_center"><span>准新车</span><span>店铺认证</span></div>
   			<div class="info_price"><b>￥{$newcar_info.can_price}万&nbsp;</b>指导价：{$newcar_info.price}万</div>
   			<div class="car_form">
-  				<div class="ipt ipt_phone"><input type="text" placeholder="请输入手机号"/><span class="getcode">获取验证码</span></div>
-  				<div class="ipt"><input type="text" placeholder="请输入短信验证码"/></div>
+  				<div class="ipt ipt_phone"><input type="text" placeholder="请输入手机号"/></div>
+  				<!--<div class="ipt"><input type="text" placeholder="请输入短信验证码"/></div>-->
   				<div><p class="lowerPrice">询问底价</p></div>
 
   			</div>
-  			<div class="link_btn">
+  			<!--<div class="link_btn">
 				<a href="javascript:;">联系商家</a>
 				<a href="">分期购车</a>
-			</div>
+			</div>-->
 			<ul class="btn_box oh">
     			<li><img src="__STATIC__/img/collect.png" alt="" /><p>收藏</p></li>
     			<li><img src="__STATIC__/img/PK.png" alt="" /><p>加入PK</p></li>
-    			<li><img src="__STATIC__/img/share.png" alt="" /><p>分享</p></li>
+    			<!--<li><img src="__STATIC__/img/share.png" alt="" /><p>分享</p></li>-->
     		</ul>
     		<div class="del"><img src="__STATIC__/img/del1.png" alt="" height="16"/></div>
   		</div>
