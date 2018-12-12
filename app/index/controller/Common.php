@@ -136,6 +136,7 @@ class Common extends Controller{
                 'cartype_id' =>'number',
                 //'id' =>'number',
             ),
+            'car_floor_price'=>array(),
         ),
         'Twocar' => array(
             'index'=>array(
@@ -1501,16 +1502,6 @@ class Common extends Controller{
 
         return $data;
     }
-    function get_area($ip = ''){
-        if($ip == ''){
-            $ip = GetIp();
-        }
-        $url = "http://ip.taobao.com/service/getIpInfo.php?ip={$ip}";
-        $ret = $this->https_request($url);
-        $arr = json_decode($ret,true);
-        return $arr;
-    }
-
 
 //    public function https_request($url,$data = null){
 //        $curl = curl_init();
@@ -2273,7 +2264,7 @@ class Common extends Controller{
 
     //获取厂商
     public function get_firm($sys_id){
-        $firm=Db::table("car_brand")->where("id=$sys_id")->value("upid");
+        $firm=Db::table("car_brand")->where("id",$sys_id)->value("upid");
 
         return $firm;
     }
