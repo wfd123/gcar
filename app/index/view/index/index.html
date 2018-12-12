@@ -318,7 +318,7 @@
 							{volist name="er_car" id="val"}
 							<li>
 								<a href="{$domain}/{$Think.session.cityurl}/details/{$val.pu_id}" class="flex_around">
-									<span class="car_img"><img class='lazy-load' height="217" src='{$val.img_url}'/>
+									<span class="car_img"><img class='lazy-load' src='{$val.img_url}' height="146"/>
 								</span>
 									<h3 class="text_overflow">{$val.name}</h3>
 									<p class="mile">{$val.car_cardtime} | {$val.car_mileage}万公里</p>
@@ -410,7 +410,7 @@
 							{volist name="car_zero" id="val"}
 							<li>
 								<a href="{$domain}/{$Think.session.cityurl}/detai/{$val.id}" class="flex_around" target="_blank">
-									<span class="car_img"><img src="{$val.img_url}" alt=""/>
+									<span class="car_img"><img src="{$val.img_url}" alt="" height="146"/>
 								</span>
 									<h3 class="text_overflow">{$val.name}</h3>
 									<p class="valign ptp15">
