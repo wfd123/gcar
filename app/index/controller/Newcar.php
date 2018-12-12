@@ -559,16 +559,6 @@ class Newcar extends Common
     }
     public function car_floor_price()
     {
-        $ip = $_SERVER["REMOTE_ADDR"];
-//        header("Content-type: text/html; charset=utf-8");
-//        $ip = "140.143.225.220";
-        $data = $this->getCity($ip);
-//        dump($data);die;
-        if (!empty($data['city'])){
-            dump($data['city']);die;
-        }else{
-            dump(1);die;
-        }
         $param = $this->request->param();
         if (empty($param['shop_id'])||empty($param['phone'])){
             $this->return_msg('202','参数不足');
