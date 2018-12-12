@@ -31,6 +31,7 @@ class Index  extends Common
                 Session::set('cityurl',$city_info['pin']);
                 Session::set('city_name',$city_info['name']);
             }
+//            dump($city_info);die;
             if(is_null($city_info)){
                 $city_id = 0;
                 $cityurl = 'quanguo';
@@ -45,9 +46,13 @@ class Index  extends Common
             $domain = $this->request->domain();
 
 
-
+        if (empty($city_id)){
+            $where = " 1=1 ";
+        }else{
+            $where = " city_id =  " . $city_id;
+        }
         //banner
-        $banner=Db::table("home_car_app")->where("city_id",$city_id)->order("sort asc")->select();
+        $banner=Db::table("home_car_app")->where($where)->order("sort asc")->select();
 
         foreach ($banner as $key => $val) {
             $banner[$key]['img_url']=$this->get_carimg($val['img'],1);
