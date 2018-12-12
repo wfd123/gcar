@@ -395,8 +395,14 @@ option:hover {
     width: 200px;
     margin: 0 auto;
 }
-.wrap {
+
+.wrap2{
     /* overflow: hidden; */
+    margin: 0 auto;
+    width: 1200px;
+}
+.wrap {
+    overflow: hidden;
     margin: 0 auto;
     width: 1200px;
 }
