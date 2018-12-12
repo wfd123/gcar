@@ -242,9 +242,9 @@
   			<div class="tag flex_center"><span>准新车</span><span>店铺认证</span></div>
   			<div class="info_price"><b>￥{$carinfo.price}万&nbsp;</b>比新车省：75.29万</div>
   			<div class="car_form">
-  				<div class="ipt ipt_phone"><input type="text" placeholder="请输入手机号"/></div>
+  				<div class="ipt ipt_phone"><input type="text" id = 'phone' placeholder="请输入手机号"/></div>
   				<!--<div class="ipt"><input type="text" placeholder="请输入短信验证码"/></div>-->
-  				<div><p class="lowerPrice">询问底价</p></div>
+  				<div><p class="lowerPrice" onclick="inquire({$shopinfo.shop_id})">询问底价</p></div>
   				
   			</div>
   			<!--<div class="link_btn">
@@ -519,10 +519,10 @@
 
 		</script>
 	<script>
-		function inquire() {
+		function inquire(shop_id) {
 			var data = {
-			    shop_id : $('#shop_id').val(),
-				phone   : $('#phone').val()
+				phone   : $('#phone').val(),
+				shop_id   : shop_id
 			};
             $.ajax({
                 type: 'POST',
