@@ -138,3 +138,4 @@ Route::get(':city/:brand/sn_<k_p?><v_p?><k_s?><v_s?><k_o?><v_o?><k_g?><v_g?><k_d
 //   }
 //用此方法 方法名前 是要加get
 //Route::Controller('gongneng','api/gongneng');//访问http://www.hr.com:8083/hr/public/gongneng/a
+Route::rule('index/index/car_floor_price','index/index/car_floor_price');
