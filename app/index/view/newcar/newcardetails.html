@@ -304,9 +304,9 @@
   			<div class="tag flex_center"><span>准新车</span><span>店铺认证</span></div>
   			<div class="info_price"><b>￥{$newcar_info.can_price}万&nbsp;</b>指导价：{$newcar_info.price}万</div>
   			<div class="car_form">
-  				<div class="ipt ipt_phone"><input type="text" placeholder="请输入手机号"/></div>
-  				<!--<div class="ipt"><input type="text" placeholder="请输入短信验证码"/></div>-->
-  				<div><p class="lowerPrice">询问底价</p></div>
+				<div class="ipt ipt_phone"><input type="text" id = 'phone' placeholder="请输入手机号"/></div>
+				<!--<div class="ipt"><input type="text" placeholder="请输入短信验证码"/></div>-->
+				<div><p class="lowerPrice" onclick="inquire({$newcar_info.shop_id})">询问底价</p></div>
 
   			</div>
   			<!--<div class="link_btn">
