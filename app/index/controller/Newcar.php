@@ -383,7 +383,6 @@ class Newcar extends Common
      * 新车详情
      */
     public function newcardetails(){
-
         //处理城市问题
 
         $city_pin = input('city');
@@ -419,9 +418,10 @@ class Newcar extends Common
 
 
         //获取车辆的信息
-        $newcar_info=Db::table("new_car")->field("id,img_ids,img_512,price,can_price,sale_num,brand_id,sys_id,cartype_id,pay10_s2,pay10_y2,pay10_n2,pay20_s2,pay20_y2,pay20_n2,pay30_s2,pay30_y2,pay30_n2,city_id")->where("id",$cheid)->find();
+        $newcar_info=Db::table("new_car")->field("id,img_ids,img_512,price,shop_id,can_price,sale_num,brand_id,sys_id,cartype_id,pay10_s2,pay10_y2,pay10_n2,pay20_s2,pay20_y2,pay20_n2,pay30_s2,pay30_y2,pay30_n2,city_id")->where("id",$cheid)->find();
         if(!$newcar_info){
-            echo '信息错误';
+
+            $this->return_msg('202','信息有误！');
         }
 
         $brand_id = $newcar_info['brand_id'];
@@ -430,7 +430,7 @@ class Newcar extends Common
 
         $firm_id=$this->get_firm($sys_id);
 
-        //dump($newcar_info);die;
+//        dump($newcar_info);die;
         //图片
 
         $newcar_info['img_ids']=$this->get_carimgs($newcar_info['img_ids'],2);
@@ -466,7 +466,7 @@ class Newcar extends Common
 
             $shop[$k]['shop_price']=$shop_price=Db::table("new_car")->where("brand_id=$brand_id and sys_id=$sys_id and cartype_id=$cartype_id and shop_id=".$v['shop_id'])->value("price");
         }
-
+//        dump($shop);die;
         //获取降价的店铺
         //$shop_discount=Db::table("user_shop")->table("user_shop as a")->join("user as b on a.user_id=b.user_id")->field("shop_id,shop_name,shop_phone,shop_address,latitude as lat,longitude as log")->where("b.is_fenghao=2 and a.qid=1 and a.business_range like '%".$firm_id."%'")->select();
 
@@ -556,5 +556,43 @@ class Newcar extends Common
 
         return $this->fetch();
 
+    }
+    public function car_floor_price()
+    {
+        $ip = $_SERVER["REMOTE_ADDR"];
+//        header("Content-type: text/html; charset=utf-8");
+//        $ip = "140.143.225.220";
+        $data = $this->getCity($ip);
+//        dump($data);die;
+        if (!empty($data['city'])){
+            dump($data['city']);die;
+        }else{
+            dump(1);die;
+        }
+        $param = $this->request->param();
+        if (empty($param['shop_id'])||empty($param['phone'])){
+            $this->return_msg('202','参数不足');
+        }
+        $phone = $param['phone'];
+        $str = "/^1[3456789]\d{9}$/";
+        if (!preg_match($str, $phone)){
+            $this->return_msg('202','手机号格式不正确！');
+        }
+        $data = [
+            'phone'=>$param['phone'],
+            'shop_id'=>$param['shop_id'],
+            'create_time'=>date('Y-m-d H:i:s',time())
+        ];
+        $user_id = Session::get('user_id');
+        if (!empty($user_id)){
+            $nickname =Db::name('user')->where('user_id',$user_id)->value('nickname');
+            $data['nickname'] = $nickname;
+        }
+        $res = Db::name('newcar_ask_list')->insert($data);
+        if ($res != false){
+            $this->return_msg(0,'已提交申请，请等待商家回复!');
+        }else{
+            $this->return_msg(101,'提交失败');
+        }
     }
 }
