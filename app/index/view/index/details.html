@@ -31,9 +31,8 @@
 						<span id="nextTop" class="btn next"></span>
 						<div id="picBox" class="picBox">
 							<ul class="cf">
-
 								{volist name="carinfo.img_url" id="vol"}
-								<li> <a href="javascript:;"><img src="{$vol}" alt=""></a></li>
+								<li> <a href="javascript:;"><img src="{$vol}" alt="" height="341"></a></li>
 								{/volist}
 							</ul>
 						</div>
@@ -50,7 +49,7 @@
 		        		<div class="detail_info">
 		        			<h1>{$carinfo.car_name}</h1>
 		        			<div class="desc_price"><span class="price">￥{$carinfo.price}万</span><span class="price_save">比新车省24.33元 </span><span class="price_note">含过户费</span></div>
-		        			<div class="signal">管家车易站，专业的二手车买卖平台</div>
+		        			<div class="signal">管家车易站，专业的二手车买卖平台  一个展示新车、二手车的网站</div>
 		        		</div>
 		        		<img src="__STATIC__/img/dianpu.png" alt="" class="sure_shop"/>
 		        		<div class="stages"><span>分期购<b>20%</b></span><span>首付<b>{$carinfo.pay20_s2}万</b></span><span>月供 <b>{$carinfo.pay20_s2}元</b></span><span>期数 <b>{$carinfo.pay20_n2}期</b></span><a href="" class="stages_go">分期购车＞</a></div>
