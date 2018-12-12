@@ -256,8 +256,9 @@
     			<b>￥{$newcar_info.price}万 </b>
     		</div>
     		<div class="car_descOrder flex_center">
-    			<input type="text" placeholder="请输入手机号"/>
-    			<p class="lowerPrice">询问底价</span>
+				<!--<input type="hidden" id="shop_id" name="shop_id" value="" >-->
+				<input class="car-input phone" id = 'phone'  type="text" name="phone" placeholder="请输入手机号"/>
+				<p class="lowerPrice xun" onclick="inquire({$newcar_info.shop_id})">询问底价</p>
     		</div>
     	</div>
     </div>
@@ -579,4 +580,29 @@
 			}
 		})
 		</script>
+	<script>
+        function inquire(shop_id) {
+            var data = {
+                shop_id : shop_id,
+                phone   : $('#phone').val()
+            };
+            $.ajax({
+                type: 'POST',
+                url: "{:url('car_floor_price')}",
+                data: data,
+                dataType: 'JSON',
+                success: function(res){
+//                    alert(1);
+                    if(res.code == 0){
+                        alert(res.msg);
+                        $('#phone').val('');
+//                        window.location.href="?";
+                    }
+                    else{
+                        alert(res.msg);
+                    }
+                },
+            });
+        }
+	</script>
 </html>
