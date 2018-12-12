@@ -396,7 +396,7 @@ option:hover {
     margin: 0 auto;
 }
 .wrap {
-    overflow: hidden;
+    /* overflow: hidden; */
     margin: 0 auto;
     width: 1200px;
 }
