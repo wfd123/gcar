@@ -28,6 +28,7 @@ Route::domain('xin',[
         'index/newcar/search_newcar', ['method'=>'GET'], ['k_p'=>'p','v_p'=>'\d{1,2}-\d{1,2}','k_s'=>'s','v_s'=>'\d+','k_o'=>'o','v_o'=>'\d+','k_g'=>'g','v_g'=>'\d+','k_d'=>'d','v_d'=>'\d+','k_b'=>'b','v_b'=>'\d+','k_c'=>'c','v_c'=>'\d+','k_f'=>'f','v_f'=>'\d+','k_n'=>'n','v_n'=>'\d+']
     ],
     ':city/detail/:id' => ['index/newcar/newcardetails',['method'=>'GET'], ['city'=>'[a-z]+$', 'id' => '\d+']],
+    'index/detail/:id' => ['index/newcar/newcardetails',['method'=>'GET'], ['city'=>'[a-z]+$', 'id' => '\d+']],
 ]);
 
 Route::rule('/', 'index/index/index');
